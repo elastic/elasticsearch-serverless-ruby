@@ -83,4 +83,4 @@ client.perform_request('GET', '/')
 
 ## Docs
 
-Some questions, assumptions and general notes about this project can be found in [docs/setup-api-key.gif](the docs directory).
+Some questions, assumptions and general notes about this project can be found in [the docs directory](./docs/questions-and-assumptions.md).
