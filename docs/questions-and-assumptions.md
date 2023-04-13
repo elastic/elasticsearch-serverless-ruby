@@ -6,7 +6,7 @@
 Not yet. For now we've decided to extract 3 APIs from the Elasticsearch spec and generate code based on that.
 
 ### How do we test against a running server?
-Serverless is available in some QA instances in Cloud. Initially I'll tested with Stack Elasticsearch with API Key authentication. But I've now tested it with a Cloud instance of Serverless in our QA Cloud and it's working there too.
+Initially I tested the code with Stack Elasticsearch and API Key authentication. But I've now tested it with a Cloud instance of Serverless in our QA Cloud and it's working there too.
 
 ### YAML Tests
 
