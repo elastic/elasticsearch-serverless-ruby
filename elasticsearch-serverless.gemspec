@@ -12,4 +12,5 @@ Gem::Specification.new do |s|
   s.add_dependency 'elastic-transport', '~> 8'
 
   s.add_development_dependency 'rake'
+  s.add_development_dependency 'rspec'
 end
