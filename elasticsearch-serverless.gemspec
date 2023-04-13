@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
     "https://rubygems.org/gems/elasticsearch-serverless"
   s.license       = "Apache-2.0"
 
-  s.add_dependency 'elastic-transport'
+  s.add_dependency 'elastic-transport', '~> 8'
 
   s.add_development_dependency 'rake'
 end
