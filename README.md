@@ -80,3 +80,7 @@ client.perform_request('GET', '/')
    "date"=>"Thu, 13 Apr 2023 10:26:21 GMT"},
  @status=200> 
 ```
+
+## Docs
+
+Some questions, assumptions and general notes about this project can be found in [docs/setup-api-key.gif](the docs directory).
