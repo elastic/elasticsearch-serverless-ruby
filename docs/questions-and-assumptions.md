@@ -30,3 +30,9 @@ One of the outcomes of this work is coordinating with the docs team to create do
 ### Assumption: Regarding implementation of libraries:
 
 In the Elasticsearch Ruby Client, elasticsearch and elasticsearch-api are two separate libraries. The whole client is elasticsearch, which requires elasticsearch-api (the generated API code). But you can also use the elasticsearch-api library on its own in your code. Josh told me in JS, it's all just one package. I see why it could make sense when it was built to have these separated in the Ruby client, but for Serverless, I'm going to assume we want to have just the one library which includes the client and the API generated code. At least that's how I'll build the prototype now and we can refactor for a different approach in the future.
+
+## Notes
+
+### Code generation
+
+The code for the current APIs `info`, `bulk` and `search` was taken from the Elasticsearch client's code for this prototype, but there'll be further work with code generation. As such, a lot of the code used in `elasticsearch-api` is being duplicated here. I need to look more into that, see what stuff can be shared in `elastic-transport` or if it deserves to be another library. My initial thought is maybe there could be a namespace for utils in transport, such as `api/utils` and `api/response` (which is also being duplicated in Enterprise Search Ruby).
