@@ -13,3 +13,9 @@ $ bundle exec rake console
 You initialized a client!
  => #<ElasticsearchServerless::Client:0x00007fabf381eec0>
 ```
+
+## Run Tests
+
+```
+$ bundle exec rake spec
+```
