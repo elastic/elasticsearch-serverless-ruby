@@ -1,8 +1,11 @@
 require 'elastic/transport'
+require 'elasticsearch-serverless/api'
 require 'elasticsearch-serverless/version'
 
 module ElasticsearchServerless
   class Client
+    include ElasticsearchServerless::API
+
     # Initializes an Elasticsearch Serverless Client
     #
     # @param :api_key [String] Base64 String, format used to authenticate with Elasticsearch
