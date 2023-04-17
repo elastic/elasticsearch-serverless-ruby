@@ -1,5 +1,7 @@
 # Elasticsearch Serverless Client
 
+[![main](https://github.com/elastic/elasticsearch-serverless-ruby/actions/workflows/tests.yml/badge.svg?branch=main)](https://github.com/elastic/elasticsearch-serverless-ruby/actions/workflows/tests.yml)
+
 Build and install:
 ```bash
 $ gem build elasticsearch-serverless.gemspec
