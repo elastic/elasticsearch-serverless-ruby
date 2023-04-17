@@ -1,11 +1,26 @@
 name: main
-on: [push, pull_request]
+on: [push]
 
 jobs:
   rspec:
     strategy:
       matrix:
         ruby: [ '3.0', '3.1', '3.2' ]
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: ${{ matrix.ruby }}
+    - name: Build and test with Rake
+      run: |
+        bundle install
+        bundle exec rake spec
+  rspec-jruby:
+    strategy:
+      fail-fast: false
+      matrix:
+        ruby: [ jruby-9.3, jruby-9.4 ]
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
