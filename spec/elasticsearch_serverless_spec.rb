@@ -19,13 +19,13 @@ describe ElasticsearchServerless::Client do
 
     it 'integrates with Elastic Transport' do
       transport = double(Elastic::Transport::Client)
-      allow(Elastic::Transport::Client).to receive(:new).
-                                             with(
-                                               {
-                                                 host: 'test',
-                                                 transport_options: { headers: {"Authorization"=>"ApiKey test" } }
-                                               }
-                                             ).and_return(transport)
+      allow(Elastic::Transport::Client).
+        to receive(:new).with(
+             {
+               host: 'test',
+               transport_options: { headers: {"Authorization"=>"ApiKey test" } }
+             }
+           ).and_return(transport)
       client = ElasticsearchServerless::Client.new(api_key: 'test', url: 'test')
 
       allow(transport).to receive(:perform_request).with('GET', '/')
