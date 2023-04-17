@@ -4,7 +4,7 @@ Gem::Specification.new do |s|
   s.summary     = "Elasticsearch Serverless Client"
   s.authors     = ["Fernando Briano"]
   s.email       = "support@elastic.co"
-  s.files       = ["lib/elasticsearch-serverless.rb"]
+  s.files       = Dir['lib/**/*.rb']
   s.homepage    =
     "https://rubygems.org/gems/elasticsearch-serverless"
   s.license       = "Apache-2.0"
