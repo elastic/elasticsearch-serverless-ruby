@@ -4,12 +4,12 @@ describe ElasticsearchServerless::Client do
   context 'instantiation' do
     it 'raises an error when no url is passed' do
       expect{ ElasticsearchServerless::Client.new(api_key: 'test') }.
-        to raise_error(ArgumentError, 'missing keyword: :url')
+        to raise_error(ArgumentError, /missing keyword: :?url/)
     end
 
     it 'raises an error when no api_key is passed' do
       expect{ ElasticsearchServerless::Client.new(url: 'test') }.
-        to raise_error(ArgumentError, 'missing keyword: :api_key')
+        to raise_error(ArgumentError, /missing keyword: :?api_key/)
     end
 
     it 'instantiates a client' do
