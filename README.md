@@ -2,9 +2,11 @@
 
 [![main](https://github.com/elastic/elasticsearch-serverless-ruby/actions/workflows/tests.yml/badge.svg?branch=main)](https://github.com/elastic/elasticsearch-serverless-ruby/actions/workflows/tests.yml)
 
+This is the official Elastic client for the **Elasticsearch Serverless** service. If you're looking to develop your Ruby application with the Elasticsearch Stack, you should look at the [Elasticsearch Client](https://github.com/elastic/elasticsearch-ruby) instead. If you're looking to develop your Ruby application with Elastic Enterprise Search, you should look at the [Enterprise Search Client](https://github.com/elastic/enterprise-search-ruby/).
+
 ## Guide
 
-Install the Elasticsearch Serverless Ruby Client:
+For now this gem is only available through its source code. You can install the Elasticsearch Serverless Ruby Client with the following commands:
 
 ```bash
 $ gem build elasticsearch-serverless.gemspec
@@ -17,7 +19,7 @@ Or include it in your Ruby project's Gemfile:
 gem 'elasticsearch-serverless', path: '../path/to/client-code'
 ```
 
-You can also find a rake task to run a Ruby console with the client in the project's code:
+You can find a rake task to run a Ruby console with the client in the project's code:
 
 ```bash
 $ bundle exec rake console
@@ -25,11 +27,17 @@ $ bundle exec rake console
 
 ### Instantiate a Client
 
-In your Cloud deployment management page, copy the endpoint for Elasticsearch. Then create a new API Key and save its value:
+You need to be using the Elastiscearch Serverless service in order to use the `elasticsearch-serverless` gem. You will need your deployment's endpoint for Elasticsearch and an API key.
+
+In your Cloud deployment management page, copy the endpoint for Elasticsearch and save it:
+
+![Copy the endpoint for Elasticsearch](docs/copy-endpoint.gif "Copy the endpoint for Elasticsearch")
+
+Then create a new API Key and save its value:
 
 ![Create and copy Apy Key](docs/setup-api-key.gif "Create and copy Apy Key")
 
-Instantiate a client with these values:
+You can now instantiate a client with these values:
 
 ```ruby
 client = ElasticsearchServerless::Client.new(
@@ -40,10 +48,11 @@ client = ElasticsearchServerless::Client.new(
 
 ### Using the API
 
-Once you've instantiated a client with your API key and Elasticsearch endpoint, you can use the **Info API** to check that you can connect to the Serverless server:
+Once you've instantiated a client with your API key and Elasticsearch endpoint, you can use the **Info API** to check that you can connect to the Serverless server. The info API returns information from the Elasticsearch Serverless service you are running:
 
 ```ruby
 > response = client.info
+> response
  =>
 #<ElasticsearchServerless::API::Response:0x00007f387ba973c8
  @response=
@@ -91,9 +100,10 @@ The client will return an API Response object. You can see the HTTP return code 
  "minimum_index_compatibility_version"=>"7.0.0"}
 ```
 
-You can index documents using the **Bulk API**:
+You can now start ingesting documents into Elasticsearch Service. You can use the **Bulk API** for this. This API allows you to index, update and delete several documents in one request. You call the `bulk` API on the client with a body parameter, an Array of hashes that define the action and a document. Here's an example of indexing some classic books into the `books` index:
 
 ```ruby
+# First we build our data:
 body = [
   { index: { _index: 'books', data: {name: "Snow Crash", "author": "Neal Stephenson", "release_date": "1992-06-01", "page_count": 470} } },
   { index: { _index: 'books', data: {name: "Revelation Space", "author": "Alastair Reynolds", "release_date": "2000-03-15", "page_count": 585} } },
@@ -102,7 +112,9 @@ body = [
   { index: { _index: 'books', data: {name: "Brave New World", "author": "Aldous Huxley", "release_date": "1932-06-01", "page_count": 268} } },
   { index: { _index: 'books', data: {name: "The Handmaid's Tale", "author": "Margaret Atwood", "release_date": "1985-06-01", "page_count": 311} } }
 ]
+# Then we send the data via the bulk api:
 > response = client.bulk(body: body)
+# And we can check that the items were indexed and given an id in the response:
 > response['items']
  =>
 [{"index"=>{"_index"=>"books", "_id"=>"Pdink4cBmDx329iqhzM2", "_version"=>1, "result"=>"created", "_shards"=>{"total"=>2, "successful"=>1, "failed"=>0}, "_seq_no"=>0, "_primary_term"=>1, "status"=>201}},
@@ -114,7 +126,7 @@ body = [
 
 ```
 
-You can search your documents using the **Search API**:
+Now that some data is available, you can search your documents using the **Search API**:
 
 ```ruby
 > response = client.search(index: 'books', q: 'snow')
@@ -124,13 +136,7 @@ You can search your documents using the **Search API**:
 
 ## Development
 
-Clone the code, cd into the project directory and run `bundle install`.
-
-### Run Tests
-
-```bash
-$ bundle exec rake spec
-```
+See [CONTRIBUTING](./CONTRIBUTING.md).
 
 ### Docs
 
