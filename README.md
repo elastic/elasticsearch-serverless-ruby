@@ -124,6 +124,8 @@ You can search your documents using the **Search API**:
 
 ## Development
 
+Clone the code, cd into the project directory and run `bundle install`.
+
 ### Run Tests
 
 ```bash
