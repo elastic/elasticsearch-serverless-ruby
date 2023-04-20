@@ -5,6 +5,13 @@ Clone the code, cd into the project directory and run `bundle install`.
 ```bash
 $ bundle exec rake spec
 ```
+
+### Run Elasticsearch Serverless Docker container
+
+```bash
+$ rake docker[STACK_VERSION]
+```
+
 ### Contributing Code Changes
 
 1. Please make sure you have signed the [Contributor License
