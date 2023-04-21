@@ -8,8 +8,17 @@ $ bundle exec rake spec
 
 ### Run Elasticsearch Serverless Docker container
 
+We can run Elasticsearch in `serverless-mode` by setting `ES_JAVA_OPTS="-Des.serverless=true"` to a stateful Elasticsearch cluster. I've added a simplified version of clients' `run-elasticsearch.sh` script to the project, and it can be run with:
+
 ```bash
 $ rake docker[STACK_VERSION]
+```
+
+If an API that is not available on Serverless is called, the following error is triggered:
+
+```ruby
+> client.info
+/home/fernando/.rvm/gems/ruby-3.2.2/gems/elastic-transport-8.2.1/lib/elastic/transport/transport/base.rb:228:in `__raise_transport_error': [400] {"error":"uri [/] with method [GET] exists but is not available when running in serverless mode"} (Elastic::Transport::Transport::Errors::BadRequest) 
 ```
 
 ### Contributing Code Changes
