@@ -48,59 +48,7 @@ client = ElasticsearchServerless::Client.new(
 
 ### Using the API
 
-Once you've instantiated a client with your API key and Elasticsearch endpoint, you can use the **Info API** to check that you can connect to the Serverless server. The info API returns information from the Elasticsearch Serverless service you are running:
-
-```ruby
-> response = client.info
-> response
- =>
-#<ElasticsearchServerless::API::Response:0x00007f387ba973c8
- @response=
-  #<Elastic::Transport::Transport::Response:0x00007f387b3afab0
-   @body=
-    {"name"=>"instance-0000000000",
-     "cluster_name"=>"77b1c8d1edc74b7ea447bb307496a987",
-     "cluster_uuid"=>"CZHOOLPnSRe3eYDkwA43hA",
-     "version"=>
-      {"number"=>"8.8.0-SNAPSHOT",
-       "build_flavor"=>"default",
-       "build_type"=>"docker",
-       "build_hash"=>"8432a5a3666624a4a989aa6b4d9c4477e4602f6c",
-       "build_date"=>"2023-04-17T18:47:52.323690096Z",
-       "build_snapshot"=>true,
-       "lucene_version"=>"9.6.0",
-       "minimum_wire_compatibility_version"=>"7.17.0",
-       "minimum_index_compatibility_version"=>"7.0.0"},
-     "tagline"=>"You Know, for Search"},
-   @headers=
-    {"content-encoding"=>"gzip",
-     "content-length"=>"353",
-     "content-type"=>"application/json",
-     "x-cloud-request-id"=>"dCMaszerQcKE4CsJdWFprQ",
-     "x-elastic-product"=>"Elasticsearch",
-     "x-found-handling-cluster"=>"77b1c8d1edc74b7ea447bb307496a987",
-     "x-found-handling-instance"=>"instance-0000000000",
-     "date"=>"Tue, 18 Apr 2023 09:10:31 GMT"},
-   @status=200>>
-```
-
-The client will return an API Response object. You can see the HTTP return code by calling `status` and the HTTP headers by calling `headers` on the response object. The Response object behaves as a Hash too, so you can access the body values directly:
-
-```ruby
-> response['version']
- =>
-{"number"=>"8.8.0-SNAPSHOT",
- "build_flavor"=>"default",
- "build_type"=>"docker",
- "build_hash"=>"8432a5a3666624a4a989aa6b4d9c4477e4602f6c",
- "build_date"=>"2023-04-17T18:47:52.323690096Z",
- "build_snapshot"=>true,
- "lucene_version"=>"9.6.0",
- "minimum_wire_compatibility_version"=>"7.17.0",
- "minimum_index_compatibility_version"=>"7.0.0"}
-```
-
-You can now start ingesting documents into Elasticsearch Service. You can use the **Bulk API** for this. This API allows you to index, update and delete several documents in one request. You call the `bulk` API on the client with a body parameter, an Array of hashes that define the action and a document. Here's an example of indexing some classic books into the `books` index:
+Once you've instantiated a client with your API key and Elasticsearch endpoint, you can start ingesting documents into Elasticsearch Service. You can use the **Bulk API** for this. This API allows you to index, update and delete several documents in one request. You call the `bulk` API on the client with a body parameter, an Array of hashes that define the action and a document. Here's an example of indexing some classic books into the `books` index:
 
 ```ruby
 # First we build our data:
@@ -125,6 +73,8 @@ body = [
  {"index"=>{"_index"=>"books", "_id"=>"Qtink4cBmDx329iqhzM2", "_version"=>1, "result"=>"created", "_shards"=>{"total"=>2, "successful"=>1, "failed"=>0}, "_seq_no"=>5, "_primary_term"=>1, "status"=>201}}]
 
 ```
+
+When you use the client to make a request to Elasticsearch, it will return an API Response object. You can see the HTTP return code by calling `status` and the HTTP headers by calling `headers` on the response object. The Response object behaves as a Hash too, so you can access the body values directly as seen on the previous example with `response['items']`.
 
 Now that some data is available, you can search your documents using the **Search API**:
 
