@@ -26,13 +26,9 @@ Additionally, you can find a rake task in the project's code to run a Ruby conso
 
 ```bash
 $ bundle exec rake console
-irb -r rubygems -I lib -r elasticsearch-serverless.rb
-3.2.2 :001 > client = ElasticsearchServerless::Client.new(api_key: 'my_api_key', url: 'https://my-deployment-url')
- => 
-#<ElasticsearchServerless::Client:0x00007f8373a0a5e8                                        
-...                                                                                         
-3.2.2 :002 >
 ```
+
+![rake console](docs/rake-console.gif "rake console")
 
 ### Instantiate a Client
 
