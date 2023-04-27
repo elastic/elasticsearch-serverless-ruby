@@ -1,0 +1,89 @@
+---
+id: gettingStarted
+slug: /serverless-ruby/docs/getting-started
+title: Getting started with the Serverless Ruby client
+description: This page contains quickstart information about the Serverless Ruby client.
+date: 2023-04-27
+tags: ['serverless','Ruby client','docs', 'getting started']
+---
+
+This page guides you through the installation process of the Serverless Ruby 
+client, shows you how to instantiate the client, and how to perform basic 
+Elasticsearch operations with it.
+
+
+## Requirements
+
+* Ruby 3.0 or higher installed on your system.
+* You must use the Elastiscearch Serverless service to use the 
+`elasticsearch-serverless` gem.
+
+
+## Installation
+
+
+### Using the command line
+
+You can install the Elasticsearch Serverless Ruby client with the following 
+commands:
+
+```bash
+# From the project's root directory:
+$ gem build elasticsearch-serverless.gemspec
+$ gem install elasticsearch-serverless-x.x.x.gem
+```
+
+
+### Using the Gemfile
+
+Or include the client gem in your Ruby project's Gemfile:
+
+```ruby
+gem 'elasticsearch-serverless', path: '../path/to/client-code'
+```
+
+
+### Adding a Ruby console
+
+Additionally, you can have a Ruby console with the required librares to use the 
+client by using a rake task:
+
+```bash
+$ bundle exec rake console
+```
+
+<DocImage url="images/rake-console.gif" alt="Rake console"/>
+
+
+## Instantiate a client
+
+You can instantiate a client by running the following command:
+
+```ruby
+client = ElasticsearchServerless::Client.new(
+  api_key: 'your_api_key',
+  url: 'https://my-deployment-url'
+)
+```
+
+You can find the Elasticsearch endpoint on the Cloud deployment management page.
+
+<DocImage url="images/copy-endpoint.gif" alt="Copy the endpoint for Elasticsearch"/>
+
+You can create a new API Key under **Stack Management** > **Security**:
+
+<DocImage url="images/setup-api-key.gif" alt="Create and copy Apy Key"/>
+
+
+## Using the API
+
+After you instantiated a client with your API key and Elasticsearch endpoint, 
+you can start ingesting documents into the Elasticsearch Service. You can use 
+the Bulk API for this. This API enables you to index, update, and delete several 
+documents in one request.
+
+You can call the `bulk` API with a body parameter, an array of hashes that 
+define the action, and a document. 
+
+The following is an example of indexing some classic books into the `books` 
+index:
