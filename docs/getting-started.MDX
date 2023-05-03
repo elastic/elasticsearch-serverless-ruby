@@ -103,7 +103,7 @@ body = [
 ]
 # Then ingest the data via the bulk API:
 > response = client.bulk(body: body)
-# Yu can check the response if the items are indexed and have an ID:
+# You can check the response if the items are indexed and have an ID:
 > response['items']
  =>
 [{"index"=>{"_index"=>"books", "_id"=>"Pdink4cBmDx329iqhzM2", "_version"=>1, "result"=>"created", "_shards"=>{"total"=>2, "successful"=>1, "failed"=>0}, "_seq_no"=>0, "_primary_term"=>1, "status"=>201}},
