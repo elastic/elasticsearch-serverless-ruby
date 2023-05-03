@@ -1,0 +1,16 @@
+{
+    "mission": "Serverless Ruby Client Docs",
+    "id": "serverless-ruby",
+    "landingPageId": "rubyClient",
+    "icon": "machineLearningApp",
+    "description": "Home of the Serverless Ruby Client documentation.",
+    "items": [
+      {
+        "label": "Home",
+        "items": [
+          { "id": "rubyClient" },
+          { "id": "gettingStarted" }
+        ]
+      }
+    ]
+  }

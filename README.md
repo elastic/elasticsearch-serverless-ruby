@@ -28,7 +28,7 @@ Additionally, you can find a rake task in the project's code to run a Ruby conso
 $ bundle exec rake console
 ```
 
-![rake console](docs/rake-console.gif "rake console")
+![rake console](docs/images/rake-console.gif "rake console")
 
 ### Instantiate a Client
 
@@ -36,11 +36,11 @@ You need to be using the Elastiscearch Serverless service in order to use the `e
 
 In your Cloud deployment management page, copy the endpoint for Elasticsearch and save it:
 
-![Copy the endpoint for Elasticsearch](docs/copy-endpoint.gif "Copy the endpoint for Elasticsearch")
+![Copy the endpoint for Elasticsearch](docs/images/copy-endpoint.gif "Copy the endpoint for Elasticsearch")
 
 Then create a new API Key and save its value:
 
-![Create and copy Apy Key](docs/setup-api-key.gif "Create and copy Apy Key")
+![Create and copy Apy Key](docs/images/setup-api-key.gif "Create and copy Apy Key")
 
 You can now instantiate a client with these values:
 
