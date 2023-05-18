@@ -15,9 +15,11 @@
 # specific language governing permissions and limitations
 # under the License.
 
+require_relative './lib/elasticsearch-serverless/version.rb'
+
 Gem::Specification.new do |s|
   s.name        = "elasticsearch-serverless"
-  s.version     = "0.0.1"
+  s.version     = ElasticsearchServerless::VERSION
   s.summary     = "Elasticsearch Serverless Client"
   s.authors     = ["Fernando Briano"]
   s.email       = "support@elastic.co"

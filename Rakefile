@@ -35,3 +35,23 @@ task :docker, [:version] do |_, params|
 
   system("STACK_VERSION=#{params[:version]} ./.ci/run-elasticsearch.sh")
 end
+
+desc 'Bump Version'
+task :bump, :version do |_, args|
+  abort('[!] Required argument [version] missing') unless args[:version]
+
+  regexp = Regexp.new(/VERSION = ("|'([0-9.]+(-SNAPSHOT)?)'|")/)
+  file = './lib/elasticsearch-serverless/version.rb'
+  content = File.read(file)
+
+  if (match = content.match(regexp))
+    old_version = match[2]
+    content.gsub!(old_version, args[:version])
+    puts "[#{old_version}] -> [#{args[:version]}] in #{file.gsub('./', '')}"
+    File.open(file, 'w') { |f| f.puts content }
+  else
+    abort "Couldn't find the version in #{file} "
+  end
+rescue StandardError => e
+  abort "[!!!] #{e.class} : #{e.message}"
+end
