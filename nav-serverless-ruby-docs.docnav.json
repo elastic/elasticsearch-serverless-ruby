@@ -9,7 +9,7 @@
         "label": "Home",
         "items": [
           { "id": "rubyClient" },
-          { "id": "gettingStarted" }
+          { "id": "gettingStartedServerlessRuby" }
         ]
       }
     ]
