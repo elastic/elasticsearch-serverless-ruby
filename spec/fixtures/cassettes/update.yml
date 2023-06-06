@@ -1,0 +1,87 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://my-deployment.elastic.co/index-for-updates/_doc
+    body:
+      encoding: UTF-8
+      string: '{"name":"Testing","description":"To be updated"}'
+    headers:
+      Authorization:
+      - ApiKey my_api_key
+      x-elastic-client-meta:
+      - et=8.2.1,rb=3.2.2,t=8.2.1,fd=2.7.4,nh=0.3.2
+      User-Agent:
+      - 'elastic-transport-ruby/8.2.1 (RUBY_VERSION: 3.2.2; linux x86_64; Faraday
+        v2.7.4)'
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      content-encoding:
+      - gzip
+      content-length:
+      - '160'
+      content-type:
+      - application/json
+      location:
+      - "/index-for-updates/_doc/2k6mj4gBpEuJav-UeAJ_"
+      x-cloud-request-id:
+      - sLYD0ycOQzuFC-YN0-GpXA
+      x-elastic-product:
+      - Elasticsearch
+      x-found-handling-cluster:
+      - 1d180c72b0da4fa19c7a135d8084fd67
+      x-found-handling-instance:
+      - instance-0000000000
+      date:
+      - Tue, 06 Jun 2023 07:40:31 GMT
+    body:
+      encoding: ASCII-8BIT
+      string: '{"_index":"index-for-updates","_id":"2k6mj4gBpEuJav-UeAJ_","_version":1,"result":"created","_shards":{"total":2,"successful":2,"failed":0},"_seq_no":1,"_primary_term":1}'
+  recorded_at: Tue, 06 Jun 2023 07:40:31 GMT
+- request:
+    method: post
+    uri: https://my-deployment.elastic.co/index-for-updates/_update/2k6mj4gBpEuJav-UeAJ_
+    body:
+      encoding: UTF-8
+      string: '{"doc":{"description":"Has been updated"}}'
+    headers:
+      Authorization:
+      - ApiKey my_api_key
+      x-elastic-client-meta:
+      - et=8.2.1,rb=3.2.2,t=8.2.1,fd=2.7.4,nh=0.3.2
+      User-Agent:
+      - 'elastic-transport-ruby/8.2.1 (RUBY_VERSION: 3.2.2; linux x86_64; Faraday
+        v2.7.4)'
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      content-encoding:
+      - gzip
+      content-length:
+      - '156'
+      content-type:
+      - application/json
+      x-cloud-request-id:
+      - YfVv11YrStW4wdQ2uH1fQg
+      x-elastic-product:
+      - Elasticsearch
+      x-found-handling-cluster:
+      - 1d180c72b0da4fa19c7a135d8084fd67
+      x-found-handling-instance:
+      - instance-0000000000
+      date:
+      - Tue, 06 Jun 2023 07:40:32 GMT
+    body:
+      encoding: ASCII-8BIT
+      string: '{"_index":"index-for-updates","_id":"2k6mj4gBpEuJav-UeAJ_","_version":2,"result":"updated","_shards":{"total":2,"successful":2,"failed":0},"_seq_no":2,"_primary_term":1}'
+  recorded_at: Tue, 06 Jun 2023 07:40:32 GMT
+recorded_with: VCR 6.1.0
