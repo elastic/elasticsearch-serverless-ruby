@@ -26,7 +26,7 @@ You can also install the gem from GitHub's releases. You will need a GitHub toke
 
 ```bash
 $ GITHUB_TOKEN=`cat ~/.elastic/github.token` # Or paste it here manually
-$ gem install elasticsearch-serverless --source "https://$GITHUB_TOKEN@github.com/elastic/elasticsearch-serverless-ruby/releases/download/v0.0.1/elasticsearch-serverless-0.0.1.gem"
+$ gem install elasticsearch-serverless --source "https://$GITHUB_TOKEN@github.com/elastic/elasticsearch-serverless-ruby/releases/download/v0.0.2.pre/elasticsearch-serverless-0.0.2.pre.gem"
 ```
 
 Additionally, you can find a rake task in the project's code to run a Ruby console with the required librares to use the client loaded into it:
