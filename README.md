@@ -64,16 +64,16 @@ Once you've instantiated a client with your API key and Elasticsearch endpoint, 
 
 ```ruby
 # First we build our data:
-body = [
-  { index: { _index: 'books', data: {name: "Snow Crash", "author": "Neal Stephenson", "release_date": "1992-06-01", "page_count": 470} } },
-  { index: { _index: 'books', data: {name: "Revelation Space", "author": "Alastair Reynolds", "release_date": "2000-03-15", "page_count": 585} } },
-  { index: { _index: 'books', data: {name: "1984", "author": "George Orwell", "release_date": "1949-06-08", "page_count": 328} } },
-  { index: { _index: 'books', data: {name: "Fahrenheit 451", "author": "Ray Bradbury", "release_date": "1953-10-15", "page_count": 227} } },
-  { index: { _index: 'books', data: {name: "Brave New World", "author": "Aldous Huxley", "release_date": "1932-06-01", "page_count": 268} } },
-  { index: { _index: 'books', data: {name: "The Handmaid's Tale", "author": "Margaret Atwood", "release_date": "1985-06-01", "page_count": 311} } }
+documents = [
+  { index: { _index: 'books', data: {name: "Snow Crash", author: "Neal Stephenson", release_date: "1992-06-01", page_count: 470} } },
+  { index: { _index: 'books', data: {name: "Revelation Space", author: "Alastair Reynolds", release_date: "2000-03-15", page_count: 585} } },
+  { index: { _index: 'books', data: {name: "1984", author: "George Orwell", release_date: "1949-06-08", page_count: 328} } },
+  { index: { _index: 'books', data: {name: "Fahrenheit 451", author: "Ray Bradbury", release_date: "1953-10-15", page_count: 227} } },
+  { index: { _index: 'books', data: {name: "Brave New World", author: "Aldous Huxley", release_date: "1932-06-01", page_count: 268} } },
+  { index: { _index: 'books', data: {name: "The Handmaid's Tale", author: "Margaret Atwood", release_date: "1985-06-01", page_count: 311} } }
 ]
 # Then we send the data via the bulk api:
-> response = client.bulk(body: body)
+> response = client.bulk(body: documents)
 # And we can check that the items were indexed and given an id in the response:
 > response['items']
  =>
@@ -87,6 +87,23 @@ body = [
 ```
 
 When you use the client to make a request to Elasticsearch, it will return an API Response object. You can see the HTTP return code by calling `status` and the HTTP headers by calling `headers` on the response object. The Response object behaves as a Hash too, so you can access the body values directly as seen on the previous example with `response['items']`.
+
+
+You can call the `update` API to update a document:
+
+```ruby
+response = client.update(
+  index: 'books', 
+  id: 'document_id', 
+  body: { doc: { page_count: 312 } }
+)
+```
+
+You can call the `delete` API to delete a document:
+
+```ruby
+client.delete(index: 'books', id: 'Ptink4cBmDx329iqhzM2')
+```
 
 Now that some data is available, you can search your documents using the **Search API**:
 
