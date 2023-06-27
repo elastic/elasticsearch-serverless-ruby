@@ -1,0 +1,38 @@
+---
+http_interactions:
+- request:
+    method: head
+    uri: https://my-deployment.elastic.co
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Authorization:
+      - ApiKey api_key
+      x-elastic-client-meta:
+      - et=8.2.1,rb=3.2.2,t=8.2.1,fd=2.7.4,nh=0.3.2
+      User-Agent:
+      - 'elastic-transport-ruby/8.2.1 (RUBY_VERSION: 3.2.2; linux x86_64; Faraday
+        v2.7.4)'
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      x-cloud-request-id:
+      - Fo3fdSNETJ6flGgy4Ad8SA
+      x-elastic-product:
+      - Elasticsearch
+      x-found-handling-cluster:
+      - 137294e46e774f88a9423a9dcc536fbd
+      x-found-handling-instance:
+      - instance-0000000000
+      date:
+      - Tue, 27 Jun 2023 16:23:15 GMT
+    body:
+      encoding: UTF-8
+      string: ''
+  recorded_at: Tue, 27 Jun 2023 16:23:15 GMT
+recorded_with: VCR 6.1.0
