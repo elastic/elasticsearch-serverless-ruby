@@ -19,7 +19,7 @@ require 'elasticsearch-serverless/api/response'
 require 'elasticsearch-serverless/api/utils'
 
 # Require everything in /api
-Dir["#{File.dirname(__FILE__)}/api/*.rb"].each { |f| require f}
+Dir["#{File.dirname(__FILE__)}/api/**/*.rb"].each { |f| require f}
 
 module ElasticsearchServerless
   module API
@@ -30,5 +30,46 @@ module ElasticsearchServerless
     HTTP_POST         = 'POST'.freeze
     HTTP_PUT          = 'PUT'.freeze
     HTTP_DELETE       = 'DELETE'.freeze
+
+    # Namespace definitions
+    #
+    # Shortcuts for namespaces allows using methods for namespaces:
+    # +client.namespace.action+
+    #
+    module CommonClient
+      attr_reader :client
+
+      def initialize(client)
+        @client = client
+      end
+
+      def perform_request(method, path, params = {}, body = nil, headers = nil)
+        client.perform_request method, path, params, body, headers
+      end
+    end
+
+    # Add new namespaces to this constant
+    #
+    API_NAMESPACES = [
+      :indices
+    ].freeze
+
+    API_NAMESPACES.each do |namespace|
+      name = namespace.to_s
+      # TODO: consider if we need to do something for APIs that have aliases (if any of these are
+      # available in serverless), like 'ccr', 'ilm', 'ml' and 'slm'
+      module_name = namespace.to_s.split("_").map(&:capitalize).join
+
+      class_name = "#{name.capitalize}Client"
+
+      klass = Class.new(Object) do
+        include CommonClient, Object.const_get("ElasticsearchServerless::API::#{module_name}::Actions")
+      end
+      Object.const_set(class_name, klass)
+
+      define_method(name) do
+        instance_variable_set("@#{name}", klass.new(self))
+      end
+    end
   end
 end
