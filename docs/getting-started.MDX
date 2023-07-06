@@ -120,6 +120,27 @@ HTTP headers by calling `headers` on the response object. The response object
 also behaves as a Hash, so you can access the body values directly as seen on 
 the previous example with `response['items']`.
 
+
+### Getting documents
+
+You can get documents by using the following code:
+
+```ruby
+
+```
+
+
+### Searching
+
+Now that some data is available, you can search your documents using the 
+**Search API**:
+
+```ruby
+> response = client.search(index: 'books', q: 'snow')
+> response['hits']['hits']
+ => [{"_index"=>"books", "_id"=>"Pdink4cBmDx329iqhzM2", "_score"=>1.5904956, "_source"=>{"name"=>"Snow Crash", "author"=>"Neal Stephenson", "release_date"=>"1992-06-01", "page_count"=>470}}]
+```
+
 ### Updating a document
 
 You can call the `update` API to update a document:
@@ -140,13 +161,10 @@ You can call the `delete` API to delete a document:
 client.delete(index: 'books', id: 'Ptink4cBmDx329iqhzM2')
 ```
 
-### Searching
 
-Now that some data is available, you can search your documents using the 
-**Search API**:
+### Deleting an index
+
 
 ```ruby
-> response = client.search(index: 'books', q: 'snow')
-> response['hits']['hits']
- => [{"_index"=>"books", "_id"=>"Pdink4cBmDx329iqhzM2", "_score"=>1.5904956, "_source"=>{"name"=>"Snow Crash", "author"=>"Neal Stephenson", "release_date"=>"1992-06-01", "page_count"=>470}}]
+
 ```
