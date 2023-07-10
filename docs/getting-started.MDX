@@ -126,7 +126,7 @@ the previous example with `response['items']`.
 You can get documents by using the following code:
 
 ```ruby
-
+client.get(index: 'my_index', id: id)
 ```
 
 
@@ -166,5 +166,5 @@ client.delete(index: 'books', id: 'Ptink4cBmDx329iqhzM2')
 
 
 ```ruby
-
+client.indices.delete(index: 'my_index')
 ```
