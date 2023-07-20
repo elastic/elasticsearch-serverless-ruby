@@ -1,0 +1,43 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://my-deployment.elastic.co/_cat/indices/index-to-cat%F0%9F%90%88
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Authorization:
+      - ApiKey my_api_key
+      x-elastic-client-meta:
+      - et=8.2.1,rb=3.2.2,t=8.2.1,fd=2.7.4,nh=0.3.2
+      User-Agent:
+      - 'elastic-transport-ruby/8.2.1 (RUBY_VERSION: 3.2.2; linux x86_64; Faraday
+        v2.7.4)'
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      content-type:
+      - text/plain; charset=UTF-8
+      x-cloud-request-id:
+      - 9Mp1ZXiIT9CocPTOCofhTg
+      x-elastic-product:
+      - Elasticsearch
+      x-found-handling-cluster:
+      - e9f9883f2f084d6b9c3aa53d8e3431fe.es
+      x-found-handling-instance:
+      - es-es-search-6bb6489b9-gcjhr
+      date:
+      - Thu, 20 Jul 2023 10:23:01 GMT
+      content-length:
+      - '69'
+    body:
+      encoding: UTF-8
+      string: "green open index-to-cat\U0001F408 7z48YtWEQYSKk8G9_iC6tQ 1 1 0 0 452b
+        226b\n"
+  recorded_at: Thu, 20 Jul 2023 10:23:01 GMT
+recorded_with: VCR 6.1.0

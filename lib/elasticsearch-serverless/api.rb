@@ -51,6 +51,7 @@ module ElasticsearchServerless
     # Add new namespaces to this constant
     #
     API_NAMESPACES = [
+      :cat,
       :indices
     ].freeze
 
