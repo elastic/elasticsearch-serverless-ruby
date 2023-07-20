@@ -1,12 +1,16 @@
 # Questions and assumptions
 
+See this file's git history for updates.
+
 ## Initial questions
 
 ### Do we have a specification?
-Not yet. For now we've decided to extract 3 APIs from the Elasticsearch spec and generate code based on that.
+
+We're using the [elasticsearch-specification](https://github.com/elastic/elasticsearch-specification/) and the availability tag in our generators to generate the APIs for Elasticsearch Serverless.
 
 ### How do we test against a running server?
-Initially I tested the code with Stack Elasticsearch and API Key authentication. But I've now tested it with a Cloud instance of Serverless in our QA Cloud and it's working there too.
+
+I'm currently testing against a QA Cloud instance, recording the requests in tests with [VCR](https://github.com/vcr/vcr/). We want to automate the testing against serverless eventually.
 
 ### YAML Tests
 
@@ -26,6 +30,8 @@ For this client I'm using `ElasticsearchServerless::Client` since I think it's t
 
 One of the outcomes of this work is coordinating with the docs team to create doc books for this client and tie that up together with the docs infra.
 
+There's been talk about hosting our own reference docs, in the way Ruby doc does (see e.g.: [elasticsearch](https://rubydoc.info/gems/elasticsearch)) as far as I understand.
+
 ## Assumptions
 
 ### Assumption: Regarding implementation of libraries:
@@ -36,4 +42,6 @@ In the Elasticsearch Ruby Client, `elasticsearch` and `elasticsearch-api` are tw
 
 ### Code generation
 
-The code for the current APIs `info`, `bulk` and `search` was taken from the Elasticsearch client's code for this prototype, but there'll be further work with code generation. As such, a lot of the code used in `elasticsearch-api` is being duplicated here. I need to look more into that, see what stuff can be shared in `elastic-transport` or if it deserves to be another library. My initial thought is maybe there could be a namespace for utils in transport, such as `api/utils` and `api/response` (which is also being duplicated in Enterprise Search Ruby).
+The code is being generated with [client-generator-ruby](https://github.com/elastic/elastic-client-generator-ruby) with the [elasticsearch-specification](https://github.com/elastic/elasticsearch-specification/) and the availability tag.
+
+There's a pending task in `elastic-transport` to add a namespace for utils, such as `api/utils` and `api/response` to avoid the duplication of a couple of classes (which are also being duplicated in Enterprise Search Ruby).
