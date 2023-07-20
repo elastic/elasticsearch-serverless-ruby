@@ -1,0 +1,42 @@
+---
+http_interactions:
+- request:
+    method: put
+    uri: https://my-deployment.elastic.co/index-to-get
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Authorization:
+      - ApiKey my_api_key
+      x-elastic-client-meta:
+      - et=8.2.1,rb=3.2.2,t=8.2.1,fd=2.7.4,nh=0.3.2
+      User-Agent:
+      - 'elastic-transport-ruby/8.2.1 (RUBY_VERSION: 3.2.2; linux x86_64; Faraday
+        v2.7.4)'
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      content-length:
+      - '71'
+      content-type:
+      - application/json
+      x-cloud-request-id:
+      - laSMdCShQK-TD-1YOFyhUw
+      x-elastic-product:
+      - Elasticsearch
+      x-found-handling-cluster:
+      - e9f9883f2f084d6b9c3aa53d8e3431fe.es
+      x-found-handling-instance:
+      - es-es-index-6d57c48bfd-wkk7b
+      date:
+      - Thu, 20 Jul 2023 10:11:31 GMT
+    body:
+      encoding: UTF-8
+      string: '{"acknowledged":true,"shards_acknowledged":true,"index":"index-to-get"}'
+  recorded_at: Thu, 20 Jul 2023 10:11:31 GMT
+recorded_with: VCR 6.1.0
