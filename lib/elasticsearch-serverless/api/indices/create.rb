@@ -29,6 +29,7 @@ module ElasticsearchServerless
         # @option arguments [Time] :timeout Explicit operation timeout
         # @option arguments [Integer, String] :wait_for_active_shards Set the number of active shards to wait for before the operation returns.
         # @option arguments [Hash] :headers Custom HTTP headers
+        # @option arguments [Hash] :body request body
         #
         # @see https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-create-index.html
         #
