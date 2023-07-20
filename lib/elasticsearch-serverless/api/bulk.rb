@@ -15,8 +15,8 @@
 # specific language governing permissions and limitations
 # under the License.
 #
-# Auto generated from build hash f284cc16f4d4b4289bc679aa1529bb504190fe80
-# @see https://github.com/elastic/elasticsearch/tree/main/rest-api-spec
+# Auto generated from commit f284cc16f4d4b4289bc679aa1529bb504190fe80
+# @see https://github.com/elastic/elasticsearch-specification
 #
 module ElasticsearchServerless
   module API
@@ -24,19 +24,17 @@ module ElasticsearchServerless
       # Allows to perform multiple index/update/delete operations in a single request.
       #
       # @option arguments [String] :index Default index for items which don't provide one
-      # @option arguments [String] :wait_for_active_shards Sets the number of shard copies that must be active before proceeding with the bulk operation. Defaults to 1, meaning the primary shard only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the shard (number of replicas + 1)
-      # @option arguments [String] :refresh If `true` then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` (the default) then do nothing with refreshes. (options: true, false, wait_for)
-      # @option arguments [String] :routing Specific routing value
-      # @option arguments [Time] :timeout Explicit operation timeout
-      # @option arguments [String] :type Default document type for items which don't provide one
-      # @option arguments [List] :_source True or false to return the _source field or not, or default list of fields to return, can be overridden on each sub-request
-      # @option arguments [List] :_source_excludes Default list of fields to exclude from the returned _source field, can be overridden on each sub-request
-      # @option arguments [List] :_source_includes Default list of fields to extract and return from the _source field, can be overridden on each sub-request
       # @option arguments [String] :pipeline The pipeline id to preprocess incoming documents with
+      # @option arguments [String] :refresh If +true+ then refresh the affected shards to make this operation visible to search, if +wait_for+ then wait for a refresh to make this operation visible to search, if +false+ (the default) then do nothing with refreshes.
+      # @option arguments [String] :routing Specific routing value
+      # @option arguments [Boolean, String, Array<String>] :_source True or false to return the _source field or not, or default list of fields to return, can be overridden on each sub-request
+      # @option arguments [String, Array<String>] :_source_excludes Default list of fields to exclude from the returned _source field, can be overridden on each sub-request
+      # @option arguments [String, Array<String>] :_source_includes Default list of fields to extract and return from the _source field, can be overridden on each sub-request
+      # @option arguments [Time] :timeout Explicit operation timeout
+      # @option arguments [Integer, String] :wait_for_active_shards Sets the number of shard copies that must be active before proceeding with the bulk operation. Defaults to 1, meaning the primary shard only. Set to +all+ for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the shard (number of replicas + 1)
       # @option arguments [Boolean] :require_alias Sets require_alias for all incoming documents. Defaults to unset (false)
       # @option arguments [Hash] :headers Custom HTTP headers
-      # @option arguments [String|Array] :body The operation definition and data (action-data pairs), separated by newlines. Array of Strings, Header/Data pairs,
-      # or the conveniency "combined" format can be passed, refer to Elasticsearch::API::Utils.__bulkify documentation.
+      # @option arguments [String|Array] :body operations. Array of Strings, Header/Data pairs, or the conveniency "combined" format can be passed, refer to ElasticsearchServerless::API::Utils.bulkify documentation.
       #
       # @see https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html
       #
@@ -46,17 +44,17 @@ module ElasticsearchServerless
         arguments = arguments.clone
         headers = arguments.delete(:headers) || {}
 
-        body   = arguments.delete(:body)
+        body = arguments.delete(:body)
 
         _index = arguments.delete(:index)
 
         method = ElasticsearchServerless::API::HTTP_POST
         path   = if _index
-                   "#{Utils.__listify(_index)}/_bulk"
+                   "#{Utils.listify(_index)}/_bulk"
                  else
                    "_bulk"
                  end
-        params = ElasticsearchServerless::API::Utils.process_params(arguments)
+        params = Utils.process_params(arguments)
 
         if body.is_a? Array
           payload = ElasticsearchServerless::API::Utils.bulkify(body)

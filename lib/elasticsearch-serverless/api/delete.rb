@@ -15,7 +15,7 @@
 # specific language governing permissions and limitations
 # under the License.
 #
-# Auto generated from commit
+# Auto generated from commit f284cc16f4d4b4289bc679aa1529bb504190fe80
 # @see https://github.com/elastic/elasticsearch-specification
 #
 module ElasticsearchServerless
@@ -25,14 +25,14 @@ module ElasticsearchServerless
       #
       # @option arguments [String] :id The document ID (*Required*)
       # @option arguments [String] :index The name of the index (*Required*)
-      # @option arguments [Number] :if_primary_term only perform the delete operation if the last operation that has changed the document has the specified primary term
-      # @option arguments [Long] :if_seq_no only perform the delete operation if the last operation that has changed the document has the specified sequence number
-      # @option arguments [String] :refresh If `true` then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` (the default) then do nothing with refreshes.
+      # @option arguments [Integer] :if_primary_term only perform the delete operation if the last operation that has changed the document has the specified primary term
+      # @option arguments [Integer] :if_seq_no only perform the delete operation if the last operation that has changed the document has the specified sequence number
+      # @option arguments [String] :refresh If +true+ then refresh the affected shards to make this operation visible to search, if +wait_for+ then wait for a refresh to make this operation visible to search, if +false+ (the default) then do nothing with refreshes.
       # @option arguments [String] :routing Specific routing value
-      # @option arguments [String] :timeout Explicit operation timeout
-      # @option arguments [Long] :version Explicit version number for concurrency control
+      # @option arguments [Time] :timeout Explicit operation timeout
+      # @option arguments [Integer] :version Explicit version number for concurrency control
       # @option arguments [String] :version_type Specific version type
-      # @option arguments [String] :wait_for_active_shards Sets the number of shard copies that must be active before proceeding with the delete operation. Defaults to 1, meaning the primary shard only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the shard (number of replicas + 1)
+      # @option arguments [Integer, String] :wait_for_active_shards Sets the number of shard copies that must be active before proceeding with the delete operation. Defaults to 1, meaning the primary shard only. Set to +all+ for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the shard (number of replicas + 1)
       # @option arguments [Hash] :headers Custom HTTP headers
       #
       # @see https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-delete.html
