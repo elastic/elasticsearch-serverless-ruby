@@ -1,3 +1,14 @@
+# Changelog
+
+## 0.0.4.20230724.pre
+
+Tests semver with date version number.
+
+API updates:
+- Updates API generated code with new generator changes.
+- Adds `indices.analyse`, `indices.get` APIs.
+- Adds `cat` namespace, `cat.indices` API.
+
 ## 0.0.3.pre
 
 - Adds `get` API.
