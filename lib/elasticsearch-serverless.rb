@@ -33,7 +33,12 @@ module ElasticsearchServerless
     def initialize(api_key:, url:, arguments: {})
       # TODO: Change this if we allow more arguments
       arguments.merge!(
-        transport_options: { headers: { 'Authorization' => "ApiKey #{api_key}" } },
+        transport_options: {
+          headers: {
+            'Authorization' => "ApiKey #{api_key}",
+            user_agent: user_agent
+          }
+        },
         host: url
       )
       @transport = Elastic::Transport::Client.new(arguments)
@@ -50,6 +55,18 @@ module ElasticsearchServerless
 
     def respond_to_missing?(method_name, *args)
       @transport.respond_to?(method_name) || super
+    end
+
+    def user_agent
+      user_agent = [
+        "elasticsearch-ruby/#{ElasticsearchServerless::VERSION}",
+        "elastic-transport-ruby/#{Elastic::Transport::VERSION}",
+        "RUBY_VERSION: #{RUBY_VERSION}"
+      ]
+      if RbConfig::CONFIG && RbConfig::CONFIG['host_os']
+        user_agent << "#{RbConfig::CONFIG['host_os'].split('_').first[/[a-z]+/i].downcase} #{RbConfig::CONFIG['target_cpu']}"
+      end
+      user_agent.join("; ")
     end
   end
 end

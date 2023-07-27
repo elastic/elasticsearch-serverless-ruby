@@ -40,7 +40,12 @@ describe ElasticsearchServerless::Client do
         to receive(:new).with(
              {
                host: 'test',
-               transport_options: { headers: {"Authorization"=>"ApiKey test" } }
+               transport_options: {
+                 headers: {
+                   "Authorization" => "ApiKey test",
+                   user_agent: ElasticsearchServerless::Client.new(url: 'test', api_key: 'test').user_agent
+                 }
+               }
              }
            ).and_return(transport)
       client = ElasticsearchServerless::Client.new(api_key: 'test', url: 'test')
