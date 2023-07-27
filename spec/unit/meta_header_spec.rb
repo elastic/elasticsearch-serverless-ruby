@@ -35,7 +35,7 @@ describe ElasticsearchServerless::Client do
     client.transport.connections.first.connection.headers
   end
 
-  it 'formates the version for pre-releases' do
+  it 'formats the version for pre-releases' do
     stub_const("ElasticsearchServerless::VERSION", '1.0.0.pre')
     expect(meta_version).to eq '1.0.0p'
   end
