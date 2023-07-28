@@ -30,4 +30,4 @@ jobs:
     - name: Build and test with Rake
       run: |
         bundle install
-        bundle exec rake spec
+        bundle exec rake spec:all
