@@ -14,12 +14,4 @@
 # KIND, either express or implied.  See the License for the
 # specific language governing permissions and limitations
 # under the License.
-
 require 'elasticsearch-serverless'
-require 'rspec'
-require 'vcr'
-
-VCR.configure do |config|
-  config.cassette_library_dir = 'spec/api/fixtures/cassettes'
-  config.hook_into :faraday
-end
