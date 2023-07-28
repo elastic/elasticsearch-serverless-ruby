@@ -15,7 +15,7 @@
 # specific language governing permissions and limitations
 # under the License.
 
-require 'spec_helper'
+require 'unit_test_helper'
 
 describe ElasticsearchServerless::Client do
   context 'instantiation' do
