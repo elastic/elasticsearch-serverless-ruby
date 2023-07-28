@@ -23,9 +23,21 @@ task :console do
   sh 'irb -r rubygems -I lib -r elasticsearch-serverless.rb'
 end
 
-desc 'Run RSpec tests'
-RSpec::Core::RakeTask.new(:spec) do |t| 
-  t.pattern = Dir.glob('spec/**/*_spec.rb')
+namespace :spec do
+  desc 'Run Unit tests'
+  RSpec::Core::RakeTask.new(:unit) do |t|
+    t.pattern = Dir.glob('spec/unit/*_spec.rb')
+  end
+
+  desc 'Run API tests'
+  RSpec::Core::RakeTask.new(:api) do |t|
+    t.pattern = Dir.glob('spec/api/**/*_spec.rb')
+  end
+
+  desc 'Run all tests'
+  RSpec::Core::RakeTask.new(:all) do |t|
+    t.pattern = Dir.glob('spec/**/*_spec.rb')
+  end
 end
 
 desc 'Run Elasticsearch in Serverless mode with Docker'
