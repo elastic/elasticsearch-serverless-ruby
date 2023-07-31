@@ -1,0 +1,35 @@
+---
+# yaml-language-server: $schema=https://json.schemastore.org/catalog-info.json
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: elasticsearch-serverless-ruby
+
+spec:
+  type: library
+  owner: group:clients-team
+  lifecycle: beta
+
+apiVersion: backstage.io/v1alpha1
+kind: Resource
+metadata:
+  name: elasticsearch-serverless-ruby-integration-tests
+  description: elasticsearch-serverless-ruby - integration tests
+
+spec:
+  type: buildkite-pipeline
+  owner: group:clients-team
+  system: buildkite
+  implementation:
+    apiVersion: buildkite.elastic.dev/v1
+    kind: Pipeline
+    metadata:
+      name: elasticsearch-serverless-ruby - integration tests
+    spec:
+      repository: elastic/elasticsearch-serverless-ruby
+      pipeline _file: .buildkite/pipeline.yml
+      teams:
+        clients-team:
+          access_level: MANAGE_BUILD_AND_READ
+        everyone:
+          access_level: READ_ONLY
