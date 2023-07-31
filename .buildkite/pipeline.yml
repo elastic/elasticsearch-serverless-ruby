@@ -1,0 +1,34 @@
+steps:
+  - label: ":elasticsearch: Serverless :rspec: Unit Tests :ruby: v{{ matrix.ruby }}"
+    agents:
+      provider: "gcp"
+    env:
+      RUBY_VERSION: "{{ matrix.ruby }}"
+    matrix:
+      setup:
+        ruby:
+          - "3.2"
+          - "3.1"
+          - "3.0"
+          - "jruby-9.3"
+          - "jruby-9.4"
+    command: |
+      bundle install
+      bundle exec rake spec:unit
+  - label: ":elasticsearch: Serverless :rspec: API Tests :ruby: v{{ matrix.ruby }}"
+    agents:
+      provider: "gcp"
+    env:
+      RUBY_VERSION: "{{ matrix.ruby }}"
+    matrix:
+      setup:
+        ruby:
+          - "3.2"
+          - "3.1"
+          - "3.0"
+          - "jruby-9.3"
+          - "jruby-9.4"
+    command: |
+      bundle install
+      bundle exec rake spec:api
+
