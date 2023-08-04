@@ -17,34 +17,32 @@
 
 require 'spec_helper'
 
-describe ElasticsearchServerless::Client do
-  context 'API:cat.indices' do
-    let(:client) do
-      ElasticsearchServerless::Client.new(
-        api_key: 'my_api_key',
-        url: 'https://my-deployment.elastic.co'
-      )
-    end
+describe 'API:cat.indices' do
+  let(:client) do
+    ElasticsearchServerless::Client.new(
+      api_key: 'my_api_key',
+      url: 'https://my-deployment.elastic.co'
+    )
+  end
 
-    let(:index) { 'index-to-cat🐈' }
-    before do
-      VCR.use_cassette('indices.cat.setup') do
-        client.indices.create(index: index)
-      end
+  let(:index) { 'index-to-cat🐈' }
+  before do
+    VCR.use_cassette('indices.cat.setup') do
+      client.indices.create(index: index)
     end
+  end
 
-    after do
-      VCR.use_cassette('indices.cat.teardown') do
-        client.indices.delete(index: index)
-      end
+  after do
+    VCR.use_cassette('indices.cat.teardown') do
+      client.indices.delete(index: index)
     end
+  end
 
-    it 'performs the request' do
-      VCR.use_cassette('indices.cat') do
-        response = client.cat.indices(index: index)
-        expect(response.status).to eq 200
-        expect(response.match? index).to be true
-      end
+  it 'performs the request' do
+    VCR.use_cassette('indices.cat') do
+      response = client.cat.indices(index: index)
+      expect(response.status).to eq 200
+      expect(response.match? index).to be true
     end
   end
 end

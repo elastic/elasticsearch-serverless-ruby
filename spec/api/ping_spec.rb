@@ -17,20 +17,18 @@
 
 require 'spec_helper'
 
-describe ElasticsearchServerless::Client do
-  context 'API:ping' do
-    let(:client) do
-      ElasticsearchServerless::Client.new(
-        api_key: 'api_key',
-        url: 'https://my-deployment.elastic.co'
-      )
-    end
+describe 'API:ping' do
+  let(:client) do
+    ElasticsearchServerless::Client.new(
+      api_key: 'api_key',
+      url: 'https://my-deployment.elastic.co'
+    )
+  end
 
-    it 'performs the request' do
-      VCR.use_cassette('ping') do
-        response = client.ping
-        expect(response).to eq true
-      end
+  it 'performs the request' do
+    VCR.use_cassette('ping') do
+      response = client.ping
+      expect(response).to eq true
     end
   end
 end

@@ -17,20 +17,18 @@
 
 require 'spec_helper'
 
-describe ElasticsearchServerless::Client do
-  context 'API:cat.transforms' do
-    let(:client) do
-      ElasticsearchServerless::Client.new(
-        api_key: 'my_api_key',
-        url: 'https://my-deployment.elastic.co'
-      )
-    end
+describe 'API:cat.transforms' do
+  let(:client) do
+    ElasticsearchServerless::Client.new(
+      api_key: 'my_api_key',
+      url: 'https://my-deployment.elastic.co'
+    )
+  end
 
-    it 'performs the request' do
-      VCR.use_cassette('cat.transforms') do
-        response = client.cat.transforms
-        expect(response.status).to eq 200
-      end
+  it 'performs the request' do
+    VCR.use_cassette('cat.transforms') do
+      response = client.cat.transforms
+      expect(response.status).to eq 200
     end
   end
 end
