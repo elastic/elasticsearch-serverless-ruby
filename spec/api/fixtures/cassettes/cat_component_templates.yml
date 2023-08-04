@@ -1,0 +1,64 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://my-deployment.elastic.co/_cat/component_templates
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Authorization:
+      - ApiKey my_api_key
+      User-Agent:
+      - 'elasticsearch-ruby/0.0.4.20230724.pre; elastic-transport-ruby/8.2.1; RUBY_VERSION:
+        3.2.2; linux x86_64'
+      x-elastic-client-meta:
+      - esv=0.0.4p,rb=3.2.2,t=8.2.1,fd=2.7.4,nh=0.3.2
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      content-type:
+      - text/plain; charset=UTF-8
+      x-cloud-request-id:
+      - aumtQDnCTJ2-xJcS9DISEw
+      x-elastic-product:
+      - Elasticsearch
+      x-found-handling-cluster:
+      - f852e9816ac44563a88d0edaa9e4d236.es
+      x-found-handling-instance:
+      - es-es-search-7bd5f5747-xm6hs
+      date:
+      - Fri, 04 Aug 2023 06:06:45 GMT
+      content-length:
+      - '1433'
+    body:
+      encoding: UTF-8
+      string: |
+        elastic-connectors-sync-jobs-mappings 1 1 19 0 2 [elastic-connectors-sync-jobs]
+        .fleet_agent_id_verification-1          0 1  1 2 []
+        metrics-mappings                      3 0 3  0 2 [metrics]
+        behavioral_analytics-events-mappings  2 0 10 0 2 [behavioral_analytics-events-default]
+        elastic-connectors-mappings           1 1 31 0 2 [elastic-connectors]
+        synthetics-mappings                   3 0 1  0 2 [synthetics]
+        .alerts-ecs-mappings                    0 44 2 1 []
+        ecs@dynamic_templates                 3 0 14 0 2 [logs]
+        .fleet_globals-1                        0 4  0 2 []
+        .deprecation-indexing-settings        1 0 0  5 2 [.deprecation-indexing-template]
+        logs-mappings                         3 0 5  0 2 [logs]
+        synthetics-settings                   3 0 0  2 2 [synthetics]
+        elastic-connectors-settings           1 0 0  4 2 [elastic-connectors-sync-jobs, elastic-connectors]
+        elastic-connectors-sync-jobs-settings 1 0 0  4 2 []
+        .deprecation-indexing-mappings        1 0 7  0 2 [.deprecation-indexing-template]
+        behavioral_analytics-events-settings  2 0 0  8 2 [behavioral_analytics-events-default]
+        metrics-settings                      3 0 0  3 2 [metrics]
+        logs-settings                         3 0 0  5 2 [logs]
+        .alerts-framework-mappings              0 5  2 1 []
+        .alerts-technical-mappings              0 6  1 0 []
+        data-streams-mappings                 3 0 8  0 2 [synthetics, metrics]
+        .alerts-legacy-alert-mappings           0 3  2 1 []
+  recorded_at: Fri, 04 Aug 2023 06:06:45 GMT
+recorded_with: VCR 6.1.0
