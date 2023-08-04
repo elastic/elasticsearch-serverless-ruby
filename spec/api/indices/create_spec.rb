@@ -17,30 +17,28 @@
 
 require 'spec_helper'
 
-describe ElasticsearchServerless::Client do
-  context 'API:indices.create' do
-    let(:client) do
-      ElasticsearchServerless::Client.new(
-        api_key: 'my_api_key',
-        url: 'https://my-deployment.elastic.co'
-      )
-    end
-    let(:index) { 'index-to-create' }
+describe 'API:indices.create' do
+  let(:client) do
+    ElasticsearchServerless::Client.new(
+      api_key: 'my_api_key',
+      url: 'https://my-deployment.elastic.co'
+    )
+  end
+  let(:index) { 'index-to-create' }
 
-    after do
-      VCR.use_cassette('indices.create.teardown') do
-        client.indices.delete(index: index)
-      end
+  after do
+    VCR.use_cassette('indices.create.teardown') do
+      client.indices.delete(index: index)
     end
+  end
 
-    it 'performs the request' do
-      VCR.use_cassette('indices.create') do
-        response = client.indices.create(index: index)
-        expect(response.status).to eq 200
-        expect(response['acknowledged']).to eq true
-        expect(response['shards_acknowledged']).to eq true
-        expect(response['index']).to eq index
-      end
+  it 'performs the request' do
+    VCR.use_cassette('indices.create') do
+      response = client.indices.create(index: index)
+      expect(response.status).to eq 200
+      expect(response['acknowledged']).to eq true
+      expect(response['shards_acknowledged']).to eq true
+      expect(response['index']).to eq index
     end
   end
 end

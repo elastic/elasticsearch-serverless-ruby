@@ -17,26 +17,24 @@
 
 require 'spec_helper'
 
-describe ElasticsearchServerless::Client do
-  context 'API:delete' do
-    let(:client) do
-      ElasticsearchServerless::Client.new(
-        api_key: 'my_api_key',
-        url: 'https://my-deployment.elastic.co'
-      )
-    end
-    let(:index) { 'my-deletable-index' }
+describe 'API:delete' do
+  let(:client) do
+    ElasticsearchServerless::Client.new(
+      api_key: 'my_api_key',
+      url: 'https://my-deployment.elastic.co'
+    )
+  end
+  let(:index) { 'my-deletable-index' }
 
-    it 'performs the request' do
-      VCR.use_cassette('delete') do
-        response = client.index(index: index, body: { name: 'Testing', description: 'To be deleted' })
-        expect(response.status).to eq 201
-        id = response['_id']
-        response = client.delete(index: index, id: id)
-        expect(response.status).to eq 200
-        expect(response['_id']).to eq id
-        expect(response['result']).to eq 'deleted'
-      end
+  it 'performs the request' do
+    VCR.use_cassette('delete') do
+      response = client.index(index: index, body: { name: 'Testing', description: 'To be deleted' })
+      expect(response.status).to eq 201
+      id = response['_id']
+      response = client.delete(index: index, id: id)
+      expect(response.status).to eq 200
+      expect(response['_id']).to eq id
+      expect(response['result']).to eq 'deleted'
     end
   end
 end

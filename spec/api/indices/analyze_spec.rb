@@ -17,51 +17,49 @@
 
 require 'spec_helper'
 
-describe ElasticsearchServerless::Client do
-  context 'API:indices.analyze' do
-    let(:client) do
-      ElasticsearchServerless::Client.new(
-        api_key: 'my_api_key',
-        url: 'https://my-deployment.elastic.co'
-      )
-    end
-    let(:index) { 'index-to-analyze' }
-    let(:body) do
-      {
-        analyzer: "whitespace",
-        text: "this is a test"
-      }
-    end
+describe 'API:indices.analyze' do
+  let(:client) do
+    ElasticsearchServerless::Client.new(
+      api_key: 'my_api_key',
+      url: 'https://my-deployment.elastic.co'
+    )
+  end
+  let(:index) { 'index-to-analyze' }
+  let(:body) do
+    {
+      analyzer: "whitespace",
+      text: "this is a test"
+    }
+  end
 
-    before do
-      VCR.use_cassette('indices.analyze.setup') do
-        client.indices.create(index: index)
+  before do
+    VCR.use_cassette('indices.analyze.setup') do
+      client.indices.create(index: index)
+    end
+  end
+
+  after do
+    VCR.use_cassette('indices.analyze.teardown') do
+      client.indices.delete(index: index)
+    end
+  end
+
+  context 'when an index is specified' do
+    it 'performs the request' do
+      VCR.use_cassette('indices.analyze') do
+        response = client.indices.analyze(index: index, body: body)
+        expect(response.status).to eq 200
+        expect(response['tokens'].count).to eq 4
       end
     end
+  end
 
-    after do
-      VCR.use_cassette('indices.analyze.teardown') do
-        client.indices.delete(index: index)
-      end
-    end
-
-    context 'when an index is specified' do
-      it 'performs the request' do
-        VCR.use_cassette('indices.analyze') do
-          response = client.indices.analyze(index: index, body: body)
-          expect(response.status).to eq 200
-          expect(response['tokens'].count).to eq 4
-        end
-      end
-    end
-
-    context 'when an index is not specified' do
-      it 'performs the request' do
-        VCR.use_cassette('indices.analyze.noindex') do
-          response = client.indices.analyze(body: body)
-          expect(response.status).to eq 200
-          expect(response['tokens'].count).to eq 4
-        end
+  context 'when an index is not specified' do
+    it 'performs the request' do
+      VCR.use_cassette('indices.analyze.noindex') do
+        response = client.indices.analyze(body: body)
+        expect(response.status).to eq 200
+        expect(response['tokens'].count).to eq 4
       end
     end
   end

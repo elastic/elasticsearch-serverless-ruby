@@ -17,21 +17,19 @@
 
 require 'spec_helper'
 
-describe ElasticsearchServerless::Client do
-  context 'API:cat.count' do
-    let(:client) do
-      ElasticsearchServerless::Client.new(
-        api_key: 'my_api_key',
-        url: 'https://my-deployment.elastic.co'
-      )
-    end
+describe 'API:cat.count' do
+  let(:client) do
+    ElasticsearchServerless::Client.new(
+      api_key: 'my_api_key',
+      url: 'https://my-deployment.elastic.co'
+    )
+  end
 
-    it 'performs the request' do
-      VCR.use_cassette('cat.count') do
-        response = client.cat.count
-        expect(response.status).to eq 200
-        expect(response.body).not_to be_empty
-      end
+  it 'performs the request' do
+    VCR.use_cassette('cat.count') do
+      response = client.cat.count
+      expect(response.status).to eq 200
+      expect(response.body).not_to be_empty
     end
   end
 end
