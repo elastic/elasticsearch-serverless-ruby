@@ -24,11 +24,11 @@ module ElasticsearchServerless
       module Actions
         # Performs the analysis process on a text and return the tokens breakdown of the text.
         #
-        # @option arguments [String] :index The name of the index to scope the operation
+        # @option arguments [String] :index Index used to derive the analyzer. If specified, the +analyzer+ or field parameter overrides this value. If no index is specified or the index does not have a default analyzer, the analyze API uses the standard analyzer.
         # @option arguments [Hash] :headers Custom HTTP headers
         # @option arguments [Hash] :body request body
         #
-        # @see https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-analyze.html
+        # @see https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-analyze.html
         #
         def analyze(arguments = {})
           arguments = arguments.clone
