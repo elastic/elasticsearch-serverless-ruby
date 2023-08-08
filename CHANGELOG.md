@@ -1,5 +1,21 @@
 # Changelog
 
+## 0.0.5.20230808.pre
+
+- Adds meta header and user agent values for Elasticsearch Serverless Client.
+
+### API updates:
+
+- 🐈 Adds cat APIs:
+  * `cat.aliases`
+  * `cat.component_templates`
+  * `cat.count`
+  * `cat.help`
+  * `cat.transforms`
+- Updates `indices` APIs (changes only in source code documentation).
+- Adds `open_point_in_time` and `close_point_in_time` APIs.
+- Adds `count` API.
+
 ## 0.0.4.20230724.pre
 
 Tests semver with date version number.
