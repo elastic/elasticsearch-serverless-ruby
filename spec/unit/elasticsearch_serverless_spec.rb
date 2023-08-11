@@ -53,5 +53,11 @@ describe ElasticsearchServerless::Client do
       allow(transport).to receive(:perform_request).with('GET', '/')
       client.perform_request('GET', '/')
     end
+
+    it 'uses the correct user agent' do
+      client = ElasticsearchServerless::Client.new(api_key: 'test', url: 'test')
+      expect(client.transport.options[:transport_options][:headers][:user_agent]).
+        to match("elasticsearch-serverless-ruby/#{ElasticsearchServerless::VERSION}")
+    end
   end
 end
