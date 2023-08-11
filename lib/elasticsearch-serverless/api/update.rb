@@ -61,7 +61,7 @@ module ElasticsearchServerless
         params = Utils.process_params(arguments)
 
         if Array(arguments[:ignore]).include?(404)
-          Utils.__rescue_from_not_found {
+          Utils.rescue_from_not_found {
             ElasticsearchServerless::API::Response.new(
               perform_request(method, path, params, body, headers)
             )
