@@ -112,6 +112,27 @@ module ElasticsearchServerless
 
         ERB::Util.url_encode(string.to_s)
       end
+
+      # Calls the given block, rescuing from `StandardError`.
+      #
+      # Primary use case is the `:ignore` parameter for API calls.
+      #
+      # Returns `false` if exception contains NotFound in its class name or message,
+      # else re-raises the exception.
+      #
+      # @yield [block] A block of code to be executed with exception handling.
+      #
+      # @api private
+      #
+      def self.rescue_from_not_found(&block)
+        yield
+      rescue StandardError => e
+        if e.class.to_s =~ /NotFound/ || e.message =~ /Not\s*Found/i
+          false
+        else
+          raise e
+        end
+      end
     end
   end
 end
