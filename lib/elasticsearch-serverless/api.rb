@@ -52,7 +52,8 @@ module ElasticsearchServerless
     #
     API_NAMESPACES = [
       :cat,
-      :indices
+      :indices,
+      :transform
     ].freeze
 
     API_NAMESPACES.each do |namespace|
