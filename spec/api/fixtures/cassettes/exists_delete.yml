@@ -1,0 +1,44 @@
+---
+http_interactions:
+- request:
+    method: delete
+    uri: https://my-deployment.elastic.co/exists
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Authorization:
+      - ApiKey my_api_key
+      User-Agent:
+      - 'elasticsearch-serverless-ruby/0.0.5.20230808.pre; elastic-transport-ruby/8.2.2;
+        RUBY_VERSION: 3.2.2; linux x86_64'
+      x-elastic-client-meta:
+      - esv=0.0.5p,rb=3.2.2,t=8.2.2,fd=2.7.10,nh=0.3.2
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      content-encoding:
+      - gzip
+      content-length:
+      - '47'
+      content-type:
+      - application/json
+      x-cloud-request-id:
+      - UZ6ekJh0QlqoNB2EcXk56w
+      x-elastic-product:
+      - Elasticsearch
+      x-found-handling-cluster:
+      - a01fd1ee3ffb466da479539070462062
+      x-found-handling-instance:
+      - instance-0000000000
+      date:
+      - Fri, 11 Aug 2023 13:36:18 GMT
+    body:
+      encoding: ASCII-8BIT
+      string: '{"acknowledged":true}'
+  recorded_at: Fri, 11 Aug 2023 13:36:18 GMT
+recorded_with: VCR 6.2.0
