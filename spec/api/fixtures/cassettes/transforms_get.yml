@@ -1,0 +1,45 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://my-deployment.elastic.co/_transform/population
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Authorization:
+      - ApiKey my_api_key
+      User-Agent:
+      - 'elasticsearch-ruby/0.0.5.20230808.pre; elastic-transport-ruby/8.2.1; RUBY_VERSION:
+        3.2.2; linux x86_64'
+      x-elastic-client-meta:
+      - esv=0.0.5p,rb=3.2.2,t=8.2.1,fd=2.7.4,nh=0.3.2
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      content-encoding:
+      - gzip
+      content-length:
+      - '287'
+      content-type:
+      - application/json
+      x-cloud-request-id:
+      - iZPivO7tSmWCdQ3PG7Bp1A
+      x-elastic-product:
+      - Elasticsearch
+      x-found-handling-cluster:
+      - a01fd1ee3ffb466da479539070462062
+      x-found-handling-instance:
+      - instance-0000000001
+      date:
+      - Fri, 11 Aug 2023 08:59:39 GMT
+    body:
+      encoding: ASCII-8BIT
+      string: '{"count":1,"transforms":[{"id":"population","authorization":{"api_key":{"id":"ceme44kBxhbcDn7XvoKq","name":"test"}},"version":"8.9.1","create_time":1691744352081,"source":{"index":["transforms"],"query":{"match_all":{}}},"dest":{"index":"transforms_transformed"},"pivot":{"group_by":{"pop":{"terms":{"field":"pop"}}},"aggregations":{"max_pop":{"max":{"field":"pop"}}}},"description":"Continents
+        aproximate population","settings":{}}]}'
+  recorded_at: Fri, 11 Aug 2023 08:59:39 GMT
+recorded_with: VCR 6.1.0
