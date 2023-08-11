@@ -59,7 +59,7 @@ module ElasticsearchServerless
 
     def user_agent
       user_agent = [
-        "elasticsearch-ruby/#{ElasticsearchServerless::VERSION}",
+        "elasticsearch-serverless-ruby/#{ElasticsearchServerless::VERSION}",
         "elastic-transport-ruby/#{Elastic::Transport::VERSION}",
         "RUBY_VERSION: #{RUBY_VERSION}"
       ]
