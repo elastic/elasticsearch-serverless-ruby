@@ -28,7 +28,7 @@ spec:
       name: elasticsearch-serverless-ruby - integration tests
     spec:
       repository: elastic/elasticsearch-serverless-ruby
-      pipeline _file: .buildkite/pipeline.yml
+      pipeline_file: .buildkite/pipeline.yml
       teams:
         clients-team:
           access_level: MANAGE_BUILD_AND_READ
