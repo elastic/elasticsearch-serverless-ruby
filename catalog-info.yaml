@@ -10,6 +10,7 @@ spec:
   owner: group:clients-team
   lifecycle: beta
 
+---
 apiVersion: backstage.io/v1alpha1
 kind: Resource
 metadata:
