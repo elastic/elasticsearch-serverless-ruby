@@ -15,7 +15,7 @@ apiVersion: backstage.io/v1alpha1
 kind: Resource
 metadata:
   name: elasticsearch-serverless-ruby-integration-tests
-  description: elasticsearch-serverless-ruby - integration tests
+  description: elasticsearch-serverless-ruby
 
 spec:
   type: buildkite-pipeline
@@ -25,7 +25,7 @@ spec:
     apiVersion: buildkite.elastic.dev/v1
     kind: Pipeline
     metadata:
-      name: elasticsearch-serverless-ruby - integration tests
+      name: elasticsearch-serverless-ruby
     spec:
       repository: elastic/elasticsearch-serverless-ruby
       pipeline_file: .buildkite/pipeline.yml
