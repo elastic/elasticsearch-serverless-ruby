@@ -2,24 +2,24 @@
 http_interactions:
 - request:
     method: post
-    uri: https://my-deployment.elastic.co/_bulk
+    uri: https://my-deployment.elastic.co/_bulk?refresh=true
     body:
       encoding: UTF-8
       string: |
-        {"index":{"_index":"books","_id":"42"}}
+        {"index":{"_index":"search_test","_id":"42"}}
         {"name":"The Hitchhiker's Guide to the Galaxy","author":"Douglas Adams","release_date":"1979-10-12","page_count":180}
-        {"index":{"_index":"books","_id":"43"}}
+        {"index":{"_index":"search_test","_id":"43"}}
         {"name":"Snow Crash","author":"Neal Stephenson","release_date":"1992-06-01","page_count":470}
-        {"index":{"_index":"books","_id":"44"}}
+        {"index":{"_index":"search_test","_id":"44"}}
         {"name":"Starship Troopers","author":"Robert A. Heinlein","release_date":"1959-12-01","page_count":335}
     headers:
       Authorization:
-      - ApiKey api_key
-      x-elastic-client-meta:
-      - et=8.2.1,rb=3.2.2,t=8.2.1,fd=2.7.4,nh=0.3.2
+      - ApiKey my_api_key
       User-Agent:
-      - 'elastic-transport-ruby/8.2.1 (RUBY_VERSION: 3.2.2; linux x86_64; Faraday
-        v2.7.4)'
+      - 'elasticsearch-serverless-ruby/0.0.5.20230808.pre; elastic-transport-ruby/8.2.2;
+        RUBY_VERSION: 3.2.2; linux x86_64'
+      x-elastic-client-meta:
+      - esv=0.0.5p,rb=3.2.2,t=8.2.2,fd=2.7.10,nh=0.3.2
       Content-Type:
       - application/x-ndjson
   response:
@@ -27,40 +27,40 @@ http_interactions:
       code: 200
       message: OK
     headers:
-      content-encoding:
-      - gzip
       content-length:
-      - '192'
+      - '610'
       content-type:
       - application/json
+      elastic-api-version:
+      - '2023-10-31'
       x-cloud-request-id:
-      - uzlIqTsaS2mnWXFaPafxzA
+      - kQLNbmaHSum93NbEav3rpQ
       x-elastic-product:
       - Elasticsearch
       x-found-handling-cluster:
-      - 1c6af1bf93c54c91b4c180a85af75756
+      - af19d18db3ef440090bb7dd995807259.es
       x-found-handling-instance:
-      - instance-0000000000
+      - es-es-index-69d649d494-865bs
       date:
-      - Mon, 17 Apr 2023 14:16:11 GMT
+      - Fri, 25 Aug 2023 07:52:45 GMT
     body:
-      encoding: ASCII-8BIT
-      string: '{"took":7,"errors":false,"items":[{"index":{"_index":"books","_id":"42","_version":12,"result":"updated","_shards":{"total":2,"successful":2,"failed":0},"_seq_no":33,"_primary_term":1,"status":200}},{"index":{"_index":"books","_id":"43","_version":12,"result":"updated","_shards":{"total":2,"successful":2,"failed":0},"_seq_no":34,"_primary_term":1,"status":200}},{"index":{"_index":"books","_id":"44","_version":12,"result":"updated","_shards":{"total":2,"successful":2,"failed":0},"_seq_no":35,"_primary_term":1,"status":200}}]}'
-  recorded_at: Mon, 17 Apr 2023 14:16:11 GMT
+      encoding: UTF-8
+      string: '{"errors":false,"took":824,"items":[{"index":{"_index":"search_test","_id":"42","_version":1,"result":"created","forced_refresh":true,"_shards":{"total":1,"successful":1,"failed":0},"_seq_no":0,"_primary_term":1,"status":201}},{"index":{"_index":"search_test","_id":"43","_version":1,"result":"created","forced_refresh":true,"_shards":{"total":1,"successful":1,"failed":0},"_seq_no":1,"_primary_term":1,"status":201}},{"index":{"_index":"search_test","_id":"44","_version":1,"result":"created","forced_refresh":true,"_shards":{"total":1,"successful":1,"failed":0},"_seq_no":2,"_primary_term":1,"status":201}}]}'
+  recorded_at: Fri, 25 Aug 2023 07:52:45 GMT
 - request:
     method: get
-    uri: https://my-deployment.elastic.co/books/_search?q=snow
+    uri: https://my-deployment.elastic.co/search_test/_search?q=snow
     body:
       encoding: US-ASCII
       string: ''
     headers:
       Authorization:
-      - ApiKey api_key
-      x-elastic-client-meta:
-      - et=8.2.1,rb=3.2.2,t=8.2.1,fd=2.7.4,nh=0.3.2
+      - ApiKey my_api_key
       User-Agent:
-      - 'elastic-transport-ruby/8.2.1 (RUBY_VERSION: 3.2.2; linux x86_64; Faraday
-        v2.7.4)'
+      - 'elasticsearch-serverless-ruby/0.0.5.20230808.pre; elastic-transport-ruby/8.2.2;
+        RUBY_VERSION: 3.2.2; linux x86_64'
+      x-elastic-client-meta:
+      - esv=0.0.5p,rb=3.2.2,t=8.2.2,fd=2.7.10,nh=0.3.2
       Content-Type:
       - application/json
   response:
@@ -68,25 +68,25 @@ http_interactions:
       code: 200
       message: OK
     headers:
-      content-encoding:
-      - gzip
-      content-length:
-      - '243'
       content-type:
       - application/json
+      elastic-api-version:
+      - '2023-10-31'
       x-cloud-request-id:
-      - T9EeJQKFSx6jhcUiKURa0g
+      - A9drFp4hRrGh6lB-_pkLhg
       x-elastic-product:
       - Elasticsearch
       x-found-handling-cluster:
-      - 1c6af1bf93c54c91b4c180a85af75756
+      - af19d18db3ef440090bb7dd995807259.es
       x-found-handling-instance:
-      - instance-0000000000
+      - es-es-search-765fc8f58c-cp6d4
       date:
-      - Mon, 17 Apr 2023 14:16:12 GMT
+      - Fri, 25 Aug 2023 07:52:45 GMT
+      content-length:
+      - '323'
     body:
-      encoding: ASCII-8BIT
-      string: '{"took":370,"timed_out":false,"_shards":{"total":1,"successful":1,"skipped":0,"failed":0},"hits":{"total":{"value":1,"relation":"eq"},"max_score":1.2310667,"hits":[{"_index":"books","_id":"43","_score":1.2310667,"_source":{"name":"Snow
+      encoding: UTF-8
+      string: '{"took":7,"timed_out":false,"_shards":{"total":1,"successful":1,"skipped":0,"failed":0},"hits":{"total":{"value":1,"relation":"eq"},"max_score":1.1727304,"hits":[{"_index":"search_test","_id":"43","_score":1.1727304,"_source":{"name":"Snow
         Crash","author":"Neal Stephenson","release_date":"1992-06-01","page_count":470}}]}}'
-  recorded_at: Mon, 17 Apr 2023 14:16:12 GMT
-recorded_with: VCR 6.1.0
+  recorded_at: Fri, 25 Aug 2023 07:52:45 GMT
+recorded_with: VCR 6.2.0
