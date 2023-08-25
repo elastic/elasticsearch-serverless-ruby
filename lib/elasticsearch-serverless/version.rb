@@ -16,5 +16,5 @@
 # under the License.
 
 module ElasticsearchServerless
-  VERSION = '0.0.5.20230808.pre'.freeze
+  VERSION = '0.0.6.20230825.pre'.freeze
 end
