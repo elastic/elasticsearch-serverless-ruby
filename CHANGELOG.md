@@ -1,5 +1,37 @@
 # Changelog
 
+## 0.0.6.20230825.pre
+
+- Updates User-Agent to `elasticsearch-serverless-ruby`.
+- Adds `rescue_from_not_found` for `:ignore` parameter for API calls.
+
+### API updates:
+
+New APIs in this release:
+
+- `async_search.delete`
+- `async_search.get`
+- `async_search.status`
+- `async_search.submit`
+- `clear_scroll`
+- `creates`
+- `exists`
+- `indices.exists`
+- `msearch`
+- `mget`
+- `scroll`
+- `transform.delete_transform`
+- `transform.get_transform`
+- `transform.get_transform_stats`
+- `transform.preview_transform`
+- `transform.put_transform`
+- `transform.reset_transform`
+- `transform.schedule_now_transform`
+- `transform.start_transform`
+- `transform.stop_transform`
+- `transform.update_transform`
+
+
 ## 0.0.5.20230808.pre
 
 - Adds meta header and user agent values for Elasticsearch Serverless Client.
