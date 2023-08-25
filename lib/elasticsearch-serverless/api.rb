@@ -56,6 +56,7 @@ module ElasticsearchServerless
     # Add new namespaces to this constant
     #
     API_NAMESPACES = [
+      :async_search,
       :cat,
       :indices,
       :transform
@@ -66,14 +67,12 @@ module ElasticsearchServerless
       # TODO: consider if we need to do something for APIs that have aliases (if any of these are
       # available in serverless), like 'ccr', 'ilm', 'ml' and 'slm'
       module_name = namespace.to_s.split("_").map(&:capitalize).join
-
-      class_name = "#{name.capitalize}Client"
+      class_name = "#{module_name}Client"
 
       klass = Class.new(Object) do
         include CommonClient, Object.const_get("ElasticsearchServerless::API::#{module_name}::Actions")
       end
       Object.const_set(class_name, klass)
-
       define_method(name) do
         instance_variable_set("@#{name}", klass.new(self))
       end
