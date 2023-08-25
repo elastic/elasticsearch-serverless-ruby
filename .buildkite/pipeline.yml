@@ -1,27 +1,47 @@
 steps:
-  - label: ":elasticsearch: Serverless :rspec: Unit Tests :ruby: v{{ matrix.ruby }}"
+  - label: ":elasticsearch: Serverless :rspec: Unit Tests :ruby: {{matrix.ruby_source}}:{{ matrix.ruby }}"
     agents:
       provider: "gcp"
     env:
       RUBY_VERSION: "{{ matrix.ruby }}"
       TEST_SUITE: 'unit'
+      RUBY_SOURCE: "{{ matrix.ruby_source }}"
     matrix:
       setup:
         ruby:
           - "3.2"
           - "3.1"
           - "3.0"
+        ruby_source:
+          - 'ruby'
+      adjustments:
+        - with:
+            ruby_source: 'jruby'
+            ruby: '9.3'
+        - with:
+            ruby_source: 'jruby'
+            ruby: '9.4'
     command: './.buildkite/run-tests.sh'
-  - label: ":elasticsearch: Serverless :rspec: API Tests :ruby: v{{ matrix.ruby }}"
+  - label: ":elasticsearch: Serverless :rspec: API Tests :ruby: {{ matrix.ruby_source}}:{{ matrix.ruby }}"
     agents:
       provider: "gcp"
     env:
       RUBY_VERSION: "{{ matrix.ruby }}"
       TEST_SUITE: 'api'
+      RUBY_SOURCE: "{{ matrix.ruby_source }}"
     matrix:
       setup:
         ruby:
           - "3.2"
           - "3.1"
           - "3.0"
+        ruby_source:
+          - 'ruby'
+      adjustments:
+        - with:
+            ruby_source: 'jruby'
+            ruby: '9.3'
+        - with:
+            ruby_source: 'jruby'
+            ruby: '9.4'
     command: './.buildkite/run-tests.sh'
