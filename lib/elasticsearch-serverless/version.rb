@@ -16,5 +16,7 @@
 # under the License.
 
 module ElasticsearchServerless
-  VERSION = '0.0.6.20230825.pre'.freeze
+  API_VERSION = '20231031'
+  CLIENT_VERSION = '0.0.7'
+  VERSION = "#{CLIENT_VERSION}.#{API_VERSION}.pre".freeze
 end
