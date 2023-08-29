@@ -1,5 +1,22 @@
 steps:
-  - label: ":elasticsearch: Serverless :rspec: Unit Tests :ruby: {{matrix.ruby_source}}:{{ matrix.ruby }}"
+  - key: create_project
+    label: "Create :elasticsearch: Serverless project"
+    agents:
+      image: docker.elastic.co/employees/dolaru/qaf:latest
+    env:
+      EC_REGISTER_BACKEND: appex-qa-team-cluster
+      EC_ENV: qa
+      EC_REGION: aws-eu-west-1
+      EC_PROJECT_NAME: serverless-ruby-tests
+    command: |
+      qaf elastic-cloud projects create --project-type elasticsearch &&
+      qaf elastic-cloud projects describe serverless-ruby-tests --as-json --show-credentials > project.json &&
+      buildkite-agent meta-data set "elasticsearch_url" `jq -r '.elasticsearch["url"]' project.json` &&
+      buildkite-agent meta-data set "api_key" `jq -r '.credentials["api_key"]' project.json` &&
+      rm project.json
+  - wait
+  - key: unit_tests
+    label: ":elasticsearch: Serverless :rspec: Unit Tests :ruby: {{matrix.ruby_source}}:{{ matrix.ruby }}"
     agents:
       provider: "gcp"
     env:
@@ -22,7 +39,8 @@ steps:
             ruby_source: 'jruby'
             ruby: '9.4'
     command: './.buildkite/run-tests.sh'
-  - label: ":elasticsearch: Serverless :rspec: API Tests :ruby: {{ matrix.ruby_source}}:{{ matrix.ruby }}"
+  - key: api_tests
+    label: ":elasticsearch: Serverless :rspec: API Tests :ruby: {{ matrix.ruby_source}}:{{ matrix.ruby }}"
     agents:
       provider: "gcp"
     env:
@@ -45,3 +63,13 @@ steps:
             ruby_source: 'jruby'
             ruby: '9.4'
     command: './.buildkite/run-tests.sh'
+  - depends_on:
+      - step: api_tests
+        allow_failure: true
+    label: ':broom::sparkles: Clean Elasticsearch project'
+    agents:
+      image: docker.elastic.co/employees/dolaru/qaf:latest
+    env:
+      EC_REGISTER_BACKEND: appex-qa-team-cluster
+      EC_PROJECT_NAME: serverless-ruby-tests
+    command: qaf elastic-cloud projects delete
