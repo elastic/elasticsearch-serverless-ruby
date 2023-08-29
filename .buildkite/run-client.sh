@@ -8,6 +8,15 @@ export RUBY_VERSION=${RUBY_VERSION:-3.2}
 export TRANSPORT_VERSION=${TRANSPORT_VERSION:-8}
 export RUBY_SOURCE=${RUBY_SOURCE:-ruby}
 
+if [[ "$BUILDKITE" == "true" ]]; then
+
+  export ELASTICSEARCH_URL=`buildkite-agent meta-data get "elasticsearch_url"`
+  export API_KEY=`buildkite-agent meta-data get "api_key"`
+else
+  export ELASTICSEARCH_URL=${ELASTICSEARCH_URL:-}
+  export API_KEY=${API_KEY:-}
+fi
+
 echo "--- :ruby: Building Docker image"
 docker build \
        --file $script_path/Dockerfile \
@@ -18,17 +27,14 @@ docker build \
        .
 
 echo "--- :ruby: Running $TEST_SUITE tests"
-#
-# Parameters we'll need when running full integration:
-# --env "TEST_ES_SERVER=${elasticsearch_url}" \
-# --env "ELASTIC_PASSWORD=${elastic_password}" \
-# --network="${network_name}" \
-#
+
 docker run \
        --env "TEST_SUITE=${TEST_SUITE}" \
        --env "ELASTIC_USER=elastic" \
        --env "BUILDKITE=true" \
        --env "TRANSPORT_VERSION=${TRANSPORT_VERSION}" \
+       --env "ELASTICSEARCH_URL=${ELASTICSEARCH_URL}" \
+       --env "API_KEY=${API_KEY}" \
        --volume $repo:/usr/src/app \
        --name elasticsearch-ruby \
        --rm \
