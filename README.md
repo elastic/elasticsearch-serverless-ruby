@@ -41,15 +41,11 @@ $ bundle exec rake console
 
 You need to be using the Elastiscearch Serverless service in order to use the `elasticsearch-serverless` gem. You will need your deployment's endpoint for Elasticsearch and an API key.
 
-In your Cloud deployment management page, copy the endpoint for Elasticsearch and save it:
+In your Elasticsearch Serverless Cloud deployment home page, create an API Key and copy the generated code:
 
-![Copy the endpoint for Elasticsearch](docs/images/copy-endpoint.gif "Copy the endpoint for Elasticsearch")
+![Copy the endpoint and API Key code for Elasticsearch](docs/images/serverless-api-key.gif "Copy the endpoint and API Key code for Elasticsearch")
 
-Then create a new API Key and save its value:
-
-![Create and copy Apy Key](docs/images/setup-api-key.gif "Create and copy Apy Key")
-
-You can now instantiate a client with these values:
+You can now instantiate a client with the values you got:
 
 ```ruby
 client = ElasticsearchServerless::Client.new(
