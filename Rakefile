@@ -34,6 +34,11 @@ namespace :spec do
     t.pattern = Dir.glob('spec/api/**/*_spec.rb')
   end
 
+  desc 'Run stack compatibility tests'
+  RSpec::Core::RakeTask.new(:stack) do |t|
+    t.pattern = Dir.glob('spec/stack_client/**/*_spec.rb')
+  end
+
   desc 'Run all tests'
   RSpec::Core::RakeTask.new(:all) do |t|
     t.pattern = Dir.glob('spec/**/*_spec.rb')

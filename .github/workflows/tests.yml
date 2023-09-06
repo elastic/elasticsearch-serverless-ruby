@@ -16,3 +16,5 @@ jobs:
       run: bundle install
     - name: Run unit tests
       run: bundle exec rake spec:unit
+    - name: Run stack compatiblity tests
+      run: bundle exec rake spec:stack
