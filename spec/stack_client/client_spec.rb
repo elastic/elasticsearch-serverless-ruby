@@ -52,4 +52,46 @@ describe Elasticsearch::Client do
       expect(response.body['name']).to eq 'serverless'
     end
   end
+
+  it 'indexes and searches documents' do
+    VCR.use_cassette('stack_client_index_and_search') do
+      body = {
+        name: "The Hitchhiker's Guide to the Galaxy",
+        author: "Douglas Adams",
+        release_date: "1979-10-12",
+        page_count: 180
+      }
+      response = client.index(index: 'books', body: body)
+      expect(response.status).to eq 201
+
+      # Update a document
+      book = { name: "Foundation", author: "Isaac Asimov", release_date: "1951-06-01", page_count: 224}
+      response = client.index(index: 'books', body: book)
+      expect(response.status).to eq 201
+      id = response['_id']
+      response = client.update(index: 'books', id: id, body: { doc: { page_count: 225 } })
+      expect(response.status).to eq 200
+
+      # Bulk index
+      body = [
+        { index: { _index: 'books', _id: '42' } },
+        { name: "The Hitchhiker's Guide to the Galaxy", author: 'Douglas Adams', release_date: '1979-10-12', page_count: 180},
+        { index: { _index: 'books', _id: '43' } },
+        { name: 'Snow Crash', author: 'Neal Stephenson', release_date: '1992-06-01', page_count: 470 },
+        { index: { _index: 'books', _id: '44' } },
+        { name: 'Starship Troopers', author: 'Robert A. Heinlein', release_date: '1959-12-01', page_count: 335}
+      ]
+      response = client.bulk(body: body)
+      expect(response.status).to eq 200
+
+      # Bulk delete
+      body = [
+        { delete: { _index: 'books', _id: '42' } },
+        { delete: { _index: 'books', _id: '43' } },
+      ]
+      response = client.bulk(body: body)
+      expect(response.status).to eq 200
+    end
+  end
+
 end
