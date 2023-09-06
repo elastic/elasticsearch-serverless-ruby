@@ -21,7 +21,7 @@ gemfile do
   gem 'elasticsearch'
   gem 'rspec'
   gem 'vcr'
-  gem 'debug'
+  gem 'debug' unless defined?(JRUBY_VERSION)
 end
 
 require 'elasticsearch'
