@@ -24,11 +24,11 @@ module ElasticsearchServerless
       # Open a point in time that can be used in subsequent searches
       #
       # @option arguments [String, Array] :index A comma-separated list of index names to open point in time; use +_all+ or empty string to perform the operation on all indices (*Required*)
-      # @option arguments [Time] :keep_alive Specific the time to live for the point in time (*Required*)
-      # @option arguments [Boolean] :ignore_unavailable Whether specified concrete indices should be ignored when unavailable (missing or closed)
-      # @option arguments [String] :preference Specify the node or shard the operation should be performed on (default: random)
-      # @option arguments [String] :routing Specific routing value
-      # @option arguments [String, Array<String>] :expand_wildcards Whether to expand wildcard expression to concrete indices that are open, closed or both.
+      # @option arguments [Time] :keep_alive Extends the time to live of the corresponding point in time. (*Required*)
+      # @option arguments [Boolean] :ignore_unavailable If +false+, the request returns an error if it targets a missing or closed index.
+      # @option arguments [String] :preference Specifies the node or shard the operation should be performed on. Random by default.
+      # @option arguments [String] :routing Custom value used to route operations to a specific shard.
+      # @option arguments [String, Array<String>] :expand_wildcards Type of index that wildcard patterns can match. If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams. Supports comma-separated values, such as +open,hidden+. Valid values are: +all+, +open+, +closed+, +hidden+, +none+. Server default: open.
       # @option arguments [Hash] :headers Custom HTTP headers
       #
       # @see https://www.elastic.co/guide/en/elasticsearch/reference/current/point-in-time-api.html

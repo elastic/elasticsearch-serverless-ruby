@@ -25,15 +25,15 @@ module ElasticsearchServerless
       #
       # Returns a 409 response when a document with a same ID already exists in the index.
       #
-      # @option arguments [String] :id Document ID (*Required*)
-      # @option arguments [String] :index The name of the index (*Required*)
-      # @option arguments [String] :pipeline The pipeline id to preprocess incoming documents with
-      # @option arguments [String] :refresh If +true+ then refresh the affected shards to make this operation visible to search, if +wait_for+ then wait for a refresh to make this operation visible to search, if +false+ (the default) then do nothing with refreshes.
-      # @option arguments [String] :routing Specific routing value
-      # @option arguments [Time] :timeout Explicit operation timeout
-      # @option arguments [Integer] :version Explicit version number for concurrency control
-      # @option arguments [String] :version_type Specific version type
-      # @option arguments [Integer, String] :wait_for_active_shards Sets the number of shard copies that must be active before proceeding with the index operation. Defaults to 1, meaning the primary shard only. Set to +all+ for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the shard (number of replicas + 1)
+      # @option arguments [String] :id Unique identifier for the document. (*Required*)
+      # @option arguments [String] :index Name of the data stream or index to target. If the target doesn’t exist and matches the name or wildcard (+*+) pattern of an index template with a +data_stream+ definition, this request creates the data stream. If the target doesn’t exist and doesn’t match a data stream template, this request creates the index. (*Required*)
+      # @option arguments [String] :pipeline ID of the pipeline to use to preprocess incoming documents. If the index has a default ingest pipeline specified, then setting the value to +_none+ disables the default ingest pipeline for this request. If a final pipeline is configured it will always run, regardless of the value of this parameter.
+      # @option arguments [String] :refresh If +true+, Elasticsearch refreshes the affected shards to make this operation visible to search, if +wait_for+ then wait for a refresh to make this operation visible to search, if +false+ do nothing with refreshes. Valid values: +true+, +false+, +wait_for+. Server default: false.
+      # @option arguments [String] :routing Custom value used to route operations to a specific shard.
+      # @option arguments [Time] :timeout Period the request waits for the following operations: automatic index creation, dynamic mapping updates, waiting for active shards. Server default: 1m.
+      # @option arguments [Integer] :version Explicit version number for concurrency control. The specified version must match the current version of the document for the request to succeed.
+      # @option arguments [String] :version_type Specific version type: +external+, +external_gte+.
+      # @option arguments [Integer, String] :wait_for_active_shards The number of shard copies that must be active before proceeding with the operation. Set to +all+ or any positive integer up to the total number of shards in the index (+number_of_replicas+1+). Server default: 1.
       # @option arguments [Hash] :headers Custom HTTP headers
       # @option arguments [Hash] :body document
       #
