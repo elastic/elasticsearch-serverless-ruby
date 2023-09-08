@@ -18,12 +18,6 @@
 require 'spec_helper'
 
 describe 'API:indices.analyze' do
-  let(:client) do
-    ElasticsearchServerless::Client.new(
-      api_key: 'my_api_key',
-      url: 'https://my-deployment.elastic.co'
-    )
-  end
   let(:index) { 'index-to-analyze' }
   let(:body) do
     {
@@ -34,20 +28,20 @@ describe 'API:indices.analyze' do
 
   before do
     VCR.use_cassette('indices.analyze.setup') do
-      client.indices.create(index: index)
+      CLIENT.indices.create(index: index)
     end
   end
 
   after do
     VCR.use_cassette('indices.analyze.teardown') do
-      client.indices.delete(index: index)
+      CLIENT.indices.delete(index: index)
     end
   end
 
   context 'when an index is specified' do
     it 'performs the request' do
       VCR.use_cassette('indices.analyze') do
-        response = client.indices.analyze(index: index, body: body)
+        response = CLIENT.indices.analyze(index: index, body: body)
         expect(response.status).to eq 200
         expect(response['tokens'].count).to eq 4
       end
@@ -57,7 +51,7 @@ describe 'API:indices.analyze' do
   context 'when an index is not specified' do
     it 'performs the request' do
       VCR.use_cassette('indices.analyze.noindex') do
-        response = client.indices.analyze(body: body)
+        response = CLIENT.indices.analyze(body: body)
         expect(response.status).to eq 200
         expect(response['tokens'].count).to eq 4
       end

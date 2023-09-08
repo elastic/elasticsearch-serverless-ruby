@@ -18,17 +18,11 @@
 require 'spec_helper'
 
 describe 'API:index' do
-  let(:client) do
-    ElasticsearchServerless::Client.new(
-      api_key: 'my_api_key',
-      url: 'https://my-deployment.elastic.co'
-    )
-  end
   let(:index) { 'my-testing-index' }
 
   it 'performs the request' do
     VCR.use_cassette('index') do
-      response = client.index(index: index, body: { name: 'Testing', service: 'Serverless'})
+      response = CLIENT.index(index: index, body: { name: 'Testing', service: 'Serverless'})
       expect(response.status).to eq 201
       expect(response['_index']).to eq index
       expect(response['result']).to eq 'created'

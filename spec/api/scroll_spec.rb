@@ -18,38 +18,31 @@
 require 'spec_helper'
 
 describe 'API:transform' do
-  let(:client) do
-    ElasticsearchServerless::Client.new(
-      api_key: 'my_api_key',
-      url: 'https://my-deployment.elastic.co'
-    )
-  end
-
   let(:index) { 'scroll' }
 
   before do
     VCR.use_cassette("#{index}_create") do
-      client.indices.create(index: index)
+      CLIENT.indices.create(index: index)
     end
   end
 
   after do
     VCR.use_cassette("#{index}_delete") do
-      client.indices.delete(index: index)
+      CLIENT.indices.delete(index: index)
     end
   end
 
   it 'scroll and clear scroll' do
     VCR.use_cassette("#{index}") do
-      response = client.search(index: index, scroll: '1m')
+      response = CLIENT.search(index: index, scroll: '1m')
       expect(response.status).to eq 200
       id = response['_scroll_id']
 
-      response = client.scroll(scroll_id: id, scroll: '1m')
+      response = CLIENT.scroll(scroll_id: id, scroll: '1m')
       expect(response.status).to eq 200
       expect(response['_scroll_id']).to eq id
 
-      response = client.clear_scroll(scroll_id: id)
+      response = CLIENT.clear_scroll(scroll_id: id)
       expect(response.status).to eq 200
       expect(response['succeeded']).to eq true
     end

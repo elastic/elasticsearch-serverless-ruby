@@ -18,31 +18,24 @@
 require 'spec_helper'
 
 describe 'API:create' do
-  let(:client) do
-    ElasticsearchServerless::Client.new(
-      api_key: 'my_api_key',
-      url: 'https://my-deployment.elastic.co'
-    )
-  end
-
   let(:index) { 'create' }
 
   before do
     VCR.use_cassette("#{index}_index") do
-      client.indices.create(index: index)
+      CLIENT.indices.create(index: index)
     end
   end
 
   after do
     VCR.use_cassette("#{index}_delete") do
-      client.indices.delete(index: index)
+      CLIENT.indices.delete(index: index)
     end
   end
 
   it 'performs create' do
     VCR.use_cassette("#{index}_create") do
       doc = { name: 'testing create' }
-      response = client.create(index: index, id: 42, body: doc)
+      response = CLIENT.create(index: index, id: 42, body: doc)
 
       expect(response.status).to eq 201
       expect(response['_index']).to eq index

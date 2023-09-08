@@ -18,29 +18,23 @@
 require 'spec_helper'
 
 describe 'API:get' do
-  let(:client) do
-    ElasticsearchServerless::Client.new(
-      api_key: 'my_api_key',
-      url: 'https://my-deployment.elastic.co'
-    )
-  end
   let(:index) { 'test_get' }
   let!(:id) do
     VCR.use_cassette('get_setup') do
-      client.indices.create(index: index)
-      client.index(index: index, body: { name: 'Testing', service: 'Serverless'})['_id']
+      CLIENT.indices.create(index: index)
+      CLIENT.index(index: index, body: { name: 'Testing', service: 'Serverless'})['_id']
     end
   end
 
   after do
     VCR.use_cassette('get_teardown') do
-      client.indices.delete(index: index)
+      CLIENT.indices.delete(index: index)
     end
   end
 
   it 'performs the request' do
     VCR.use_cassette('get') do
-      response = client.get(index: index, id: id)
+      response = CLIENT.get(index: index, id: id)
       expect(response.status).to eq 200
       expect(response.headers['x-elastic-product']).to eq 'Elasticsearch'
       expect(response['_id']).to eq id

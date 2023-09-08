@@ -18,12 +18,6 @@
 require 'spec_helper'
 
 describe 'API:async_search' do
-  let(:client) do
-    ElasticsearchServerless::Client.new(
-      api_key: 'my_api_key',
-      url: 'https://my-deployment.elastic.co'
-    )
-  end
   let(:index) { 'async_search_test' }
 
   before do
@@ -36,33 +30,33 @@ describe 'API:async_search' do
       { index: { _index: index, _id: '43' } },
       { name: 'Tales of love, madness and death', author: 'Horacio Quiroga', release_date: '1917-12-01', page_count: 188 }
     ]
-    client.bulk(body: body, refresh: true)
+    CLIENT.bulk(body: body, refresh: true)
     end
   end
 
   after do
     VCR.use_cassette("#{index}_delete_index") do
-      client.indices.delete(index: index, ignore: 404)
+      CLIENT.indices.delete(index: index, ignore: 404)
     end
   end
 
   it 'performs the request' do
     VCR.use_cassette("#{index}_perform") do
       # Submit
-      response = client.async_search.submit(index: index, q: 'julio', wait_for_completion_timeout: '0')
+      response = CLIENT.async_search.submit(index: index, q: 'julio', wait_for_completion_timeout: '0')
       id = response['id']
       expect(response.status).to eq 200
       expect(response['is_partial']).to eq true
       # Get
-      response = client.async_search.get(id: id)
+      response = CLIENT.async_search.get(id: id)
       expect(response.status).to eq 200
       expect(response['response']['hits']['hits'].count).to eq 1
       expect(response['response']['hits']['hits'].first['_source']['name']).to eq 'Bestiario'
       # Status
-      response = client.async_search.status(id: id)
+      response = CLIENT.async_search.status(id: id)
       expect(response.status).to eq 200
       # Delete
-      response = client.async_search.delete(id: id)
+      response = CLIENT.async_search.delete(id: id)
       expect(response.status).to eq 200
       expect(response['acknowledged']).to be true
     end

@@ -18,33 +18,26 @@
 require 'spec_helper'
 
 describe 'API:indices.exists' do
-  let(:client) do
-    ElasticsearchServerless::Client.new(
-      api_key: 'my_api_key',
-      url: 'https://my-deployment.elastic.co'
-    )
-  end
-
   let(:index) { 'indices_exists' }
 
   before do
     VCR.use_cassette("#{index}_create") do
-      client.indices.create(index: index)
+      CLIENT.indices.create(index: index)
     end
   end
 
   after do
     VCR.use_cassette("#{index}_delete") do
-      client.indices.delete(index: index)
+      CLIENT.indices.delete(index: index)
     end
   end
 
   it 'performs indices.exists' do
     VCR.use_cassette("#{index}_exists") do
-      response = client.indices.exists(index: index)
+      response = CLIENT.indices.exists(index: index)
       expect(response).to be true
 
-      response = client.indices.exists?(index: index)
+      response = CLIENT.indices.exists?(index: index)
       expect(response).to be true
     end
   end

@@ -18,16 +18,9 @@
 require 'spec_helper'
 
 describe 'API:cat.component_templates' do
-  let(:client) do
-    ElasticsearchServerless::Client.new(
-      api_key: 'my_api_key',
-      url: 'https://my-deployment.elastic.co'
-    )
-  end
-
   it 'performs the request' do
     VCR.use_cassette('cat.component_templates') do
-      response = client.cat.component_templates
+      response = CLIENT.cat.component_templates
       expect(response.status).to eq 200
       expect(response.include? 'elastic-connectors').to be true
     end

@@ -18,19 +18,13 @@
 require 'spec_helper'
 
 describe 'API:transform' do
-  let(:client) do
-    ElasticsearchServerless::Client.new(
-      api_key: 'my_api_key',
-      url: 'https://my-deployment.elastic.co'
-    )
-  end
   let(:index) { 'transforms' }
   let(:transform_id) { 'population' }
 
   before(:suite) do
     VCR.use_cassette("#{index}_create") do
-      client.indices.create(index: index)
-      client.bulk(
+      CLIENT.indices.create(index: index)
+      CLIENT.bulk(
         body: [
           { index: { _index: index, _id: '1', data: { name: 'Africa', pop: 17.6} } },
           { index: { _index: index, _id: '2', data: { name: 'America', pop: 13 } } },
@@ -46,15 +40,15 @@ describe 'API:transform' do
 
   after(:suite) do
     VCR.use_cassette("#{index}_delete") do
-      client.indices.delete(index: index)
-      client.indices.delete(index: "#{index}_transformed")
+      CLIENT.indices.delete(index: index)
+      CLIENT.indices.delete(index: "#{index}_transformed")
     end
   end
 
   context 'transform' do
     it 'put_transform' do
       VCR.use_cassette("#{index}_put") do
-        response = client.transform.put_transform(
+        response = CLIENT.transform.put_transform(
           transform_id: transform_id,
           body: {
             source: {
@@ -76,7 +70,7 @@ describe 'API:transform' do
 
     it 'update_transform' do
       VCR.use_cassette("#{index}_update") do
-        response = client.transform.update_transform(
+        response = CLIENT.transform.update_transform(
           transform_id: transform_id,
           body: { description: 'Continents aproximate population' }
         )
@@ -87,7 +81,7 @@ describe 'API:transform' do
 
     it 'get_transform' do
       VCR.use_cassette("#{index}_get") do
-        response = client.transform.get_transform(transform_id: transform_id)
+        response = CLIENT.transform.get_transform(transform_id: transform_id)
         expect(response.status).to eq 200
         expect(response['count']).to eq 1
         expect(response['transforms'].first['id']).to eq transform_id
@@ -96,7 +90,7 @@ describe 'API:transform' do
 
     it 'get_transform_stats' do
       VCR.use_cassette("#{index}_stats") do
-        response = client.transform.get_transform_stats(transform_id: transform_id)
+        response = CLIENT.transform.get_transform_stats(transform_id: transform_id)
         expect(response.status).to eq 200
         expect(response['count']).to eq 1
         expect(response['transforms'].first['id']).to eq transform_id
@@ -106,7 +100,7 @@ describe 'API:transform' do
 
     it 'preview_transform' do
       VCR.use_cassette("#{index}_preview") do
-        response = client.transform.preview_transform(transform_id: transform_id)
+        response = CLIENT.transform.preview_transform(transform_id: transform_id)
         expect(response.status).to eq 200
         expect(response['preview']).not_to be_empty
       end
@@ -114,7 +108,7 @@ describe 'API:transform' do
 
     it 'start_transform' do
       VCR.use_cassette("#{index}_start") do
-        response = client.transform.start_transform(transform_id: transform_id)
+        response = CLIENT.transform.start_transform(transform_id: transform_id)
         expect(response.status).to eq 200
         expect(response['acknowledged']).to be true
       end
@@ -122,7 +116,7 @@ describe 'API:transform' do
 
     it 'stop_transform' do
       VCR.use_cassette("#{index}_stop") do
-        response = client.transform.stop_transform(transform_id: transform_id)
+        response = CLIENT.transform.stop_transform(transform_id: transform_id)
         expect(response.status).to eq 200
         expect(response['acknowledged']).to be true
       end
@@ -130,7 +124,7 @@ describe 'API:transform' do
 
     it 'reset_transform' do
       VCR.use_cassette("#{index}_reset") do
-        response = client.transform.reset_transform(transform_id: transform_id)
+        response = CLIENT.transform.reset_transform(transform_id: transform_id)
         expect(response.status).to eq 200
         expect(response['acknowledged']).to be true
       end
@@ -138,7 +132,7 @@ describe 'API:transform' do
 
     it 'schedule_now_transform' do
       VCR.use_cassette("#{index}_schedule_now") do
-        response = client.transform.schedule_now_transform(transform_id: transform_id)
+        response = CLIENT.transform.schedule_now_transform(transform_id: transform_id)
         expect(response.status).to eq 200
         expect(response['acknowledged']).to be true
       end
@@ -146,7 +140,7 @@ describe 'API:transform' do
 
     it 'delete_transform' do
       VCR.use_cassette("#{index}_delete") do
-        response = client.transform.delete_transform(transform_id: transform_id)
+        response = CLIENT.transform.delete_transform(transform_id: transform_id)
         expect(response.status).to eq 200
       end
     end

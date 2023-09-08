@@ -18,7 +18,7 @@
 require 'spec_helper'
 
 describe 'API:info' do
-  let(:client) do
+  let(:CLIENT) do
     ElasticsearchServerless::Client.new(
       api_key: 'api_key',
       url: 'https://my-deployment.elastic.co'
@@ -27,7 +27,7 @@ describe 'API:info' do
 
   it 'performs the request' do
     VCR.use_cassette('info') do
-      response = client.info
+      response = CLIENT.info
       expect(response.status).to eq 200
       expect(response.headers['x-elastic-product']).to eq 'Elasticsearch'
     end

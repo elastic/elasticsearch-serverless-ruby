@@ -18,19 +18,13 @@
 require 'spec_helper'
 
 describe 'API:indices.delete' do
-  let(:client) do
-    ElasticsearchServerless::Client.new(
-      api_key: 'my_api_key',
-      url: 'https://my-deployment.elastic.co'
-    )
-  end
   let(:index) { 'index-to-delete' }
 
   it 'performs the request' do
     VCR.use_cassette('indices.delete') do
-      response = client.indices.create(index: index)
+      response = CLIENT.indices.create(index: index)
       expect(response.status).to eq 200
-      response = client.indices.delete(index: index)
+      response = CLIENT.indices.delete(index: index)
       expect(response.status).to eq 200
       expect(response['acknowledged']).to eq true
     end

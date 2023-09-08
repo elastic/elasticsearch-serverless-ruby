@@ -18,16 +18,9 @@
 require 'spec_helper'
 
 describe 'API:cat.help' do
-  let(:client) do
-    ElasticsearchServerless::Client.new(
-      api_key: 'my_api_key',
-      url: 'https://my-deployment.elastic.co'
-    )
-  end
-
   it 'performs the request' do
     VCR.use_cassette('cat.help') do
-      response = client.cat.help
+      response = CLIENT.cat.help
       expect(response.status).to eq 200
       expect(response.include? '=^.^=').to be true
     end
