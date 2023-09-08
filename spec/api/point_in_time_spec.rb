@@ -18,37 +18,31 @@
 require 'spec_helper'
 
 describe 'API:point_in_time' do
-  let(:client) do
-    ElasticsearchServerless::Client.new(
-      api_key: 'my_api_key',
-      url: 'https://my-deployment.elastic.co'
-    )
-  end
   let(:index) { 'point_in_time' }
 
   before do
     VCR.use_cassette("#{index}_create") do
-      client.indices.create(index: index)
+      CLIENT.indices.create(index: index)
     end
   end
 
   after do
     VCR.use_cassette("#{index}_delete") do
-      client.indices.delete(index: index)
+      CLIENT.indices.delete(index: index)
     end
   end
 
   it 'opens a point in time, searches in it and closes it' do
     VCR.use_cassette('point_in_time_open') do
-      response = client.open_point_in_time(index: index, keep_alive: '1m')
+      response = CLIENT.open_point_in_time(index: index, keep_alive: '1m')
       expect(response.status).to eq 200
       id = response['id']
-      response = client.search(
+      response = CLIENT.search(
         body: { query: { match_all: {} }, pit: { id: id, keep_alive: '1m' } }
       )
       expect(response.status).to eq 200
       expect(response['pit_id']).to eq id
-      response = client.close_point_in_time(body: {id: id})
+      response = CLIENT.close_point_in_time(body: {id: id})
       expect(response.status).to eq 200
       expect(response.body).to eq({ 'succeeded' => true, 'num_freed' => 1})
     end

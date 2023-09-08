@@ -18,18 +18,12 @@
 require 'spec_helper'
 
 describe 'API:count' do
-  let(:client) do
-    ElasticsearchServerless::Client.new(
-      api_key: 'my_api_key',
-      url: 'https://my-deployment.elastic.co'
-    )
-  end
   let(:index) { 'count_index' }
 
   before do
     VCR.use_cassette("#{index}_create") do
-      client.indices.create(index: index)
-      client.index(
+      CLIENT.indices.create(index: index)
+      CLIENT.index(
         index: index,
         body: { name: 'garbanzo' },
         refresh: true
@@ -39,13 +33,13 @@ describe 'API:count' do
 
   after do
     VCR.use_cassette("#{index}_delete") do
-      client.indices.delete(index: index)
+      CLIENT.indices.delete(index: index)
     end
   end
 
   it 'performs the request' do
     VCR.use_cassette('count') do
-      response = client.count(index: index)
+      response = CLIENT.count(index: index)
       expect(response.status).to eq 200
       expect(response['count']).to eq 1
     end

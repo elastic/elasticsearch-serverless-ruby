@@ -18,20 +18,14 @@
 require 'spec_helper'
 
 describe 'API:update' do
-  let(:client) do
-    ElasticsearchServerless::Client.new(
-      api_key: 'my_api_key',
-      url: 'https://my-deployment.elastic.co'
-    )
-  end
   let(:index) { 'index-for-updates' }
 
   it 'performs the request' do
     VCR.use_cassette('update') do
-      response = client.index(index: index, body: { name: 'Testing', description: 'To be updated' })
+      response = CLIENT.index(index: index, body: { name: 'Testing', description: 'To be updated' })
       expect(response.status).to eq 201
       id = response['_id']
-      response = client.update(index: index, id: id, body: { doc: { description: 'Has been updated' } })
+      response = CLIENT.update(index: index, id: id, body: { doc: { description: 'Has been updated' } })
       expect(response.status).to eq 200
       expect(response['_id']).to eq id
       expect(response['_index']).to eq index

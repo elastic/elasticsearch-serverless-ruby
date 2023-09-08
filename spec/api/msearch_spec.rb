@@ -18,7 +18,7 @@
 require 'spec_helper'
 
 describe 'API:msearch' do
-  let(:client) do
+  let(:CLIENT) do
     ElasticsearchServerless::Client.new(
       api_key: 'my-api-key',
       url: 'https://my-deployment.elastic.co'
@@ -28,7 +28,7 @@ describe 'API:msearch' do
 
   before do
     VCR.use_cassette("#{index}_create") do
-      client.indices.create(index: index)
+      CLIENT.indices.create(index: index)
       body = [
         { index: { _index: index, _id: '42' } },
         { name: 'Las lenguas de diamante', author: 'Juana de Ibarbourou', release_date: '1918-12-01', page_count: 108},
@@ -37,19 +37,19 @@ describe 'API:msearch' do
         { index: { _index: index, _id: '43' } },
         { name: 'Tales of love, madness and death', author: 'Horacio Quiroga', release_date: '1917-12-01', page_count: 188 }
       ]
-      client.bulk(body: body, refresh: true)
+      CLIENT.bulk(body: body, refresh: true)
     end
   end
 
   after do
     VCR.use_cassette("#{index}_delete") do
-      client.indices.delete(index: index)
+      CLIENT.indices.delete(index: index)
     end
   end
 
   it 'performs the request' do
     VCR.use_cassette("#{index}_perform") do
-      response = client.msearch(
+      response = CLIENT.msearch(
         index: index,
         body: [
           {},

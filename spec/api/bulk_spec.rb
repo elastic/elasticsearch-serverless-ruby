@@ -18,13 +18,6 @@
 require 'spec_helper'
 
 describe 'API:bulk' do
-  let(:client) do
-    ElasticsearchServerless::Client.new(
-      api_key: 'api_key',
-      url: 'https://my-deployment.elastic.co'
-    )
-  end
-
   it 'performs the request' do
     VCR.use_cassette('bulk') do
       body = [
@@ -35,7 +28,7 @@ describe 'API:bulk' do
         { index: { _index: 'books', _id: '44' } },
         { name: 'Starship Troopers', author: 'Robert A. Heinlein', release_date: '1959-12-01', page_count: 335}
       ]
-      response = client.bulk(body: body)
+      response = CLIENT.bulk(body: body)
       expect(response.status).to eq 200
       expect(response.headers['x-elastic-product']).to eq 'Elasticsearch'
       expect(response['items'].count).to eq 3

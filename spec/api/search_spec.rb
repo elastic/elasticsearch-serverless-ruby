@@ -18,17 +18,11 @@
 require 'spec_helper'
 
 describe 'API:search' do
-  let(:client) do
-    ElasticsearchServerless::Client.new(
-      api_key: 'my_api_key',
-      url: 'https://my-deployment.elastic.co'
-    )
-  end
   let(:index) { 'search_test' }
 
   after do
     VCR.use_cassette("#{index}_delete_index") do
-      client.indices.delete(index: index, ignore: 404)
+      CLIENT.indices.delete(index: index, ignore: 404)
     end
   end
 
@@ -42,8 +36,8 @@ describe 'API:search' do
         { index: { _index: index, _id: '44' } },
         { name: 'Starship Troopers', author: 'Robert A. Heinlein', release_date: '1959-12-01', page_count: 335}
       ]
-      client.bulk(body: body, refresh: true)
-      response = client.search(index: index, q: 'snow')
+      CLIENT.bulk(body: body, refresh: true)
+      response = CLIENT.search(index: index, q: 'snow')
       expect(response.status).to eq 200
       expect(response['hits']['hits'].first['_source']).to eq ({
                                                                  'name' => 'Snow Crash',
