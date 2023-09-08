@@ -23,7 +23,7 @@ module ElasticsearchServerless
     module Actions
       # Explicitly clears the search context for a scroll.
       #
-      # @option arguments [String, Array] :scroll_id A comma-separated list of scroll IDs to clear
+      # @option arguments [String, Array] :scroll_id Comma-separated list of scroll IDs to clear. To clear all scroll IDs, use +_all+.
       # @option arguments [Hash] :headers Custom HTTP headers
       # @option arguments [Hash] :body request body
       #

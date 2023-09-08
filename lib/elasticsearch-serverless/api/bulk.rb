@@ -23,16 +23,16 @@ module ElasticsearchServerless
     module Actions
       # Allows to perform multiple index/update/delete operations in a single request.
       #
-      # @option arguments [String] :index Default index for items which don't provide one
-      # @option arguments [String] :pipeline The pipeline id to preprocess incoming documents with
-      # @option arguments [String] :refresh If +true+ then refresh the affected shards to make this operation visible to search, if +wait_for+ then wait for a refresh to make this operation visible to search, if +false+ (the default) then do nothing with refreshes.
-      # @option arguments [String] :routing Specific routing value
-      # @option arguments [Boolean, String, Array<String>] :_source True or false to return the _source field or not, or default list of fields to return, can be overridden on each sub-request
-      # @option arguments [String, Array<String>] :_source_excludes Default list of fields to exclude from the returned _source field, can be overridden on each sub-request
-      # @option arguments [String, Array<String>] :_source_includes Default list of fields to extract and return from the _source field, can be overridden on each sub-request
-      # @option arguments [Time] :timeout Explicit operation timeout
-      # @option arguments [Integer, String] :wait_for_active_shards Sets the number of shard copies that must be active before proceeding with the bulk operation. Defaults to 1, meaning the primary shard only. Set to +all+ for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the shard (number of replicas + 1)
-      # @option arguments [Boolean] :require_alias Sets require_alias for all incoming documents. Defaults to unset (false)
+      # @option arguments [String] :index Name of the data stream, index, or index alias to perform bulk actions on.
+      # @option arguments [String] :pipeline ID of the pipeline to use to preprocess incoming documents. If the index has a default ingest pipeline specified, then setting the value to +_none+ disables the default ingest pipeline for this request. If a final pipeline is configured it will always run, regardless of the value of this parameter.
+      # @option arguments [String] :refresh If +true+, Elasticsearch refreshes the affected shards to make this operation visible to search, if +wait_for+ then wait for a refresh to make this operation visible to search, if +false+ do nothing with refreshes. Valid values: +true+, +false+, +wait_for+. Server default: false.
+      # @option arguments [String] :routing Custom value used to route operations to a specific shard.
+      # @option arguments [Boolean, String, Array<String>] :_source +true+ or +false+ to return the +_source+ field or not, or a list of fields to return.
+      # @option arguments [String, Array<String>] :_source_excludes A comma-separated list of source fields to exclude from the response.
+      # @option arguments [String, Array<String>] :_source_includes A comma-separated list of source fields to include in the response.
+      # @option arguments [Time] :timeout Period each action waits for the following operations: automatic index creation, dynamic mapping updates, waiting for active shards. Server default: 1m.
+      # @option arguments [Integer, String] :wait_for_active_shards The number of shard copies that must be active before proceeding with the operation. Set to all or any positive integer up to the total number of shards in the index (+number_of_replicas+1+). Server default: 1.
+      # @option arguments [Boolean] :require_alias If +true+, the request’s actions must target an index alias.
       # @option arguments [Hash] :headers Custom HTTP headers
       # @option arguments [String|Array] :body operations. Array of Strings, Header/Data pairs, or the conveniency "combined" format can be passed, refer to ElasticsearchServerless::API::Utils.bulkify documentation.
       #

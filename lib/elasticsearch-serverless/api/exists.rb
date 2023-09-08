@@ -23,18 +23,18 @@ module ElasticsearchServerless
     module Actions
       # Returns information about whether a document exists in an index.
       #
-      # @option arguments [String] :id The document ID (*Required*)
-      # @option arguments [String] :index The name of the index (*Required*)
-      # @option arguments [String] :preference Specify the node or shard the operation should be performed on (default: random)
-      # @option arguments [Boolean] :realtime Specify whether to perform the operation in realtime or search mode
-      # @option arguments [Boolean] :refresh Refresh the shard containing the document before performing the operation
-      # @option arguments [String] :routing Specific routing value
-      # @option arguments [Boolean, String, Array<String>] :_source True or false to return the _source field or not, or a list of fields to return
-      # @option arguments [String, Array<String>] :_source_excludes A list of fields to exclude from the returned _source field
-      # @option arguments [String, Array<String>] :_source_includes A list of fields to extract and return from the _source field
-      # @option arguments [String, Array<String>] :stored_fields A comma-separated list of stored fields to return in the response
-      # @option arguments [Integer] :version Explicit version number for concurrency control
-      # @option arguments [String] :version_type Specific version type
+      # @option arguments [String] :id Identifier of the document. (*Required*)
+      # @option arguments [String] :index Comma-separated list of data streams, indices, and aliases. Supports wildcards (+*+). (*Required*)
+      # @option arguments [String] :preference Specifies the node or shard the operation should be performed on. Random by default.
+      # @option arguments [Boolean] :realtime If +true+, the request is real-time as opposed to near-real-time. Server default: true.
+      # @option arguments [Boolean] :refresh If +true+, Elasticsearch refreshes all shards involved in the delete by query after the request completes.
+      # @option arguments [String] :routing Target the specified primary shard.
+      # @option arguments [Boolean, String, Array<String>] :_source +true+ or +false+ to return the +_source+ field or not, or a list of fields to return.
+      # @option arguments [String, Array<String>] :_source_excludes A comma-separated list of source fields to exclude in the response.
+      # @option arguments [String, Array<String>] :_source_includes A comma-separated list of source fields to include in the response.
+      # @option arguments [String, Array<String>] :stored_fields List of stored fields to return as part of a hit. If no fields are specified, no stored fields are included in the response. If this field is specified, the +_source+ parameter defaults to false.
+      # @option arguments [Integer] :version Explicit version number for concurrency control. The specified version must match the current version of the document for the request to succeed.
+      # @option arguments [String] :version_type Specific version type: +external+, +external_gte+.
       # @option arguments [Hash] :headers Custom HTTP headers
       #
       # @see https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html
