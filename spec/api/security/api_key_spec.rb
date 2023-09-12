@@ -17,9 +17,9 @@
 
 require 'spec_helper'
 
-describe 'API:security.create_api_key' do
-  it 'creates and gets an API Key' do
-    VCR.use_cassette('create_api_key') do
+describe 'API:security.api_key' do
+  it 'creates, gets, queries an API Key' do
+    VCR.use_cassette('security.api_key') do
       body = {
         name: 'test_api_key',
         role_descriptors: { test_role: { cluster: [], indices: [] } }
@@ -31,6 +31,11 @@ describe 'API:security.create_api_key' do
 
       response = CLIENT.security.get_api_key(id: id)
       expect(response.status).to eq 200
+      expect(response['api_keys'].first['name']).to eq 'test_api_key'
+
+      response = CLIENT.security.query_api_keys(body: { query: { ids: { values: [id] } } })
+      expect(response.status).to eq 200
+      expect(response['api_keys'].count).to eq 1
       expect(response['api_keys'].first['name']).to eq 'test_api_key'
     end
   end
