@@ -18,7 +18,7 @@
 require 'spec_helper'
 
 describe 'API:security.create_api_key' do
-  it 'creates an API Key' do
+  it 'creates and gets an API Key' do
     VCR.use_cassette('create_api_key') do
       body = {
         name: 'test_api_key',
@@ -27,6 +27,11 @@ describe 'API:security.create_api_key' do
       response = CLIENT.security.create_api_key(body: body, refresh: true)
       expect(response.status).to eq 200
       expect(response['name']).to eq 'test_api_key'
+      id = response['id']
+
+      response = CLIENT.security.get_api_key(id: id)
+      expect(response.status).to eq 200
+      expect(response['api_keys'].first['name']).to eq 'test_api_key'
     end
   end
 end
