@@ -59,6 +59,7 @@ module ElasticsearchServerless
       :async_search,
       :cat,
       :indices,
+      :security,
       :transform
     ].freeze
 
