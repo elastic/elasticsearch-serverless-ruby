@@ -1,0 +1,126 @@
+---
+http_interactions:
+- request:
+    method: put
+    uri: https://my-deployment.elastic.co/_security/api_key?refresh=true
+    body:
+      encoding: UTF-8
+      string: '{"name":"test_api_key","role_descriptors":{"test_role":{"cluster":[],"indices":[]}}}'
+    headers:
+      Authorization:
+      - ApiKey my_api_key
+      User-Agent:
+      - 'elasticsearch-serverless-ruby/0.0.7.20231031.pre; elastic-transport-ruby/8.2.2;
+        RUBY_VERSION: 3.2.2; linux x86_64'
+      x-elastic-client-meta:
+      - esv=0.0.7p,rb=3.2.2,t=8.2.2,fd=2.7.10,nh=0.3.2
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      content-length:
+      - '159'
+      content-type:
+      - application/json
+      elastic-api-version:
+      - '2023-10-31'
+      x-cloud-request-id:
+      - 4oLUaGoARpuZQW7o8ueRIQ
+      x-elastic-product:
+      - Elasticsearch
+      x-found-handling-cluster:
+      - b4d146099af649a18caa89c5dc303129.es
+      x-found-handling-instance:
+      - es-es-index-7fcf764597-lgdmc
+      date:
+      - Tue, 12 Sep 2023 08:20:08 GMT
+    body:
+      encoding: UTF-8
+      string: '{"id":"AqB5iIoB2tNaNoqb9WLL","name":"test_api_key","api_key":"q8LVMVy2SGCRqlUa0IDNVQ","encoded":"QXFCNWlJb0IydE5hTm9xYjlXTEw6cThMVk1WeTJTR0NScWxVYTBJRE5WUQ=="}'
+  recorded_at: Tue, 12 Sep 2023 08:20:08 GMT
+- request:
+    method: get
+    uri: https://my-deployment.elastic.co/_security/api_key?id=AqB5iIoB2tNaNoqb9WLL
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Authorization:
+      - ApiKey my_api_key
+      User-Agent:
+      - 'elasticsearch-serverless-ruby/0.0.7.20231031.pre; elastic-transport-ruby/8.2.2;
+        RUBY_VERSION: 3.2.2; linux x86_64'
+      x-elastic-client-meta:
+      - esv=0.0.7p,rb=3.2.2,t=8.2.2,fd=2.7.10,nh=0.3.2
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      content-length:
+      - '328'
+      content-type:
+      - application/json
+      elastic-api-version:
+      - '2023-10-31'
+      x-cloud-request-id:
+      - lgFVCylUT6aDDQmvtenEQg
+      x-elastic-product:
+      - Elasticsearch
+      x-found-handling-cluster:
+      - b4d146099af649a18caa89c5dc303129.es
+      x-found-handling-instance:
+      - es-es-search-87b8c7b5c-8z5tc
+      date:
+      - Tue, 12 Sep 2023 08:20:09 GMT
+    body:
+      encoding: UTF-8
+      string: '{"api_keys":[{"id":"AqB5iIoB2tNaNoqb9WLL","name":"test_api_key","type":"rest","creation":1694506808779,"invalidated":false,"username":"3938141951","realm":"_es_api_key","metadata":{},"role_descriptors":{"test_role":{"cluster":[],"indices":[],"applications":[],"run_as":[],"metadata":{},"transient_metadata":{"enabled":true}}}}]}'
+  recorded_at: Tue, 12 Sep 2023 08:20:09 GMT
+- request:
+    method: post
+    uri: https://my-deployment.elastic.co/_security/_query/api_key
+    body:
+      encoding: UTF-8
+      string: '{"query":{"ids":{"values":["AqB5iIoB2tNaNoqb9WLL"]}}}'
+    headers:
+      Authorization:
+      - ApiKey my_api_key
+      User-Agent:
+      - 'elasticsearch-serverless-ruby/0.0.7.20231031.pre; elastic-transport-ruby/8.2.2;
+        RUBY_VERSION: 3.2.2; linux x86_64'
+      x-elastic-client-meta:
+      - esv=0.0.7p,rb=3.2.2,t=8.2.2,fd=2.7.10,nh=0.3.2
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      content-length:
+      - '348'
+      content-type:
+      - application/json
+      elastic-api-version:
+      - '2023-10-31'
+      x-cloud-request-id:
+      - d0f8IvlLRuGcPIdsGk3G7A
+      x-elastic-product:
+      - Elasticsearch
+      x-found-handling-cluster:
+      - b4d146099af649a18caa89c5dc303129.es
+      x-found-handling-instance:
+      - es-es-index-7fcf764597-lgdmc
+      date:
+      - Tue, 12 Sep 2023 08:20:09 GMT
+    body:
+      encoding: UTF-8
+      string: '{"total":1,"count":1,"api_keys":[{"id":"AqB5iIoB2tNaNoqb9WLL","name":"test_api_key","type":"rest","creation":1694506808779,"invalidated":false,"username":"3938141951","realm":"_es_api_key","metadata":{},"role_descriptors":{"test_role":{"cluster":[],"indices":[],"applications":[],"run_as":[],"metadata":{},"transient_metadata":{"enabled":true}}}}]}'
+  recorded_at: Tue, 12 Sep 2023 08:20:09 GMT
+recorded_with: VCR 6.2.0
