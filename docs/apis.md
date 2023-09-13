@@ -21,6 +21,12 @@ These are the available APIs in the Elasticsearch Serverless Ruby client so far.
   * transforms
 * clear_scroll
 * close_point_in_time
+* cluster
+  * delete_component_template
+  * info
+  * put_component_template
+  * exists_component_template
+  * get_component_template
 * count
 * create
 * delete
