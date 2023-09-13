@@ -1,0 +1,71 @@
+# Available APIs
+
+These are the available APIs in the Elasticsearch Serverless Ruby client so far.
+
+* async_search
+  * delete
+  * get
+  * status
+  * submit
+* bulk
+* cat
+  * aliases
+  * component_templates
+  * count
+  * help
+  * indices
+  * ml_datafeeds
+  * ml_data_frame_analytics
+  * ml_jobs
+  * ml_trained_models
+  * transforms
+* clear_scroll
+* close_point_in_time
+* count
+* create
+* delete
+* delete_by_query
+* exists
+* exists_source
+* get
+* get_source
+* index
+* indices
+  * analyze
+  * create
+  * delete
+  * delete_alias
+  * exists
+  * exists_alias
+  * get
+  * get_alias
+  * put_alias
+  * update_aliases
+  * validate_query
+* info
+* mget
+* msearch
+* open_point_in_time
+* ping
+* response
+* scroll
+* search
+* security
+  * authenticate
+  * create_api_key
+  * get_api_key
+  * invalidate_api_key
+  * query_api_keys
+* transform
+  * delete_transform
+  * get_transform
+  * get_transform_stats
+  * preview_transform
+  * put_transform
+  * reset_transform
+  * schedule_now_transform
+  * start_transform
+  * stop_transform
+  * update_transform
+* update
+* update_by_query
