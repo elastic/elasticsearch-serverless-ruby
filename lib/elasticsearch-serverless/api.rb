@@ -58,6 +58,7 @@ module ElasticsearchServerless
     API_NAMESPACES = [
       :async_search,
       :cat,
+      :cluster,
       :indices,
       :security,
       :transform
