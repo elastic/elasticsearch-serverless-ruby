@@ -46,6 +46,10 @@ describe 'API:cluster.component_templates' do
       # GET component template
       response = CLIENT.cluster.get_component_template(name: name)
       expect(response.status).to eq 200
+      # DELETE component template
+      response = CLIENT.cluster.delete_component_template(name: name)
+      expect(response.status).to eq 200
+      expect(response['acknowledged']).to be true
     end
   end
 end
