@@ -50,6 +50,10 @@ describe 'API:cluster.component_templates' do
       response = CLIENT.cluster.delete_component_template(name: name)
       expect(response.status).to eq 200
       expect(response['acknowledged']).to be true
+      # PUT component template
+      response = CLIENT.cluster.put_component_template(name: 'put_component_template', body: body)
+      expect(response.status).to eq 200
+      expect(response['acknowledged']).to be true
     end
   end
 end
