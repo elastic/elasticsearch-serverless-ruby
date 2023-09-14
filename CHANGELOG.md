@@ -1,5 +1,34 @@
 # Changelog
 
+## 0.0.7.20231031.pre
+
+### API updates
+
+New APIs in this release:
+
+- `cluster.delete_component_template`
+- `cluster.exists_component_template`
+- `cluster.get_component_template`
+- `cluster.info`
+- `cluster.put_component_template`
+- `delete_by_query`
+- `exists_source`
+- `get_source`
+- `indices.delete_alias.rb`
+- `indices.exists_alias.rb`
+- `indices.get_alias.rb`
+- `indices.put_alias.rb`
+- `indices.update_aliases.rb`
+- `security.authenticate`
+- `security.create_api_key`
+- `security.get_api_key`
+- `security.invalidate_api_key`
+- `security.query_api_keys`
+- `update_by_query`
+- `validate_query`
+
+See [APIs](https://github.com/elastic/elasticsearch-serverless-ruby/blob/main/docs/apis.md) for the full list of available endpoints.
+
 ## 0.0.6.20230825.pre
 
 - Updates User-Agent to `elasticsearch-serverless-ruby`.
