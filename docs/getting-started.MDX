@@ -21,10 +21,23 @@ Elasticsearch operations with it.
 
 ## Installation
 
+### From GitHub's releases
 
-### Using the command line
+You can install the Elasticsearch Serverless Ruby client from GitHub's 
+releases. You will need a GitHub token (can be generated at 
+https://github.com/settings/tokens):
 
-You can install the Elasticsearch Serverless Ruby client with the following 
+```bash
+$ GITHUB_TOKEN=`cat ~/.elastic/github.token` # Or paste it here manually
+$ gem install elasticsearch-serverless --source "https://$GITHUB_TOKEN@github.com/elastic/elasticsearch-serverless-ruby/releases/download/v0.0.7.20231031.pre/elasticsearch-serverless-0.0.7.20231031.pre.gem"
+```
+
+Check [releases](https://github.com/elastic/elasticsearch-serverless-ruby/releases) for the latests available versions.
+
+
+### From the source code
+
+You can install the gem from its source code with the following 
 commands:
 
 ```bash
