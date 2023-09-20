@@ -39,4 +39,4 @@ docker run \
        --name elasticsearch-ruby \
        --rm \
        elastic/elasticsearch-ruby \
-       bundle exec rake spec:${TEST_SUITE}
+       bundle exec rake info spec:${TEST_SUITE}
