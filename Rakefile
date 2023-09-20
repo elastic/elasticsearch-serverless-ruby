@@ -72,3 +72,10 @@ task :bump, :version do |_, args|
 rescue StandardError => e
   abort "[!!!] #{e.class} : #{e.message}"
 end
+
+desc "Server info"
+task :info do
+  require 'elasticsearch-serverless'
+  client = ElasticsearchServerless::Client.new(url: ENV['ELASTICSEARCH_URL'], api_key: ENV['API_KEY'])
+  pp client.info
+end
