@@ -8,15 +8,6 @@ export RUBY_VERSION=${RUBY_VERSION:-3.2}
 export TRANSPORT_VERSION=${TRANSPORT_VERSION:-8}
 export RUBY_SOURCE=${RUBY_SOURCE:-ruby}
 
-if [[ "$BUILDKITE" == "true" ]]; then
-
-  export ELASTICSEARCH_URL=`buildkite-agent meta-data get "elasticsearch_url"`
-  export API_KEY=`buildkite-agent meta-data get "api_key"`
-else
-  export ELASTICSEARCH_URL=${ELASTICSEARCH_URL:-}
-  export API_KEY=${API_KEY:-}
-fi
-
 echo "--- :ruby: Building Docker image"
 docker build \
        --file $script_path/Dockerfile \
@@ -27,6 +18,20 @@ docker build \
        .
 
 echo "--- :ruby: Running $TEST_SUITE tests"
+
+# Add info task if we're running api tests
+RAKE_TASKS="spec:${TEST_SUITE}"
+if [[ "TEST_SUITE" == "api" ]]; then
+  RAKE_TASKS="info ${RAKE_TASKS}"
+
+  if [[ "$BUILDKITE" == "true" ]]; then
+    export ELASTICSEARCH_URL=`buildkite-agent meta-data get "elasticsearch_url"`
+    export API_KEY=`buildkite-agent meta-data get "api_key"`
+  fi
+fi
+
+export ELASTICSEARCH_URL=${ELASTICSEARCH_URL:-}
+export API_KEY=${API_KEY:-}
 
 docker run \
        --env "TEST_SUITE=${TEST_SUITE}" \
@@ -39,4 +44,4 @@ docker run \
        --name elasticsearch-ruby \
        --rm \
        elastic/elasticsearch-ruby \
-       bundle exec rake info spec:${TEST_SUITE}
+       bundle exec rake $RAKE_TASKS
