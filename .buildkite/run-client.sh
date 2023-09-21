@@ -21,7 +21,7 @@ echo "--- :ruby: Running $TEST_SUITE tests"
 
 # Add info task if we're running api tests
 RAKE_TASKS="spec:${TEST_SUITE}"
-if [[ "TEST_SUITE" == "api" ]]; then
+if [[ "$TEST_SUITE" == "api" ]]; then
   RAKE_TASKS="info ${RAKE_TASKS}"
 
   if [[ "$BUILDKITE" == "true" ]]; then
