@@ -60,6 +60,7 @@ module ElasticsearchServerless
       :cat,
       :cluster,
       :indices,
+      :logstash,
       :security,
       :transform
     ].freeze
