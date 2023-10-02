@@ -1,0 +1,44 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://my-deployment.elastic.co/_reindex
+    body:
+      encoding: UTF-8
+      string: '{"source":{"index":"reindex_index"},"dest":{"index":"reindex_index_reindexed"}}'
+    headers:
+      Authorization:
+      - ApiKey my_api_key
+      User-Agent:
+      - 'elasticsearch-serverless-ruby/0.0.7.20231031.pre; elastic-transport-ruby/8.2.2;
+        RUBY_VERSION: 3.2.2; linux x86_64'
+      x-elastic-client-meta:
+      - esv=0.0.7p,rb=3.2.2,t=8.2.2,fd=2.7.10,nh=0.3.2
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      content-length:
+      - '241'
+      content-type:
+      - application/json
+      elastic-api-version:
+      - '2023-10-31'
+      x-cloud-request-id:
+      - 6LaGn5eUSimz8WwOqaaCRw
+      x-elastic-product:
+      - Elasticsearch
+      x-found-handling-cluster:
+      - bcd7624ffc974dec9158ae9efbeeaa89.es
+      x-found-handling-instance:
+      - es-es-index-977c8bd4b-tk46t
+      date:
+      - Mon, 02 Oct 2023 10:05:54 GMT
+    body:
+      encoding: UTF-8
+      string: '{"took":212,"timed_out":false,"total":1,"updated":0,"created":1,"deleted":0,"batches":1,"version_conflicts":0,"noops":0,"retries":{"bulk":0,"search":0},"throttled_millis":0,"requests_per_second":-1.0,"throttled_until_millis":0,"failures":[]}'
+  recorded_at: Mon, 02 Oct 2023 10:05:54 GMT
+recorded_with: VCR 6.2.0
