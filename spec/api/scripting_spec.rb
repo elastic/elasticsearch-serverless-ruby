@@ -62,4 +62,22 @@ describe 'API:scripts' do
       expect(response['acknowledged']).to eq true
     end
   end
+
+  it 'runs scripts_painless_execute' do
+    VCR.use_cassette('painless_scripting') do
+      response = CLIENT.scripts_painless_execute(
+        body: {
+          script: {
+            source: "params.count / params.total",
+            params: {
+              count: 100.0,
+              total: 1000.0
+            }
+          }
+        }
+      )
+      expect(response.status).to eq 200
+      expect(response['result']).to eq '0.1'
+    end
+  end
 end
