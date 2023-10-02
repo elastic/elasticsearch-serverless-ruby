@@ -46,9 +46,14 @@ These are the available APIs in the Elasticsearch Serverless Ruby client so far.
   * get
   * get_alias
   * put_alias
+  * refresh
   * update_aliases
   * validate_query
 * info
+* logstash
+  * logstash.delete_pipeline
+  * logstash.get_pipeline
+  * logstash.put_pipeline
 * mget
 * msearch
 * open_point_in_time
