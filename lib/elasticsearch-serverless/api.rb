@@ -62,14 +62,21 @@ module ElasticsearchServerless
       :indices,
       :logstash,
       :security,
+      :sql,
       :transform
     ].freeze
+
+    UPPERCASE_APIS = ['sql'].freeze
 
     API_NAMESPACES.each do |namespace|
       name = namespace.to_s
       # TODO: consider if we need to do something for APIs that have aliases (if any of these are
       # available in serverless), like 'ccr', 'ilm', 'ml' and 'slm'
-      module_name = namespace.to_s.split("_").map(&:capitalize).join
+      module_name = if UPPERCASE_APIS.include?(name)
+                      name.upcase
+                    else
+                      name.split("_").map(&:capitalize).join
+                    end
       class_name = "#{module_name}Client"
 
       klass = Class.new(Object) do
