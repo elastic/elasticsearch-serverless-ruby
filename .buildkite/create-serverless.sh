@@ -5,10 +5,11 @@ set -euo pipefail
 export EC_REGISTER_BACKEND=appex-qa-team-cluster
 export EC_ENV=qa
 export EC_REGION=aws-eu-west-1
+# Using BUILDKITE_JOB_ID for the name to make it unique:
 export EC_PROJECT_NAME="$EC_PROJECT_PREFIX-$BUILDKITE_JOB_ID"
 
 # fetch cloud creds used by qaf
-CLOUD_ACCESS_KEY=$(vault read -field="$EC_ENV" secret/ci/elastic-elasticsearch-serverless-ruby/cloud-access)
+CLOUD_ACCESS_KEY=$(vault read -field="$EC_ENV" $CLOUD_CREDENTIALS_PATH)
 echo "{\"api_key\":{\"$EC_ENV\":\"$CLOUD_ACCESS_KEY\"}}" > "$(pwd)/cloud.json"
 
 run_qaf() {

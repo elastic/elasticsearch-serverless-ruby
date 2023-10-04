@@ -8,6 +8,7 @@ steps:
       TEST_SUITE: 'api'
       RUBY_SOURCE: "{{ matrix.ruby_source }}"
       EC_PROJECT_PREFIX: 'sl_ruby'
+      CLOUD_CREDENTIALS_PATH: 'secret/ci/elastic-elasticsearch-serverless-ruby/cloud-access'
     matrix:
       setup:
         ruby:
