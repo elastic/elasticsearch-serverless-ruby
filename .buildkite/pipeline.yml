@@ -7,6 +7,7 @@ steps:
       RUBY_VERSION: "{{ matrix.ruby }}"
       TEST_SUITE: 'api'
       RUBY_SOURCE: "{{ matrix.ruby_source }}"
+      EC_PROJECT_PREFIX: 'sl_ruby'
     matrix:
       setup:
         ruby:
