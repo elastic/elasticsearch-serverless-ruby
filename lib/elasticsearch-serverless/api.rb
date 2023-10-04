@@ -63,6 +63,7 @@ module ElasticsearchServerless
       :logstash,
       :security,
       :sql,
+      :synonyms,
       :transform
     ].freeze
 
