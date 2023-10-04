@@ -44,6 +44,11 @@ describe ElasticsearchServerless::Client do
     expect(meta_version).to eq '1.0.0'
   end
 
+  it 'formats the version with api date' do
+    stub_const("ElasticsearchServerless::VERSION", '1.2.0.20231031.pre')
+    expect(meta_version).to eq '1.2.0p'
+  end
+
   it 'adds the meta header to the connection' do
     expect(headers).to include('x-elastic-client-meta' => meta_header)
   end
