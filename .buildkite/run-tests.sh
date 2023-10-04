@@ -7,7 +7,10 @@
 script_path=$(dirname $(realpath -s $0))
 set -euo pipefail
 
-export EC_PROJECT_PREFIX='sl_ruby'
+if [[ -z $EC_PROJECT_PREFIX ]]; then
+  echo -e "\033[31;1mERROR:\033[0m Required environment variable [EC_PROJECT_PREFIX] not set\033[0m"
+  exit 1
+fi
 
 # Create a serverless project:
 source $script_path/create-serverless.sh
