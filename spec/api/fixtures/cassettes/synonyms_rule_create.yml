@@ -1,8 +1,8 @@
 ---
 http_interactions:
 - request:
-    method: delete
-    uri: https://my-deployment.elastic.co/synonyms_index
+    method: put
+    uri: https://my-deployment.elastic.co/synonyms_rule
     body:
       encoding: US-ASCII
       string: ''
@@ -22,13 +22,13 @@ http_interactions:
       message: OK
     headers:
       content-length:
-      - '21'
+      - '72'
       content-type:
       - application/json
       elastic-api-version:
       - '2023-10-31'
       x-cloud-request-id:
-      - B-udoy-QQE6qhq73YNn-1Q
+      - sT4SohsRQiKJIyVfQQJ0SA
       x-elastic-product:
       - Elasticsearch
       x-found-handling-cluster:
@@ -36,9 +36,9 @@ http_interactions:
       x-found-handling-instance:
       - es-es-index-6448bf8dbf-wgkn9
       date:
-      - Wed, 04 Oct 2023 12:39:57 GMT
+      - Wed, 04 Oct 2023 13:30:33 GMT
     body:
       encoding: UTF-8
-      string: '{"acknowledged":true}'
-  recorded_at: Wed, 04 Oct 2023 12:39:58 GMT
+      string: '{"acknowledged":true,"shards_acknowledged":true,"index":"synonyms_rule"}'
+  recorded_at: Wed, 04 Oct 2023 13:30:33 GMT
 recorded_with: VCR 6.2.0
