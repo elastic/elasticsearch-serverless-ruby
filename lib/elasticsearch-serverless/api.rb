@@ -59,6 +59,7 @@ module ElasticsearchServerless
       :async_search,
       :cat,
       :cluster,
+      :enrich,
       :indices,
       :license,
       :logstash,
