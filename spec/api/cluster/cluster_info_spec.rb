@@ -19,10 +19,8 @@ require 'spec_helper'
 
 describe 'API:cluster.info' do
   it 'returns ingest info' do
-    VCR.use_cassette('cluster.info') do
-      response = CLIENT.cluster.info(target: 'ingest')
-      expect(response.status).to eq 200
-      expect(response['ingest']).not_to be_empty
-    end
+    response = CLIENT.cluster.info(target: 'ingest')
+    expect(response.status).to eq 200
+    expect(response['ingest']).not_to be_empty
   end
 end

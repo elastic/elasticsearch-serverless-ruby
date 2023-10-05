@@ -21,7 +21,6 @@ describe 'API:async_search' do
   let(:index) { 'async_search_test' }
 
   before do
-    VCR.use_cassette("#{index}_create_data") do
     body = [
       { index: { _index: index, _id: '42' } },
       { name: 'Las lenguas de diamante', author: 'Juana de Ibarbourou', release_date: '1918-12-01', page_count: 108},
@@ -31,34 +30,29 @@ describe 'API:async_search' do
       { name: 'Tales of love, madness and death', author: 'Horacio Quiroga', release_date: '1917-12-01', page_count: 188 }
     ]
     CLIENT.bulk(body: body, refresh: true)
-    end
   end
 
   after do
-    VCR.use_cassette("#{index}_delete_index") do
-      CLIENT.indices.delete(index: index, ignore: 404)
-    end
+    CLIENT.indices.delete(index: index, ignore: 404)
   end
 
   it 'performs the request' do
-    VCR.use_cassette("#{index}_perform") do
-      # Submit
-      response = CLIENT.async_search.submit(index: index, q: 'julio', wait_for_completion_timeout: '0')
-      id = response['id']
-      expect(response.status).to eq 200
-      expect(response['is_partial']).to eq true
-      # Get
-      response = CLIENT.async_search.get(id: id)
-      expect(response.status).to eq 200
-      expect(response['response']['hits']['hits'].count).to eq 1
-      expect(response['response']['hits']['hits'].first['_source']['name']).to eq 'Bestiario'
-      # Status
-      response = CLIENT.async_search.status(id: id)
-      expect(response.status).to eq 200
-      # Delete
-      response = CLIENT.async_search.delete(id: id)
-      expect(response.status).to eq 200
-      expect(response['acknowledged']).to be true
-    end
+    # Submit
+    response = CLIENT.async_search.submit(index: index, q: 'julio', wait_for_completion_timeout: '0')
+    id = response['id']
+    expect(response.status).to eq 200
+    expect(response['is_partial']).to eq true
+    # Get
+    response = CLIENT.async_search.get(id: id)
+    expect(response.status).to eq 200
+    expect(response['response']['hits']['hits'].count).to eq 1
+    expect(response['response']['hits']['hits'].first['_source']['name']).to eq 'Bestiario'
+    # Status
+    response = CLIENT.async_search.status(id: id)
+    expect(response.status).to eq 200
+    # Delete
+    response = CLIENT.async_search.delete(id: id)
+    expect(response.status).to eq 200
+    expect(response['acknowledged']).to be true
   end
 end

@@ -20,22 +20,17 @@ require 'spec_helper'
 describe 'API:cat.indices' do
   let(:index) { 'index-to-cat🐈' }
   before do
-    VCR.use_cassette('indices.cat.setup') do
-      CLIENT.indices.create(index: index)
-    end
+    CLIENT.indices.create(index: index)
   end
 
   after do
-    VCR.use_cassette('indices.cat.teardown') do
-      CLIENT.indices.delete(index: index)
-    end
+    CLIENT.indices.delete(index: index)
   end
 
+
   it 'performs the request' do
-    VCR.use_cassette('indices.cat') do
-      response = CLIENT.cat.indices(index: index)
-      expect(response.status).to eq 200
-      expect(response.match? index).to be true
-    end
+    response = CLIENT.cat.indices(index: index)
+    expect(response.status).to eq 200
+    expect(response.match? index).to be true
   end
 end

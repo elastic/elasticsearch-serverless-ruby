@@ -21,30 +21,24 @@ describe 'API:transform' do
   let(:index) { 'scroll' }
 
   before do
-    VCR.use_cassette("#{index}_create") do
-      CLIENT.indices.create(index: index)
-    end
+    CLIENT.indices.create(index: index)
   end
 
   after do
-    VCR.use_cassette("#{index}_delete") do
-      CLIENT.indices.delete(index: index)
-    end
+    CLIENT.indices.delete(index: index)
   end
 
   it 'scroll and clear scroll' do
-    VCR.use_cassette("#{index}") do
-      response = CLIENT.search(index: index, scroll: '1m')
-      expect(response.status).to eq 200
-      id = response['_scroll_id']
+    response = CLIENT.search(index: index, scroll: '1m')
+    expect(response.status).to eq 200
+    id = response['_scroll_id']
 
-      response = CLIENT.scroll(scroll_id: id, scroll: '1m')
-      expect(response.status).to eq 200
-      expect(response['_scroll_id']).to eq id
+    response = CLIENT.scroll(scroll_id: id, scroll: '1m')
+    expect(response.status).to eq 200
+    expect(response['_scroll_id']).to eq id
 
-      response = CLIENT.clear_scroll(scroll_id: id)
-      expect(response.status).to eq 200
-      expect(response['succeeded']).to eq true
-    end
+    response = CLIENT.clear_scroll(scroll_id: id)
+    expect(response.status).to eq 200
+    expect(response['succeeded']).to eq true
   end
 end

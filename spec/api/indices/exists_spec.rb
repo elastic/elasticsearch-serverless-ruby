@@ -21,24 +21,18 @@ describe 'API:indices.exists' do
   let(:index) { 'indices_exists' }
 
   before do
-    VCR.use_cassette("#{index}_create") do
-      CLIENT.indices.create(index: index)
-    end
+    CLIENT.indices.create(index: index)
   end
 
   after do
-    VCR.use_cassette("#{index}_delete") do
-      CLIENT.indices.delete(index: index)
-    end
+    CLIENT.indices.delete(index: index)
   end
 
   it 'performs indices.exists' do
-    VCR.use_cassette("#{index}_exists") do
-      response = CLIENT.indices.exists(index: index)
-      expect(response).to be true
+    response = CLIENT.indices.exists(index: index)
+    expect(response).to be true
 
-      response = CLIENT.indices.exists?(index: index)
-      expect(response).to be true
-    end
+    response = CLIENT.indices.exists?(index: index)
+    expect(response).to be true
   end
 end

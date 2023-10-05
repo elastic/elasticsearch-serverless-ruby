@@ -21,39 +21,33 @@ describe 'API:mget' do
   let(:index) { 'mget_test' }
 
   before do
-    VCR.use_cassette("#{index}_create") do
-      CLIENT.indices.create(index: index)
-      body = [
-        { index: { _index: index, _id: '42' } },
-        { name: 'Las lenguas de diamante', author: 'Juana de Ibarbourou', release_date: '1918-12-01', page_count: 108},
-        { index: { _index: index, _id: '44' } },
-        { name: 'Bestiario', author: 'Julio Cortazar', release_date: '1952-10-12', page_count: 133},
-        { index: { _index: index, _id: '43' } },
-        { name: 'Tales of love, madness and death', author: 'Horacio Quiroga', release_date: '1917-12-01', page_count: 188 }
-      ]
-      CLIENT.bulk(body: body, refresh: true)
-    end
+    CLIENT.indices.create(index: index)
+    body = [
+      { index: { _index: index, _id: '42' } },
+      { name: 'Las lenguas de diamante', author: 'Juana de Ibarbourou', release_date: '1918-12-01', page_count: 108},
+      { index: { _index: index, _id: '44' } },
+      { name: 'Bestiario', author: 'Julio Cortazar', release_date: '1952-10-12', page_count: 133},
+      { index: { _index: index, _id: '43' } },
+      { name: 'Tales of love, madness and death', author: 'Horacio Quiroga', release_date: '1917-12-01', page_count: 188 }
+    ]
+    CLIENT.bulk(body: body, refresh: true)
   end
 
   after do
-    VCR.use_cassette("#{index}_delete") do
-      CLIENT.indices.delete(index: index)
-    end
+    CLIENT.indices.delete(index: index)
   end
 
   it 'performs the request' do
-    VCR.use_cassette("#{index}_perform") do
-      response = CLIENT.mget(
-        body: {
-          docs: [
-            { _index: index, _id: '42' },
-            { _index: index, _id: '43' }
-          ]
-        }
-      )
-      expect(response.status).to eq 200
-      expect(response['docs'].count).to eq 2
-      expect(response['docs'].map { |a| a['_source']['author'] }).to eq ['Juana de Ibarbourou', 'Horacio Quiroga']
-    end
+    response = CLIENT.mget(
+      body: {
+        docs: [
+          { _index: index, _id: '42' },
+          { _index: index, _id: '43' }
+        ]
+      }
+    )
+    expect(response.status).to eq 200
+    expect(response['docs'].count).to eq 2
+    expect(response['docs'].map { |a| a['_source']['author'] }).to eq ['Juana de Ibarbourou', 'Horacio Quiroga']
   end
 end

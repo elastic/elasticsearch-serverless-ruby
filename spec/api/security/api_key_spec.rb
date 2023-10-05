@@ -19,29 +19,27 @@ require 'spec_helper'
 
 describe 'API:security.api_key' do
   it 'creates, gets, queries an API Key' do
-    VCR.use_cassette('security.api_key') do
-      # CREATE API Key
-      body = {
-        name: 'test_api_key',
-        role_descriptors: { test_role: { cluster: [], indices: [] } }
-      }
-      response = CLIENT.security.create_api_key(body: body, refresh: true)
-      expect(response.status).to eq 200
-      expect(response['name']).to eq 'test_api_key'
-      id = response['id']
-      # GET API Key
-      response = CLIENT.security.get_api_key(id: id)
-      expect(response.status).to eq 200
-      expect(response['api_keys'].first['name']).to eq 'test_api_key'
-      # QUERY API Key
-      response = CLIENT.security.query_api_keys(body: { query: { ids: { values: [id] } } })
-      expect(response.status).to eq 200
-      expect(response['api_keys'].count).to eq 1
-      expect(response['api_keys'].first['name']).to eq 'test_api_key'
-      # INVALIDATE API Key
-      response = CLIENT.security.invalidate_api_key(body: { ids: [id] })
-      expect(response.status).to eq 200
-      expect(response['invalidated_api_keys']).to include(id)
-    end
+    # CREATE API Key
+    body = {
+      name: 'test_api_key',
+      role_descriptors: { test_role: { cluster: [], indices: [] } }
+    }
+    response = CLIENT.security.create_api_key(body: body, refresh: true)
+    expect(response.status).to eq 200
+    expect(response['name']).to eq 'test_api_key'
+    id = response['id']
+    # GET API Key
+    response = CLIENT.security.get_api_key(id: id)
+    expect(response.status).to eq 200
+    expect(response['api_keys'].first['name']).to eq 'test_api_key'
+    # QUERY API Key
+    response = CLIENT.security.query_api_keys(body: { query: { ids: { values: [id] } } })
+    expect(response.status).to eq 200
+    expect(response['api_keys'].count).to eq 1
+    expect(response['api_keys'].first['name']).to eq 'test_api_key'
+    # INVALIDATE API Key
+    response = CLIENT.security.invalidate_api_key(body: { ids: [id] })
+    expect(response.status).to eq 200
+    expect(response['invalidated_api_keys']).to include(id)
   end
 end

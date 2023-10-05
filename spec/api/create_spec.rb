@@ -21,25 +21,19 @@ describe 'API:create' do
   let(:index) { 'create' }
 
   before do
-    VCR.use_cassette("#{index}_index") do
-      CLIENT.indices.create(index: index)
-    end
+    CLIENT.indices.create(index: index)
   end
 
   after do
-    VCR.use_cassette("#{index}_delete") do
-      CLIENT.indices.delete(index: index)
-    end
+    CLIENT.indices.delete(index: index)
   end
 
   it 'performs create' do
-    VCR.use_cassette("#{index}_create") do
-      doc = { name: 'testing create' }
-      response = CLIENT.create(index: index, id: 42, body: doc)
+    doc = { name: 'testing create' }
+    response = CLIENT.create(index: index, id: 42, body: doc)
 
-      expect(response.status).to eq 201
-      expect(response['_index']).to eq index
-      expect(response['result']).to eq 'created'
-    end
+    expect(response.status).to eq 201
+    expect(response['_index']).to eq index
+    expect(response['result']).to eq 'created'
   end
 end

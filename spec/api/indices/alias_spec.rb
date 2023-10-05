@@ -22,51 +22,45 @@ describe 'API:indices.alias' do
   let(:name) { 'my_alias' }
 
   before do
-    VCR.use_cassette("#{index}_setup") do
-      CLIENT.indices.create(index: index)
-      CLIENT.indices.create(index: "#{index}2")
-    end
+    CLIENT.indices.create(index: index)
+    CLIENT.indices.create(index: "#{index}2")
   end
 
   after do
-    VCR.use_cassette("#{index}_teardown") do
-      CLIENT.indices.delete(index: index)
-      CLIENT.indices.delete(index: "#{index}2")
-    end
+    CLIENT.indices.delete(index: index)
+    CLIENT.indices.delete(index: "#{index}2")
   end
 
   it 'creates, gets, exists, updates and deletes aliases' do
-    VCR.use_cassette("#{index}_perform") do
-      # CREATE Alias
-      response = CLIENT.indices.put_alias(index: index, name: name)
-      expect(response.status).to eq 200
-      expect(response['acknowledged']).to eq true
-      # GET Alias
-      response = CLIENT.indices.get_alias(name: name)
-      expect(response['aliases_index']['aliases']).to eq({ 'my_alias'=>{} })
-      expect(response.status).to eq 200
-      # EXISTS Alias
-      response = CLIENT.indices.exists_alias(name: name)
-      expect(response).to eq true
-      # UPDATE Alias
-      response = CLIENT.indices.update_aliases(
-        body: {
-          actions: [
-            {
-              add: {
-                index: "#{index}2",
-                'alias' => name
-              }
+    # CREATE Alias
+    response = CLIENT.indices.put_alias(index: index, name: name)
+    expect(response.status).to eq 200
+    expect(response['acknowledged']).to eq true
+    # GET Alias
+    response = CLIENT.indices.get_alias(name: name)
+    expect(response['aliases_index']['aliases']).to eq({ 'my_alias'=>{} })
+    expect(response.status).to eq 200
+    # EXISTS Alias
+    response = CLIENT.indices.exists_alias(name: name)
+    expect(response).to eq true
+    # UPDATE Alias
+    response = CLIENT.indices.update_aliases(
+      body: {
+        actions: [
+          {
+            add: {
+              index: "#{index}2",
+              'alias' => name
             }
-          ]
-        }
-      )
-      expect(response.status).to eq 200
-      expect(response['acknowledged']).to eq true
-      # DELETE Alias
-      response = CLIENT.indices.delete_alias(index: '*', name: name)
-      expect(response.status).to eq 200
-      expect(response['acknowledged']).to eq true
-    end
+          }
+        ]
+      }
+    )
+    expect(response.status).to eq 200
+    expect(response['acknowledged']).to eq true
+    # DELETE Alias
+    response = CLIENT.indices.delete_alias(index: '*', name: name)
+    expect(response.status).to eq 200
+    expect(response['acknowledged']).to eq true
   end
 end

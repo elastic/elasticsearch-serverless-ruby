@@ -21,7 +21,6 @@ describe 'API:update' do
   let(:index) { 'index-for-updates' }
 
   it 'performs the request' do
-    VCR.use_cassette('update') do
       response = CLIENT.index(index: index, body: { name: 'Testing', description: 'To be updated' })
       expect(response.status).to eq 201
       id = response['_id']
@@ -31,5 +30,4 @@ describe 'API:update' do
       expect(response['_index']).to eq index
       expect(response['result']).to eq 'updated'
     end
-  end
 end

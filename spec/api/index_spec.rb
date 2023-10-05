@@ -21,11 +21,9 @@ describe 'API:index' do
   let(:index) { 'my-testing-index' }
 
   it 'performs the request' do
-    VCR.use_cassette('index') do
-      response = CLIENT.index(index: index, body: { name: 'Testing', service: 'Serverless'})
-      expect(response.status).to eq 201
-      expect(response['_index']).to eq index
-      expect(response['result']).to eq 'created'
-    end
+    response = CLIENT.index(index: index, body: { name: 'Testing', service: 'Serverless'})
+    expect(response.status).to eq 201
+    expect(response['_index']).to eq index
+    expect(response['result']).to eq 'created'
   end
 end

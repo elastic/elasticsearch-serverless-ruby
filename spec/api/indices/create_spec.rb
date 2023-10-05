@@ -21,18 +21,14 @@ describe 'API:indices.create' do
   let(:index) { 'index-to-create' }
 
   after do
-    VCR.use_cassette('indices.create.teardown') do
-      CLIENT.indices.delete(index: index)
-    end
+    CLIENT.indices.delete(index: index)
   end
 
   it 'performs the request' do
-    VCR.use_cassette('indices.create') do
-      response = CLIENT.indices.create(index: index)
-      expect(response.status).to eq 200
-      expect(response['acknowledged']).to eq true
-      expect(response['shards_acknowledged']).to eq true
-      expect(response['index']).to eq index
-    end
+    response = CLIENT.indices.create(index: index)
+    expect(response.status).to eq 200
+    expect(response['acknowledged']).to eq true
+    expect(response['shards_acknowledged']).to eq true
+    expect(response['index']).to eq index
   end
 end

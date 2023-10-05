@@ -19,10 +19,8 @@ require 'spec_helper'
 
 describe 'API:cat.help' do
   it 'performs the request' do
-    VCR.use_cassette('cat.help') do
-      response = CLIENT.cat.help
-      expect(response.status).to eq 200
-      expect(response.include? '=^.^=').to be true
-    end
+    response = CLIENT.cat.help
+    expect(response.status).to eq 200
+    expect(response.include? '=^.^=').to be true
   end
 end

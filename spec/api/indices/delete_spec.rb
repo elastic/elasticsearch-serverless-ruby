@@ -21,12 +21,10 @@ describe 'API:indices.delete' do
   let(:index) { 'index-to-delete' }
 
   it 'performs the request' do
-    VCR.use_cassette('indices.delete') do
-      response = CLIENT.indices.create(index: index)
-      expect(response.status).to eq 200
-      response = CLIENT.indices.delete(index: index)
-      expect(response.status).to eq 200
-      expect(response['acknowledged']).to eq true
-    end
+    response = CLIENT.indices.create(index: index)
+    expect(response.status).to eq 200
+    response = CLIENT.indices.delete(index: index)
+    expect(response.status).to eq 200
+    expect(response['acknowledged']).to eq true
   end
 end

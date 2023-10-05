@@ -18,20 +18,24 @@
 require 'spec_helper'
 
 describe 'API:bulk' do
+  let(:index) { 'bulk_books' }
+
+  after do
+    CLIENT.indices.delete(index: index)
+  end
+
   it 'performs the request' do
-    VCR.use_cassette('bulk') do
-      body = [
-        { index: { _index: 'books', _id: '42' } },
-        { name: "The Hitchhiker's Guide to the Galaxy", author: 'Douglas Adams', release_date: '1979-10-12', page_count: 180},
-        { index: { _index: 'books', _id: '43' } },
-        { name: 'Snow Crash', author: 'Neal Stephenson', release_date: '1992-06-01', page_count: 470 },
-        { index: { _index: 'books', _id: '44' } },
-        { name: 'Starship Troopers', author: 'Robert A. Heinlein', release_date: '1959-12-01', page_count: 335}
-      ]
-      response = CLIENT.bulk(body: body)
-      expect(response.status).to eq 200
-      expect(response.headers['x-elastic-product']).to eq 'Elasticsearch'
-      expect(response['items'].count).to eq 3
-    end
+    body = [
+      { index: { _index: index, _id: '42' } },
+      { name: "The Hitchhiker's Guide to the Galaxy", author: 'Douglas Adams', release_date: '1979-10-12', page_count: 180},
+      { index: { _index: index, _id: '43' } },
+      { name: 'Snow Crash', author: 'Neal Stephenson', release_date: '1992-06-01', page_count: 470 },
+      { index: { _index: index, _id: '44' } },
+      { name: 'Starship Troopers', author: 'Robert A. Heinlein', release_date: '1959-12-01', page_count: 335}
+    ]
+    response = CLIENT.bulk(body: body)
+    expect(response.status).to eq 200
+    expect(response.headers['x-elastic-product']).to eq 'Elasticsearch'
+    expect(response['items'].count).to eq 3
   end
 end
