@@ -28,12 +28,12 @@ describe 'API:synonyms' do
 
   after do
     CLIENT.indices.delete(index: index)
-    CLIENT.synonyms.delete_synonym(id: 'id')
+    CLIENT.synonyms.delete_synonym(id: set_id)
   end
 
   it 'puts, gets, deletes synonyms' do
     response = CLIENT.synonyms.put_synonym(
-      id: 'id',
+      id: set_id,
       body: { synonyms_set: [ synonyms: 'house, home' ] }
     )
     expect(response.status).to eq 201
