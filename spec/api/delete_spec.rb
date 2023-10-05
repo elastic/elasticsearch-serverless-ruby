@@ -21,14 +21,12 @@ describe 'API:delete' do
   let(:index) { 'my-deletable-index' }
 
   it 'performs the request' do
-    VCR.use_cassette('delete') do
-      response = CLIENT.index(index: index, body: { name: 'Testing', description: 'To be deleted' })
-      expect(response.status).to eq 201
-      id = response['_id']
-      response = CLIENT.delete(index: index, id: id)
-      expect(response.status).to eq 200
-      expect(response['_id']).to eq id
-      expect(response['result']).to eq 'deleted'
-    end
+    response = CLIENT.index(index: index, body: { name: 'Testing', description: 'To be deleted' })
+    expect(response.status).to eq 201
+    id = response['_id']
+    response = CLIENT.delete(index: index, id: id)
+    expect(response.status).to eq 200
+    expect(response['_id']).to eq id
+    expect(response['result']).to eq 'deleted'
   end
 end

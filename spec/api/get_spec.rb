@@ -20,24 +20,18 @@ require 'spec_helper'
 describe 'API:get' do
   let(:index) { 'test_get' }
   let!(:id) do
-    VCR.use_cassette('get_setup') do
-      CLIENT.indices.create(index: index)
-      CLIENT.index(index: index, body: { name: 'Testing', service: 'Serverless'})['_id']
-    end
+    CLIENT.indices.create(index: index)
+    CLIENT.index(index: index, body: { name: 'Testing', service: 'Serverless'})['_id']
   end
 
   after do
-    VCR.use_cassette('get_teardown') do
-      CLIENT.indices.delete(index: index)
-    end
+    CLIENT.indices.delete(index: index)
   end
 
   it 'performs the request' do
-    VCR.use_cassette('get') do
-      response = CLIENT.get(index: index, id: id)
-      expect(response.status).to eq 200
-      expect(response.headers['x-elastic-product']).to eq 'Elasticsearch'
-      expect(response['_id']).to eq id
-    end
+    response = CLIENT.get(index: index, id: id)
+    expect(response.status).to eq 200
+    expect(response.headers['x-elastic-product']).to eq 'Elasticsearch'
+    expect(response['_id']).to eq id
   end
 end

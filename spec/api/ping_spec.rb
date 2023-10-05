@@ -18,17 +18,8 @@
 require 'spec_helper'
 
 describe 'API:ping' do
-  let(:CLIENT) do
-    ElasticsearchServerless::Client.new(
-      api_key: 'api_key',
-      url: 'https://my-deployment.elastic.co'
-    )
-  end
-
   it 'performs the request' do
-    VCR.use_cassette('ping') do
-      response = CLIENT.ping
-      expect(response).to eq true
-    end
+    response = CLIENT.ping
+    expect(response).to eq true
   end
 end

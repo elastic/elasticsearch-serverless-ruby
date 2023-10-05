@@ -20,21 +20,15 @@ require 'spec_helper'
 describe 'API:exists' do
   let(:index) { 'exists' }
   let(:id) do
-    VCR.use_cassette("#{index}_create") do
-      CLIENT.index(index: index, body: { name: 'testing' }, refresh: true)['_id']
-    end
+    CLIENT.index(index: index, body: { name: 'testing' }, refresh: true)['_id']
   end
 
   after do
-    VCR.use_cassette("#{index}_delete") do
-      CLIENT.indices.delete(index: index)
-    end
+    CLIENT.indices.delete(index: index)
   end
 
   it 'performs exists' do
-    VCR.use_cassette("#{index}_exists") do
-      response = CLIENT.exists(index: index, id: id)
-      expect(response).to be true
-    end
+    response = CLIENT.exists(index: index, id: id)
+    expect(response).to be true
   end
 end

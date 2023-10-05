@@ -22,127 +22,103 @@ describe 'API:transform' do
   let(:transform_id) { 'population' }
 
   before(:suite) do
-    VCR.use_cassette("#{index}_create") do
-      CLIENT.indices.create(index: index)
-      CLIENT.bulk(
-        body: [
-          { index: { _index: index, _id: '1', data: { name: 'Africa', pop: 17.6} } },
-          { index: { _index: index, _id: '2', data: { name: 'America', pop: 13 } } },
-          { index: { _index: index, _id: '3', data: { name: 'Antarctica', pop: 0} } },
-          { index: { _index: index, _id: '4', data: { name: 'Asia', pop: 59.4} } },
-          { index: { _index: index, _id: '5', data: { name: 'Oceania', pop: 0.6} } },
-          { index: { _index: index, _id: '6', data: { name: 'Europe', pop: 9.4} } }
-        ],
-        refresh: true
-      )
-    end
+    CLIENT.indices.create(index: index)
+    CLIENT.bulk(
+      body: [
+        { index: { _index: index, _id: '1', data: { name: 'Africa', pop: 17.6} } },
+        { index: { _index: index, _id: '2', data: { name: 'America', pop: 13 } } },
+        { index: { _index: index, _id: '3', data: { name: 'Antarctica', pop: 0} } },
+        { index: { _index: index, _id: '4', data: { name: 'Asia', pop: 59.4} } },
+        { index: { _index: index, _id: '5', data: { name: 'Oceania', pop: 0.6} } },
+        { index: { _index: index, _id: '6', data: { name: 'Europe', pop: 9.4} } }
+      ],
+      refresh: true
+    )
   end
 
   after(:suite) do
-    VCR.use_cassette("#{index}_delete") do
-      CLIENT.indices.delete(index: index)
-      CLIENT.indices.delete(index: "#{index}_transformed")
-    end
+    CLIENT.indices.delete(index: index)
+    CLIENT.indices.delete(index: "#{index}_transformed")
   end
 
   context 'transform' do
     it 'put_transform' do
-      VCR.use_cassette("#{index}_put") do
-        response = CLIENT.transform.put_transform(
-          transform_id: transform_id,
-          body: {
-            source: {
-              index: index
-            },
-            dest: {
-              index: "#{index}_transformed"
-            },
-            pivot: {
-              group_by: { pop: { terms: { field: 'pop' } } },
-              aggregations: { max_pop: { max: { field: 'pop' } } }
-            }
+      response = CLIENT.transform.put_transform(
+        transform_id: transform_id,
+        body: {
+          source: {
+            index: index
+          },
+          dest: {
+            index: "#{index}_transformed"
+          },
+          pivot: {
+            group_by: { pop: { terms: { field: 'pop' } } },
+            aggregations: { max_pop: { max: { field: 'pop' } } }
           }
-        )
-        expect(response.status).to eq 200
-        expect(response['acknowledged']).to be true
-      end
+        }
+      )
+      expect(response.status).to eq 200
+      expect(response['acknowledged']).to be true
     end
 
     it 'update_transform' do
-      VCR.use_cassette("#{index}_update") do
-        response = CLIENT.transform.update_transform(
-          transform_id: transform_id,
-          body: { description: 'Continents aproximate population' }
-        )
-        expect(response.status).to eq 200
-        expect(response['id']).to eq transform_id
-      end
+      response = CLIENT.transform.update_transform(
+        transform_id: transform_id,
+        body: { description: 'Continents aproximate population' }
+      )
+      expect(response.status).to eq 200
+      expect(response['id']).to eq transform_id
     end
 
     it 'get_transform' do
-      VCR.use_cassette("#{index}_get") do
-        response = CLIENT.transform.get_transform(transform_id: transform_id)
-        expect(response.status).to eq 200
-        expect(response['count']).to eq 1
-        expect(response['transforms'].first['id']).to eq transform_id
-      end
+      response = CLIENT.transform.get_transform(transform_id: transform_id)
+      expect(response.status).to eq 200
+      expect(response['count']).to eq 1
+      expect(response['transforms'].first['id']).to eq transform_id
     end
 
     it 'get_transform_stats' do
-      VCR.use_cassette("#{index}_stats") do
-        response = CLIENT.transform.get_transform_stats(transform_id: transform_id)
-        expect(response.status).to eq 200
-        expect(response['count']).to eq 1
-        expect(response['transforms'].first['id']).to eq transform_id
-        expect(response['transforms'].first['stats']).not_to be_empty
-      end
+      response = CLIENT.transform.get_transform_stats(transform_id: transform_id)
+      expect(response.status).to eq 200
+      expect(response['count']).to eq 1
+      expect(response['transforms'].first['id']).to eq transform_id
+      expect(response['transforms'].first['stats']).not_to be_empty
     end
 
     it 'preview_transform' do
-      VCR.use_cassette("#{index}_preview") do
-        response = CLIENT.transform.preview_transform(transform_id: transform_id)
-        expect(response.status).to eq 200
-        expect(response['preview']).not_to be_empty
-      end
+      response = CLIENT.transform.preview_transform(transform_id: transform_id)
+      expect(response.status).to eq 200
+      expect(response['preview']).not_to be_empty
     end
 
     it 'start_transform' do
-      VCR.use_cassette("#{index}_start") do
-        response = CLIENT.transform.start_transform(transform_id: transform_id)
-        expect(response.status).to eq 200
-        expect(response['acknowledged']).to be true
-      end
+      response = CLIENT.transform.start_transform(transform_id: transform_id)
+      expect(response.status).to eq 200
+      expect(response['acknowledged']).to be true
     end
 
     it 'stop_transform' do
-      VCR.use_cassette("#{index}_stop") do
-        response = CLIENT.transform.stop_transform(transform_id: transform_id)
-        expect(response.status).to eq 200
-        expect(response['acknowledged']).to be true
-      end
+      response = CLIENT.transform.stop_transform(transform_id: transform_id)
+      expect(response.status).to eq 200
+      expect(response['acknowledged']).to be true
     end
 
     it 'reset_transform' do
-      VCR.use_cassette("#{index}_reset") do
-        response = CLIENT.transform.reset_transform(transform_id: transform_id)
-        expect(response.status).to eq 200
-        expect(response['acknowledged']).to be true
-      end
+      response = CLIENT.transform.reset_transform(transform_id: transform_id)
+      expect(response.status).to eq 200
+      expect(response['acknowledged']).to be true
     end
 
     it 'schedule_now_transform' do
-      VCR.use_cassette("#{index}_schedule_now") do
-        response = CLIENT.transform.schedule_now_transform(transform_id: transform_id)
-        expect(response.status).to eq 200
-        expect(response['acknowledged']).to be true
-      end
+      response = CLIENT.transform.schedule_now_transform(transform_id: transform_id)
+      expect(response.status).to eq 200
+      expect(response['acknowledged']).to be true
     end
 
     it 'delete_transform' do
-      VCR.use_cassette("#{index}_delete") do
-        response = CLIENT.transform.delete_transform(transform_id: transform_id)
-        expect(response.status).to eq 200
-      end
+      response = CLIENT.transform.delete_transform(transform_id: transform_id)
+      expect(response.status).to eq 200
     end
   end
 end

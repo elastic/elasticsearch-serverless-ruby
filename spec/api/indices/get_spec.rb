@@ -21,22 +21,16 @@ describe 'API:indices.get' do
   let(:index) { 'index-to-get' }
 
   before do
-    VCR.use_cassette('indices.get.setup') do
-      CLIENT.indices.create(index: index)
-    end
+    CLIENT.indices.create(index: index)
   end
 
   after do
-    VCR.use_cassette('indices.get.teardown') do
-      CLIENT.indices.delete(index: index)
-    end
+    CLIENT.indices.delete(index: index)
   end
 
   it 'performs the request' do
-    VCR.use_cassette('indices.get') do
-      response = CLIENT.indices.get(index: index)
-      expect(response.status).to eq 200
-      expect(response[index]).not_to be_nil
-    end
+    response = CLIENT.indices.get(index: index)
+    expect(response.status).to eq 200
+    expect(response[index]).not_to be_nil
   end
 end

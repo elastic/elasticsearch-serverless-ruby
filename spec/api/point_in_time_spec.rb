@@ -21,30 +21,24 @@ describe 'API:point_in_time' do
   let(:index) { 'point_in_time' }
 
   before do
-    VCR.use_cassette("#{index}_create") do
-      CLIENT.indices.create(index: index)
-    end
+    CLIENT.indices.create(index: index)
   end
 
   after do
-    VCR.use_cassette("#{index}_delete") do
-      CLIENT.indices.delete(index: index)
-    end
+    CLIENT.indices.delete(index: index)
   end
 
   it 'opens a point in time, searches in it and closes it' do
-    VCR.use_cassette('point_in_time_open') do
-      response = CLIENT.open_point_in_time(index: index, keep_alive: '1m')
-      expect(response.status).to eq 200
-      id = response['id']
-      response = CLIENT.search(
-        body: { query: { match_all: {} }, pit: { id: id, keep_alive: '1m' } }
-      )
-      expect(response.status).to eq 200
-      expect(response['pit_id']).to eq id
-      response = CLIENT.close_point_in_time(body: {id: id})
-      expect(response.status).to eq 200
-      expect(response.body).to eq({ 'succeeded' => true, 'num_freed' => 1})
-    end
+    response = CLIENT.open_point_in_time(index: index, keep_alive: '1m')
+    expect(response.status).to eq 200
+    id = response['id']
+    response = CLIENT.search(
+      body: { query: { match_all: {} }, pit: { id: id, keep_alive: '1m' } }
+    )
+    expect(response.status).to eq 200
+    expect(response['pit_id']).to eq id
+    response = CLIENT.close_point_in_time(body: {id: id})
+    expect(response.status).to eq 200
+    expect(response.body).to eq({ 'succeeded' => true, 'num_freed' => 1})
   end
 end

@@ -19,10 +19,8 @@ require 'spec_helper'
 
 describe 'API:cat.component_templates' do
   it 'performs the request' do
-    VCR.use_cassette('cat.component_templates') do
-      response = CLIENT.cat.component_templates
-      expect(response.status).to eq 200
-      expect(response.include? 'elastic-connectors').to be true
-    end
+    response = CLIENT.cat.component_templates
+    expect(response.status).to eq 200
+    expect(response.include? 'elastic-connectors').to be true
   end
 end

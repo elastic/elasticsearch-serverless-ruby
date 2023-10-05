@@ -18,27 +18,16 @@
 require 'spec_helper'
 
 describe ElasticsearchServerless::Client do
-  let(:client) do
-    ElasticsearchServerless::Client.new(
-      api_key: 'my_api_key',
-      url: 'https://my-deployment.elastic.co'
-    )
-  end
-
   context 'ignore parameter' do
     it 'raises a 404 error' do
-      VCR.use_cassette('ignore_param_error') do
-        expect do
-          client.indices.delete(index: 'not_existent')
-        end.to raise_error(Elastic::Transport::Transport::Errors::NotFound)
-      end
+      expect do
+        CLIENT.indices.delete(index: 'not_existent')
+      end.to raise_error(Elastic::Transport::Transport::Errors::NotFound)
     end
 
     it 'does not raise an error when using the ignore parameter' do
-      VCR.use_cassette('ignore_param_ok') do
-        response = client.indices.delete(index: 'not_existent', ignore: 404)
-        expect(response.status).to eq 404
-      end
+      response = CLIENT.indices.delete(index: 'not_existent', ignore: 404)
+      expect(response.status).to eq 404
     end
   end
 end

@@ -19,10 +19,8 @@ require 'spec_helper'
 
 describe 'API:cat.count' do
   it 'performs the request' do
-    VCR.use_cassette('cat.count') do
-      response = CLIENT.cat.count
-      expect(response.status).to eq 200
-      expect(response.body).not_to be_empty
-    end
+    response = CLIENT.cat.count
+    expect(response.status).to eq 200
+    expect(response.body).not_to be_empty
   end
 end

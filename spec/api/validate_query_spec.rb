@@ -21,23 +21,17 @@ describe 'API:validate_query' do
   let(:index) { 'validate_query_index' }
 
   before do
-    VCR.use_cassette("#{index}_create") do
-      CLIENT.indices.create(index: index)
-    end
+    CLIENT.indices.create(index: index)
   end
 
   after do
-    VCR.use_cassette("#{index}_delete") do
-      CLIENT.indices.delete(index: index)
-    end
+    CLIENT.indices.delete(index: index)
   end
 
   it 'performs the request' do
-    VCR.use_cassette("#{index}_perform") do
-      body = { query: { term: { name: 'user' } } }
-      response = CLIENT.indices.validate_query(index: index, body: body)
-      expect(response.status).to eq 200
-      expect(response['valid']).to eq true
-    end
+    body = { query: { term: { name: 'user' } } }
+    response = CLIENT.indices.validate_query(index: index, body: body)
+    expect(response.status).to eq 200
+    expect(response['valid']).to eq true
   end
 end

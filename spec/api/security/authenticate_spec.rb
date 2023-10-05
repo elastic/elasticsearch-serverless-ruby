@@ -19,9 +19,7 @@ require 'spec_helper'
 
 describe 'API:security.authenticate' do
   it 'authenticates' do
-    VCR.use_cassette('authenticate') do
-      response = CLIENT.security.authenticate
-      expect(response.status).to eq 200
-    end
+    response = CLIENT.security.authenticate
+    expect(response.status).to eq 200
   end
 end

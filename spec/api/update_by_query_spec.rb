@@ -21,34 +21,28 @@ describe 'API:update_by_query' do
   let(:index) { 'update_by_query_index' }
 
   before do
-    VCR.use_cassette("#{index}_create") do
-      CLIENT.indices.create(index: index)
-      CLIENT.index(
-        index: index,
-        body: { name: 'user', age: 29 },
-        refresh: true
-      )
-    end
+    CLIENT.indices.create(index: index)
+    CLIENT.index(
+      index: index,
+      body: { name: 'user', age: 29 },
+      refresh: true
+    )
   end
 
   after do
-    VCR.use_cassette("#{index}_delete") do
-      CLIENT.indices.delete(index: index)
-    end
+    CLIENT.indices.delete(index: index)
   end
 
   it 'performs the request' do
-    VCR.use_cassette("#{index}_perform") do
-      body = {
-        query: { term: { name: 'user' } },
-        script: {
-          source: 'ctx._source.age++',
-          lang: 'painless'
-        }
+    body = {
+      query: { term: { name: 'user' } },
+      script: {
+        source: 'ctx._source.age++',
+        lang: 'painless'
       }
-      response = CLIENT.update_by_query(index: index, body: body)
-      expect(response.status).to eq 200
-      expect(response['updated']).to eq 1
-    end
+    }
+    response = CLIENT.update_by_query(index: index, body: body)
+    expect(response.status).to eq 200
+    expect(response['updated']).to eq 1
   end
 end

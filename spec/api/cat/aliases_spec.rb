@@ -19,10 +19,8 @@ require 'spec_helper'
 
 describe 'API:cat.aliases' do
   it 'performs the request' do
-    VCR.use_cassette('cat.aliases') do
-      response = CLIENT.cat.aliases
-      expect(response.status).to eq 200
-      expect(response.include? 'security').to be true
-    end
+    response = CLIENT.cat.aliases
+    expect(response.status).to eq 200
+    expect(response.include? 'security').to be true
   end
 end

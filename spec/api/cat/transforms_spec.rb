@@ -19,9 +19,7 @@ require 'spec_helper'
 
 describe 'API:cat.transforms' do
   it 'performs the request' do
-    VCR.use_cassette('cat.transforms') do
-      response = CLIENT.cat.transforms
-      expect(response.status).to eq 200
-    end
+    response = CLIENT.cat.transforms
+    expect(response.status).to eq 200
   end
 end

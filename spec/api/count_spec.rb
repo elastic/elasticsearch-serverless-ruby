@@ -21,27 +21,21 @@ describe 'API:count' do
   let(:index) { 'count_index' }
 
   before do
-    VCR.use_cassette("#{index}_create") do
-      CLIENT.indices.create(index: index)
-      CLIENT.index(
-        index: index,
-        body: { name: 'garbanzo' },
-        refresh: true
-      )
-    end
+    CLIENT.indices.create(index: index)
+    CLIENT.index(
+      index: index,
+      body: { name: 'garbanzo' },
+      refresh: true
+    )
   end
 
   after do
-    VCR.use_cassette("#{index}_delete") do
-      CLIENT.indices.delete(index: index)
-    end
+    CLIENT.indices.delete(index: index)
   end
 
   it 'performs the request' do
-    VCR.use_cassette('count') do
-      response = CLIENT.count(index: index)
-      expect(response.status).to eq 200
-      expect(response['count']).to eq 1
-    end
+    response = CLIENT.count(index: index)
+    expect(response.status).to eq 200
+    expect(response['count']).to eq 1
   end
 end

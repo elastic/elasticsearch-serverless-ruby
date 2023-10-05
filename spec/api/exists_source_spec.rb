@@ -20,29 +20,21 @@ require 'spec_helper'
 describe 'API:exists_source' do
   let(:index) { 'exists_source' }
   let(:id) do
-    VCR.use_cassette("#{index}_create") do
-      CLIENT.index(index: index, body: { name: 'testing' }, refresh: true)['_id']
-    end
+    CLIENT.index(index: index, body: { name: 'testing' }, refresh: true)['_id']
   end
 
   after do
-    VCR.use_cassette("#{index}_delete") do
-      CLIENT.indices.delete(index: index)
-    end
+    CLIENT.indices.delete(index: index)
   end
 
   it 'performs request' do
-    VCR.use_cassette("#{index}_exists") do
-      response = CLIENT.exists_source(index: index, id: id)
-      expect(response.status).to eq 200
-    end
+    response = CLIENT.exists_source(index: index, id: id)
+    expect(response.status).to eq 200
   end
 
   it 'returns a 404' do
-    VCR.use_cassette("#{index}_ignore") do
-      expect do
-        CLIENT.exists_source(index: index, id: 'test')
-      end.to raise_error Elastic::Transport::Transport::Errors::NotFound
-    end
+    expect do
+      CLIENT.exists_source(index: index, id: 'test')
+    end.to raise_error Elastic::Transport::Transport::Errors::NotFound
   end
 end

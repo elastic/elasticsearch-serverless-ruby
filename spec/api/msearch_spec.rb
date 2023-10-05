@@ -18,52 +18,40 @@
 require 'spec_helper'
 
 describe 'API:msearch' do
-  let(:CLIENT) do
-    ElasticsearchServerless::Client.new(
-      api_key: 'my-api-key',
-      url: 'https://my-deployment.elastic.co'
-    )
-  end
   let(:index) { 'msearch_test' }
 
   before do
-    VCR.use_cassette("#{index}_create") do
-      CLIENT.indices.create(index: index)
-      body = [
-        { index: { _index: index, _id: '42' } },
-        { name: 'Las lenguas de diamante', author: 'Juana de Ibarbourou', release_date: '1918-12-01', page_count: 108},
-        { index: { _index: index, _id: '44' } },
-        { name: 'Bestiario', author: 'Julio Cortazar', release_date: '1952-10-12', page_count: 133},
-        { index: { _index: index, _id: '43' } },
-        { name: 'Tales of love, madness and death', author: 'Horacio Quiroga', release_date: '1917-12-01', page_count: 188 }
-      ]
-      CLIENT.bulk(body: body, refresh: true)
-    end
+    CLIENT.indices.create(index: index)
+    body = [
+      { index: { _index: index, _id: '42' } },
+      { name: 'Las lenguas de diamante', author: 'Juana de Ibarbourou', release_date: '1918-12-01', page_count: 108},
+      { index: { _index: index, _id: '44' } },
+      { name: 'Bestiario', author: 'Julio Cortazar', release_date: '1952-10-12', page_count: 133},
+      { index: { _index: index, _id: '43' } },
+      { name: 'Tales of love, madness and death', author: 'Horacio Quiroga', release_date: '1917-12-01', page_count: 188 }
+    ]
+    CLIENT.bulk(body: body, refresh: true)
   end
 
   after do
-    VCR.use_cassette("#{index}_delete") do
-      CLIENT.indices.delete(index: index)
-    end
+    CLIENT.indices.delete(index: index)
   end
 
   it 'performs the request' do
-    VCR.use_cassette("#{index}_perform") do
-      response = CLIENT.msearch(
-        index: index,
-        body: [
-          {},
-          { query: { match: { name: 'Bestiario' } } },
-          {},
-          { query: { match_all: {} } }
-        ]
-      )
-      expect(response.status).to eq 200
-      expect(response['responses'].first['hits']['hits'].first['_source']['name']).to eq 'Bestiario'
-      expect(response['responses'].first['hits']['hits'].count).to eq 1
-      expect(response['responses'].last['hits']['hits'].count).to eq 3
-      names = response['responses'].last['hits']['hits'].map { |a| a['_source']['name'] }
-      expect(names).to eq ['Las lenguas de diamante', 'Bestiario', 'Tales of love, madness and death']
-    end
+    response = CLIENT.msearch(
+      index: index,
+      body: [
+        {},
+        { query: { match: { name: 'Bestiario' } } },
+        {},
+        { query: { match_all: {} } }
+      ]
+    )
+    expect(response.status).to eq 200
+    expect(response['responses'].first['hits']['hits'].first['_source']['name']).to eq 'Bestiario'
+    expect(response['responses'].first['hits']['hits'].count).to eq 1
+    expect(response['responses'].last['hits']['hits'].count).to eq 3
+    names = response['responses'].last['hits']['hits'].map { |a| a['_source']['name'] }
+    expect(names).to eq ['Las lenguas de diamante', 'Bestiario', 'Tales of love, madness and death']
   end
 end

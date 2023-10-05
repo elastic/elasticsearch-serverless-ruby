@@ -27,34 +27,26 @@ describe 'API:indices.analyze' do
   end
 
   before do
-    VCR.use_cassette('indices.analyze.setup') do
-      CLIENT.indices.create(index: index)
-    end
+    CLIENT.indices.create(index: index)
   end
 
   after do
-    VCR.use_cassette('indices.analyze.teardown') do
-      CLIENT.indices.delete(index: index)
-    end
+    CLIENT.indices.delete(index: index)
   end
 
   context 'when an index is specified' do
     it 'performs the request' do
-      VCR.use_cassette('indices.analyze') do
-        response = CLIENT.indices.analyze(index: index, body: body)
-        expect(response.status).to eq 200
-        expect(response['tokens'].count).to eq 4
-      end
+      response = CLIENT.indices.analyze(index: index, body: body)
+      expect(response.status).to eq 200
+      expect(response['tokens'].count).to eq 4
     end
   end
 
   context 'when an index is not specified' do
     it 'performs the request' do
-      VCR.use_cassette('indices.analyze.noindex') do
-        response = CLIENT.indices.analyze(body: body)
-        expect(response.status).to eq 200
-        expect(response['tokens'].count).to eq 4
-      end
+      response = CLIENT.indices.analyze(body: body)
+      expect(response.status).to eq 200
+      expect(response['tokens'].count).to eq 4
     end
   end
 end
