@@ -23,7 +23,7 @@ describe 'API:exists_source' do
     CLIENT.index(index: index, body: { name: 'testing' }, refresh: true)['_id']
   end
 
-  after do
+  after(:suite) do
     CLIENT.indices.delete(index: index)
   end
 

@@ -19,9 +19,10 @@ require 'spec_helper'
 
 describe 'API:transform' do
   let(:index) { 'transforms' }
+  let(:transformed_index) { 'transformed'}
   let(:transform_id) { 'population' }
 
-  before(:suite) do
+  before do
     CLIENT.indices.create(index: index)
     CLIENT.bulk(
       body: [
@@ -36,13 +37,12 @@ describe 'API:transform' do
     )
   end
 
-  after(:suite) do
+  after do
     CLIENT.indices.delete(index: index)
-    CLIENT.indices.delete(index: "#{index}_transformed")
   end
 
   context 'transform' do
-    it 'put_transform' do
+    it 'put, update, get, get stats, preview, start, stop, reset, schedule, delete' do
       response = CLIENT.transform.put_transform(
         transform_id: transform_id,
         body: {
@@ -50,7 +50,7 @@ describe 'API:transform' do
             index: index
           },
           dest: {
-            index: "#{index}_transformed"
+            index: transformed_index
           },
           pivot: {
             group_by: { pop: { terms: { field: 'pop' } } },
@@ -60,63 +60,54 @@ describe 'API:transform' do
       )
       expect(response.status).to eq 200
       expect(response['acknowledged']).to be true
-    end
 
-    it 'update_transform' do
+      # update_transform
       response = CLIENT.transform.update_transform(
         transform_id: transform_id,
         body: { description: 'Continents aproximate population' }
       )
       expect(response.status).to eq 200
       expect(response['id']).to eq transform_id
-    end
 
-    it 'get_transform' do
+      # get_transform
       response = CLIENT.transform.get_transform(transform_id: transform_id)
       expect(response.status).to eq 200
       expect(response['count']).to eq 1
       expect(response['transforms'].first['id']).to eq transform_id
-    end
 
-    it 'get_transform_stats' do
+      # get_transform_stats
       response = CLIENT.transform.get_transform_stats(transform_id: transform_id)
       expect(response.status).to eq 200
       expect(response['count']).to eq 1
       expect(response['transforms'].first['id']).to eq transform_id
       expect(response['transforms'].first['stats']).not_to be_empty
-    end
 
-    it 'preview_transform' do
+      # preview_transform'
       response = CLIENT.transform.preview_transform(transform_id: transform_id)
       expect(response.status).to eq 200
       expect(response['preview']).not_to be_empty
-    end
 
-    it 'start_transform' do
+      # start_transform
       response = CLIENT.transform.start_transform(transform_id: transform_id)
       expect(response.status).to eq 200
       expect(response['acknowledged']).to be true
-    end
 
-    it 'stop_transform' do
-      response = CLIENT.transform.stop_transform(transform_id: transform_id)
+      # stop_transform
+      response = CLIENT.transform.stop_transform(transform_id: transform_id, wait_for_completion: true)
       expect(response.status).to eq 200
       expect(response['acknowledged']).to be true
-    end
 
-    it 'reset_transform' do
+      # reset_transform
       response = CLIENT.transform.reset_transform(transform_id: transform_id)
       expect(response.status).to eq 200
       expect(response['acknowledged']).to be true
-    end
 
-    it 'schedule_now_transform' do
+      # schedule_now_transform
       response = CLIENT.transform.schedule_now_transform(transform_id: transform_id)
       expect(response.status).to eq 200
       expect(response['acknowledged']).to be true
-    end
 
-    it 'delete_transform' do
+      # delete_transform
       response = CLIENT.transform.delete_transform(transform_id: transform_id)
       expect(response.status).to eq 200
     end
