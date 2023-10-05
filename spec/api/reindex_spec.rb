@@ -21,38 +21,32 @@ describe 'API:reindex' do
   let(:index) { 'reindex_index' }
 
   before do
-    VCR.use_cassette("#{index}_create") do
-      CLIENT.indices.create(index: index)
-      CLIENT.index(
-        index: index,
-        body: { name: 'garbanzo' },
-        refresh: true
-      )
-    end
+    CLIENT.indices.create(index: index)
+    CLIENT.index(
+      index: index,
+      body: { name: 'garbanzo' },
+      refresh: true
+    )
   end
 
   after do
-    VCR.use_cassette("#{index}_delete") do
-      CLIENT.indices.delete(index: index)
-      CLIENT.indices.delete(index: "#{index}_reindexed")
-    end
+    CLIENT.indices.delete(index: index)
+    CLIENT.indices.delete(index: "#{index}_reindexed")
   end
 
   it 'performs the request' do
-    VCR.use_cassette('reindex') do
-      response = CLIENT.reindex(
-        body: {
-          source: {
-            index: index
-          },
-          dest: {
-            index: "#{index}_reindexed"
-          }
+    response = CLIENT.reindex(
+      body: {
+        source: {
+          index: index
+        },
+        dest: {
+          index: "#{index}_reindexed"
         }
-      )
+      }
+    )
 
-      expect(response.status).to eq 200
-      expect(response['created']).to eq 1
-    end
+    expect(response.status).to eq 200
+    expect(response['created']).to eq 1
   end
 end

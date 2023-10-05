@@ -21,33 +21,27 @@ describe 'API:field_caps' do
   let(:index) { 'field_caps' }
 
   before do
-    VCR.use_cassette("#{index}_setup") do
-      CLIENT.indices.create(
-        index: index,
-        body: {
-          mappings: {
-            properties: {
-              text: { type: 'text' }
-            }
+    CLIENT.indices.create(
+      index: index,
+      body: {
+        mappings: {
+          properties: {
+            text: { type: 'text' }
           }
         }
-      )
-    end
+      }
+    )
   end
 
   after do
-    VCR.use_cassette("#{index}_teardown") do
-      CLIENT.indices.delete(index: index)
-    end
+    CLIENT.indices.delete(index: index)
   end
 
   it 'performs the request' do
-    VCR.use_cassette("#{index}_perform") do
-      response = CLIENT.field_caps(index: index, fields: 'text')
+    response = CLIENT.field_caps(index: index, fields: 'text')
 
-      expect(response.status).to eq 200
-      expect(response['fields']['text']['text']['searchable']).to eq true
-      expect(response['fields']['text']['text']['aggregatable']).to eq false
-    end
+    expect(response.status).to eq 200
+    expect(response['fields']['text']['text']['searchable']).to eq true
+    expect(response['fields']['text']['text']['aggregatable']).to eq false
   end
 end

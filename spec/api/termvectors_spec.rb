@@ -21,29 +21,23 @@ describe 'API:termvectors' do
   let(:index) { 'termvectors_index' }
 
   before do
-    VCR.use_cassette("#{index}_create") do
-      CLIENT.indices.create(index: index)
-      CLIENT.index(
-        index: index,
-        body: { name: 'poroto' },
-        refresh: true
-      )
-    end
+    CLIENT.indices.create(index: index)
+    CLIENT.index(
+      index: index,
+      body: { name: 'poroto' },
+      refresh: true
+    )
   end
 
   after do
-    VCR.use_cassette("#{index}_delete") do
-      CLIENT.indices.delete(index: index)
-    end
+    CLIENT.indices.delete(index: index)
   end
 
   it 'performs the request' do
-    VCR.use_cassette("#{index}_perform") do
-      response = CLIENT.search(index: index)
-      id = response['hits']['hits'].first['_id']
+    response = CLIENT.search(index: index)
+    id = response['hits']['hits'].first['_id']
 
-      response = CLIENT.termvectors(index: index, id: id)
-      expect(response.status).to eq 200
-    end
+    response = CLIENT.termvectors(index: index, id: id)
+    expect(response.status).to eq 200
   end
 end

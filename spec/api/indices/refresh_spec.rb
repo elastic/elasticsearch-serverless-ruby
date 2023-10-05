@@ -21,22 +21,16 @@ describe 'API:indices.refresh' do
   let(:index) { 'index-to-refresh' }
 
   before do
-    VCR.use_cassette('indices.refresh.setup') do
-      CLIENT.indices.create(index: index)
-    end
+    CLIENT.indices.create(index: index)
   end
 
   after do
-    VCR.use_cassette('indices.refresh.teardown') do
-      CLIENT.indices.delete(index: index)
-    end
+    CLIENT.indices.delete(index: index)
   end
 
   it 'performs the request' do
-    VCR.use_cassette('indices.refresh') do
-      response = CLIENT.indices.refresh(index: index)
-      expect(response.status).to eq 200
-      expect(response['_shards']['successful']).to be >= 1
-    end
+    response = CLIENT.indices.refresh(index: index)
+    expect(response.status).to eq 200
+    expect(response['_shards']['successful']).to be >= 1
   end
 end

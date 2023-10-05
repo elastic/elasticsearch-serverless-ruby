@@ -21,38 +21,32 @@ describe 'API:explain' do
   let(:index) { 'explain_index' }
 
   before do
-    VCR.use_cassette("#{index}_create") do
-      CLIENT.indices.create(index: index)
-    end
+    CLIENT.indices.create(index: index)
   end
 
   after do
-    VCR.use_cassette("#{index}_delete") do
-      CLIENT.indices.delete(index: index)
-    end
+    CLIENT.indices.delete(index: index)
   end
 
   it 'performs the request' do
-    VCR.use_cassette('explain') do
-      id = CLIENT.index(
-        index: index,
-        body: { name: 'garbanzo' },
-        refresh: true
-      )['_id']
+    id = CLIENT.index(
+      index: index,
+      body: { name: 'garbanzo' },
+      refresh: true
+    )['_id']
 
-      response = CLIENT.explain(
-        index: index,
-        id: id,
-        body: {
-          query: {
-            match: {
-              name: 'garbanzo'
-            }
+    response = CLIENT.explain(
+      index: index,
+      id: id,
+      body: {
+        query: {
+          match: {
+            name: 'garbanzo'
           }
         }
-      )
-      expect(response.status).to eq 200
-      expect(response['matched']).to eq true
-    end
+      }
+    )
+    expect(response.status).to eq 200
+    expect(response['matched']).to eq true
   end
 end
