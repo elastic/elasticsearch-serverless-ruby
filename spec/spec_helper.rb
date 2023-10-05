@@ -22,6 +22,6 @@ RSpec.configure do |config|
   config.formatter = 'documentation'
 end
 
-api_key = 'my_api_key'
-url = 'https://my-deployment.elastic.co'
+api_key = ENV['API_KEY']
+url = ENV['ELASTICSEARCH_URL']
 CLIENT = ElasticsearchServerless::Client.new(api_key: api_key, url: url)
