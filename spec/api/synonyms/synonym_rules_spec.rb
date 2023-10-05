@@ -23,44 +23,38 @@ describe 'API:synonyms' do
   let(:rule_id) { 'rule_id' }
 
   before do
-    VCR.use_cassette("#{index}_create") do
-      CLIENT.indices.create(index: index)
-    end
+    CLIENT.indices.create(index: index)
   end
 
   after do
-    VCR.use_cassette("#{index}_delete") do
-      CLIENT.indices.delete(index: index)
-      CLIENT.synonyms.delete_synonym(id: 'id')
-    end
+    CLIENT.indices.delete(index: index)
+    CLIENT.synonyms.delete_synonym(id: 'id')
   end
 
   it 'puts, gets, deletes synonyms' do
-    VCR.use_cassette("#{index}_perform") do
-      response = CLIENT.synonyms.put_synonym(
-        id: 'id',
-        body: { synonyms_set: [ synonyms: 'house, home' ] }
-      )
-      expect(response.status).to eq 201
-      expect(response['result']).to eq 'created'
+    response = CLIENT.synonyms.put_synonym(
+      id: 'id',
+      body: { synonyms_set: [ synonyms: 'house, home' ] }
+    )
+    expect(response.status).to eq 201
+    expect(response['result']).to eq 'created'
 
-      response = CLIENT.synonyms.put_synonym_rule(
-        set_id: set_id,
-        rule_id: rule_id,
-        body: {
-          synonyms: 'bye, goodbye'
-        }
-      )
-      expect(response.status).to eq 200
-      expect(response['result']).to eq 'updated'
+    response = CLIENT.synonyms.put_synonym_rule(
+      set_id: set_id,
+      rule_id: rule_id,
+      body: {
+        synonyms: 'bye, goodbye'
+      }
+    )
+    expect(response.status).to eq 201
+    expect(response['result']).to eq 'created'
 
-      response = CLIENT.synonyms.get_synonym_rule(set_id: set_id, rule_id: rule_id)
-      expect(response.status).to eq 200
-      expect(response['synonyms']).to eq('bye, goodbye')
+    response = CLIENT.synonyms.get_synonym_rule(set_id: set_id, rule_id: rule_id)
+    expect(response.status).to eq 200
+    expect(response['synonyms']).to eq('bye, goodbye')
 
-      response = CLIENT.synonyms.delete_synonym_rule(set_id: set_id, rule_id: rule_id)
-      expect(response.status).to eq 200
-      expect(response['result']).to eq('deleted')
-    end
+    response = CLIENT.synonyms.delete_synonym_rule(set_id: set_id, rule_id: rule_id)
+    expect(response.status).to eq 200
+    expect(response['result']).to eq('deleted')
   end
 end

@@ -22,62 +22,54 @@ describe 'API:scripts' do
   let(:id) { 'my-script' }
 
   before do
-    VCR.use_cassette("#{index}_create") do
-      CLIENT.indices.create(index: index)
-      CLIENT.index(
-        index: index,
-        body: { name: 'test' },
-        refresh: true
-      )
-    end
+    CLIENT.indices.create(index: index)
+    CLIENT.index(
+      index: index,
+      body: { name: 'test' },
+      refresh: true
+    )
   end
 
   after do
-    VCR.use_cassette("#{index}_delete") do
-      CLIENT.indices.delete(index: index)
-    end
+    CLIENT.indices.delete(index: index)
   end
 
   it 'puts, gets and deletes a script' do
-    VCR.use_cassette('scripting') do
-      response = CLIENT.put_script(
-        id: id,
-        body: {
-          script: {
-            lang: 'painless',
-            source: "Math.log(_score * 2)"
-          }
+    response = CLIENT.put_script(
+      id: id,
+      body: {
+        script: {
+          lang: 'painless',
+          source: "Math.log(_score * 2)"
         }
-      )
-      expect(response.status).to eq 200
-      expect(response['acknowledged']).to eq true
+      }
+    )
+    expect(response.status).to eq 200
+    expect(response['acknowledged']).to eq true
 
-      response = CLIENT.get_script(id: id)
-      expect(response.status).to eq 200
-      expect(response['_id']).to eq id
-      expect(response['found']).to eq true
+    response = CLIENT.get_script(id: id)
+    expect(response.status).to eq 200
+    expect(response['_id']).to eq id
+    expect(response['found']).to eq true
 
-      response = CLIENT.delete_script(id: id)
-      expect(response.status).to eq 200
-      expect(response['acknowledged']).to eq true
-    end
+    response = CLIENT.delete_script(id: id)
+    expect(response.status).to eq 200
+    expect(response['acknowledged']).to eq true
   end
 
   it 'runs scripts_painless_execute' do
-    VCR.use_cassette('painless_scripting') do
-      response = CLIENT.scripts_painless_execute(
-        body: {
-          script: {
-            source: "params.count / params.total",
-            params: {
-              count: 100.0,
-              total: 1000.0
-            }
+    response = CLIENT.scripts_painless_execute(
+      body: {
+        script: {
+          source: "params.count / params.total",
+          params: {
+            count: 100.0,
+            total: 1000.0
           }
         }
-      )
-      expect(response.status).to eq 200
-      expect(response['result']).to eq '0.1'
-    end
+      }
+    )
+    expect(response.status).to eq 200
+    expect(response['result']).to eq '0.1'
   end
 end

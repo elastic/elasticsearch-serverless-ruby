@@ -19,9 +19,7 @@ require 'spec_helper'
 
 describe 'API:license' do
   it 'performs the request' do
-    VCR.use_cassette('license') do
-      response = CLIENT.license.get
-      expect(response.status).to eq 200
-    end
+    response = CLIENT.license.get
+    expect(response.status).to eq 200
   end
 end

@@ -22,59 +22,53 @@ describe 'API:enrich' do
   let(:name) { 'policy-crud' }
 
   before do
-    VCR.use_cassette("#{index}_setup") do
-      CLIENT.indices.create(
-        index: index,
-        body: {
-          mappings: {
-            properties: {
-              baz: { type: 'keyword' },
-              a: { type: 'keyword' },
-              b: { type: 'keyword' }
-            }
+    CLIENT.indices.create(
+      index: index,
+      body: {
+        mappings: {
+          properties: {
+            baz: { type: 'keyword' },
+            a: { type: 'keyword' },
+            b: { type: 'keyword' }
           }
         }
-      )
-    end
+      }
+    )
   end
 
   after do
-    VCR.use_cassette("#{index}_teardown") do
-      CLIENT.indices.delete(index: index)
-    end
+    CLIENT.indices.delete(index: index)
   end
 
   it 'puts, executes, gets, stats and deletes policy' do
-    VCR.use_cassette("#{index}_perform") do
-      response = CLIENT.enrich.put_policy(
-        name: name,
-        body: {
-          match: {
-            indices: ["#{index}*"],
-            match_field: 'baz',
-            enrich_fields: ['a', 'b']
-          }
+    response = CLIENT.enrich.put_policy(
+      name: name,
+      body: {
+        match: {
+          indices: ["#{index}*"],
+          match_field: 'baz',
+          enrich_fields: ['a', 'b']
         }
-      )
-      expect(response.status).to eq 200
-      expect(response['acknowledged']).to eq true
+      }
+    )
+    expect(response.status).to eq 200
+    expect(response['acknowledged']).to eq true
 
-      response = CLIENT.enrich.execute_policy(name: name)
-      expect(response.status).to eq 200
-      expect(response['status']['phase']).to eq 'COMPLETE'
+    response = CLIENT.enrich.execute_policy(name: name)
+    expect(response.status).to eq 200
+    expect(response['status']['phase']).to eq 'COMPLETE'
 
-      response = CLIENT.enrich.get_policy(name: name)
-      expect(response.status).to eq 200
-      expect(response['policies'].count).to eq 1
-      expect(response['policies'].first['config']['match']['name']).to eq name
+    response = CLIENT.enrich.get_policy(name: name)
+    expect(response.status).to eq 200
+    expect(response['policies'].count).to eq 1
+    expect(response['policies'].first['config']['match']['name']).to eq name
 
-      response = CLIENT.enrich.stats
-      expect(response.status).to eq 200
-      expect(response['executing_policies'].count).to eq 0
+    response = CLIENT.enrich.stats
+    expect(response.status).to eq 200
+    expect(response['executing_policies'].count).to eq 0
 
-      response = CLIENT.enrich.delete_policy(name: name)
-      expect(response.status).to eq 200
-      expect(response['acknowledged']).to eq true
-    end
+    response = CLIENT.enrich.delete_policy(name: name)
+    expect(response.status).to eq 200
+    expect(response['acknowledged']).to eq true
   end
 end

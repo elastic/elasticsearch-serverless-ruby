@@ -22,32 +22,26 @@ describe 'API:synonyms' do
   let(:id) { 'synonyms_id' }
 
   before do
-    VCR.use_cassette("#{index}_create") do
-      CLIENT.indices.create(index: index)
-    end
+    CLIENT.indices.create(index: index)
   end
 
   after do
-    VCR.use_cassette("#{index}_delete") do
-      CLIENT.indices.delete(index: index)
-    end
+    CLIENT.indices.delete(index: index)
   end
 
   it 'puts, gets, deletes synonyms' do
-    VCR.use_cassette("#{index}_perform") do
-      response = CLIENT.synonyms.put_synonym(
-        id: id,
-        body: { synonyms_set: [ synonyms: 'house, home' ] }
-      )
-      expect(response.status).to eq 201
-      expect(response['result']).to eq 'created'
+    response = CLIENT.synonyms.put_synonym(
+      id: id,
+      body: { synonyms_set: [ synonyms: 'house, home' ] }
+    )
+    expect(response.status).to eq 201
+    expect(response['result']).to eq 'created'
 
-      response = CLIENT.synonyms.get_synonym(id: id)
-      expect(response.status).to eq 200
+    response = CLIENT.synonyms.get_synonym(id: id)
+    expect(response.status).to eq 200
 
-      response = CLIENT.synonyms.delete_synonym(id: id)
-      expect(response.status).to eq 200
-      expect(response['acknowledged']).to eq true
-    end
+    response = CLIENT.synonyms.delete_synonym(id: id)
+    expect(response.status).to eq 200
+    expect(response['acknowledged']).to eq true
   end
 end

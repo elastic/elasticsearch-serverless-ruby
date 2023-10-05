@@ -22,37 +22,35 @@ describe 'API:logstash' do
   let(:description) { 'Sample pipeline for illustration purposes' }
 
   it 'performs the request' do
-    VCR.use_cassette('logstash') do
-      # PUT Pipeline
-      response = CLIENT.logstash.put_pipeline(
-        id: id,
-        body: {
-          description: description,
-          last_modified: '2021-01-02T02:50:51.250Z',
-          pipeline_metadata: {
-            type: 'logstash_pipeline',
-            version: '1'
-          },
-          username: 'elastic',
-          pipeline: 'input {}\n filter { grok {} }\n output {}',
-          pipeline_settings: {
-            'pipeline.workers' => 1,
-            'pipeline.batch.size' => 125,
-            'pipeline.batch.delay' => 50,
-            'queue.type' => 'memory',
-            'queue.max_bytes' => '1gb',
-            'queue.checkpoint.writes' => 1024
-          }
+    # PUT Pipeline
+    response = CLIENT.logstash.put_pipeline(
+      id: id,
+      body: {
+        description: description,
+        last_modified: '2021-01-02T02:50:51.250Z',
+        pipeline_metadata: {
+          type: 'logstash_pipeline',
+          version: '1'
+        },
+        username: 'elastic',
+        pipeline: 'input {}\n filter { grok {} }\n output {}',
+        pipeline_settings: {
+          'pipeline.workers' => 1,
+          'pipeline.batch.size' => 125,
+          'pipeline.batch.delay' => 50,
+          'queue.type' => 'memory',
+          'queue.max_bytes' => '1gb',
+          'queue.checkpoint.writes' => 1024
         }
-      )
-      expect(response.status).to eq 201
-      # GET Pipeline
-      response = CLIENT.logstash.get_pipeline(id: id)
-      expect(response.status).to eq 200
-      expect(response[id]['description']).to eq description
-      # DELETE Pipeline
-      response = CLIENT.logstash.delete_pipeline(id: id)
-      expect(response.status).to eq 200
-    end
+      }
+    )
+    expect(response.status).to eq 201
+    # GET Pipeline
+    response = CLIENT.logstash.get_pipeline(id: id)
+    expect(response.status).to eq 200
+    expect(response[id]['description']).to eq description
+    # DELETE Pipeline
+    response = CLIENT.logstash.delete_pipeline(id: id)
+    expect(response.status).to eq 200
   end
 end

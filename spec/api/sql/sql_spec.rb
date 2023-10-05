@@ -33,76 +33,64 @@ describe 'API:SQL' do
 
   context 'sync' do
     before do
-      VCR.use_cassette("#{index}_create") do
-        CLIENT.indices.create(index: index)
-        CLIENT.bulk(body: body, refresh: true)
-      end
+      CLIENT.indices.create(index: index)
+      CLIENT.bulk(body: body, refresh: true)
     end
 
     after do
-      VCR.use_cassette("#{index}_delete") do
-        CLIENT.indices.delete(index: index)
-      end
+      CLIENT.indices.delete(index: index)
     end
 
     it 'queries, translates, clears cursor' do
-      VCR.use_cassette("#{index}_perform") do
-        response = CLIENT.sql.query(
-          format: 'json',
-          body: { query: query, fetch_size: 2 }
-        )
-        expect(response.status).to eq 200
-        cursor = response['cursor']
+      response = CLIENT.sql.query(
+        format: 'json',
+        body: { query: query, fetch_size: 2 }
+      )
+      expect(response.status).to eq 200
+      cursor = response['cursor']
 
-        response = CLIENT.sql.translate(body: { query: query })
-        expect(response.status).to eq 200
+      response = CLIENT.sql.translate(body: { query: query })
+      expect(response.status).to eq 200
 
-        response = CLIENT.sql.clear_cursor(body: { cursor: cursor })
-        expect(response.status).to eq 200
-        expect(response['succeeded']).to eq true
-      end
+      response = CLIENT.sql.clear_cursor(body: { cursor: cursor })
+      expect(response.status).to eq 200
+      expect(response['succeeded']).to eq true
     end
   end
 
   context 'Async' do
     before do
-      VCR.use_cassette("#{index}_async_create") do
-        CLIENT.indices.create(index: index)
-        CLIENT.bulk(body: body, refresh: true)
-      end
+      CLIENT.indices.create(index: index)
+      CLIENT.bulk(body: body, refresh: true)
     end
 
     after do
-      VCR.use_cassette("#{index}_async_delete") do
-        CLIENT.indices.delete(index: index)
-      end
+      CLIENT.indices.delete(index: index)
     end
 
     it 'uses async SQL APIs' do
-      VCR.use_cassette("#{index}_async") do
-        # sql async search
-        response = CLIENT.sql.query(
-          format: 'json',
-          body: {
-            keep_alive: '1d',
-            wait_for_completion_timeout: '0s',
-            query: query,
-            fetch_size: 1
-          }
-        )
-        expect(response.status).to eq 200
-        id = response['id']
-        # get_async_status
-        response = CLIENT.sql.get_async_status(id: id)
-        expect(response.status).to eq 200
-        # get_async
-        response = CLIENT.sql.get_async(id: id)
-        expect(response.status).to eq 200
-        # delete_async
-        response = CLIENT.sql.delete_async(id: id)
-        expect(response.status).to eq 200
-        expect(response['acknowledged']).to eq true
-      end
+      # sql async search
+      response = CLIENT.sql.query(
+        format: 'json',
+        body: {
+          keep_alive: '1d',
+          wait_for_completion_timeout: '0s',
+          query: query,
+          fetch_size: 1
+        }
+      )
+      expect(response.status).to eq 200
+      id = response['id']
+      # get_async_status
+      response = CLIENT.sql.get_async_status(id: id)
+      expect(response.status).to eq 200
+      # get_async
+      response = CLIENT.sql.get_async(id: id)
+      expect(response.status).to eq 200
+      # delete_async
+      response = CLIENT.sql.delete_async(id: id)
+      expect(response.status).to eq 200
+      expect(response['acknowledged']).to eq true
     end
   end
 end

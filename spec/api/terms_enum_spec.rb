@@ -21,26 +21,20 @@ describe 'API:terms_enum' do
   let(:index) { 'terms_enum_index' }
 
   before do
-    VCR.use_cassette("#{index}_create") do
-      CLIENT.indices.create(index: index)
-      CLIENT.index(
-        index: index,
-        body: { name: 'garbanzo' },
-        refresh: true
-      )
-    end
+    CLIENT.indices.create(index: index)
+    CLIENT.index(
+      index: index,
+      body: { name: 'garbanzo' },
+      refresh: true
+    )
   end
 
   after do
-    VCR.use_cassette("#{index}_delete") do
-      CLIENT.indices.delete(index: index)
-    end
+    CLIENT.indices.delete(index: index)
   end
 
   it 'performs the request' do
-    VCR.use_cassette('terms_enum') do
-      response = CLIENT.terms_enum(index: index, body: { field: 'name' })
-      expect(response.status).to eq 200
-    end
+    response = CLIENT.terms_enum(index: index, body: { field: 'name' })
+    expect(response.status).to eq 200
   end
 end
