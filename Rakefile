@@ -44,6 +44,22 @@ namespace :spec do
   RSpec::Core::RakeTask.new(:all) do |t|
     t.pattern = Dir.glob('spec/**/*_spec.rb')
   end
+
+  desc "Git clone test suite to ./spec/tmp/tests"
+  task :clone do
+    begin
+      github_token = ENV['GITHUB_TOKEN'] || File.read(File.expand_path("~/.elastic/github.token"))
+    rescue Errno::ENOENT => e
+    end
+    raise ArgumentError, 'GITHUB_TOKEN needs to be provided either as an env variable or in ~/.elastic/github.token' unless github_token
+
+    path = 'spec/tmp/tests'
+    `git clone https://#{github_token}@github.com/elastic/serverless-clients-tests.git #{path}`
+    if $?.exitstatus == 0
+      puts "Tests cloned to #{path}"
+    end
+  end
+
 end
 
 desc 'Run Elasticsearch in Serverless mode with Docker'
