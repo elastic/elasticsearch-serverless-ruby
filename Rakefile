@@ -71,6 +71,10 @@ namespace :spec do
     system("cd spec/tmp && git pull origin main")
   end
 
+  desc 'Run YAML test runner'
+  task :yaml do
+    ruby './spec/yaml-test-runner/runner.rb'
+  end
 end
 
 desc 'Run Elasticsearch in Serverless mode with Docker'
