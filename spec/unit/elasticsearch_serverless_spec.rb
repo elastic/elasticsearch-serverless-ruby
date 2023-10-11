@@ -45,7 +45,8 @@ describe ElasticsearchServerless::Client do
                    "Authorization" => "ApiKey test",
                    user_agent: ElasticsearchServerless::Client.new(url: 'test', api_key: 'test').user_agent
                  }
-               }
+               },
+               compression: true
              }
            ).and_return(transport)
       client = ElasticsearchServerless::Client.new(api_key: 'test', url: 'test')
@@ -58,6 +59,19 @@ describe ElasticsearchServerless::Client do
       client = ElasticsearchServerless::Client.new(api_key: 'test', url: 'test')
       expect(client.transport.options[:transport_options][:headers][:user_agent]).
         to match("elasticsearch-serverless-ruby/#{ElasticsearchServerless::VERSION}")
+    end
+  end
+
+  context 'compression' do
+    let(:client) do
+      ElasticsearchServerless::Client.new(
+        api_key: 'test',
+        url: 'test'
+      )
+    end
+
+    it 'has compression enabled' do
+      expect(client.transport.options[:compression]).to eq true
     end
   end
 end
