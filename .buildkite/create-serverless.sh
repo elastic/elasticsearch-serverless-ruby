@@ -32,6 +32,7 @@ cleanup() {
   run_qaf 'qaf elastic-cloud projects delete'
   rm -rf "$(pwd)/cloud.json"
 }
+trap cleanup EXIT
 
 echo -e "--- :elasticsearch: Start serverless instance $EC_PROJECT_NAME"
 
