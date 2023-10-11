@@ -23,26 +23,40 @@ module ElasticsearchServerless
   class Client
     include ElasticsearchServerless::API
 
+    VALID_PARAMETERS = [:adapter, :log, :logger, :serializer_class, :trace, :tracer, :headers]
+
     # Initializes an Elasticsearch Serverless Client
     #
     # @param :api_key [String] Base64 String, format used to authenticate with Elasticsearch
     # @param :url [String] Elasticsearch endpoint
     # @param :arguments [Hash] Other optional arguments.
+    # @option arguments [Symbol] :adapter A specific adapter for Faraday (e.g. `:patron`)
     # TODO: See which arguments we'll allow for Serverless.
     #
     def initialize(api_key:, url:, arguments: {})
-      # TODO: Change this if we allow more arguments
-      arguments.merge!(
+      validate_arguments(arguments)
+      arguments.merge!(default_parameters(url, api_key))
+
+      @transport = Elastic::Transport::Client.new(arguments)
+    end
+
+    def default_parameters(url, api_key)
+      {
+        host: url,
         transport_options: {
           headers: {
             'Authorization' => "ApiKey #{api_key}",
             user_agent: user_agent
           },
         },
-        compression: true,
-        host: url
-      )
-      @transport = Elastic::Transport::Client.new(arguments)
+        compression: true
+      }
+    end
+
+    def validate_arguments(arguments)
+      arguments.map do |k, _|
+        raise ArgumentError, "Parameter #{k}" unless VALID_PARAMETERS.include?(k)
+      end
     end
 
     # Metaprogramming for integration with Transport

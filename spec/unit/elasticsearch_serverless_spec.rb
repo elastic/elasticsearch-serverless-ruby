@@ -60,9 +60,20 @@ describe ElasticsearchServerless::Client do
       expect(client.transport.options[:transport_options][:headers][:user_agent]).
         to match("elasticsearch-serverless-ruby/#{ElasticsearchServerless::VERSION}")
     end
+
+    it 'raises an error for wrong parameters' do
+      expect do
+        ElasticsearchServerless::Client.new(api_key: 'test', url: 'test', randomize_hosts: true)
+      end.to raise_error(ArgumentError)
+    end
+
+    it 'accepts adapter as an argument' do
+      require 'faraday/net_http_persistent'
+      client = ElasticsearchServerless::Client.new(api_key: 'test', url: 'test', arguments: { adapter: :net_http_persistent})
+    end
   end
 
-  context 'compression' do
+  context 'has compression enabled' do
     let(:client) do
       ElasticsearchServerless::Client.new(
         api_key: 'test',
