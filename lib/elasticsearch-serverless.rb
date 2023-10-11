@@ -37,8 +37,9 @@ module ElasticsearchServerless
           headers: {
             'Authorization' => "ApiKey #{api_key}",
             user_agent: user_agent
-          }
+          },
         },
+        compression: true,
         host: url
       )
       @transport = Elastic::Transport::Client.new(arguments)
