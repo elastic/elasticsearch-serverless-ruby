@@ -35,12 +35,12 @@ module ElasticsearchServerless
     #
     def initialize(api_key:, url:, arguments: {})
       validate_arguments(arguments)
-      arguments.merge!(default_parameters(url, api_key))
+      arguments.merge!(essential_parameters(url, api_key))
 
       @transport = Elastic::Transport::Client.new(arguments)
     end
 
-    def default_parameters(url, api_key)
+    def essential_parameters(url, api_key)
       {
         host: url,
         transport_options: {
