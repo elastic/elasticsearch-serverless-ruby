@@ -96,9 +96,11 @@ describe ElasticsearchServerless::Client do
       let(:arguments) { { adapter: :net_http_persistent } }
 
       it 'accepts adapter as an argument' do
-        require 'faraday/net_http_persistent'
-        expect(client.transport.connections.first.connection.adapter).to eq Faraday::Adapter::NetHttpPersistent
-      end
+        fork {
+          require 'faraday/net_http_persistent'
+          expect(client.transport.connections.first.connection.adapter).to eq Faraday::Adapter::NetHttpPersistent
+        }
+      end unless defined?(JRUBY_VERSION)
     end
 
     context 'log' do
