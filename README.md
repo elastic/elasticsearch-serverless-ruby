@@ -117,7 +117,3 @@ Now that some data is available, you can search your documents using the **Searc
 ## Development
 
 See [CONTRIBUTING](./CONTRIBUTING.md).
-
-### Docs
-
-Some questions, assumptions and general notes about this project can be found in [the docs directory](./docs/questions-and-assumptions.md).
