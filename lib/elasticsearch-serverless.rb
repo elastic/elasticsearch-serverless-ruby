@@ -31,7 +31,13 @@ module ElasticsearchServerless
     # @param :url [String] Elasticsearch endpoint
     # @param :arguments [Hash] Other optional arguments.
     # @option arguments [Symbol] :adapter A specific adapter for Faraday (e.g. `:patron`)
-    # TODO: See which arguments we'll allow for Serverless.
+    # @option arguments [Boolean] :log Use the default logger (disabled by default)
+    # @option arguments [Object] :logger An instance of a Logger-compatible object
+    # @option arguments [Boolean] :trace Use the default tracer (disabled by default)
+    # @option arguments [Object] :tracer An instance of a Logger-compatible object
+    # @option arguments [Constant] :serializer_class A specific serializer class to use, will be initialized by
+    #                                                the transport and passed the transport instance
+    # @option arguments [Hash] :headers Custom HTTP Request Headers
     #
     def initialize(api_key:, url:, arguments: {})
       validate_arguments(arguments)
