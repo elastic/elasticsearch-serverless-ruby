@@ -42,7 +42,6 @@ module ElasticsearchServerless
     def initialize(api_key:, url:, arguments: {})
       validate_arguments(arguments)
       arguments.merge!(essential_parameters(url, api_key))
-
       @transport = Elastic::Transport::Client.new(arguments)
     end
 
