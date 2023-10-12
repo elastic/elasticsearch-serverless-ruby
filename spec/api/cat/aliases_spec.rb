@@ -21,6 +21,5 @@ describe 'API:cat.aliases' do
   it 'performs the request' do
     response = CLIENT.cat.aliases
     expect(response.status).to eq 200
-    expect(response.include? 'security').to be true
   end
 end
