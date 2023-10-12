@@ -17,7 +17,7 @@
 
 require 'spec_helper'
 
-describe 'API:render_search_template' do
+describe 'API:search_template' do
   let(:index) { 'render_template_test' }
 
   before do
@@ -48,7 +48,7 @@ describe 'API:render_search_template' do
     CLIENT.indices.delete(index: index)
   end
 
-  it 'performs the request' do
+  it 'renders, searchees search template' do
     response = CLIENT.render_search_template(
       body: {
         id: 'my-search-template',
@@ -59,8 +59,20 @@ describe 'API:render_search_template' do
         }
       }
     )
-
     expect(response.status).to eq 200
     expect(response['template_output']['query']['match']['message']).to eq('hello world')
+
+    response = CLIENT.search_template(
+      index: index,
+      body: {
+        id: 'my-search-template',
+        params: {
+          query_string: 'hello world',
+          from: 0,
+          size: 10
+        }
+      }
+    )
+    expect(response.status).to eq 200
   end
 end
