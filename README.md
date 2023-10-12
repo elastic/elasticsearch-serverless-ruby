@@ -8,11 +8,10 @@ This is the official Elastic client for the **Elasticsearch Serverless** service
 
 You need to have Ruby version 3.0 or higher installed to use this gem.
 
-You can install the Elasticsearch Serverless Ruby Client from GitHub's releases:
+You can install the Elasticsearch Serverless Ruby Client from RubyGems:
 
 ```bash
-$ gem install elasticsearch-serverless --source "https://github.com/elastic/elasticsearch-serverless-ruby/releases/download/v0.0.7.20231031.pre/elasticsearch-serverless-0.0.7.20231031.pre.gem"
-
+$ gem install elasticsearch-serverless --pre
 ```
 
 Check [releases](https://github.com/elastic/elasticsearch-serverless-ruby/releases) for the latests available versions.
@@ -28,7 +27,13 @@ $ gem install elasticsearch-serverless-x.x.x.gem
 Or include it in your Ruby project's Gemfile:
 
 ```ruby
-gem 'elasticsearch-serverless', path: '../path/to/client-code'
+gem 'elasticsearch-serverless'
+```
+
+Once installed, require it in your code:
+
+```ruby
+require 'elasticsearch-serverless'
 ```
 
 Additionally, you can find a rake task in the project's code to run a Ruby console with the required librares to use the client loaded into it:
