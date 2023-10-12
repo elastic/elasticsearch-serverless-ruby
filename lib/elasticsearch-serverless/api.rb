@@ -63,6 +63,7 @@ module ElasticsearchServerless
       :eql,
       :graph,
       :indices,
+      :ingest,
       :license,
       :logstash,
       :security,
