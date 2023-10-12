@@ -60,6 +60,7 @@ module ElasticsearchServerless
       :cat,
       :cluster,
       :enrich,
+      :graph,
       :indices,
       :license,
       :logstash,
