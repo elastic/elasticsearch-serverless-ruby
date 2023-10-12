@@ -20,6 +20,8 @@ require 'rspec'
 
 RSpec.configure do |config|
   config.formatter = 'documentation'
+  config.color = true
+  config.tty = true
 end
 
 api_key = ENV['API_KEY']
