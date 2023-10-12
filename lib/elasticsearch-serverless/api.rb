@@ -66,6 +66,7 @@ module ElasticsearchServerless
       :ingest,
       :license,
       :logstash,
+      :search_application,
       :security,
       :sql,
       :synonyms,
