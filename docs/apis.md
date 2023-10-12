@@ -33,6 +33,11 @@ These are the available APIs in the Elasticsearch Serverless Ruby client so far.
 * delete_by_query
 * delete_script
 * enrich
+* eql
+  * delete
+  * get
+  * get_status
+  * search
 * exists
 * exists_source
 * explain
@@ -40,6 +45,7 @@ These are the available APIs in the Elasticsearch Serverless Ruby client so far.
 * get
 * get_script
 * get_source
+* graph.explore
 * index
 * indices
   * analyze
@@ -55,6 +61,11 @@ These are the available APIs in the Elasticsearch Serverless Ruby client so far.
   * update_aliases
   * validate_query
 * info
+* ingest
+  * delete_pipeline
+  * processor_grok
+  * put_pipeline
+  * simulate
 * license.get
 * logstash
   * logstash.delete_pipeline
@@ -62,15 +73,24 @@ These are the available APIs in the Elasticsearch Serverless Ruby client so far.
   * logstash.put_pipeline
 * mget
 * msearch
+* msearch_template
 * mtermvectors
 * open_point_in_time
 * ping
 * put_script
 * reindex
+* render_search_template
 * response
 * scripts_painless_executre
 * scroll
 * search
+* search_application
+  * delete
+  * get
+  * list
+  * put
+  * search
+* search_template
 * security
   * authenticate
   * create_api_key
