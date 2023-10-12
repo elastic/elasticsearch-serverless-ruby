@@ -1,5 +1,81 @@
 # Changelog
 
+## 0.0.8.20231030.pre
+
+First public release of the Elasticsearch Serverless Ruby Client.
+
+### Client
+
+Updated: Accept only valid parameters when instantiating a new client. Supported parameters for now are:
+`:adapter, :log, :logger, :serializer_class, :trace, :tracer, :headers`.
+
+These can be passed in to the client on instantiation and will be passed to [elastic-transport](https://github.com/elastic/elastic-transport-ruby):
+
+```ruby
+client = ElasticsearchServerless::Client.new(
+  api_key: 'API_KEY',
+  url: 'URL',
+  arguments: {
+    adapter: :net_http_persistent,
+    log: true,
+    logger: MyLogger.new
+  }
+)
+```
+
+### API updates
+
+See [APIs](https://github.com/elastic/elasticsearch-serverless-ruby/blob/main/docs/apis.md) for the full list of available endpoints.
+
+New APIs in this release:
+
+- `logstash.delete_pipeline`
+- `logstash.get_pipeline`
+- `logstash.put_pipeline`
+- `indices.refresh`
+- `explain`
+- `reindex`
+- `delete_script`
+- `get_script`
+- `put_script`
+- `scripts_painless_execute`
+- `sql.clear_cursor`
+- `sql.delete_async`
+- `sql.get_async`
+- `sql.get_async_status`
+- `sql.query`
+- `sql.translate`
+- `terms_enum`
+- `termvectors`
+- `synonyms.delete_synonym`
+- `synonyms.delete_synonym_rule`
+- `synonyms.get_synonym`
+- `synonyms.get_synonym_rule`
+- `synonyms.get_synonym_sets`
+- `synonyms.put_synonym`
+- `synonyms.put_synonym_rule`
+- `license.get`
+- `mtermvectors`
+- `field_caps`
+- `enrich`
+- `graph.explore`
+- `eql.delete`
+- `eql.get`
+- `eql.get_status`
+- `eql.search`
+- `ingest.delete_pipeline`
+- `ingest.processor_grok`
+- `ingest.put_pipeline`
+- `ingest.simulate`
+- `msearch_template`
+- `render_search_template`
+- `search_template`
+- `search_application.delete`
+- `search_application.get`
+- `search_application.list`
+- `search_application.put`
+- `search_application.search`
+
 ## 0.0.7.20231031.pre
 
 ### API updates
