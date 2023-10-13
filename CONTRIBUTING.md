@@ -1,27 +1,20 @@
 Clone the code, cd into the project directory and run `bundle install`.
 
-### Run Tests
+## Run Tests
+
+Unit tests:
 
 ```bash
-$ bundle exec rake spec
+$ bundle exec rake spec:unit
 ```
 
-### Run Elasticsearch Serverless Docker container
-
-We can run Elasticsearch in `serverless-mode` by setting `ES_JAVA_OPTS="-Des.serverless=true"` to a stateful Elasticsearch cluster. I've added a simplified version of clients' `run-elasticsearch.sh` script to the project, and it can be run with:
+API tests - You need a running instance of Elasticsearch Serverless to run the API tests. You can set the credentials and endpoint in environment variables like so:
 
 ```bash
-$ rake docker[STACK_VERSION]
+API_KEY=your_api_key ELASTICSEARCH_URL=your_serverless_url bundle exec rake spec:api
 ```
 
-If an API that is not available on Serverless is called, the following error is triggered:
-
-```ruby
-> client.info
-/home/fernando/.rvm/gems/ruby-3.2.2/gems/elastic-transport-8.2.1/lib/elastic/transport/transport/base.rb:228:in `__raise_transport_error': [400] {"error":"uri [/] with method [GET] exists but is not available when running in serverless mode"} (Elastic::Transport::Transport::Errors::BadRequest) 
-```
-
-### Contributing Code Changes
+## Contributing Code Changes
 
 1. Please make sure you have signed the [Contributor License
    Agreement](http://www.elastic.co/contributor-agreement/). We are not
