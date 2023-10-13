@@ -56,6 +56,36 @@ client = ElasticsearchServerless::Client.new(
 )
 ```
 
+### Configuration
+
+Elasticsearch Serverless Ruby uses [elastic-transport](github.com/elastic/elastic-transport-ruby/) as the HTTP layer to connect to Elasticsearch Serverless. You can use some of the following parameters when instatiating a client in the `arguments` hash like so:
+
+```ruby
+client = ElasticsearchServerless::Client.new(
+  api_key: 'API_KEY',
+  url: 'URL',
+  arguments: {
+    adapter: :net_http_persistent,
+    log: true,
+    logger: MyLogger.new
+  }
+)
+```
+
+The parameters are:
+
+| Key                | Type      | Description                                                                                                                        |
+|--------------------|-----------|------------------------------------------------------------------------------------------------------------------------------------|
+| `adapter`          | `string`  | A specific adapter for Faraday (`patron`, `typhoeus`, `HTTPClient`, `NetHttpPersistent`).                                          |
+| `log`              | `boolean` | Log requests and responses to standard output with the default logger (an instance of Ruby’s ::Logger class), disabled by default. |
+| `logger`           | `Logger`  | An instance of a Logger-compatible object to use as a logger.                                                                      |
+| `trace`            | `boolean` | Use the default tracer to trace requests and responses in the Curl format.                                                         |
+| `tracer`           | `Logger`  | An instance of a Logger-compatible object to use as a tracer.                                                                      |
+| `serializer_class` | `Object`  | A specific serializer class to use to serialize JSON.                                                                              |
+| `headers`          | `Hash`    | Custom HTTP Request Headers                                                                                                        |
+
+
+
 ### Using the API
 
 See [APIs](https://github.com/elastic/elasticsearch-serverless-ruby/blob/main/docs/apis.md) for the full list of available endpoints.
