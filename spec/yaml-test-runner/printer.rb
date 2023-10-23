@@ -13,7 +13,7 @@ module Elastic
       end
 
       def print_error(e)
-        LOGGER.error "🤬 ERROR: #{@file} #{@title} failed\n"
+        puts "🤬 ERROR: #{@file} #{@title} failed\n"
         LOGGER.error e.display
         LOGGER.error "#{e.backtrace}\n"
         raise e

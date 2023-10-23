@@ -33,9 +33,12 @@ module Elastic
       end
 
       def execute
-        run_setup
-        run_actions
-        run_teardown
+        begin
+          run_setup
+          run_actions
+        ensure
+          run_teardown
+        end
       end
 
       def run_actions

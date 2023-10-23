@@ -37,5 +37,8 @@ Dir.glob("#{PATH}/**/*.yml").map do |test_file|
   test.execute
 rescue Psych::SyntaxError => e
   LOGGER.warn("YAML error in #{test_file}")
-  raise e
+  LOGGER.warn e
+rescue StandardError => e
+  puts("🤬 ERROR: File #{test_file}")
+  LOGGER.warn e
 end
