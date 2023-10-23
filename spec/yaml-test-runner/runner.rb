@@ -24,7 +24,7 @@ PATH = File.expand_path('../../tmp/tests', __FILE__)
 LOGGER = Logger.new($stdout)
 LOGGER.level = Logger::WARN unless ENV['DEBUG']
 
-raise RuntimeError, "Couldn't find test files. Run rake spec:clone to clone the repository in spec/tmp" unless File.directory?(PATH)
+raise RuntimeError, "Couldn't find test files. Run rake spec:download_tests to download the tests in spec/tmp" unless File.directory?(PATH)
 
 Dir.glob("#{PATH}/**/*.yml").map do |test_file|
   yaml = YAML.load_stream(File.read(test_file))

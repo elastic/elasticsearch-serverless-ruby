@@ -51,24 +51,39 @@ namespace :spec do
     rescue Errno::ENOENT => e
     end
     raise ArgumentError, 'GITHUB_TOKEN needs to be provided either as an env variable or in ~/.elastic/github.token' unless github_token
+
+    github_token
   end
 
-  desc 'Git clone test suite to ./spec/tmp'
-  task :clone do
-    check_for_token
+  desc 'Download test suite to ./spec/tmp'
+  task :download_tests do
+    require 'open-uri'
 
+    github_token = check_for_token
     path = 'spec/tmp'
-    system("git clone https://#{github_token}@github.com/elastic/serverless-clients-tests.git #{path}")
-    if $?.exitstatus == 0
-      puts "Tests cloned to #{path}"
+    filename = 'tests.zip'
+    url = 'https://api.github.com/repos/elastic/serverless-clients-tests/zipball/main'
+
+    File.open(filename, "w") do |downloaded_file|
+      URI.open(
+        url,
+        'Authorization' => "Bearer #{github_token}",
+        'Accept' => 'application/vnd.github+json',
+      ) do |artifact_file|
+        downloaded_file.write(artifact_file.read)
+      end
     end
-  end
+    if File.exist?(filename)
+      puts "Successfully downloaded #{filename}"
+    else
+      warn "[!] Couldn't download #{filename}"
+      exit 1
+    end
 
-  desc 'Git pull test suite'
-  task :update_suite do
-    check_for_token
-
-    system("cd spec/tmp && git pull origin main")
+    puts "Unzipping files"
+    `unzip #{filename} -d spec/tmp/`
+    puts "Removing zip file"
+    File.delete(filename)
   end
 
   desc 'Run YAML test runner'
