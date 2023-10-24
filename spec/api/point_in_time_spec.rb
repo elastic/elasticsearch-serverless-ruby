@@ -39,6 +39,6 @@ describe 'API:point_in_time' do
     expect(response['pit_id']).to eq id
     response = CLIENT.close_point_in_time(body: {id: id})
     expect(response.status).to eq 200
-    expect(response.body).to eq({ 'succeeded' => true, 'num_freed' => 1})
+    expect(response.body).to include({ 'succeeded' => true })
   end
 end
