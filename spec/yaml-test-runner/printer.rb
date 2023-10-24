@@ -30,10 +30,9 @@ module Elastic
       end
 
       def print_error(e)
-        puts "🤬 ERROR: #{@file} #{@title} failed\n"
+        puts "❌ ERROR: #{@file} #{@title} failed\n"
         LOGGER.error e.display
         LOGGER.error "#{e.backtrace}\n"
-        raise e
       end
 
       def test_filename(file)

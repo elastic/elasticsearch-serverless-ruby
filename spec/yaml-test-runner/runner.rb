@@ -27,6 +27,9 @@ LOGGER.level = Logger::WARN unless ENV['DEBUG']
 
 raise RuntimeError, "Couldn't find test files. Run rake spec:download_tests to download the tests in spec/tmp" unless File.directory?(PATH)
 
+@tests_count = 0
+@errors = []
+
 Dir.glob("#{PATH}/**/*.yml").map do |test_file|
   yaml = YAML.load_stream(File.read(test_file))
 
@@ -35,11 +38,23 @@ Dir.glob("#{PATH}/**/*.yml").map do |test_file|
   teardown = yaml.map.with_index { |a, i| yaml.delete_at(i) if a.keys.first == 'teardown' }.compact.first
   title, actions = yaml.first.first
   test = Elastic::TestRunner::Test.new(title, test_file, setup, actions, teardown)
+  @tests_count += 1
   test.execute
 rescue Psych::SyntaxError => e
+  @errors << { error: e, file: test_file }
   LOGGER.warn("YAML error in #{test_file}")
   LOGGER.warn e
 rescue StandardError => e
-  puts("🤬 ERROR: File #{test_file}")
+  @errors << { error: e, file: test_file }
+  puts("❌ ERROR: File #{test_file}")
   LOGGER.warn e
+end
+
+puts "--- 🧪 Tests: #{@tests_count} | Passed: #{@tests_count - @errors.count} | Failed: #{@errors.count}"
+unless @errors.empty?
+  puts "+++ ❌ Errors: #{@errors.count}"
+  @errors.map do |error|
+    puts "* Test: #{error[:file]}\n #{error[:error].message}"
+  end
+  exit 1
 end
