@@ -69,7 +69,7 @@ module Elastic
       def run_teardown
         return unless @teardown
 
-        do_action(@teardown['teardown'].first['do'])
+        @teardown['teardown'].map { |step| do_action(step['do']) }
       end
     end
   end
