@@ -20,7 +20,8 @@ require 'yaml'
 require_relative '../spec_helper'
 require_relative './test'
 
-PATH = File.expand_path('../../tmp/tests', __FILE__)
+PATH = File.expand_path('../../tmp', __FILE__)
+
 LOGGER = Logger.new($stdout)
 LOGGER.level = Logger::WARN unless ENV['DEBUG']
 
