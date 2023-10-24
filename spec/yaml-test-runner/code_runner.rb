@@ -45,8 +45,10 @@ module Elastic
         LOGGER.debug("\n#{@response}\n")
       rescue Elastic::Transport::Transport::Error => e
         print_error(e)
+        raise e
       rescue StandardError => e
         print_error(e)
+        raise e
       end
 
       # Code for matching expectations and response
@@ -63,6 +65,7 @@ module Elastic
           print_success
         else
           print_failure(action, @response[k])
+          raise StandardError.new("Failure: #{action}, #{@response}")
         end
       end
 
