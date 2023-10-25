@@ -61,11 +61,41 @@ module Elastic
         end
 
         result = search_in_response(k)
-        if result == v || result.include?(v)
+
+        if result && (result == v || result.include?(v))
           print_success
         else
-          print_failure(action, @response[k])
+          print_failure(action, @response)
+          # TODO replace with custom exception so we don't print it out again in caller code
           raise StandardError.new("Failure: #{action}, #{@response}")
+        end
+      end
+
+      def do_length(action)
+        k, v = action['length'].first
+
+        result = search_in_response(k).count
+        if result && result == v
+          print_success
+        else
+          # TODO: Extract this
+          print_failure(action, @response)
+        end
+      end
+
+      def is_true(action)
+        if @response == true
+          print_success
+        else
+          print_failure(action, @response)
+        end
+      end
+
+      def is_false(action)
+        if @response == false
+          print_success
+        else
+          print_failure(action, @response)
         end
       end
 

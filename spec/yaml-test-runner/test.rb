@@ -57,6 +57,12 @@ module Elastic
           set_variable(action)
         when 'match'
           do_match(action)
+        when 'length'
+          do_length(action)
+        when 'is_true'
+          is_true(action)
+        when 'is_false'
+          is_false(action)
         end
       end
 

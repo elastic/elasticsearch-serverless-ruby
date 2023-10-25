@@ -19,14 +19,18 @@ module Elastic
   module TestRunner
     module Printer
       def print_success
-        puts "✅ #{@file} #{@title} passed. Response: #{@response.status}"
+        response = if [true, false].include? @response
+                     @response
+                   else
+                     @response.status
+                   end
+        puts "✅ #{@file} #{@title} passed. Response: #{response}"
       end
 
-      def print_failure(action, response_value)
+      def print_failure(action, response)
         puts "❌ #{@file} #{@title} failed"
-        puts "Expected result: #{action['match']}"
-        puts "Result in response: #{response_value}"
-        LOGGER.debug "\n#{@respons}\n"
+        puts "Expected result: #{action}" # TODO: Show match/length differently
+        puts "Response: #{response}"
       end
 
       def print_error(e)
