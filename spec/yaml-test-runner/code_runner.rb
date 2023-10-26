@@ -83,8 +83,11 @@ module Elastic
         end
       end
 
+      #
+      # action - { 'is_true' => field } or { 'is_true' => '' }
+      #
       def is_true(action)
-        if @response == true
+        if @response == true || !@response[action['is_true']].nil?
           print_success
         else
           print_failure(action, @response)
