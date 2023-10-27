@@ -30,7 +30,10 @@ raise RuntimeError, "Couldn't find test files. Run rake spec:download_tests to d
 @tests_count = 0
 @errors = []
 
+SKIPPED_TESTS = File.read(File.expand_path('./skipped_tests', __dir__)).split("\n")
+
 Dir.glob("#{PATH}/**/*.yml").map do |test_file|
+  next if SKIPPED_TESTS.include?(test_file.split('/').last(2).join('/'))
   yaml = YAML.load_stream(File.read(test_file))
 
   # Create the test object:
