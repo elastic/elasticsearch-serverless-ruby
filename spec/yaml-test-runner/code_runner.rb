@@ -62,7 +62,9 @@ module Elastic
 
         result = search_in_response(k)
 
-        if !result.nil? && (result == v || result&.include?(v))
+        if !result.nil? && (
+             result == v || (result.respond_to?(:include?) && result.include?(v))
+           )
           print_success
         else
           print_failure(action, @response)
