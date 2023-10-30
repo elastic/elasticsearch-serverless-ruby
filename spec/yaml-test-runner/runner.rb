@@ -31,8 +31,13 @@ raise RuntimeError, "Couldn't find test files. Run rake spec:download_tests to d
 @errors = []
 
 SKIPPED_TESTS = File.read(File.expand_path('./skipped_tests', __dir__)).split("\n")
+test_files = if ENV['SINGLE_TEST']
+               ["#{PATH}/tests/#{ENV['SINGLE_TEST']}"]
+             else
+               Dir.glob("#{PATH}/**/*.yml")
+             end
 
-Dir.glob("#{PATH}/**/*.yml").map do |test_file|
+test_files.map do |test_file|
   next if SKIPPED_TESTS.include?(test_file.split('/').last(2).join('/'))
   yaml = YAML.load_stream(File.read(test_file))
 
