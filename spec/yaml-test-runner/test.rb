@@ -63,6 +63,8 @@ module Elastic
           is_true(action)
         when 'is_false'
           is_false(action)
+        when 'gt', 'gte', 'lt', 'lte'
+          compare(action)
         end
       end
 
