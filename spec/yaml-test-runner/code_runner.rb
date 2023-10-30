@@ -18,6 +18,12 @@
 module Elastic
   module TestRunner
     module CodeRunner
+      COMPARATORS = {
+        'lt' => '<',
+        'lte' => '<=',
+        'gt' => '>',
+        'gte' => '>='
+      }.freeze
       # The main functionality in the test runner, run actions with the client from YAML `do`
       # specifications.
       #
@@ -98,6 +104,22 @@ module Elastic
 
       def is_false(action)
         if @response == false
+          print_success
+        else
+          print_failure(action, @response)
+        end
+      end
+
+      #
+      # Used for comparing gte (greater or equal than), gt (greater than), lte (less or equal than)
+      # and lt (less than)
+      # action - { 'gte' => { 'key' => value } }
+      #
+      def compare(action)
+        operator, value = action.first
+
+        result = search_in_response(value.keys.first)
+        if result && result.send(COMPARATORS[operator], value[value.keys.first])
           print_success
         else
           print_failure(action, @response)
