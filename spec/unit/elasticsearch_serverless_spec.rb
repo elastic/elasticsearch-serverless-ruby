@@ -43,6 +43,7 @@ describe ElasticsearchServerless::Client do
                transport_options: {
                  headers: {
                    "Authorization" => "ApiKey test",
+                   "Elastic-Api-Version" => '2023-10-31',
                    user_agent: ElasticsearchServerless::Client.new(url: 'test', api_key: 'test').user_agent
                  }
                },
