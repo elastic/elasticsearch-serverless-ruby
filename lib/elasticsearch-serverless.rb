@@ -51,6 +51,7 @@ module ElasticsearchServerless
         transport_options: {
           headers: {
             'Authorization' => "ApiKey #{api_key}",
+            'Elastic-Api-Version' => ElasticsearchServerless::API_VERSION,
             user_agent: user_agent
           },
         },
