@@ -156,6 +156,7 @@ module Elastic
       def process_params(params)
         params = params.transform_keys(&:to_sym)
         params.map do |key, param|
+          params[key] = process_params(param) if param.is_a?(Hash)
           if param.is_a?(String) && param.include?('$')
             params[key] = instance_variable_get(param.gsub('$', '@'))
           end
