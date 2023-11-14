@@ -157,13 +157,17 @@ module Elastic
         params = params.transform_keys(&:to_sym)
         params.map do |key, param|
           params[key] = process_params(param) if param.is_a?(Hash)
-          if param.is_a?(String) && param.include?('$')
-            params[key] = instance_variable_get(param.gsub('$', '@'))
-          end
+          set_param_variable(params, key, param)
+          param.map { |param| set_private_variable(params, key, param) } if param.is_a?(Array)
         end
         params
       end
 
+      def set_param_variable(params, key, param)
+        if param.is_a?(String) && param.include?('$')
+          params[key] = instance_variable_get(param.gsub('$', '@'))
+        end
+      end
       # Given a list of keys, find the value in a recursively nested document.
       #
       # @param [ Array<String> ] chain The list of nested document keys.
