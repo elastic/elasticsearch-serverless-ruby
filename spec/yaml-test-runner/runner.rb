@@ -44,10 +44,13 @@ test_files.map do |test_file|
   # Create the test object:
   setup = yaml.map.with_index { |a, i| yaml.delete_at(i) if a.keys.first == 'setup' }.compact.first&.[]('setup')
   teardown = yaml.map.with_index { |a, i| yaml.delete_at(i) if a.keys.first == 'teardown' }.compact.first
-  title, actions = yaml.first.first
-  test = Elastic::TestRunner::Test.new(title, test_file, setup, actions, teardown)
-  @tests_count += 1
-  test.execute
+
+  yaml.each do |test_data|
+    title, actions = test_data.first
+    test = Elastic::TestRunner::Test.new(title, test_file, setup, actions, teardown)
+    @tests_count += 1
+    test.execute
+  end
 rescue Psych::SyntaxError => e
   @errors << { error: e, file: test_file }
   LOGGER.warn("YAML error in #{test_file}")
