@@ -158,7 +158,7 @@ module Elastic
         params.map do |key, param|
           params[key] = process_params(param) if param.is_a?(Hash)
           set_param_variable(params, key, param)
-          param.map { |param| set_private_variable(params, key, param) } if param.is_a?(Array)
+          param.map { |param| set_param_variable(params, key, param) } if param.is_a?(Array)
         end
         params
       end
