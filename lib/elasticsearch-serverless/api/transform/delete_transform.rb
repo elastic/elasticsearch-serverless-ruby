@@ -26,6 +26,7 @@ module ElasticsearchServerless
         #
         # @option arguments [String] :transform_id Identifier for the transform. (*Required*)
         # @option arguments [Boolean] :force If this value is false, the transform must be stopped before it can be deleted. If true, the transform is deleted regardless of its current state.
+        # @option arguments [Boolean] :delete_dest_index If this value is true, the destination index is deleted together with the transform. If false, the destination index will not be deleted
         # @option arguments [Time] :timeout Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error. Server default: 30s.
         # @option arguments [Hash] :headers Custom HTTP headers
         #
