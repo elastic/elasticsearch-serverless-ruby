@@ -130,7 +130,7 @@ module Elastic
       # from the response.
       def set_variable(action)
         k, v = action['set'].first
-        instance_variable_set("@#{v}", @response[k])
+        instance_variable_set("@#{v}", search_in_response(k))
       end
 
       private
