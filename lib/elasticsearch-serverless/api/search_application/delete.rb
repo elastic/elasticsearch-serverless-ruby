@@ -31,7 +31,7 @@ module ElasticsearchServerless
         # @option arguments [String] :name The name of the search application to delete (*Required*)
         # @option arguments [Hash] :headers Custom HTTP headers
         #
-        # @see https://www.elastic.co/guide/en/elasticsearch/reference/master/put-search-application.html
+        # @see https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-search-application.html
         #
         def delete(arguments = {})
           raise ArgumentError, "Required argument 'name' missing" unless arguments[:name]
