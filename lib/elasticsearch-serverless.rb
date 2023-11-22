@@ -95,11 +95,9 @@ end
 module Elastic
   # If the version is X.X.X.pre/alpha/beta, use X.X.Xp for the meta-header:
   def self.client_meta_version
-    regexp = /^([0-9]+\.[0-9]+\.[0-9]+)\.?([a-z0-9.-]+)?$/
-    match = ElasticsearchServerless::VERSION.match(regexp)
-    return "#{match[1]}p" if match[2]
+    return "#{ElasticsearchServerless::CLIENT_VERSION}p" if ElasticsearchServerless::VERSION.match(/[a-z]+/)
 
-    ElasticsearchServerless::VERSION
+    ElasticsearchServerless::CLIENT_VERSION
   end
 
   ELASTICSEARCH_SERVICE_VERSION = [:esv, client_meta_version].freeze
