@@ -27,7 +27,7 @@ module ElasticsearchServerless
         # @option arguments [String] :id Identifier for the search. (*Required*)
         # @option arguments [Hash] :headers Custom HTTP headers
         #
-        # @see  https://www.elastic.co/guide/en/elasticsearch/reference/current/get-async-eql-status-api.html
+        # @see https://www.elastic.co/guide/en/elasticsearch/reference/current/get-async-eql-status-api.html
         #
         def get_status(arguments = {})
           raise ArgumentError, "Required argument 'id' missing" unless arguments[:id]

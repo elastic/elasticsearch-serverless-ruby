@@ -29,7 +29,7 @@ module ElasticsearchServerless
         # @option arguments [Time] :wait_for_completion_timeout Timeout duration to wait for the request to finish. Defaults to no timeout, meaning the request waits for complete search results.
         # @option arguments [Hash] :headers Custom HTTP headers
         #
-        # @see  https://www.elastic.co/guide/en/elasticsearch/reference/current/get-async-eql-search-api.html
+        # @see https://www.elastic.co/guide/en/elasticsearch/reference/current/get-async-eql-search-api.html
         #
         def get(arguments = {})
           raise ArgumentError, "Required argument 'id' missing" unless arguments[:id]
