@@ -1,5 +1,40 @@
 # Changelog
 
+## 0.0.9.20231031.pre
+
+### Client
+
+- General updates in documentation.
+- API integration tests were migrated to run with the clients common YAML test suite.
+- Refactored the client version into API_VERSION and CLIENT_VERSION for better API versioning in the future.
+
+### API updates
+
+See [APIs](https://github.com/elastic/elasticsearch-serverless-ruby/blob/main/docs/apis.md) for the full list of available endpoints.
+
+New APIs in this release:
+
+* `cat.ml_data_frame_analytics`
+* `cat.ml_datafeeds`
+* `cat.ml_jobs`
+* `cat.ml_trained_models`
+* `indices.add_block`
+* `indices.create_data_stream`
+* `indices.data_streams_stats`
+* `indices.delete_data_stream`
+* `indices.delete_index_template`
+* `indices.get_data_stream`
+* `indices.put_index_template`
+* `query_ruleset.delete`
+* `query_ruleset.get`
+* `query_ruleset.list`
+* `query_ruleset.put`
+* `search_application.delete_behavioral_analytics`
+* `search_application.get_behavioral_analytics`
+* `search_application.put_behavioral_analytics`
+* `search_mvt`
+* `security.has_privileges`
+
 ## 0.0.8.20231030.pre
 
 First public release of the Elasticsearch Serverless Ruby Client.
