@@ -92,10 +92,12 @@ module Elastic
       end
 
       #
+      # The specified key exists and has a true value (ie not 0, false, undefined, null)
       # action - { 'is_true' => field } or { 'is_true' => '' }
       #
       def is_true(action)
-        if @response == true || !@response[action['is_true']].nil?
+        response_value = search_in_response(action['is_true']) unless [true, false].include? @response
+        if @response == true || !response_value.nil?
           print_success
         else
           print_failure(action, @response)
@@ -103,7 +105,8 @@ module Elastic
       end
 
       def is_false(action)
-        if @response == false
+        response_value = search_in_response(action['is_false']) unless [true, false].include? @response
+        if @response == false || response_value.nil? || [false, 'false'].include?(response_value)
           print_success
         else
           print_failure(action, @response)
