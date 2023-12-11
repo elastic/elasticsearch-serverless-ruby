@@ -29,5 +29,10 @@ describe ElasticsearchServerless::Client do
       response = CLIENT.indices.delete(index: 'not_existent', ignore: 404)
       expect(response.status).to eq 404
     end
+
+    it 'uses namespace aliases' do
+      expect(CLIENT.ml).to be_a(MachineLearningClient)
+      expect(CLIENT.machine_learning).to be_a(MachineLearningClient)
+    end
   end
 end

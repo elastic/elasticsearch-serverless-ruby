@@ -66,6 +66,7 @@ module ElasticsearchServerless
       :ingest,
       :license,
       :logstash,
+      :machine_learning,
       :query_ruleset,
       :search_application,
       :security,
@@ -73,13 +74,10 @@ module ElasticsearchServerless
       :synonyms,
       :transform
     ].freeze
-
     UPPERCASE_APIS = ['sql'].freeze
 
     API_NAMESPACES.each do |namespace|
       name = namespace.to_s
-      # TODO: consider if we need to do something for APIs that have aliases (if any of these are
-      # available in serverless), like 'ccr', 'ilm', 'ml' and 'slm'
       module_name = if UPPERCASE_APIS.include?(name)
                       name.upcase
                     else
@@ -95,5 +93,7 @@ module ElasticsearchServerless
         instance_variable_set("@#{name}", klass.new(self))
       end
     end
+    # TODO: If there are more aliases, make this dynamic and add them to constant
+    alias :ml :machine_learning
   end
 end
