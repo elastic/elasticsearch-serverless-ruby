@@ -129,5 +129,6 @@ describe Elasticsearch::Client do
     response = client.search(index: 'books-reindexed', body: { query: { match_all: {} } })
     expect(response.status).to eq 200
     expect(response['hits']['hits'].count).to eq 10
+    client.indices.delete(index: 'books-reindexed')
   end
 end
