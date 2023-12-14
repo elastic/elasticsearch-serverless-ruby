@@ -23,10 +23,6 @@ module ElasticsearchServerless
     module Synonyms
       module Actions
         # Retrieves a summary of all defined synonym sets
-        # This functionality is Experimental and may be changed or removed
-        # completely in a future release. Elastic will take a best effort approach
-        # to fix any issues, but experimental features are not subject to the
-        # support SLA of official GA features.
         #
         # @option arguments [Integer] :from Starting offset Server default: 0.
         # @option arguments [Integer] :size specifies a max number of results to get Server default: 10.
