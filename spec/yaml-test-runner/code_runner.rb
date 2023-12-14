@@ -49,12 +49,8 @@ module Elastic
           process_params(params)
         )
         LOGGER.debug("\n#{@response}\n")
-      rescue Elastic::Transport::Transport::Error => e
-        print_error(e)
-        raise e
       rescue StandardError => e
         print_error(e)
-        raise e
       end
 
       # Code for matching expectations and response
@@ -73,9 +69,7 @@ module Elastic
            )
           print_success
         else
-          print_failure(action, @response)
-          # TODO replace with custom exception so we don't print it out again in caller code
-          raise StandardError.new("Failure: #{action}, #{@response}")
+          print_match_failure(action, @response)
         end
       end
 
