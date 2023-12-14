@@ -39,6 +39,7 @@ test_files = if ENV['SINGLE_TEST']
 
 test_files.map do |test_file|
   next if SKIPPED_TESTS.include?(test_file.split('/').last(2).join('/'))
+
   yaml = YAML.load_stream(File.read(test_file))
 
   # Create the test object:
@@ -65,7 +66,9 @@ puts "--- 🧪 Tests: #{@tests_count} | Passed: #{@tests_count - @errors.count} 
 unless @errors.empty?
   puts "+++ ❌ Errors: #{@errors.count}"
   @errors.map do |error|
+    puts
     puts "* Test: #{error[:file]}\n #{error[:error].message}"
+    puts
   end
   exit 1
 end

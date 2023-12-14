@@ -24,19 +24,34 @@ module Elastic
                    else
                      @response.status
                    end
-        puts "✅ #{@file} #{@title} passed. Response: #{response}"
+        puts "🟢 #{@file} #{@title} passed. Response: #{response}"
       end
 
       def print_failure(action, response)
-        puts "❌ #{@file} #{@title} failed"
+        puts "🔴 #{@file} #{@title} failed"
         puts "Expected result: #{action}" # TODO: Show match/length differently
-        puts "Response: #{response}"
+        if response.is_a?(ElasticsearchServerless::API::Response)
+          puts 'Response:'
+          pp response.body
+        else
+          pp response
+        end
+      end
+
+      def print_match_failure(action, response)
+        keys = action['match'].keys.first
+        value = action['match'].values.first
+        puts "🔴 #{@file} #{@title} failed"
+        puts "Expected: { #{keys}: #{value} }"
+        puts "Actual  : { #{keys}: #{search_in_response(action['match'].keys.first)} }"
+        LOGGER.debug @response
       end
 
       def print_error(e)
         puts "❌ ERROR: #{@file} #{@title} failed\n"
         LOGGER.error e.display
-        LOGGER.error "#{e.backtrace}\n"
+        backtrace = e.backtrace.join("\n")
+        LOGGER.error "#{backtrace}\n"
       end
 
       def test_filename(file)
