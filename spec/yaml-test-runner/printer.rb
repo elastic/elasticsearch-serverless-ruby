@@ -14,6 +14,7 @@
 # KIND, either express or implied.  See the License for the
 # specific language governing permissions and limitations
 # under the License.
+require_relative 'errors'
 
 module Elastic
   module TestRunner
@@ -36,6 +37,7 @@ module Elastic
         else
           pp response
         end
+        raise Elastic::TestRunner::TestFailure
       end
 
       def print_match_failure(action, response)
@@ -45,6 +47,7 @@ module Elastic
         puts "Expected: { #{keys}: #{value} }"
         puts "Actual  : { #{keys}: #{search_in_response(action['match'].keys.first)} }"
         LOGGER.debug @response
+        raise Elastic::TestRunner::TestFailure
       end
 
       def print_error(e)
@@ -52,6 +55,7 @@ module Elastic
         LOGGER.error e.display
         backtrace = e.backtrace.join("\n")
         LOGGER.error "#{backtrace}\n"
+        raise e
       end
 
       def test_filename(file)

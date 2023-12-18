@@ -49,8 +49,8 @@ test_files.map do |test_file|
   yaml.each do |test_data|
     title, actions = test_data.first
     test = Elastic::TestRunner::Test.new(title, test_file, setup, actions, teardown)
-    @tests_count += 1
     test.execute
+    @tests_count += test.count
   end
 rescue Psych::SyntaxError => e
   @errors << { error: e, file: test_file }
@@ -58,8 +58,7 @@ rescue Psych::SyntaxError => e
   LOGGER.warn e
 rescue StandardError => e
   @errors << { error: e, file: test_file }
-  puts("❌ ERROR: File #{test_file}")
-  LOGGER.warn e
+  LOGGER.debug e
 end
 
 puts "--- 🧪 Tests: #{@tests_count} | Passed: #{@tests_count - @errors.count} | Failed: #{@errors.count}"

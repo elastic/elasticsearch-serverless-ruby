@@ -79,6 +79,10 @@ module Elastic
 
         @teardown['teardown'].map { |step| do_action(step['do']) }
       end
+
+      def count
+        @actions.length
+      end
     end
   end
 end
