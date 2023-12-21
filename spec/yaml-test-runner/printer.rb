@@ -43,11 +43,13 @@ module Elastic
       def print_match_failure(action, response)
         keys = action['match'].keys.first
         value = action['match'].values.first
-        puts "🔴 #{@file} #{@title} failed"
-        puts "Expected: { #{keys}: #{value} }"
-        puts "Actual  : { #{keys}: #{search_in_response(action['match'].keys.first)} }"
+        message = <<~MSG
+                  🔴 #{@file} #{@title} failed
+                  Expected: { #{keys}: #{value} }
+                  Actual  : { #{keys}: #{search_in_response(action['match'].keys.first)} }
+                MSG
         LOGGER.debug @response
-        raise Elastic::TestRunner::TestFailure
+        raise Elastic::TestRunner::TestFailure.new(message)
       end
 
       def print_error(e)
