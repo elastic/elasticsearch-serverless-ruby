@@ -27,6 +27,7 @@ LOGGER.level = Logger::WARN unless ENV['DEBUG']
 
 raise RuntimeError, "Couldn't find test files. Run rake spec:download_tests to download the tests in spec/tmp" unless File.directory?(PATH)
 
+starttime = Time.now
 @tests_count = 0
 @errors = []
 
@@ -62,8 +63,9 @@ rescue StandardError => e
 end
 
 puts "--- 🧪 Tests: #{@tests_count} | Passed: #{@tests_count - @errors.count} | Failed: #{@errors.count}"
+puts "--- ⏲  Elapsed time: #{Time.at(Time.now - starttime).utc.strftime("%H:%M:%S")}"
 unless @errors.empty?
-  puts "+++ ❌ Errors: #{@errors.count}"
+  puts "+++ ❌ Errors/Failures: #{@errors.count}"
   @errors.map do |error|
     puts
     puts "* Test: #{error[:file]}\n #{error[:error].message}"
