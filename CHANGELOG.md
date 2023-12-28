@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.1.0.20231031.pre
+
+- A lot of Serverless APIs were added to the client. 200 Serverless endpoints are supported and tested via the client starting in this version. See [APIs](https://github.com/elastic/elasticsearch-serverless-ruby/blob/main/docs/apis.md) for the full list of available endpoints, a brief description and the link to the official docs on each API.
+- New namespace `machine_learning` added, can be used with alias `ml`. E.g.:
+```ruby
+client.ml.get_jobs
+client.machine_learning.get_jobs
+```
+
 ## 0.0.9.20231031.pre
 
 ### Client
