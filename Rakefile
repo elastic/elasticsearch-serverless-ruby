@@ -62,7 +62,7 @@ namespace :spec do
     github_token = check_for_token
     path = 'spec/tmp'
     filename = 'tests.zip'
-    url = 'https://api.github.com/repos/elastic/serverless-clients-tests/zipball/main'
+    url = 'https://api.github.com/repos/elastic/elasticsearch-clients-tests/zipball/main'
 
     File.open(filename, "w") do |downloaded_file|
       URI.open(
