@@ -45,21 +45,9 @@ namespace :spec do
     t.pattern = Dir.glob('spec/**/*_spec.rb')
   end
 
-  def check_for_token
-    begin
-      github_token = ENV['GITHUB_TOKEN'] || File.read(File.expand_path("~/.elastic/github.token"))
-    rescue Errno::ENOENT => e
-    end
-    raise ArgumentError, 'GITHUB_TOKEN needs to be provided either as an env variable or in ~/.elastic/github.token' unless github_token
-
-    github_token
-  end
-
   desc 'Download test suite to ./spec/tmp'
   task :download_tests do
     require 'open-uri'
-
-    github_token = check_for_token
     path = 'spec/tmp'
     filename = 'tests.zip'
     url = 'https://api.github.com/repos/elastic/elasticsearch-clients-tests/zipball/main'
@@ -67,8 +55,7 @@ namespace :spec do
     File.open(filename, "w") do |downloaded_file|
       URI.open(
         url,
-        'Authorization' => "Bearer #{github_token}",
-        'Accept' => 'application/vnd.github+json',
+        'Accept' => 'application/vnd.github+json'
       ) do |artifact_file|
         downloaded_file.write(artifact_file.read)
       end
@@ -84,6 +71,11 @@ namespace :spec do
     `unzip #{filename} -d spec/tmp/`
     puts "Removing zip file"
     File.delete(filename)
+  end
+
+  desc 'Clean tests folder'
+  task :clean_tests do
+    FileUtils.rm_rf(Dir.glob('./spec/tmp/**/*'), secure: true)
   end
 
   desc 'Run YAML test runner'
