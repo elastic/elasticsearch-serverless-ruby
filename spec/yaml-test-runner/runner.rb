@@ -44,6 +44,7 @@ test_files.map do |test_file|
   yaml = YAML.load_stream(File.read(test_file))
 
   # Create the test object:
+  requires = yaml.map.with_index { |a, i| yaml.delete_at(i) if a.keys.first == 'requires' }.compact
   setup = yaml.map.with_index { |a, i| yaml.delete_at(i) if a.keys.first == 'setup' }.compact.first&.[]('setup')
   teardown = yaml.map.with_index { |a, i| yaml.delete_at(i) if a.keys.first == 'teardown' }.compact.first
 
@@ -62,8 +63,6 @@ rescue StandardError => e
   LOGGER.debug e
 end
 
-puts "--- 🧪 Tests: #{@tests_count} | Passed: #{@tests_count - @errors.count} | Failed: #{@errors.count}"
-puts "--- ⏲  Elapsed time: #{Time.at(Time.now - starttime).utc.strftime("%H:%M:%S")}"
 unless @errors.empty?
   puts "+++ ❌ Errors/Failures: #{@errors.count}"
   @errors.map do |error|
@@ -73,3 +72,5 @@ unless @errors.empty?
   end
   exit 1
 end
+puts "--- 🧪 Tests: #{@tests_count} | Passed: #{@tests_count - @errors.count} | Failed: #{@errors.count}"
+puts "--- ⏲  Elapsed time: #{Time.at(Time.now - starttime).utc.strftime("%H:%M:%S")}"
