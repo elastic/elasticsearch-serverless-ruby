@@ -95,7 +95,12 @@ module Elastic
       # action - { 'is_true' => field } or { 'is_true' => '' }
       #
       def is_true(action)
-        response_value = search_in_response(action['is_true']) unless [true, false].include? @response
+        if @response.respond_to?(:body) && !@response&.nil? && ['', []].include?(action['is_true'])
+          print_success
+          return
+        end
+
+        response_value = search_in_response(action['is_true']) unless [true, false].include?(@response)
         if @response == true || !response_value.nil?
           print_success
         else
