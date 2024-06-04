@@ -65,12 +65,18 @@ module Elastic
         result = search_in_response(k)
 
         if !result.nil? && (
-             result == v || (result.respond_to?(:include?) && result.include?(v))
+             result == v ||
+             (result.respond_to?(:include?) && result.include?(v)) ||
+             match_regexp(v, result)
            )
           print_success
         else
           print_match_failure(action, @response)
         end
+      end
+
+      def match_regexp(expected, result)
+        expected.is_a?(String) && expected.match?(/^\//) && result.match?(Regexp.new(expected.gsub('/', '')))
       end
 
       def do_length(action)
@@ -80,7 +86,6 @@ module Elastic
         if result && result == v
           print_success
         else
-          # TODO: Extract this
           print_failure(action, @response)
         end
       end
