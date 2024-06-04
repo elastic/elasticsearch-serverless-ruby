@@ -19,9 +19,6 @@ docker build \
 
 echo "--- :ruby: Running $TEST_SUITE tests"
 
-GITHUB_TOKEN=$(vault read -field=token "$GITHUB_TOKEN_PATH")
-export GITHUB_TOKEN
-
 docker run \
        -e "TEST_SUITE=${TEST_SUITE}" \
        -e "ELASTIC_USER=elastic" \
@@ -29,7 +26,6 @@ docker run \
        -e "TRANSPORT_VERSION=${TRANSPORT_VERSION}" \
        -e "ELASTICSEARCH_URL=${ELASTICSEARCH_URL}" \
        -e "API_KEY=${ES_API_SECRET_KEY}" \
-       -e "GITHUB_TOKEN" \
        --volume $repo:/usr/src/app \
        --name elasticsearch-ruby \
        --rm \
