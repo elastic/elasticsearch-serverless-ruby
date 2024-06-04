@@ -43,7 +43,6 @@ module Elastic
           client = CLIENT.send(arrayed_method.first)
           method = arrayed_method.last
         end
-
         @response = client.send(
           method.to_sym,
           process_params(params)
@@ -126,7 +125,7 @@ module Elastic
         operator, value = action.first
 
         result = search_in_response(value.keys.first)
-        if result && result.send(COMPARATORS[operator], value[value.keys.first])
+        if result&.send(COMPARATORS[operator], value[value.keys.first])
           print_success
         else
           print_failure(action, @response)

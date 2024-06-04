@@ -71,7 +71,9 @@ module Elastic
       def run_setup
         return unless @setup
 
-        @setup.map { |step| do_action(step['do']) }
+        @setup.map do |step|
+          do_action(step['do']) if step['do']
+        end
       end
 
       def run_teardown

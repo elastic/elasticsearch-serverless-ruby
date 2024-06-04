@@ -37,17 +37,14 @@ test_files = if ENV['SINGLE_TEST']
              else
                Dir.glob("#{PATH}/**/*.yml")
              end
-
 test_files.map do |test_file|
   next if SKIPPED_TESTS.include?(test_file.split('/').last(2).join('/'))
 
   yaml = YAML.load_stream(File.read(test_file))
-
   # Create the test object:
   requires = yaml.map.with_index { |a, i| yaml.delete_at(i) if a.keys.first == 'requires' }.compact
   setup = yaml.map.with_index { |a, i| yaml.delete_at(i) if a.keys.first == 'setup' }.compact.first&.[]('setup')
   teardown = yaml.map.with_index { |a, i| yaml.delete_at(i) if a.keys.first == 'teardown' }.compact.first
-
   yaml.each do |test_data|
     title, actions = test_data.first
     test = Elastic::TestRunner::Test.new(title, test_file, setup, actions, teardown)
