@@ -52,7 +52,7 @@ namespace :spec do
     filename = 'tests.zip'
     url = 'https://api.github.com/repos/elastic/elasticsearch-clients-tests/zipball/main'
 
-    File.open(filename, "w") do |downloaded_file|
+    File.open(filename, 'w') do |downloaded_file|
       URI.open(
         url,
         'Accept' => 'application/vnd.github+json'
