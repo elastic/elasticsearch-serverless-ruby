@@ -26,6 +26,8 @@ module ElasticsearchServerless
         #
         # @option arguments [String] :name Index or template name (*Required*)
         # @option arguments [Boolean] :create If +true+, this request cannot replace or update existing index templates.
+        # @option arguments [Time] :master_timeout Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error. Server default: 30s.
+        # @option arguments [String] :cause User defined reason for creating/updating the index template
         # @option arguments [Hash] :headers Custom HTTP headers
         # @option arguments [Hash] :body request body
         #
