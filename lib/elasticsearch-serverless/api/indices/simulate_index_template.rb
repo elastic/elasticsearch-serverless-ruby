@@ -24,12 +24,10 @@ module ElasticsearchServerless
       module Actions
         # Simulate matching the given index name against the index templates in the system
         #
-        # @option arguments [String] :name Index or template name to simulate (*Required*)
-        # @option arguments [Boolean] :create If +true+, the template passed in the body is only used if no existing templates match the same index patterns. If +false+, the simulation uses the template with the highest priority. Note that the template is not permanently added or updated in either case; it is only used for the simulation.
+        # @option arguments [String] :name Name of the index to simulate (*Required*)
         # @option arguments [Time] :master_timeout Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error. Server default: 30s.
         # @option arguments [Boolean] :include_defaults If true, returns all relevant default configurations for the index template.
         # @option arguments [Hash] :headers Custom HTTP headers
-        # @option arguments [Hash] :body request body
         #
         # @see https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-simulate-index.html
         #
@@ -39,7 +37,7 @@ module ElasticsearchServerless
           arguments = arguments.clone
           headers = arguments.delete(:headers) || {}
 
-          body = arguments.delete(:body)
+          body = nil
 
           _name = arguments.delete(:name)
 
