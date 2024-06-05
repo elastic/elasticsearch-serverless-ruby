@@ -53,7 +53,7 @@ module ElasticsearchServerless
             'Authorization' => "ApiKey #{api_key}",
             'Elastic-Api-Version' => ElasticsearchServerless::API_VERSION,
             user_agent: user_agent
-          },
+          }
         },
         compression: true
       }

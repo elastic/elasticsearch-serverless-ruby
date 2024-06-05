@@ -19,7 +19,7 @@ require 'elasticsearch-serverless/api/response'
 require 'elasticsearch-serverless/api/utils'
 
 # Require everything in /api
-Dir["#{File.dirname(__FILE__)}/api/**/*.rb"].each { |f| require f}
+Dir["#{File.dirname(__FILE__)}/api/**/*.rb"].each { |f| require f }
 
 module ElasticsearchServerless
   module API
@@ -81,7 +81,7 @@ module ElasticsearchServerless
       module_name = if UPPERCASE_APIS.include?(name)
                       name.upcase
                     else
-                      name.split("_").map(&:capitalize).join
+                      name.split('_').map(&:capitalize).join
                     end
       class_name = "#{module_name}Client"
 
@@ -94,6 +94,6 @@ module ElasticsearchServerless
       end
     end
     # TODO: If there are more aliases, make this dynamic and add them to constant
-    alias :ml :machine_learning
+    alias ml machine_learning
   end
 end
