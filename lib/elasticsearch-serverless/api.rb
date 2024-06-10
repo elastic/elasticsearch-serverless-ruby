@@ -61,6 +61,7 @@ module ElasticsearchServerless
       :cluster,
       :enrich,
       :eql,
+      :esql,
       :graph,
       :indices,
       :ingest,
