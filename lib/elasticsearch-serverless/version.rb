@@ -18,5 +18,5 @@
 module ElasticsearchServerless
   API_VERSION = '2023-10-31'.freeze
   CLIENT_VERSION = '0.1.0'.freeze
-  VERSION = "#{CLIENT_VERSION}.#{API_VERSION.split('-').join}.pre".freeze
+  VERSION = CLIENT_VERSION
 end
