@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.1.0
+
+- Added ES|QL `query` API. See [documentation](https://www.elastic.co/guide/en/elasticsearch/reference/current/esql-rest.html).
+* `indices.put_index_template` has two parameters added:
+  * `master_timeout` Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error. Server default: 30s.
+  * `cause` User defined reason for creating/updating the index template
+
 ## 0.1.0.20231031.pre
 
 - A lot of Serverless APIs were added to the client. 200 Serverless endpoints are supported and tested via the client starting in this version. See [APIs](https://github.com/elastic/elasticsearch-serverless-ruby/blob/main/docs/apis.md) for the full list of available endpoints, a brief description and the link to the official docs on each API.
