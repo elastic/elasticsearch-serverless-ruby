@@ -80,7 +80,7 @@ namespace :spec do
 
   desc 'Run YAML test runner'
   task :yaml do
-    ruby './spec/yaml-test-runner/runner.rb'
+    ruby './spec/yaml-test-runner/run.rb'
   end
 end
 
@@ -112,7 +112,7 @@ rescue StandardError => e
   abort "[!!!] #{e.class} : #{e.message}"
 end
 
-desc "Server info"
+desc 'Server info'
 task :info do
   require 'elasticsearch-serverless'
   client = ElasticsearchServerless::Client.new(url: ENV['ELASTICSEARCH_URL'], api_key: ENV['API_KEY'])
