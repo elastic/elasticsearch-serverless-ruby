@@ -15,9 +15,15 @@
 # specific language governing permissions and limitations
 # under the License.
 
-module Elastic
-  module TestRunner
-    class TestFailure < StandardError; end
-    class TestError < StandardError; end
-  end
-end
+require 'logger'
+require 'elasticsearch/tests/test_runner'
+require 'elasticsearch/tests/downloader'
+require_relative '../spec_helper'
+
+tests_path = File.expand_path('../../tmp', __dir__)
+
+logger = Logger.new($stdout)
+logger.level = Logger::WARN unless ENV['DEBUG']
+
+Elasticsearch::Tests::Downloader::run(tests_path)
+Elasticsearch::Tests::TestRunner.new(CLIENT, tests_path, logger).run
