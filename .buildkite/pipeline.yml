@@ -21,8 +21,5 @@ steps:
       adjustments:
         - with:
             ruby_source: 'jruby'
-            ruby: '9.3'
-        - with:
-            ruby_source: 'jruby'
             ruby: '9.4'
     command: './.buildkite/run-tests.sh'
