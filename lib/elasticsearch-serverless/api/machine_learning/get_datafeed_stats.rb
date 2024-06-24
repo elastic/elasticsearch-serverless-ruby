@@ -23,6 +23,12 @@ module ElasticsearchServerless
     module MachineLearning
       module Actions
         # Retrieves usage information for datafeeds.
+        # You can get statistics for multiple datafeeds in a single API request by
+        # using a comma-separated list of datafeeds or a wildcard expression. You can
+        # get statistics for all datafeeds by using `_all`, by specifying `*` as the
+        # `<feed_id>`, or by omitting the `<feed_id>`. If the datafeed is stopped, the
+        # only information you receive is the `datafeed_id` and the `state`.
+        # This API returns a maximum of 10,000 datafeeds.
         #
         # @option arguments [String, Array] :datafeed_id Identifier for the datafeed. It can be a datafeed identifier or a wildcard expression. If you do not specify one of these options, the API returns information about all datafeeds.
         # @option arguments [Boolean] :allow_no_match Specifies what to do when the request:  1. Contains wildcard expressions and there are no datafeeds that match. 2. Contains the +_all+ string or no identifiers and there are no matches. 3. Contains wildcard expressions and there are only partial matches.  The default value is +true+, which returns an empty +datafeeds+ array when there are no matches and the subset of results when there are partial matches. If this parameter is +false+, the request returns a +404+ status code when there are no matches or only partial matches.

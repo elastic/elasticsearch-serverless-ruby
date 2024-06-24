@@ -22,7 +22,7 @@ module ElasticsearchServerless
   module API
     module Cluster
       module Actions
-        # Returns one or more component templates
+        # Retrieves information about component templates.
         #
         # @option arguments [String] :name Comma-separated list of component template names used to limit the request. Wildcard (+*+) expressions are supported.
         # @option arguments [Boolean] :flat_settings If +true+, returns settings in flat format.

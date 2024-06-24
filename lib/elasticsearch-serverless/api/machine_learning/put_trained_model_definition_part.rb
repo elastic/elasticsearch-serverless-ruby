@@ -22,7 +22,7 @@ module ElasticsearchServerless
   module API
     module MachineLearning
       module Actions
-        # Creates part of a trained model definition
+        # Creates part of a trained model definition.
         #
         # @option arguments [String] :model_id The unique identifier of the trained model. (*Required*)
         # @option arguments [Integer] :part The definition part number. When the definition is loaded for inference the definition parts are streamed in the order of their part number. The first part must be +0+ and the final part must be +total_parts - 1+. (*Required*)

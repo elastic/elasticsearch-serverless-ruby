@@ -21,7 +21,8 @@
 module ElasticsearchServerless
   module API
     module Actions
-      # Allows to perform multiple index/update/delete operations in a single request.
+      # Performs multiple indexing or delete operations in a single API call.
+      # This reduces overhead and can greatly increase indexing speed.
       #
       # @option arguments [String] :index Name of the data stream, index, or index alias to perform bulk actions on.
       # @option arguments [String] :pipeline ID of the pipeline to use to preprocess incoming documents. If the index has a default ingest pipeline specified, then setting the value to +_none+ disables the default ingest pipeline for this request. If a final pipeline is configured it will always run, regardless of the value of this parameter.

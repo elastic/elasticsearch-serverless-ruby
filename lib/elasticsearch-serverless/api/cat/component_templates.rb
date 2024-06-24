@@ -22,7 +22,10 @@ module ElasticsearchServerless
   module API
     module Cat
       module Actions
-        # Returns information about existing component_templates templates.
+        # Returns information about component templates in a cluster.
+        # Component templates are building blocks for constructing index templates that specify index mappings, settings, and aliases.
+        # IMPORTANT: cat APIs are only intended for human consumption using the command line or Kibana console.
+        # They are not intended for use by applications. For application consumption, use the get component template API.
         #
         # @option arguments [String] :name The name of the component template. Accepts wildcard expressions. If omitted, all component templates are returned.
         # @option arguments [String] :format Specifies the format to return the columnar data in, can be set to +text+, +json+, +cbor+, +yaml+, or +smile+. Server default: text.

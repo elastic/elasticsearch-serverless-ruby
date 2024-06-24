@@ -21,7 +21,7 @@
 module ElasticsearchServerless
   module API
     module Actions
-      # Allows to use the Mustache language to pre-render a search definition.
+      # Runs a search with a search template.
       #
       # @option arguments [String, Array] :index Comma-separated list of data streams, indices, and aliases to search. Supports wildcards (*).
       # @option arguments [Boolean] :allow_no_indices If +false+, the request returns an error if any wildcard expression, index alias, or +_all+ value targets only missing or closed indices. This behavior applies even if the request targets other open indices. For example, a request targeting +foo*,bar*+ returns an error if an index starts with +foo+ but no index starts with +bar+. Server default: true.

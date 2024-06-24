@@ -21,7 +21,7 @@
 module ElasticsearchServerless
   module API
     module Actions
-      # Returns information about whether a document exists in an index.
+      # Checks if a document in an index exists.
       #
       # @option arguments [String] :id Identifier of the document. (*Required*)
       # @option arguments [String] :index Comma-separated list of data streams, indices, and aliases. Supports wildcards (+*+). (*Required*)

@@ -22,8 +22,7 @@ module ElasticsearchServerless
   module API
     module Indices
       module Actions
-        # Updates an alias to point to a new index when the existing index
-        # is considered to be too large or too old.
+        # Creates a new index for a data stream or index alias.
         #
         # @option arguments [String] :alias Name of the data stream or index alias to roll over. (*Required*)
         # @option arguments [String] :new_index Name of the index to create. Supports date math. Data streams do not support this parameter.

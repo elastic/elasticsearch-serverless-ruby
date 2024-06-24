@@ -22,7 +22,8 @@ module ElasticsearchServerless
   module API
     module Indices
       module Actions
-        # Returns information about one or more indices.
+        # Returns information about one or more indices. For data streams, the API returns information about the
+        # stream’s backing indices.
         #
         # @option arguments [String, Array] :index Comma-separated list of data streams, indices, and index aliases used to limit the request. Wildcard expressions (*) are supported. (*Required*)
         # @option arguments [Boolean] :allow_no_indices If false, the request returns an error if any wildcard expression, index alias, or _all value targets only missing or closed indices. This behavior applies even if the request targets other open indices. For example, a request targeting foo*,bar* returns an error if an index starts with foo but no index starts with bar. Server default: true.

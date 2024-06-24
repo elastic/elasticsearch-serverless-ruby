@@ -22,7 +22,8 @@ module ElasticsearchServerless
   module API
     module Cluster
       module Actions
-        # Deletes a component template
+        # Deletes component templates.
+        # Component templates are building blocks for constructing index templates that specify index mappings, settings, and aliases.
         #
         # @option arguments [String, Array<String>] :name Comma-separated list or wildcard expression of component template names used to limit the request. (*Required*)
         # @option arguments [Time] :master_timeout Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error. Server default: 30s.

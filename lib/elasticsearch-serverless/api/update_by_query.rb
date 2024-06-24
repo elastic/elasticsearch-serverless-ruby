@@ -21,8 +21,8 @@
 module ElasticsearchServerless
   module API
     module Actions
-      # Performs an update on every document in the index without changing the source,
-      # for example to pick up a mapping change.
+      # Updates documents that match the specified query.
+      # If no query is specified, performs an update on every document in the data stream or index without modifying the source, which is useful for picking up mapping changes.
       #
       # @option arguments [String, Array] :index Comma-separated list of data streams, indices, and aliases to search. Supports wildcards (+*+). To search all data streams or indices, omit this parameter or use +*+ or +_all+. (*Required*)
       # @option arguments [Boolean] :allow_no_indices If +false+, the request returns an error if any wildcard expression, index alias, or +_all+ value targets only missing or closed indices. This behavior applies even if the request targets other open indices. For example, a request targeting +foo*,bar*+ returns an error if an index starts with +foo+ but no index starts with +bar+. Server default: true.

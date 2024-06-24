@@ -22,7 +22,23 @@ module ElasticsearchServerless
   module API
     module MachineLearning
       module Actions
-        # Retrieves overall bucket results that summarize the bucket results of multiple anomaly detection jobs.
+        # Retrieves overall bucket results that summarize the bucket results of
+        # multiple anomaly detection jobs.
+        #
+        # The `overall_score` is calculated by combining the scores of all the
+        # buckets within the overall bucket span. First, the maximum
+        # `anomaly_score` per anomaly detection job in the overall bucket is
+        # calculated. Then the `top_n` of those scores are averaged to result in
+        # the `overall_score`. This means that you can fine-tune the
+        # `overall_score` so that it is more or less sensitive to the number of
+        # jobs that detect an anomaly at the same time. For example, if you set
+        # `top_n` to `1`, the `overall_score` is the maximum bucket score in the
+        # overall bucket. Alternatively, if you set `top_n` to the number of jobs,
+        # the `overall_score` is high only when all jobs detect anomalies in that
+        # overall bucket. If you set the `bucket_span` parameter (to a value
+        # greater than its default), the `overall_score` is the maximum
+        # `overall_score` of the overall buckets that have a span equal to the
+        # jobs' largest bucket span.
         #
         # @option arguments [String] :job_id Identifier for the anomaly detection job. It can be a job identifier, a group name, a comma-separated list of jobs or groups, or a wildcard expression.  You can summarize the bucket results for all anomaly detection jobs by using +_all+ or by specifying +*+ as the +<job_id>+. (*Required*)
         # @option arguments [Boolean] :allow_no_match Specifies what to do when the request:  1. Contains wildcard expressions and there are no jobs that match. 2. Contains the +_all+ string or no identifiers and there are no matches. 3. Contains wildcard expressions and there are only partial matches.  If +true+, the request returns an empty +jobs+ array when there are no matches and the subset of results when there are partial matches. If this parameter is +false+, the request returns a +404+ status code when there are no matches or only partial matches. Server default: true.

@@ -21,7 +21,7 @@
 module ElasticsearchServerless
   module API
     module Actions
-      # Allows to execute several search template operations in one request.
+      # Runs multiple templated searches with a single request.
       #
       # @option arguments [String, Array] :index Comma-separated list of data streams, indices, and aliases to search. Supports wildcards (+*+). To search all data streams and indices, omit this parameter or use +*+.
       # @option arguments [Boolean] :ccs_minimize_roundtrips If +true+, network round-trips are minimized for cross-cluster search requests. Server default: true.

@@ -22,7 +22,7 @@ module ElasticsearchServerless
   module API
     module MachineLearning
       module Actions
-        # Instantiates an anomaly detection job.
+        # Instantiates an anomaly detection job. If you include a `datafeed_config`, you must have read index privileges on the source index.
         #
         # @option arguments [String] :job_id The identifier for the anomaly detection job. This identifier can contain lowercase alphanumeric characters (a-z and 0-9), hyphens, and underscores. It must start and end with alphanumeric characters. (*Required*)
         # @option arguments [Hash] :headers Custom HTTP headers

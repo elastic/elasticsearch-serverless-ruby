@@ -21,7 +21,7 @@
 module ElasticsearchServerless
   module API
     module Actions
-      # Close a point in time
+      # Closes a point-in-time.
       #
       # @option arguments [Hash] :headers Custom HTTP headers
       # @option arguments [Hash] :body request body

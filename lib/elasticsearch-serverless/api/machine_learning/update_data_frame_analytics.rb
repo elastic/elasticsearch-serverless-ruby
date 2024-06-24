@@ -22,7 +22,7 @@ module ElasticsearchServerless
   module API
     module MachineLearning
       module Actions
-        # Updates certain properties of a data frame analytics job.
+        # Updates an existing data frame analytics job.
         #
         # @option arguments [String] :id Identifier for the data frame analytics job. This identifier can contain lowercase alphanumeric characters (a-z and 0-9), hyphens, and underscores. It must start and end with alphanumeric characters. (*Required*)
         # @option arguments [Hash] :headers Custom HTTP headers

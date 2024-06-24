@@ -22,7 +22,7 @@ module ElasticsearchServerless
   module API
     module Indices
       module Actions
-        # Returns data streams.
+        # Retrieves information about one or more data streams.
         #
         # @option arguments [String, Array<String>] :name Comma-separated list of data stream names used to limit the request. Wildcard (+*+) expressions are supported. If omitted, all data streams are returned.
         # @option arguments [String, Array<String>] :expand_wildcards Type of data stream that wildcard patterns can match. Supports comma-separated values, such as +open,hidden+. Server default: open.

@@ -22,7 +22,7 @@ module ElasticsearchServerless
   module API
     module Indices
       module Actions
-        # Creates or updates an alias.
+        # Adds a data stream or index to an alias.
         #
         # @option arguments [String, Array] :index Comma-separated list of data streams or indices to add. Supports wildcards (+*+). Wildcard patterns that match both data streams and indices return an error. (*Required*)
         # @option arguments [String] :name Alias to update. If the alias doesn’t exist, the request creates it. Index alias names support date math. (*Required*)

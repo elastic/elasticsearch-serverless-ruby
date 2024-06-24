@@ -22,7 +22,9 @@ module ElasticsearchServerless
   module API
     module Security
       module Actions
-        # Enables authentication as a user and retrieve information about the authenticated user.
+        # Enables you to submit a request with a basic auth header to authenticate a user and retrieve information about the authenticated user.
+        # A successful call returns a JSON structure that shows user information such as their username, the roles that are assigned to the user, any assigned metadata, and information about the realms that authenticated and authorized the user.
+        # If the user cannot be authenticated, this API returns a 401 status code.
         #
         # @option arguments [Hash] :headers Custom HTTP headers
         #

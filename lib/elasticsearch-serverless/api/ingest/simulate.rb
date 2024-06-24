@@ -22,7 +22,7 @@ module ElasticsearchServerless
   module API
     module Ingest
       module Actions
-        # Allows to simulate a pipeline with example documents.
+        # Executes an ingest pipeline against a set of provided documents.
         #
         # @option arguments [String] :id Pipeline to test. If you don’t specify a +pipeline+ in the request body, this parameter is required.
         # @option arguments [Boolean] :verbose If +true+, the response includes output data for each processor in the executed pipeline.

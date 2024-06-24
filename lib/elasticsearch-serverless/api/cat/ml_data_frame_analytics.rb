@@ -22,7 +22,11 @@ module ElasticsearchServerless
   module API
     module Cat
       module Actions
-        # Gets configuration and usage information about data frame analytics jobs.
+        # Returns configuration and usage information about data frame analytics jobs.
+        #
+        # IMPORTANT: cat APIs are only intended for human consumption using the Kibana
+        # console or command line. They are not intended for use by applications. For
+        # application consumption, use the get data frame analytics jobs statistics API.
         #
         # @option arguments [String] :id The ID of the data frame analytics to fetch
         # @option arguments [Boolean] :allow_no_match Whether to ignore if a wildcard expression matches no configs. (This includes +_all+ string or when no configs have been specified)

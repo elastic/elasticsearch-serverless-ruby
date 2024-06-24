@@ -22,7 +22,9 @@ module ElasticsearchServerless
   module API
     module Indices
       module Actions
-        # Updates the index mappings.
+        # Adds new fields to an existing data stream or index.
+        # You can also use this API to change the search settings of existing fields.
+        # For data streams, these changes are applied to all backing indices by default.
         #
         # @option arguments [String, Array] :index A comma-separated list of index names the mapping should be added to (supports wildcards); use +_all+ or omit to add the mapping on all indices. (*Required*)
         # @option arguments [Boolean] :allow_no_indices If +false+, the request returns an error if any wildcard expression, index alias, or +_all+ value targets only missing or closed indices. This behavior applies even if the request targets other open indices. Server default: true.

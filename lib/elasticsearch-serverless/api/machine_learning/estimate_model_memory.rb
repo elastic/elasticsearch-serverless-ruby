@@ -22,7 +22,9 @@ module ElasticsearchServerless
   module API
     module MachineLearning
       module Actions
-        # Estimates the model memory
+        # Makes an estimation of the memory usage for an anomaly detection job model.
+        # It is based on analysis configuration details for the job and cardinality
+        # estimates for the fields it references.
         #
         # @option arguments [Hash] :headers Custom HTTP headers
         # @option arguments [Hash] :body request body

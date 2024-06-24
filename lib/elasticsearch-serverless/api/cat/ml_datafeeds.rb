@@ -22,7 +22,14 @@ module ElasticsearchServerless
   module API
     module Cat
       module Actions
-        # Gets configuration and usage information about datafeeds.
+        # Returns configuration and usage information about datafeeds.
+        # This API returns a maximum of 10,000 datafeeds.
+        # If the Elasticsearch security features are enabled, you must have `monitor_ml`, `monitor`, `manage_ml`, or `manage`
+        # cluster privileges to use this API.
+        #
+        # IMPORTANT: cat APIs are only intended for human consumption using the Kibana
+        # console or command line. They are not intended for use by applications. For
+        # application consumption, use the get datafeed statistics API.
         #
         # @option arguments [String] :datafeed_id A numerical character string that uniquely identifies the datafeed.
         # @option arguments [Boolean] :allow_no_match Specifies what to do when the request:  * Contains wildcard expressions and there are no datafeeds that match. * Contains the +_all+ string or no identifiers and there are no matches. * Contains wildcard expressions and there are only partial matches.  If +true+, the API returns an empty datafeeds array when there are no matches and the subset of results when there are partial matches. If +false+, the API returns a 404 status code when there are no matches or only partial matches. Server default: true.

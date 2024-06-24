@@ -23,6 +23,8 @@ module ElasticsearchServerless
     module MachineLearning
       module Actions
         # Stops one or more datafeeds.
+        # A datafeed that is stopped ceases to retrieve data from Elasticsearch. A datafeed can be started and stopped
+        # multiple times throughout its lifecycle.
         #
         # @option arguments [String] :datafeed_id Identifier for the datafeed. You can stop multiple datafeeds in a single API request by using a comma-separated list of datafeeds or a wildcard expression. You can close all datafeeds by using +_all+ or by specifying +*+ as the identifier. (*Required*)
         # @option arguments [Boolean] :allow_no_match Specifies what to do when the request:  * Contains wildcard expressions and there are no datafeeds that match. * Contains the +_all+ string or no identifiers and there are no matches. * Contains wildcard expressions and there are only partial matches.  If +true+, the API returns an empty datafeeds array when there are no matches and the subset of results when there are partial matches. If +false+, the API returns a 404 status code when there are no matches or only partial matches. Server default: true.

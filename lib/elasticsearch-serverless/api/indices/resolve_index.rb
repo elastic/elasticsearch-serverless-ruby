@@ -22,7 +22,8 @@ module ElasticsearchServerless
   module API
     module Indices
       module Actions
-        # Returns information about any matching indices, aliases, and data streams
+        # Resolves the specified name(s) and/or index patterns for indices, aliases, and data streams.
+        # Multiple patterns and remote clusters are supported.
         #
         # @option arguments [String, Array<String>] :name Comma-separated name(s) or index pattern(s) of the indices, aliases, and data streams to resolve. Resources on remote clusters can be specified using the +<cluster>+:+<name>+ syntax. (*Required*)
         # @option arguments [String, Array<String>] :expand_wildcards Type of index that wildcard patterns can match. If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams. Supports comma-separated values, such as +open,hidden+. Valid values are: +all+, +open+, +closed+, +hidden+, +none+. Server default: open.

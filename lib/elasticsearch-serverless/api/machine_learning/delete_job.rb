@@ -22,7 +22,14 @@ module ElasticsearchServerless
   module API
     module MachineLearning
       module Actions
-        # Deletes an existing anomaly detection job.
+        # Deletes an anomaly detection job.
+        #
+        # All job configuration, model state and results are deleted.
+        # It is not currently possible to delete multiple jobs using wildcards or a
+        # comma separated list. If you delete a job that has a datafeed, the request
+        # first tries to delete the datafeed. This behavior is equivalent to calling
+        # the delete datafeed API with the same timeout and force parameters as the
+        # delete job request.
         #
         # @option arguments [String] :job_id Identifier for the anomaly detection job. (*Required*)
         # @option arguments [Boolean] :force Use to forcefully delete an opened job; this method is quicker than closing and deleting the job.

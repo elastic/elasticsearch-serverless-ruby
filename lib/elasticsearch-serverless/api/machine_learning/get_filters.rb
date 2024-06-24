@@ -23,6 +23,7 @@ module ElasticsearchServerless
     module MachineLearning
       module Actions
         # Retrieves filters.
+        # You can get a single filter or all filters.
         #
         # @option arguments [String, Array] :filter_id A string that uniquely identifies a filter.
         # @option arguments [Integer] :from Skips the specified number of filters. Server default: 0.

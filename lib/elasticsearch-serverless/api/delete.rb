@@ -21,7 +21,7 @@
 module ElasticsearchServerless
   module API
     module Actions
-      # Removes a document from the index.
+      # Removes a JSON document from the specified index.
       #
       # @option arguments [String] :id Unique identifier for the document. (*Required*)
       # @option arguments [String] :index Name of the target index. (*Required*)

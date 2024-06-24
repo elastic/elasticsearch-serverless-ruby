@@ -23,6 +23,13 @@ module ElasticsearchServerless
     module MachineLearning
       module Actions
         # Opens one or more anomaly detection jobs.
+        # An anomaly detection job must be opened in order for it to be ready to
+        # receive and analyze data. It can be opened and closed multiple times
+        # throughout its lifecycle.
+        # When you open a new job, it starts with an empty model.
+        # When you open an existing job, the most recent model state is automatically
+        # loaded. The job is ready to resume its analysis from where it left off, once
+        # new data is received.
         #
         # @option arguments [String] :job_id Identifier for the anomaly detection job. (*Required*)
         # @option arguments [Time] :timeout Controls the time to wait until a job has opened. Server default: 30m.

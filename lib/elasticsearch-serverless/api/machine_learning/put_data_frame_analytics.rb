@@ -23,6 +23,8 @@ module ElasticsearchServerless
     module MachineLearning
       module Actions
         # Instantiates a data frame analytics job.
+        # This API creates a data frame analytics job that performs an analysis on the
+        # source indices and stores the outcome in a destination index.
         #
         # @option arguments [String] :id Identifier for the data frame analytics job. This identifier can contain lowercase alphanumeric characters (a-z and 0-9), hyphens, and underscores. It must start and end with alphanumeric characters. (*Required*)
         # @option arguments [Hash] :headers Custom HTTP headers

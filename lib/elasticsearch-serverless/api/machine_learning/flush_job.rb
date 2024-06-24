@@ -23,6 +23,14 @@ module ElasticsearchServerless
     module MachineLearning
       module Actions
         # Forces any buffered data to be processed by the job.
+        # The flush jobs API is only applicable when sending data for analysis using
+        # the post data API. Depending on the content of the buffer, then it might
+        # additionally calculate new results. Both flush and close operations are
+        # similar, however the flush is more efficient if you are expecting to send
+        # more data for analysis. When flushing, the job remains open and is available
+        # to continue analyzing data. A close operation additionally prunes and
+        # persists the model state to disk and the job must be opened again before
+        # analyzing further data.
         #
         # @option arguments [String] :job_id Identifier for the anomaly detection job. (*Required*)
         # @option arguments [String, Time] :advance_time Specifies to advance to a particular time value. Results are generated and the model is updated for data from the specified time interval.

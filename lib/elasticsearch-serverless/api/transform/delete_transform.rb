@@ -22,7 +22,7 @@ module ElasticsearchServerless
   module API
     module Transform
       module Actions
-        # Deletes an existing transform.
+        # Deletes a transform.
         #
         # @option arguments [String] :transform_id Identifier for the transform. (*Required*)
         # @option arguments [Boolean] :force If this value is false, the transform must be stopped before it can be deleted. If true, the transform is deleted regardless of its current state.

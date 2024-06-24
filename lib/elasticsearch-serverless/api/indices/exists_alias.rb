@@ -22,7 +22,7 @@ module ElasticsearchServerless
   module API
     module Indices
       module Actions
-        # Returns information about whether a particular alias exists.
+        # Checks if an alias exists.
         #
         # @option arguments [String, Array<String>] :name Comma-separated list of aliases to check. Supports wildcards (+*+). (*Required*)
         # @option arguments [String, Array] :index Comma-separated list of data streams or indices used to limit the request. Supports wildcards (+*+). To target all data streams and indices, omit this parameter or use +*+ or +_all+.

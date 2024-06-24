@@ -21,7 +21,7 @@
 module ElasticsearchServerless
   module API
     module Actions
-      # Returns a script.
+      # Retrieves a stored script or search template.
       #
       # @option arguments [String] :id Identifier for the stored script or search template. (*Required*)
       # @option arguments [Time] :master_timeout Specify timeout for connection to master

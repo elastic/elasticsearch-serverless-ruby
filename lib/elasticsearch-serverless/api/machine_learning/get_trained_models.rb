@@ -22,9 +22,9 @@ module ElasticsearchServerless
   module API
     module MachineLearning
       module Actions
-        # Retrieves configuration information for a trained inference model.
+        # Retrieves configuration information for a trained model.
         #
-        # @option arguments [String] :model_id The unique identifier of the trained model.
+        # @option arguments [String, Array] :model_id The unique identifier of the trained model or a model alias.  You can get information for multiple trained models in a single API request by using a comma-separated list of model IDs or a wildcard expression.
         # @option arguments [Boolean] :allow_no_match Specifies what to do when the request:  - Contains wildcard expressions and there are no models that match. - Contains the _all string or no identifiers and there are no matches. - Contains wildcard expressions and there are only partial matches.  If true, it returns an empty array when there are no matches and the subset of results when there are partial matches. Server default: true.
         # @option arguments [Boolean] :decompress_definition Specifies whether the included model definition should be returned as a JSON map (true) or in a custom compressed format (false). Server default: true.
         # @option arguments [Boolean] :exclude_generated Indicates if certain fields should be removed from the configuration on retrieval. This allows the configuration to be in an acceptable format to be retrieved and then added to another cluster.

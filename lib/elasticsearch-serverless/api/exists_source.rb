@@ -21,7 +21,7 @@
 module ElasticsearchServerless
   module API
     module Actions
-      # Returns information about whether a document source exists in an index.
+      # Checks if a document's `_source` is stored.
       #
       # @option arguments [String] :id Identifier of the document. (*Required*)
       # @option arguments [String] :index Comma-separated list of data streams, indices, and aliases. Supports wildcards (+*+). (*Required*)

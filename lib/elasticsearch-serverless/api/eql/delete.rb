@@ -22,7 +22,8 @@ module ElasticsearchServerless
   module API
     module Eql
       module Actions
-        # Deletes an async EQL search by ID. If the search is still running, the search request will be cancelled. Otherwise, the saved search results are deleted.
+        # Deletes an async EQL search or a stored synchronous EQL search.
+        # The API also deletes results for the search.
         #
         # @option arguments [String] :id Identifier for the search to delete. A search ID is provided in the EQL search API's response for an async search. A search ID is also provided if the request’s +keep_on_completion+ parameter is +true+. (*Required*)
         # @option arguments [Hash] :headers Custom HTTP headers
