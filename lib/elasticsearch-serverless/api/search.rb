@@ -22,7 +22,7 @@ module ElasticsearchServerless
   module API
     module Actions
       # Returns search hits that match the query defined in the request.
-      # You can provide search queries using the `q` query string parameter or the request body.
+      # You can provide search queries using the +q+ query string parameter or the request body.
       # If both are specified, only the query parameter is used.
       #
       # @option arguments [String, Array] :index Comma-separated list of data streams, indices, and aliases to search. Supports wildcards (+*+). To search all data streams and indices, omit this parameter or use +*+ or +_all+.

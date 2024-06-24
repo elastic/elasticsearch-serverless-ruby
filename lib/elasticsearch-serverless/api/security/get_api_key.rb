@@ -23,8 +23,8 @@ module ElasticsearchServerless
     module Security
       module Actions
         # Retrieves information for one or more API keys.
-        # NOTE: If you have only the `manage_own_api_key` privilege, this API returns only the API keys that you own.
-        # If you have `read_security`, `manage_api_key` or greater privileges (including `manage_security`), this API returns all API keys regardless of ownership.
+        # NOTE: If you have only the +manage_own_api_key+ privilege, this API returns only the API keys that you own.
+        # If you have +read_security+, +manage_api_key+ or greater privileges (including +manage_security+), this API returns all API keys regardless of ownership.
         #
         # @option arguments [String] :id An API key id. This parameter cannot be used with any of +name+, +realm_name+ or +username+.
         # @option arguments [String] :name An API key name. This parameter cannot be used with any of +id+, +realm_name+ or +username+. It supports prefix search with wildcard.

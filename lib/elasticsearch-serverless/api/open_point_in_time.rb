@@ -25,7 +25,7 @@ module ElasticsearchServerless
       # which is called point in time. Elasticsearch pit (point in time) is a lightweight view into the
       # state of the data as it existed when initiated. In some cases, it’s preferred to perform multiple
       # search requests using the same point in time. For example, if refreshes happen between
-      # `search_after` requests, then the results of those requests might not be consistent as changes happening
+      # +search_after+ requests, then the results of those requests might not be consistent as changes happening
       # between searches are only visible to the more recent point in time.
       #
       # @option arguments [String, Array] :index A comma-separated list of index names to open point in time; use +_all+ or empty string to perform the operation on all indices (*Required*)

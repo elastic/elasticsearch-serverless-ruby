@@ -24,7 +24,7 @@ module ElasticsearchServerless
       module Actions
         # Returns configuration and usage information about datafeeds.
         # This API returns a maximum of 10,000 datafeeds.
-        # If the Elasticsearch security features are enabled, you must have `monitor_ml`, `monitor`, `manage_ml`, or `manage`
+        # If the Elasticsearch security features are enabled, you must have +monitor_ml+, +monitor+, +manage_ml+, or +manage+
         # cluster privileges to use this API.
         #
         # IMPORTANT: cat APIs are only intended for human consumption using the Kibana

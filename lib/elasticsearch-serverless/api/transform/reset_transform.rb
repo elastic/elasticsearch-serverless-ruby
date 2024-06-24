@@ -23,7 +23,7 @@ module ElasticsearchServerless
     module Transform
       module Actions
         # Resets a transform.
-        # Before you can reset it, you must stop it; alternatively, use the `force` query parameter.
+        # Before you can reset it, you must stop it; alternatively, use the +force+ query parameter.
         # If the destination index was created by the transform, it is deleted.
         #
         # @option arguments [String] :transform_id Identifier for the transform. This identifier can contain lowercase alphanumeric characters (a-z and 0-9), hyphens, and underscores. It has a 64 character limit and must start and end with alphanumeric characters. (*Required*)

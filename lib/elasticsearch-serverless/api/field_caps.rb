@@ -23,7 +23,7 @@ module ElasticsearchServerless
     module Actions
       # The field capabilities API returns the information about the capabilities of fields among multiple indices.
       # The field capabilities API returns runtime fields like any other field. For example, a runtime field with a type
-      # of keyword is returned as any other field that belongs to the `keyword` family.
+      # of keyword is returned as any other field that belongs to the +keyword+ family.
       #
       # @option arguments [String, Array] :index Comma-separated list of data streams, indices, and aliases used to limit the request. Supports wildcards (*). To target all data streams and indices, omit this parameter or use * or _all.
       # @option arguments [Boolean] :allow_no_indices If false, the request returns an error if any wildcard expression, index alias, or +_all+ value targets only missing or closed indices. This behavior applies even if the request targets other open indices. For example, a request targeting +foo*,bar*+ returns an error if an index starts with foo but no index starts with bar. Server default: true.

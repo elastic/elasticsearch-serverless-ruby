@@ -25,8 +25,8 @@ module ElasticsearchServerless
         # Retrieves configuration information for datafeeds.
         # You can get information for multiple datafeeds in a single API request by
         # using a comma-separated list of datafeeds or a wildcard expression. You can
-        # get information for all datafeeds by using `_all`, by specifying `*` as the
-        # `<feed_id>`, or by omitting the `<feed_id>`.
+        # get information for all datafeeds by using +_all+, by specifying +*+ as the
+        # +<feed_id>+, or by omitting the +<feed_id>+.
         # This API returns a maximum of 10,000 datafeeds.
         #
         # @option arguments [String, Array] :datafeed_id Identifier for the datafeed. It can be a datafeed identifier or a wildcard expression. If you do not specify one of these options, the API returns information about all datafeeds.

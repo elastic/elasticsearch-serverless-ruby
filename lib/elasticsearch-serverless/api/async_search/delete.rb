@@ -25,7 +25,7 @@ module ElasticsearchServerless
         # Deletes an async search by identifier.
         # If the search is still running, the search request will be cancelled.
         # Otherwise, the saved search results are deleted.
-        # If the Elasticsearch security features are enabled, the deletion of a specific async search is restricted to: the authenticated user that submitted the original search request; users that have the `cancel_task` cluster privilege.
+        # If the Elasticsearch security features are enabled, the deletion of a specific async search is restricted to: the authenticated user that submitted the original search request; users that have the +cancel_task+ cluster privilege.
         #
         # @option arguments [String] :id A unique identifier for the async search. (*Required*)
         # @option arguments [Hash] :headers Custom HTTP headers
