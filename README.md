@@ -89,12 +89,9 @@ The parameters are:
 | `tracer`           | `Logger`  | An instance of a Logger-compatible object to use as a tracer.                                                                      |
 | `serializer_class` | `Object`  | A specific serializer class to use to serialize JSON.                                                                              |
 | `headers`          | `Hash`    | Custom HTTP Request Headers                                                                                                        |
-
-
-
 ### Using the API
 
-See [APIs](https://github.com/elastic/elasticsearch-serverless-ruby/blob/main/docs/apis.md) for the full list of available endpoints.
+See [APIs](https://github.com/elastic/elasticsearch-serverless-ruby/blob/main/docs/apis.md) for the full list of available endpoints. Check [rubydoc](https://rubydoc.info/gems/elasticsearch-serverless/) for the API reference, or run `yardoc` in the root of the project if you've checked out the code. The API reference documentation will be generated in the `doc` folder.
 
 Once you've instantiated a client with your API key and Elasticsearch endpoint, you can start ingesting documents into Elasticsearch Service. You can use the **Bulk API** for this. This API allows you to index, update and delete several documents in one request. You call the `bulk` API on the client with a body parameter, an Array of hashes that define the action and a document. Here's an example of indexing some classic books into the `books` index:
 

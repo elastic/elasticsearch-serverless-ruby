@@ -27,9 +27,9 @@ module ElasticsearchServerless
 
     # Initializes an Elasticsearch Serverless Client
     #
-    # @param :api_key [String] Base64 String, format used to authenticate with Elasticsearch
-    # @param :url [String] Elasticsearch endpoint
-    # @param :arguments [Hash] Other optional arguments.
+    # @param [String] api_key Base64 String, format used to authenticate with Elasticsearch
+    # @param [String] url Elasticsearch endpoint
+    # @param [Hash] arguments Other optional arguments.
     # @option arguments [Symbol] :adapter A specific adapter for Faraday (e.g. `:patron`)
     # @option arguments [Boolean] :log Use the default logger (disabled by default)
     # @option arguments [Object] :logger An instance of a Logger-compatible object

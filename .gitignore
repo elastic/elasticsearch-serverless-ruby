@@ -5,3 +5,5 @@ Gemfile.lock
 tmp
 *.log
 .env
+doc
+.yardoc
