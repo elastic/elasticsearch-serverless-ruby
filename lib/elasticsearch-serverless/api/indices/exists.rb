@@ -22,7 +22,7 @@ module ElasticsearchServerless
   module API
     module Indices
       module Actions
-        # Returns information about whether a particular index exists.
+        # Checks if a data stream, index, or alias exists.
         #
         # @option arguments [String, Array] :index Comma-separated list of data streams, indices, and aliases. Supports wildcards (+*+). (*Required*)
         # @option arguments [Boolean] :allow_no_indices If +false+, the request returns an error if any wildcard expression, index alias, or +_all+ value targets only missing or closed indices. This behavior applies even if the request targets other open indices. Server default: true.

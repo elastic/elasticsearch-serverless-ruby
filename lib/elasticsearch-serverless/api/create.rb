@@ -21,9 +21,8 @@
 module ElasticsearchServerless
   module API
     module Actions
-      # Creates a new document in the index.
-      #
-      # Returns a 409 response when a document with a same ID already exists in the index.
+      # Adds a JSON document to the specified data stream or index and makes it searchable.
+      # If the target is an index and the document already exists, the request updates the document and increments its version.
       #
       # @option arguments [String] :id Unique identifier for the document. (*Required*)
       # @option arguments [String] :index Name of the data stream or index to target. If the target doesn’t exist and matches the name or wildcard (+*+) pattern of an index template with a +data_stream+ definition, this request creates the data stream. If the target doesn’t exist and doesn’t match a data stream template, this request creates the index. (*Required*)

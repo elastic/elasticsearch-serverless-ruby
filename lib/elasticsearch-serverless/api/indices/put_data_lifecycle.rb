@@ -22,7 +22,7 @@ module ElasticsearchServerless
   module API
     module Indices
       module Actions
-        # Updates the data stream lifecycle of the selected data streams.
+        # Update the data lifecycle of the specified data streams.
         #
         # @option arguments [String, Array<String>] :name Comma-separated list of data streams used to limit the request. Supports wildcards (+*+). To target all data streams use +*+ or +_all+. (*Required*)
         # @option arguments [String, Array<String>] :expand_wildcards Type of data stream that wildcard patterns can match. Supports comma-separated values, such as +open,hidden+. Valid values are: +all+, +hidden+, +open+, +closed+, +none+. Server default: open.

@@ -24,6 +24,11 @@ module ElasticsearchServerless
       module Actions
         # Schedules now a transform.
         #
+        # If you _schedule_now a transform, it will process the new data instantly,
+        # without waiting for the configured frequency interval. After _schedule_now API is called,
+        # the transform will be processed again at now + frequency unless _schedule_now API
+        # is called again in the meantime.
+        #
         # @option arguments [String] :transform_id Identifier for the transform. (*Required*)
         # @option arguments [Time] :timeout Controls the time to wait for the scheduling to take place Server default: 30s.
         # @option arguments [Hash] :headers Custom HTTP headers

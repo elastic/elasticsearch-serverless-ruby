@@ -22,7 +22,7 @@ module ElasticsearchServerless
   module API
     module MachineLearning
       module Actions
-        # Instantiates a calendar.
+        # Creates a calendar.
         #
         # @option arguments [String] :calendar_id A string that uniquely identifies a calendar. (*Required*)
         # @option arguments [Hash] :headers Custom HTTP headers

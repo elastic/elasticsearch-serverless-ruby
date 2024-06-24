@@ -22,7 +22,11 @@ module ElasticsearchServerless
   module API
     module Cat
       module Actions
-        # Gets configuration and usage information about transforms.
+        # Returns configuration and usage information about transforms.
+        #
+        # IMPORTANT: cat APIs are only intended for human consumption using the Kibana
+        # console or command line. They are not intended for use by applications. For
+        # application consumption, use the get transform statistics API.
         #
         # @option arguments [String] :transform_id A transform identifier or a wildcard expression. If you do not specify one of these options, the API returns information for all transforms.
         # @option arguments [Boolean] :allow_no_match Specifies what to do when the request: contains wildcard expressions and there are no transforms that match; contains the +_all+ string or no identifiers and there are no matches; contains wildcard expressions and there are only partial matches. If +true+, it returns an empty transforms array when there are no matches and the subset of results when there are partial matches. If +false+, the request returns a 404 status code when there are no matches or only partial matches. Server default: true.

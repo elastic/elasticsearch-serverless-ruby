@@ -21,7 +21,7 @@
 module ElasticsearchServerless
   module API
     module Actions
-      # Creates or updates a script.
+      # Creates or updates a stored script or search template.
       #
       # @option arguments [String] :id Identifier for the stored script or search template. Must be unique within the cluster. (*Required*)
       # @option arguments [String] :context Context in which the script or search template should run. To prevent errors, the API immediately compiles the script or template in this context.

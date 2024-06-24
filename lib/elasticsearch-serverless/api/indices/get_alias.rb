@@ -22,7 +22,7 @@ module ElasticsearchServerless
   module API
     module Indices
       module Actions
-        # Returns an alias.
+        # Retrieves information for one or more aliases.
         #
         # @option arguments [String, Array<String>] :name Comma-separated list of aliases to retrieve. Supports wildcards (+*+). To retrieve all aliases, omit this parameter or use +*+ or +_all+.
         # @option arguments [String, Array] :index Comma-separated list of data streams or indices used to limit the request. Supports wildcards (+*+). To target all data streams and indices, omit this parameter or use +*+ or +_all+.

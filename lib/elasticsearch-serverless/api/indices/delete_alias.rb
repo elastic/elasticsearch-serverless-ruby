@@ -22,7 +22,7 @@ module ElasticsearchServerless
   module API
     module Indices
       module Actions
-        # Deletes an alias.
+        # Removes a data stream or index from an alias.
         #
         # @option arguments [String, Array] :index Comma-separated list of data streams or indices used to limit the request. Supports wildcards (+*+). (*Required*)
         # @option arguments [String, Array<String>] :name Comma-separated list of aliases to remove. Supports wildcards (+*+). To remove all aliases, use +*+ or +_all+. (*Required*)

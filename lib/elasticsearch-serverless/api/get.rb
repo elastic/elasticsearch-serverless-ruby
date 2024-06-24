@@ -25,6 +25,7 @@ module ElasticsearchServerless
       #
       # @option arguments [String] :id Unique identifier of the document. (*Required*)
       # @option arguments [String] :index Name of the index that contains the document. (*Required*)
+      # @option arguments [Boolean] :force_synthetic_source Should this request force synthetic _source? Use this to test if the mapping supports synthetic _source and to get a sense of the worst case performance. Fetches with this enabled will be slower the enabling synthetic source natively in the index.
       # @option arguments [String] :preference Specifies the node or shard the operation should be performed on. Random by default.
       # @option arguments [Boolean] :realtime If +true+, the request is real-time as opposed to near-real-time. Server default: true.
       # @option arguments [Boolean] :refresh If true, Elasticsearch refreshes the affected shards to make this operation visible to search. If false, do nothing with refreshes.

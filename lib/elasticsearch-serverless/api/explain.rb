@@ -21,7 +21,7 @@
 module ElasticsearchServerless
   module API
     module Actions
-      # Returns information about why a specific matches (or doesn't match) a query.
+      # Returns information about why a specific document matches (or doesn’t match) a query.
       #
       # @option arguments [String] :id Defines the document ID. (*Required*)
       # @option arguments [String] :index Index names used to limit the request. Only a single index name can be provided to this parameter. (*Required*)

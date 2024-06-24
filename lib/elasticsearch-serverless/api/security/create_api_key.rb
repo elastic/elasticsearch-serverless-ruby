@@ -23,6 +23,9 @@ module ElasticsearchServerless
     module Security
       module Actions
         # Creates an API key for access without requiring basic authentication.
+        # A successful request returns a JSON structure that contains the API key, its unique id, and its name.
+        # If applicable, it also returns expiration information for the API key in milliseconds.
+        # NOTE: By default, API keys never expire. You can specify expiration information when you create the API keys.
         #
         # @option arguments [String] :refresh If +true+ (the default) then refresh the affected shards to make this operation visible to search, if +wait_for+ then wait for a refresh to make this operation visible to search, if +false+ then do nothing with refreshes.
         # @option arguments [Hash] :headers Custom HTTP headers

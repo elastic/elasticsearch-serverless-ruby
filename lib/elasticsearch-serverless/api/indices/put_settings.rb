@@ -22,7 +22,8 @@ module ElasticsearchServerless
   module API
     module Indices
       module Actions
-        # Updates the index settings.
+        # Changes a dynamic index setting in real time. For data streams, index setting
+        # changes are applied to all backing indices by default.
         #
         # @option arguments [String, Array] :index Comma-separated list of data streams, indices, and aliases used to limit the request. Supports wildcards (+*+). To target all data streams and indices, omit this parameter or use +*+ or +_all+.
         # @option arguments [Boolean] :allow_no_indices If +false+, the request returns an error if any wildcard expression, index alias, or +_all+ value targets only missing or closed indices. This behavior applies even if the request targets other open indices. For example, a request targeting +foo*,bar*+ returns an error if an index starts with +foo+ but no index starts with +bar+.

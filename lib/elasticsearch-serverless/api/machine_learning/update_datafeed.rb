@@ -22,7 +22,11 @@ module ElasticsearchServerless
   module API
     module MachineLearning
       module Actions
-        # Updates certain properties of a datafeed.
+        # Updates the properties of a datafeed.
+        # You must stop and start the datafeed for the changes to be applied.
+        # When Elasticsearch security features are enabled, your datafeed remembers which roles the user who updated it had at
+        # the time of the update and runs the query using those same roles. If you provide secondary authorization headers,
+        # those credentials are used instead.
         #
         # @option arguments [String] :datafeed_id A numerical character string that uniquely identifies the datafeed. This identifier can contain lowercase alphanumeric characters (a-z and 0-9), hyphens, and underscores. It must start and end with alphanumeric characters. (*Required*)
         # @option arguments [Boolean] :allow_no_indices If +true+, wildcard indices expressions that resolve into no concrete indices are ignored. This includes the +_all+ string or when no indices are specified. Server default: true.

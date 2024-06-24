@@ -22,7 +22,7 @@ module ElasticsearchServerless
   module API
     module QueryRuleset
       module Actions
-        # Lists query rulesets.
+        # Returns summarized information about existing query rulesets.
         # This functionality is Experimental and may be changed or removed
         # completely in a future release. Elastic will take a best effort approach
         # to fix any issues, but experimental features are not subject to the

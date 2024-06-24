@@ -22,7 +22,8 @@ module ElasticsearchServerless
   module API
     module Indices
       module Actions
-        # Returns settings for one or more indices.
+        # Returns setting information for one or more indices. For data streams,
+        # returns setting information for the stream’s backing indices.
         #
         # @option arguments [String, Array] :index Comma-separated list of data streams, indices, and aliases used to limit the request. Supports wildcards (+*+). To target all data streams and indices, omit this parameter or use +*+ or +_all+.
         # @option arguments [String, Array<String>] :name Comma-separated list or wildcard expression of settings to retrieve.

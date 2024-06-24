@@ -21,7 +21,8 @@
 module ElasticsearchServerless
   module API
     module Actions
-      # Creates or updates a document in an index.
+      # Adds a JSON document to the specified data stream or index and makes it searchable.
+      # If the target is an index and the document already exists, the request updates the document and increments its version.
       #
       # @option arguments [String] :id Unique identifier for the document.
       # @option arguments [String] :index Name of the data stream or index to target. (*Required*)

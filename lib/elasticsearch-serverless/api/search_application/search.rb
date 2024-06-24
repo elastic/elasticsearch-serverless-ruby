@@ -22,13 +22,14 @@ module ElasticsearchServerless
   module API
     module SearchApplication
       module Actions
-        # Perform a search against a search application
+        # Perform a search against a search application.
         # This functionality is in Beta and is subject to change. The design and
         # code is less mature than official GA features and is being provided
         # as-is with no warranties. Beta features are not subject to the support
         # SLA of official GA features.
         #
         # @option arguments [String] :name The name of the search application to be searched. (*Required*)
+        # @option arguments [Boolean] :typed_keys Determines whether aggregation names are prefixed by their respective types in the response.
         # @option arguments [Hash] :headers Custom HTTP headers
         # @option arguments [Hash] :body request body
         #
@@ -51,7 +52,7 @@ module ElasticsearchServerless
                    end
 
           path   = "_application/search_application/#{Utils.listify(_name)}/_search"
-          params = {}
+          params = Utils.process_params(arguments)
 
           ElasticsearchServerless::API::Response.new(
             perform_request(method, path, params, body, headers)

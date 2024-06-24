@@ -23,6 +23,8 @@ module ElasticsearchServerless
     module MachineLearning
       module Actions
         # Deletes a filter.
+        # If an anomaly detection job references the filter, you cannot delete the
+        # filter. You must update or delete the job before you can delete the filter.
         #
         # @option arguments [String] :filter_id A string that uniquely identifies a filter. (*Required*)
         # @option arguments [Hash] :headers Custom HTTP headers

@@ -22,7 +22,7 @@ module ElasticsearchServerless
   module API
     module Indices
       module Actions
-        # Returns an index template.
+        # Returns information about one or more index templates.
         #
         # @option arguments [String] :name Comma-separated list of index template names used to limit the request. Wildcard (*) expressions are supported.
         # @option arguments [Boolean] :local If true, the request retrieves information from the local node only. Defaults to false, which means information is retrieved from the master node.

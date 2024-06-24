@@ -22,7 +22,11 @@ module ElasticsearchServerless
   module API
     module MachineLearning
       module Actions
-        # Resets an existing anomaly detection job.
+        # Resets an anomaly detection job.
+        # All model state and results are deleted. The job is ready to start over as if
+        # it had just been created.
+        # It is not currently possible to reset multiple jobs using wildcards or a
+        # comma separated list.
         #
         # @option arguments [String] :job_id The ID of the job to reset. (*Required*)
         # @option arguments [Boolean] :wait_for_completion Should this request wait until the operation has completed before returning. Server default: true.

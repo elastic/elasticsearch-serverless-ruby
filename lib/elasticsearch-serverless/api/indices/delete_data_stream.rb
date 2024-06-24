@@ -22,7 +22,7 @@ module ElasticsearchServerless
   module API
     module Indices
       module Actions
-        # Deletes a data stream.
+        # Deletes one or more data streams and their backing indices.
         #
         # @option arguments [String, Array<String>] :name Comma-separated list of data streams to delete. Wildcard (+*+) expressions are supported. (*Required*)
         # @option arguments [String, Array<String>] :expand_wildcards Type of data stream that wildcard patterns can match. Supports comma-separated values,such as +open,hidden+. Server default: open.

@@ -23,6 +23,9 @@ module ElasticsearchServerless
     module MachineLearning
       module Actions
         # Retrieves configuration information for data frame analytics jobs.
+        # You can get information for multiple data frame analytics jobs in a single
+        # API request by using a comma-separated list of data frame analytics jobs or a
+        # wildcard expression.
         #
         # @option arguments [String] :id Identifier for the data frame analytics job. If you do not specify this option, the API returns information for the first hundred data frame analytics jobs.
         # @option arguments [Boolean] :allow_no_match Specifies what to do when the request:  1. Contains wildcard expressions and there are no data frame analytics jobs that match. 2. Contains the +_all+ string or no identifiers and there are no matches. 3. Contains wildcard expressions and there are only partial matches.  The default value returns an empty data_frame_analytics array when there are no matches and the subset of results when there are partial matches. If this parameter is +false+, the request returns a 404 status code when there are no matches or only partial matches. Server default: true.

@@ -22,7 +22,9 @@ module ElasticsearchServerless
   module API
     module Cat
       module Actions
-        # Shows information about currently configured aliases to indices including filter and routing infos.
+        # Retrieves the cluster’s index aliases, including filter and routing information.
+        # The API does not return data stream aliases.
+        # IMPORTANT: cat APIs are only intended for human consumption using the command line or the Kibana console. They are not intended for use by applications. For application consumption, use the aliases API.
         #
         # @option arguments [String, Array<String>] :name A comma-separated list of aliases to retrieve. Supports wildcards (+*+).  To retrieve all aliases, omit this parameter or use +*+ or +_all+.
         # @option arguments [String, Array<String>] :expand_wildcards Whether to expand wildcard expression to concrete indices that are open, closed or both.

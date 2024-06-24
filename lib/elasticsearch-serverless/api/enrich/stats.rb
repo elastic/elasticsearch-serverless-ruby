@@ -22,7 +22,7 @@ module ElasticsearchServerless
   module API
     module Enrich
       module Actions
-        # Gets enrich coordinator statistics and information about enrich policies that are currently executing.
+        # Returns enrich coordinator statistics and information about enrich policies that are currently executing.
         #
         # @option arguments [Hash] :headers Custom HTTP headers
         #

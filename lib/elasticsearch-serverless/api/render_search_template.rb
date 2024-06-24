@@ -21,7 +21,7 @@
 module ElasticsearchServerless
   module API
     module Actions
-      # Allows to use the Mustache language to pre-render a search definition.
+      # Renders a search template as a search request body.
       #
       # @option arguments [String] :id ID of the search template to render. If no +source+ is specified, this or the +id+ request body parameter is required.
       # @option arguments [Hash] :headers Custom HTTP headers

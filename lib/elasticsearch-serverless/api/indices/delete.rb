@@ -22,7 +22,7 @@ module ElasticsearchServerless
   module API
     module Indices
       module Actions
-        # Deletes an index.
+        # Deletes one or more indices.
         #
         # @option arguments [String, Array] :index Comma-separated list of indices to delete. You cannot specify index aliases. By default, this parameter does not support wildcards (+*+) or +_all+. To use wildcards or +_all+, set the +action.destructive_requires_name+ cluster setting to +false+. (*Required*)
         # @option arguments [Boolean] :allow_no_indices If +false+, the request returns an error if any wildcard expression, index alias, or +_all+ value targets only missing or closed indices. This behavior applies even if the request targets other open indices. Server default: true.

@@ -24,6 +24,7 @@ module ElasticsearchServerless
       # Allows to get multiple documents in one request.
       #
       # @option arguments [String] :index Name of the index to retrieve documents from when +ids+ are specified, or when a document in the +docs+ array does not specify an index.
+      # @option arguments [Boolean] :force_synthetic_source Should this request force synthetic _source? Use this to test if the mapping supports synthetic _source and to get a sense of the worst case performance. Fetches with this enabled will be slower the enabling synthetic source natively in the index.
       # @option arguments [String] :preference Specifies the node or shard the operation should be performed on. Random by default.
       # @option arguments [Boolean] :realtime If +true+, the request is real-time as opposed to near-real-time. Server default: true.
       # @option arguments [Boolean] :refresh If +true+, the request refreshes relevant shards before retrieving documents.

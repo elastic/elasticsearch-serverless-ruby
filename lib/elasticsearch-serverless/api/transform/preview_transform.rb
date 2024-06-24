@@ -24,6 +24,10 @@ module ElasticsearchServerless
       module Actions
         # Previews a transform.
         #
+        # It returns a maximum of 100 results. The calculations are based on all the current data in the source index. It also
+        # generates a list of mappings and settings for the destination index. These values are determined based on the field
+        # types of the source index and the transform aggregations.
+        #
         # @option arguments [String] :transform_id Identifier for the transform to preview. If you specify this path parameter, you cannot provide transform configuration details in the request body.
         # @option arguments [Time] :timeout Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error. Server default: 30s.
         # @option arguments [Hash] :headers Custom HTTP headers

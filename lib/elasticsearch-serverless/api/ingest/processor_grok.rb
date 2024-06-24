@@ -22,7 +22,9 @@ module ElasticsearchServerless
   module API
     module Ingest
       module Actions
-        # Returns a list of the built-in patterns.
+        # Extracts structured fields out of a single text field within a document.
+        # You choose which field to extract matched fields from, as well as the grok pattern you expect will match.
+        # A grok pattern is like a regular expression that supports aliased expressions that can be reused.
         #
         # @option arguments [Hash] :headers Custom HTTP headers
         #

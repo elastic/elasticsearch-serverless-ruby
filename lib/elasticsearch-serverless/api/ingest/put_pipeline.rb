@@ -22,7 +22,8 @@ module ElasticsearchServerless
   module API
     module Ingest
       module Actions
-        # Creates or updates a pipeline.
+        # Creates or updates an ingest pipeline.
+        # Changes made using this API take effect immediately.
         #
         # @option arguments [String] :id ID of the ingest pipeline to create or update. (*Required*)
         # @option arguments [Time] :master_timeout Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error. Server default: 30s.

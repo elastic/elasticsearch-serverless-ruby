@@ -22,7 +22,7 @@ module ElasticsearchServerless
   module API
     module Indices
       module Actions
-        # Deletes the data stream lifecycle of the selected data streams.
+        # Removes the data lifecycle from a data stream rendering it not managed by the data stream lifecycle
         #
         # @option arguments [String, Array<String>] :name A comma-separated list of data streams of which the data stream lifecycle will be deleted; use +*+ to get all data streams (*Required*)
         # @option arguments [String, Array<String>] :expand_wildcards Whether wildcard expressions should get expanded to open or closed indices (default: open)

@@ -22,7 +22,7 @@ module ElasticsearchServerless
   module API
     module Graph
       module Actions
-        # Explore extracted and summarized information about the documents and terms in an index.
+        # Extracts and summarizes information about the documents and terms in an Elasticsearch data stream or index.
         #
         # @option arguments [String, Array] :index Name of the index. (*Required*)
         # @option arguments [String] :routing Custom value used to route operations to a specific shard.

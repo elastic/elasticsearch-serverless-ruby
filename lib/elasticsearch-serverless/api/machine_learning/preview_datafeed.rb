@@ -23,6 +23,14 @@ module ElasticsearchServerless
     module MachineLearning
       module Actions
         # Previews a datafeed.
+        # This API returns the first "page" of search results from a datafeed.
+        # You can preview an existing datafeed or provide configuration details for a datafeed
+        # and anomaly detection job in the API. The preview shows the structure of the data
+        # that will be passed to the anomaly detection engine.
+        # IMPORTANT: When Elasticsearch security features are enabled, the preview uses the credentials of the user that
+        # called the API. However, when the datafeed starts it uses the roles of the last user that created or updated the
+        # datafeed. To get a preview that accurately reflects the behavior of the datafeed, use the appropriate credentials.
+        # You can also use secondary authorization headers to supply the credentials.
         #
         # @option arguments [String] :datafeed_id A numerical character string that uniquely identifies the datafeed. This identifier can contain lowercase alphanumeric characters (a-z and 0-9), hyphens, and underscores. It must start and end with alphanumeric characters. NOTE: If you use this path parameter, you cannot provide datafeed or anomaly detection job configuration details in the request body.
         # @option arguments [String, Time] :start The start time from where the datafeed preview should begin

@@ -22,7 +22,7 @@ module ElasticsearchServerless
   module API
     module Eql
       module Actions
-        # Returns the status of a previously submitted async or stored Event Query Language (EQL) search
+        # Returns the current status for an async EQL search or a stored synchronous EQL search without returning results.
         #
         # @option arguments [String] :id Identifier for the search. (*Required*)
         # @option arguments [Hash] :headers Custom HTTP headers

@@ -22,7 +22,9 @@ module ElasticsearchServerless
   module API
     module Indices
       module Actions
-        # Deletes an index template.
+        # The provided <index-template> may contain multiple template names separated by a comma. If multiple template
+        # names are specified then there is no wildcard support and the provided names should match completely with
+        # existing templates.
         #
         # @option arguments [String, Array<String>] :name Comma-separated list of index template names used to limit the request. Wildcard (*) expressions are supported. (*Required*)
         # @option arguments [Time] :master_timeout Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error. Server default: 30s.

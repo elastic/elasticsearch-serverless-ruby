@@ -21,7 +21,9 @@
 module ElasticsearchServerless
   module API
     module Actions
-      # Returns results matching a query.
+      # Returns search hits that match the query defined in the request.
+      # You can provide search queries using the `q` query string parameter or the request body.
+      # If both are specified, only the query parameter is used.
       #
       # @option arguments [String, Array] :index Comma-separated list of data streams, indices, and aliases to search. Supports wildcards (+*+). To search all data streams and indices, omit this parameter or use +*+ or +_all+.
       # @option arguments [Boolean] :allow_no_indices If +false+, the request returns an error if any wildcard expression, index alias, or +_all+ value targets only missing or closed indices. This behavior applies even if the request targets other open indices. For example, a request targeting +foo*,bar*+ returns an error if an index starts with +foo+ but no index starts with +bar+. Server default: true.
@@ -67,6 +69,7 @@ module ElasticsearchServerless
       # @option arguments [Integer] :size Defines the number of hits to return. By default, you cannot page through more than 10,000 hits using the +from+ and +size+ parameters. To page through more hits, use the +search_after+ parameter. Server default: 10.
       # @option arguments [Integer] :from Starting document offset. Needs to be non-negative. By default, you cannot page through more than 10,000 hits using the +from+ and +size+ parameters. To page through more hits, use the +search_after+ parameter. Server default: 0.
       # @option arguments [String] :sort A comma-separated list of <field>:<direction> pairs.
+      # @option arguments [Boolean] :force_synthetic_source Should this request force synthetic _source? Use this to test if the mapping supports synthetic _source and to get a sense of the worst case performance. Fetches with this enabled will be slower the enabling synthetic source natively in the index.
       # @option arguments [Hash] :headers Custom HTTP headers
       # @option arguments [Hash] :body request body
       #

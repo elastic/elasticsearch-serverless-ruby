@@ -22,7 +22,8 @@ module ElasticsearchServerless
   module API
     module MachineLearning
       module Actions
-        # Retrieves usage information for trained inference models.
+        # Retrieves usage information for trained models. You can get usage information for multiple trained
+        # models in a single API request by using a comma-separated list of model IDs or a wildcard expression.
         #
         # @option arguments [String, Array] :model_id The unique identifier of the trained model or a model alias. It can be a comma-separated list or a wildcard expression.
         # @option arguments [Boolean] :allow_no_match Specifies what to do when the request:  - Contains wildcard expressions and there are no models that match. - Contains the _all string or no identifiers and there are no matches. - Contains wildcard expressions and there are only partial matches.  If true, it returns an empty array when there are no matches and the subset of results when there are partial matches. Server default: true.
