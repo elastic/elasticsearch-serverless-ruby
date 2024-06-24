@@ -24,7 +24,7 @@ module ElasticsearchServerless
       module Actions
         # Get async search status
         # Retrieves the status of a previously submitted async search request given its identifier, without retrieving search results.
-        # If the Elasticsearch security features are enabled, use of this API is restricted to the `monitoring_user` role.
+        # If the Elasticsearch security features are enabled, use of this API is restricted to the +monitoring_user+ role.
         #
         # @option arguments [String] :id A unique identifier for the async search. (*Required*)
         # @option arguments [Hash] :headers Custom HTTP headers
