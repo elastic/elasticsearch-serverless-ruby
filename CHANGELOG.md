@@ -1,5 +1,23 @@
 # Changelog
 
+## 0.2.0
+
+- Extracts YAML test runner into [es-test-runner](https://github.com/elastic/es-test-runner-ruby).
+- Adds inference APIs: `inference.delete`, `inference.get`, `inference.inference`, `inference.put`.
+- Source code documentation updated for better YARD formatting. Check [rubydoc](https://rubydoc.info/gems/elasticsearch-serverless/) for the API reference, or run `yardoc` in the root of the project if you've checked out the code. The API reference documentation will be generated in the `doc` folder.
+
+### Changes in APIs:
+
+* `create` -  Adds [Integer, String] parameter `:wait_for_active_shards`: The number of shard copies that must be active before proceeding with the operation. Set to +all+ or any positive integer up to the total number of shards in the index (+number_of_replicas+1+). Server default: 1.
+* `field_caps` - Adds boolean parameter `:include_empty_fields`: If false, empty fields are not included in the response. Server default: true.
+* `get`, `mget`, `search` - Add boolean parameter `:force_synthetic_source`: Should this request force synthetic _source? Use this to test if the mapping supports synthetic _source and to get a sense of the worst case performance. Fetches with this enabled will be slower the enabling synthetic source natively in the index.
+* `ml.get_trained_models` - Adds [String, Array] parameter `:model_id`: The unique identifier of the trained model or a model alias.  You can get information for multiple trained models in a single API request by using a comma-separated list of model IDs or a wildcard expression.
+* `ml.put_calendar_job` Adds [String, Array] parameter `:job_id`: An identifier for the anomaly detection jobs. It can be a job identifier, a group name, or a comma-separated list of jobs or groups. (*Required*)
+* `ml.put_trained_model` - Adds boolean parameter `:wait_for_completion`: Whether to wait for all child operations (e.g. model download) to complete.
+* `search_application.search` - Adds boolean parameter `:typed_keys`: Determines whether aggregation names are prefixed by their respective types in the response.
+* `security.get_api_key` - Adds boolean parameter `:active_only` A boolean flag that can be used to query API keys that are currently active. An API key is considered active if it is neither invalidated, nor expired at query time. You can specify this together with other parameters such as `owner` or `name`. If `active_only` is false, the response will include both active and inactive (expired or invalidated) keys. Adds boolean parameter `:with_profile_uid`: Determines whether to also retrieve the profile uid, for the API key owner principal, if it exists.
+* `security.query_api_keys` - Adds boolean parameter `:with_profile_uid`: Determines whether to also retrieve the profile uid, for the API key owner principal, if it exists. Adds boolean parameter `:typed_keys`: Determines whether aggregation names are prefixed by their respective types in the response.
+
 ## 0.1.0
 
 - Added ES|QL `query` API. See [documentation](https://www.elastic.co/guide/en/elasticsearch/reference/current/esql-rest.html).
