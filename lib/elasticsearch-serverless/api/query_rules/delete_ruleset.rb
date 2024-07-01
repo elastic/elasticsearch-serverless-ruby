@@ -20,20 +20,16 @@
 #
 module ElasticsearchServerless
   module API
-    module QueryRuleset
+    module QueryRules
       module Actions
-        # Returns the details about a query ruleset
-        # This functionality is Experimental and may be changed or removed
-        # completely in a future release. Elastic will take a best effort approach
-        # to fix any issues, but experimental features are not subject to the
-        # support SLA of official GA features.
+        # Deletes a query ruleset.
         #
-        # @option arguments [String] :ruleset_id The unique identifier of the query ruleset (*Required*)
+        # @option arguments [String] :ruleset_id The unique identifier of the query ruleset to delete (*Required*)
         # @option arguments [Hash] :headers Custom HTTP headers
         #
-        # @see https://www.elastic.co/guide/en/elasticsearch/reference/master/get-query-ruleset.html
+        # @see https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-query-ruleset.html
         #
-        def get(arguments = {})
+        def delete_ruleset(arguments = {})
           raise ArgumentError, "Required argument 'ruleset_id' missing" unless arguments[:ruleset_id]
 
           arguments = arguments.clone
@@ -43,7 +39,7 @@ module ElasticsearchServerless
 
           _ruleset_id = arguments.delete(:ruleset_id)
 
-          method = ElasticsearchServerless::API::HTTP_GET
+          method = ElasticsearchServerless::API::HTTP_DELETE
           path   = "_query_rules/#{Utils.listify(_ruleset_id)}"
           params = {}
 

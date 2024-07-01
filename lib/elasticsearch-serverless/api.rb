@@ -69,7 +69,7 @@ module ElasticsearchServerless
       :license,
       :logstash,
       :machine_learning,
-      :query_ruleset,
+      :query_rules,
       :search_application,
       :security,
       :sql,
