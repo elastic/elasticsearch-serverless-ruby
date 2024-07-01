@@ -22,7 +22,8 @@ module ElasticsearchServerless
   module API
     module Indices
       module Actions
-        # Simulate matching the given index name against the index templates in the system
+        # Simulate an index.
+        # Returns the index configuration that would be applied to the specified index from an existing index template.
         #
         # @option arguments [String] :name Name of the index to simulate (*Required*)
         # @option arguments [Time] :master_timeout Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error. Server default: 30s.

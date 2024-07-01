@@ -22,6 +22,7 @@ module ElasticsearchServerless
   module API
     module Indices
       module Actions
+        # Simulate an index template.
         # Returns the index configuration that would be applied by a particular index template.
         #
         # @option arguments [String] :name Name of the index template to simulate. To test a template configuration before you add it to the cluster, omit this parameter and specify the template configuration in the request body.

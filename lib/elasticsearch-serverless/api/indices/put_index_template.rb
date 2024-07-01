@@ -22,7 +22,7 @@ module ElasticsearchServerless
   module API
     module Indices
       module Actions
-        # Creates or updates an index template.
+        # Create or update an index template.
         # Index templates define settings, mappings, and aliases that can be applied automatically to new indices.
         #
         # @option arguments [String] :name Index or template name (*Required*)
