@@ -23,7 +23,7 @@ module ElasticsearchServerless
   class Client
     include ElasticsearchServerless::API
 
-    VALID_PARAMETERS = [:adapter, :log, :logger, :serializer_class, :trace, :tracer, :headers]
+    VALID_PARAMETERS = [:adapter, :log, :logger, :serializer_class, :trace, :tracer, :headers, :request_timeout]
 
     # Initializes an Elasticsearch Serverless Client
     #
@@ -33,6 +33,8 @@ module ElasticsearchServerless
     # @option arguments [Symbol] :adapter A specific adapter for Faraday (e.g. `:patron`)
     # @option arguments [Boolean] :log Use the default logger (disabled by default)
     # @option arguments [Object] :logger An instance of a Logger-compatible object
+    # @option arguments [Integer] :request_timeout The request timeout to be passed to transport in
+    #                                              options in seconds
     # @option arguments [Boolean] :trace Use the default tracer (disabled by default)
     # @option arguments [Object] :tracer An instance of a Logger-compatible object
     # @option arguments [Constant] :serializer_class A specific serializer class to use, will be initialized by
