@@ -22,6 +22,7 @@ module ElasticsearchServerless
   module API
     module Indices
       module Actions
+        # Get index templates.
         # Returns information about one or more index templates.
         #
         # @option arguments [String] :name Comma-separated list of index template names used to limit the request. Wildcard (*) expressions are supported.
