@@ -26,4 +26,4 @@ end
 
 api_key = ENV['API_KEY']
 url = ENV['ELASTICSEARCH_URL']
-CLIENT = ElasticsearchServerless::Client.new(api_key: api_key, url: url)
+CLIENT = ElasticsearchServerless::Client.new(api_key: api_key, url: url, arguments: { request_timeout: 120 })
