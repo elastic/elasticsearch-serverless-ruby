@@ -20,21 +20,19 @@
 #
 module ElasticsearchServerless
   module API
-    module QueryRuleset
+    module QueryRules
       module Actions
-        # Deletes a query ruleset.
-        # This functionality is Experimental and may be changed or removed
-        # completely in a future release. Elastic will take a best effort approach
-        # to fix any issues, but experimental features are not subject to the
-        # support SLA of official GA features.
+        # Deletes a query rule within a query ruleset.
         #
-        # @option arguments [String] :ruleset_id The unique identifier of the query ruleset to delete (*Required*)
+        # @option arguments [String] :ruleset_id The unique identifier of the query ruleset containing the rule to delete (*Required*)
+        # @option arguments [String] :rule_id The unique identifier of the query rule within the specified ruleset to delete (*Required*)
         # @option arguments [Hash] :headers Custom HTTP headers
         #
-        # @see https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-query-ruleset.html
+        # @see https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-query-rule.html
         #
-        def delete(arguments = {})
+        def delete_rule(arguments = {})
           raise ArgumentError, "Required argument 'ruleset_id' missing" unless arguments[:ruleset_id]
+          raise ArgumentError, "Required argument 'rule_id' missing" unless arguments[:rule_id]
 
           arguments = arguments.clone
           headers = arguments.delete(:headers) || {}
@@ -43,8 +41,10 @@ module ElasticsearchServerless
 
           _ruleset_id = arguments.delete(:ruleset_id)
 
+          _rule_id = arguments.delete(:rule_id)
+
           method = ElasticsearchServerless::API::HTTP_DELETE
-          path   = "_query_rules/#{Utils.listify(_ruleset_id)}"
+          path   = "_query_rules/#{Utils.listify(_ruleset_id)}/_rule/#{Utils.listify(_rule_id)}"
           params = {}
 
           ElasticsearchServerless::API::Response.new(

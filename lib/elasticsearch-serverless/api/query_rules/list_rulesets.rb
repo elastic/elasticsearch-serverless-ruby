@@ -20,13 +20,9 @@
 #
 module ElasticsearchServerless
   module API
-    module QueryRuleset
+    module QueryRules
       module Actions
         # Returns summarized information about existing query rulesets.
-        # This functionality is Experimental and may be changed or removed
-        # completely in a future release. Elastic will take a best effort approach
-        # to fix any issues, but experimental features are not subject to the
-        # support SLA of official GA features.
         #
         # @option arguments [Integer] :from Starting offset (default: 0)
         # @option arguments [Integer] :size specifies a max number of results to get
@@ -34,7 +30,7 @@ module ElasticsearchServerless
         #
         # @see https://www.elastic.co/guide/en/elasticsearch/reference/master/list-query-rulesets.html
         #
-        def list(arguments = {})
+        def list_rulesets(arguments = {})
           arguments = arguments.clone
           headers = arguments.delete(:headers) || {}
 
