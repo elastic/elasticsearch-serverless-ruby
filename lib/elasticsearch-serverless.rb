@@ -23,7 +23,8 @@ module ElasticsearchServerless
   class Client
     include ElasticsearchServerless::API
 
-    VALID_PARAMETERS = [:adapter, :log, :logger, :serializer_class, :trace, :tracer, :headers, :request_timeout]
+    VALID_PARAMETERS = [:adapter, :log, :logger, :serializer_class, :trace, :tracer, :headers,
+                        :request_timeout, :retry_on_status, :retry_on_failure, :delay_on_retry]
 
     # Initializes an Elasticsearch Serverless Client
     #
@@ -35,6 +36,11 @@ module ElasticsearchServerless
     # @option arguments [Object] :logger An instance of a Logger-compatible object
     # @option arguments [Integer] :request_timeout The request timeout to be passed to transport in
     #                                              options in seconds
+    # @option arguments [Boolean,Number] :retry_on_failure Retry X times when request fails before raising and
+    #                                                      exception (false by default)
+    # @option arguments Array<Number> :retry_on_status Retry when specific status codes are returned
+    # @option arguments [Number] :delay_on_retry Delay in milliseconds between each retry (0 by default)
+    # @option arguments [Boolean] :trace Use the default tracer (disabled by default)
     # @option arguments [Boolean] :trace Use the default tracer (disabled by default)
     # @option arguments [Object] :tracer An instance of a Logger-compatible object
     # @option arguments [Constant] :serializer_class A specific serializer class to use, will be initialized by
