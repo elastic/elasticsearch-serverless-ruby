@@ -26,4 +26,4 @@ logger = Logger.new($stdout)
 logger.level = Logger::WARN unless ENV['DEBUG']
 
 Elasticsearch::Tests::Downloader::run(tests_path)
-Elasticsearch::Tests::TestRunner.new(CLIENT, tests_path, logger).run
+Elasticsearch::Tests::TestRunner.new(CLIENT, tests_path, logger).run(ENV['SINGLE_TEST'] || [])

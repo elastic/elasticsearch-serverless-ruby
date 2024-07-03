@@ -26,4 +26,10 @@ end
 
 api_key = ENV['API_KEY']
 url = ENV['ELASTICSEARCH_URL']
-CLIENT = ElasticsearchServerless::Client.new(api_key: api_key, url: url, arguments: { request_timeout: 120 })
+arguments = {
+  retry_on_status: [409],
+  retry_on_failure: 10,
+  delay_on_retry: 60_000,
+  request_timeout: 120
+}
+CLIENT = ElasticsearchServerless::Client.new(api_key: api_key, url: url, arguments: arguments)
