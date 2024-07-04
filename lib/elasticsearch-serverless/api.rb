@@ -59,6 +59,7 @@ module ElasticsearchServerless
       :async_search,
       :cat,
       :cluster,
+      :connector,
       :enrich,
       :eql,
       :esql,
