@@ -45,11 +45,7 @@ module ElasticsearchServerless
         arguments = arguments.clone
         headers = arguments.delete(:headers) || {}
 
-        body = if (ids = arguments.delete(:ids))
-                 { :ids => ids }
-               else
-                 arguments.delete(:body)
-               end
+        body = arguments.delete(:body)
 
         _index = arguments.delete(:index)
 
