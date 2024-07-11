@@ -22,7 +22,7 @@ module ElasticsearchServerless
   module API
     module MachineLearning
       module Actions
-        # Opens one or more anomaly detection jobs.
+        # Open anomaly detection jobs.
         # An anomaly detection job must be opened in order for it to be ready to
         # receive and analyze data. It can be opened and closed multiple times
         # throughout its lifecycle.
