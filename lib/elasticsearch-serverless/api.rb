@@ -48,8 +48,8 @@ module ElasticsearchServerless
         @client = client
       end
 
-      def perform_request(method, path, params = {}, body = nil, headers = nil)
-        client.perform_request method, path, params, body, headers
+      def perform_request(method, path, params = {}, body = nil, headers = nil, request_opts = {})
+        client.perform_request(method, path, params, body, headers, request_opts)
       end
     end
 
