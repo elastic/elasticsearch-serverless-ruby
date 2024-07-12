@@ -35,20 +35,20 @@ describe ElasticsearchServerless::Client do
   end
 
   it 'formats the version for pre-releases' do
-    stub_const("ElasticsearchServerless::CLIENT_VERSION", '1.0.0')
-    stub_const("ElasticsearchServerless::VERSION", '1.0.0.pre')
+    stub_const('ElasticsearchServerless::CLIENT_VERSION', '1.0.0')
+    stub_const('ElasticsearchServerless::VERSION', '1.0.0.pre')
     expect(meta_version).to eq '1.0.0p'
   end
 
   it 'doesnae change the version for normal releases' do
-    stub_const("ElasticsearchServerless::CLIENT_VERSION", '1.0.0')
-    stub_const("ElasticsearchServerless::VERSION", '1.0.0')
+    stub_const('ElasticsearchServerless::CLIENT_VERSION', '1.0.0')
+    stub_const('ElasticsearchServerless::VERSION', '1.0.0')
     expect(meta_version).to eq '1.0.0'
   end
 
   it 'formats the version with api date' do
-    stub_const("ElasticsearchServerless::CLIENT_VERSION", '1.2.0')
-    stub_const("ElasticsearchServerless::VERSION", '1.2.0.20231031.pre')
+    stub_const('ElasticsearchServerless::CLIENT_VERSION', '1.2.0')
+    stub_const('ElasticsearchServerless::VERSION', '1.2.0.20231031.pre')
     expect(meta_version).to eq '1.2.0p'
   end
 
