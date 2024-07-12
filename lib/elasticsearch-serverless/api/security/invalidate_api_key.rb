@@ -36,6 +36,8 @@ module ElasticsearchServerless
         # @see https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-invalidate-api-key.html
         #
         def invalidate_api_key(arguments = {})
+          request_opts = { endpoint: arguments[:endpoint] || "security.invalidate_api_key" }
+
           raise ArgumentError, "Required argument 'body' missing" unless arguments[:body]
 
           arguments = arguments.clone
@@ -48,7 +50,7 @@ module ElasticsearchServerless
           params = {}
 
           ElasticsearchServerless::API::Response.new(
-            perform_request(method, path, params, body, headers)
+            perform_request(method, path, params, body, headers, request_opts)
           )
         end
       end

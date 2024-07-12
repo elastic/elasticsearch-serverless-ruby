@@ -39,6 +39,8 @@ module ElasticsearchServerless
       # @see https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-reindex.html
       #
       def reindex(arguments = {})
+        request_opts = { endpoint: arguments[:endpoint] || "reindex" }
+
         raise ArgumentError, "Required argument 'body' missing" unless arguments[:body]
 
         arguments = arguments.clone
@@ -51,7 +53,7 @@ module ElasticsearchServerless
         params = Utils.process_params(arguments)
 
         ElasticsearchServerless::API::Response.new(
-          perform_request(method, path, params, body, headers)
+          perform_request(method, path, params, body, headers, request_opts)
         )
       end
     end

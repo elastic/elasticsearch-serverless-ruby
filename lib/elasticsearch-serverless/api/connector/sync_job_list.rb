@@ -38,6 +38,8 @@ module ElasticsearchServerless
         # @see https://www.elastic.co/guide/en/elasticsearch/reference/current/list-connector-sync-jobs-api.html
         #
         def sync_job_list(arguments = {})
+          request_opts = { endpoint: arguments[:endpoint] || "connector.sync_job_list" }
+
           arguments = arguments.clone
           headers = arguments.delete(:headers) || {}
 
@@ -48,7 +50,7 @@ module ElasticsearchServerless
           params = Utils.process_params(arguments)
 
           ElasticsearchServerless::API::Response.new(
-            perform_request(method, path, params, body, headers)
+            perform_request(method, path, params, body, headers, request_opts)
           )
         end
       end

@@ -39,6 +39,8 @@ module ElasticsearchServerless
         # @see https://www.elastic.co/guide/en/elasticsearch/reference/current/list-connector-api.html
         #
         def list(arguments = {})
+          request_opts = { endpoint: arguments[:endpoint] || "connector.list" }
+
           arguments = arguments.clone
           headers = arguments.delete(:headers) || {}
 
@@ -49,7 +51,7 @@ module ElasticsearchServerless
           params = Utils.process_params(arguments)
 
           ElasticsearchServerless::API::Response.new(
-            perform_request(method, path, params, body, headers)
+            perform_request(method, path, params, body, headers, request_opts)
           )
         end
       end
