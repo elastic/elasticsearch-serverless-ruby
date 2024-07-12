@@ -36,6 +36,14 @@ module ElasticsearchServerless
         # @see https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-stop-datafeed.html
         #
         def stop_datafeed(arguments = {})
+          request_opts = { endpoint: arguments[:endpoint] || "ml.stop_datafeed" }
+
+          defined_params = [:datafeed_id].inject({}) do |set_variables, variable|
+            set_variables[variable] = arguments[variable] if arguments.key?(variable)
+            set_variables
+          end
+          request_opts[:defined_params] = defined_params unless defined_params.empty?
+
           raise ArgumentError, "Required argument 'datafeed_id' missing" unless arguments[:datafeed_id]
 
           arguments = arguments.clone
@@ -50,7 +58,7 @@ module ElasticsearchServerless
           params = Utils.process_params(arguments)
 
           ElasticsearchServerless::API::Response.new(
-            perform_request(method, path, params, body, headers)
+            perform_request(method, path, params, body, headers, request_opts)
           )
         end
       end

@@ -34,6 +34,8 @@ module ElasticsearchServerless
         # @see https://www.elastic.co/guide/en/elasticsearch/reference/current/evaluate-dfanalytics.html
         #
         def evaluate_data_frame(arguments = {})
+          request_opts = { endpoint: arguments[:endpoint] || "ml.evaluate_data_frame" }
+
           raise ArgumentError, "Required argument 'body' missing" unless arguments[:body]
 
           arguments = arguments.clone
@@ -46,7 +48,7 @@ module ElasticsearchServerless
           params = {}
 
           ElasticsearchServerless::API::Response.new(
-            perform_request(method, path, params, body, headers)
+            perform_request(method, path, params, body, headers, request_opts)
           )
         end
       end

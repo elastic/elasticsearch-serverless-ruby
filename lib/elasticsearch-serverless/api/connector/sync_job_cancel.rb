@@ -34,6 +34,14 @@ module ElasticsearchServerless
         # @see https://www.elastic.co/guide/en/elasticsearch/reference/current/cancel-connector-sync-job-api.html
         #
         def sync_job_cancel(arguments = {})
+          request_opts = { endpoint: arguments[:endpoint] || "connector.sync_job_cancel" }
+
+          defined_params = [:connector_sync_job_id].inject({}) do |set_variables, variable|
+            set_variables[variable] = arguments[variable] if arguments.key?(variable)
+            set_variables
+          end
+          request_opts[:defined_params] = defined_params unless defined_params.empty?
+
           raise ArgumentError,
                 "Required argument 'connector_sync_job_id' missing" unless arguments[:connector_sync_job_id]
 
@@ -49,7 +57,7 @@ module ElasticsearchServerless
           params = {}
 
           ElasticsearchServerless::API::Response.new(
-            perform_request(method, path, params, body, headers)
+            perform_request(method, path, params, body, headers, request_opts)
           )
         end
       end

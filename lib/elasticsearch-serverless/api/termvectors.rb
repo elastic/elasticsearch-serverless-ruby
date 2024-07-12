@@ -42,6 +42,14 @@ module ElasticsearchServerless
       # @see https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-termvectors.html
       #
       def termvectors(arguments = {})
+        request_opts = { endpoint: arguments[:endpoint] || "termvectors" }
+
+        defined_params = [:index, :id].inject({}) do |set_variables, variable|
+          set_variables[variable] = arguments[variable] if arguments.key?(variable)
+          set_variables
+        end
+        request_opts[:defined_params] = defined_params unless defined_params.empty?
+
         raise ArgumentError, "Required argument 'index' missing" unless arguments[:index]
 
         arguments = arguments.clone
@@ -60,15 +68,15 @@ module ElasticsearchServerless
                  end
 
         arguments.delete(:endpoint)
-        path   = if _index && _id
-                   "#{Utils.listify(_index)}/_termvectors/#{Utils.listify(_id)}"
-                 else
-                   "#{Utils.listify(_index)}/_termvectors"
-                 end
+        path = if _index && _id
+                 "#{Utils.listify(_index)}/_termvectors/#{Utils.listify(_id)}"
+               else
+                 "#{Utils.listify(_index)}/_termvectors"
+               end
         params = Utils.process_params(arguments)
 
         ElasticsearchServerless::API::Response.new(
-          perform_request(method, path, params, body, headers)
+          perform_request(method, path, params, body, headers, request_opts)
         )
       end
 

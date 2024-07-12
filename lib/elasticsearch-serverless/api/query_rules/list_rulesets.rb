@@ -31,6 +31,8 @@ module ElasticsearchServerless
         # @see https://www.elastic.co/guide/en/elasticsearch/reference/master/list-query-rulesets.html
         #
         def list_rulesets(arguments = {})
+          request_opts = { endpoint: arguments[:endpoint] || "query_rules.list_rulesets" }
+
           arguments = arguments.clone
           headers = arguments.delete(:headers) || {}
 
@@ -41,7 +43,7 @@ module ElasticsearchServerless
           params = Utils.process_params(arguments)
 
           ElasticsearchServerless::API::Response.new(
-            perform_request(method, path, params, body, headers)
+            perform_request(method, path, params, body, headers, request_opts)
           )
         end
       end

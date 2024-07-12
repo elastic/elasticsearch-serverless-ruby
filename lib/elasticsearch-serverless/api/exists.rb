@@ -40,6 +40,14 @@ module ElasticsearchServerless
       # @see https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html
       #
       def exists(arguments = {})
+        request_opts = { endpoint: arguments[:endpoint] || "exists" }
+
+        defined_params = [:index, :id].inject({}) do |set_variables, variable|
+          set_variables[variable] = arguments[variable] if arguments.key?(variable)
+          set_variables
+        end
+        request_opts[:defined_params] = defined_params unless defined_params.empty?
+
         raise ArgumentError, "Required argument 'index' missing" unless arguments[:index]
         raise ArgumentError, "Required argument 'id' missing" unless arguments[:id]
 
@@ -57,7 +65,7 @@ module ElasticsearchServerless
         params = Utils.process_params(arguments)
 
         Utils.rescue_from_not_found do
-          perform_request(method, path, params, body, headers).status == 200 ? true : false
+          perform_request(method, path, params, body, headers, request_opts).status == 200 ? true : false
         end
       end
 

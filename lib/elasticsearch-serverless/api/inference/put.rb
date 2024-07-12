@@ -36,6 +36,14 @@ module ElasticsearchServerless
         # @see https://www.elastic.co/guide/en/elasticsearch/reference/master/put-inference-api.html
         #
         def put(arguments = {})
+          request_opts = { endpoint: arguments[:endpoint] || "inference.put" }
+
+          defined_params = [:inference_id, :task_type].inject({}) do |set_variables, variable|
+            set_variables[variable] = arguments[variable] if arguments.key?(variable)
+            set_variables
+          end
+          request_opts[:defined_params] = defined_params unless defined_params.empty?
+
           raise ArgumentError, "Required argument 'body' missing" unless arguments[:body]
           raise ArgumentError, "Required argument 'inference_id' missing" unless arguments[:inference_id]
 
@@ -57,7 +65,7 @@ module ElasticsearchServerless
           params = {}
 
           ElasticsearchServerless::API::Response.new(
-            perform_request(method, path, params, body, headers)
+            perform_request(method, path, params, body, headers, request_opts)
           )
         end
       end

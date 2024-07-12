@@ -42,6 +42,14 @@ module ElasticsearchServerless
       # @see https://www.elastic.co/guide/en/elasticsearch/reference/master/search-multi-search.html
       #
       def msearch(arguments = {})
+        request_opts = { endpoint: arguments[:endpoint] || "msearch" }
+
+        defined_params = [:index].inject({}) do |set_variables, variable|
+          set_variables[variable] = arguments[variable] if arguments.key?(variable)
+          set_variables
+        end
+        request_opts[:defined_params] = defined_params unless defined_params.empty?
+
         raise ArgumentError, "Required argument 'body' missing" unless arguments[:body]
 
         arguments = arguments.clone
@@ -83,7 +91,7 @@ module ElasticsearchServerless
 
         headers.merge!("Content-Type" => "application/x-ndjson")
         ElasticsearchServerless::API::Response.new(
-          perform_request(method, path, params, payload, headers)
+          perform_request(method, path, params, payload, headers, request_opts)
         )
       end
     end

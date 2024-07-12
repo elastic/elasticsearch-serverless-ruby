@@ -81,6 +81,14 @@ module ElasticsearchServerless
         # @see https://www.elastic.co/guide/en/elasticsearch/reference/current/async-search.html
         #
         def submit(arguments = {})
+          request_opts = { endpoint: arguments[:endpoint] || "async_search.submit" }
+
+          defined_params = [:index].inject({}) do |set_variables, variable|
+            set_variables[variable] = arguments[variable] if arguments.key?(variable)
+            set_variables
+          end
+          request_opts[:defined_params] = defined_params unless defined_params.empty?
+
           arguments = arguments.clone
           headers = arguments.delete(:headers) || {}
 
@@ -97,7 +105,7 @@ module ElasticsearchServerless
           params = Utils.process_params(arguments)
 
           ElasticsearchServerless::API::Response.new(
-            perform_request(method, path, params, body, headers)
+            perform_request(method, path, params, body, headers, request_opts)
           )
         end
       end
