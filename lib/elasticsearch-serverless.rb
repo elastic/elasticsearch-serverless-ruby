@@ -95,7 +95,7 @@ module ElasticsearchServerless
       if RbConfig::CONFIG && RbConfig::CONFIG['host_os']
         user_agent << "#{RbConfig::CONFIG['host_os'].split('_').first[/[a-z]+/i].downcase} #{RbConfig::CONFIG['target_cpu']}"
       end
-      user_agent.join("; ")
+      user_agent.join('; ')
     end
   end
 end
@@ -108,5 +108,5 @@ module Elastic
     ElasticsearchServerless::CLIENT_VERSION
   end
 
-  ELASTICSEARCH_SERVICE_VERSION = [:esv, client_meta_version].freeze
+  ES_SERVERLESS_SERVICE_VERSION = [:esv, client_meta_version].freeze
 end
