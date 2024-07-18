@@ -19,70 +19,82 @@ require 'spec_helper'
 require 'elastic-transport'
 
 describe 'Perform request args' do
-  spec = OpenStruct.new(
-    module_namespace: ['indices'],
-    path_params: ['index'],
-    required_parts: ['index'],
-    endpoint_name: 'indices.create',
-    path_parts: { 'index' => { 'type' => 'string', 'description' => 'index' } },
-    method_name: 'create'
-  )
+  specs = [
+    OpenStruct.new(
+      module_namespace: ['indices'],
+      path_params: ['index'],
+      required_parts: ['index'],
+      endpoint_name: 'indices.create',
+      path_parts: { 'index' => { 'type' => 'string', 'description' => 'index' } },
+      method_name: 'create'
+    ),
+    OpenStruct.new(
+      module_namespace: [],
+      path_params: [],
+      required_parts: [],
+      endpoint_name: 'count',
+      path_parts: {},
+      method_name: 'count'
+    )
+  ]
 
-  # These are the path parts defined by the user in the method argument
-  defined_path_parts = spec.path_params.inject({}) do |params, part|
-    params.merge(part.to_sym => 'testing')
-  end
-
-  # These are the required params, we must pass them to the method even when testing
-  required_params = spec.required_parts.inject({}) do |params, part|
-    params.merge(part.to_sym => 'testing')
-  end
-
-  let(:client_double) do
-    Class.new { include ElasticsearchServerless::API }.new.tap do |client|
-      expect(client).to receive(:perform_request) do |_, _, _, _, _, request_params|
-        # The create method ends up becoming an 'index' request
-        if expected_perform_request_params[:endpoint] == 'create'
-          expected_perform_request_params[:endpoint] = 'index'
-        end
-        # Check that the expected hash is passed to the perform_request method
-        expect(request_params).to eq(expected_perform_request_params)
-      end.and_return(response_double)
+  specs.each do |spec|
+    # These are the path parts defined by the user in the method argument
+    defined_path_parts = spec.path_params.inject({}) do |params, part|
+      params.merge(part.to_sym => 'testing')
     end
-  end
 
-  let(:response_double) do
-    double('response', status: 200, body: {}, headers: {})
-  end
+    # These are the required params, we must pass them to the method even when testing
+    required_params = spec.required_parts.inject({}) do |params, part|
+      params.merge(part.to_sym => 'testing')
+    end
 
-  context(spec.endpoint_name) do
-    # The expected hash passed to perform_request contains the endpoint name and any defined path parts
-    let(:expected_perform_request_params) do
-      if defined_path_parts.empty?
-        { endpoint: spec.endpoint_name }
+    let(:client_double) do
+      Class.new { include ElasticsearchServerless::API }.new.tap do |client|
+        expect(client).to receive(:perform_request) do |_, _, _, _, _, request_params|
+          # The create method ends up becoming an 'index' request
+          if expected_perform_request_params[:endpoint] == 'create'
+            expected_perform_request_params[:endpoint] = 'index'
+          end
+          # Check that the expected hash is passed to the perform_request method
+          expect(request_params).to eq(expected_perform_request_params)
+        end.and_return(response_double)
+      end
+    end
+
+    let(:response_double) do
+      double('response', status: 200, body: {}, headers: {})
+    end
+
+    context(spec.endpoint_name) do
+      # The expected hash passed to perform_request contains the endpoint name and any defined path parts
+      let(:expected_perform_request_params) do
+        if defined_path_parts.empty?
+          { endpoint: spec.endpoint_name }
+        else
+          { endpoint: spec.endpoint_name, defined_params: defined_path_parts }
+        end
+      end
+
+      if spec.path_parts.empty?
+        it 'passes the endpoint id to the request' do
+          if spec.module_namespace.empty?
+            client_double.send(spec.method_name, required_params)
+          else
+            client_double.send(spec.module_namespace[0]).send(spec.method_name, required_params)
+          end
+        end
       else
-        { endpoint: spec.endpoint_name, defined_params: defined_path_parts}
-      end
-    end
-
-    if spec.path_parts.empty?
-      it 'passes the endpoint id to the request' do
-        if spec.module_namespace.empty?
-          client_double.send(spec.method_name, required_params)
-        else
-          client_double.send(spec.module_namespace[0]).send(spec.method_name, required_params)
-        end
-      end
-    else
-      it "passes params to the request with the endpoint id: #{spec.path_parts.keys}" do
-        if spec.module_namespace.empty?
-          client_double.send(spec.method_name, required_params.merge(defined_path_parts))
-        else
-          client_double.send(
-            spec.module_namespace[0]
-          ).send(
-            spec.method_name, required_params.merge(defined_path_parts)
-          )
+        it "passes params to the request with the endpoint id: #{spec.path_parts.keys}" do
+          if spec.module_namespace.empty?
+            client_double.send(spec.method_name, required_params.merge(defined_path_parts))
+          else
+            client_double.send(
+              spec.module_namespace[0]
+            ).send(
+              spec.method_name, required_params.merge(defined_path_parts)
+            )
+          end
         end
       end
     end
