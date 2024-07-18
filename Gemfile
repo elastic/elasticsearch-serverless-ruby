@@ -18,3 +18,5 @@
 source 'https://rubygems.org'
 
 gemspec
+
+gem 'opentelemetry-sdk', require: false

@@ -40,6 +40,14 @@ namespace :spec do
     t.pattern = Dir.glob('spec/stack_client/**/*_spec.rb')
   end
 
+  desc 'Run OpenTelemetry tests'
+  RSpec::Core::RakeTask.new(:otel) do |t|
+    t.pattern = [
+      'spec/api/perform_request_spec.rb',
+      'spec/api/opentelemetry_spec.rb'
+    ]
+  end
+
   desc 'Run all tests'
   RSpec::Core::RakeTask.new(:all) do |t|
     t.pattern = Dir.glob('spec/**/*_spec.rb')

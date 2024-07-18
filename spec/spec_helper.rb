@@ -24,6 +24,18 @@ RSpec.configure do |config|
   config.tty = true
 end
 
+if ENV['TEST_WITH_OTEL'] == 'true'
+  require 'opentelemetry-sdk'
+  EXPORTER = OpenTelemetry::SDK::Trace::Export::InMemorySpanExporter.new
+  span_processor = OpenTelemetry::SDK::Trace::Export::SimpleSpanProcessor.new(EXPORTER)
+
+  OpenTelemetry::SDK.configure do |c|
+    c.error_handler = ->(exception:, message:) { raise(exception || message) }
+    c.logger = Logger.new($stderr, level: ENV.fetch('OTEL_LOG_LEVEL', 'fatal').to_sym)
+    c.add_span_processor span_processor
+  end
+end
+
 api_key = ENV['API_KEY']
 url = ENV['ELASTICSEARCH_URL']
 arguments = {
@@ -32,4 +44,5 @@ arguments = {
   delay_on_retry: 60_000,
   request_timeout: 120
 }
+
 CLIENT = ElasticsearchServerless::Client.new(api_key: api_key, url: url, arguments: arguments)
