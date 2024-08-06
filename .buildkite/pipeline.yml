@@ -23,23 +23,3 @@ steps:
             ruby_source: 'jruby'
             ruby: '9.4'
     command: './.buildkite/run-tests.sh'
-  - label: ':elasticsearch: Serverless :otel: OpenTelemetry Tests :ruby: {{ matrix.ruby_source}}:{{ matrix.ruby }}'
-    agents:
-      provider: 'gcp'
-    env:
-      RUBY_VERSION: "{{ matrix.ruby }}"
-      TEST_SUITE: 'otel'
-      RUBY_SOURCE: "{{ matrix.ruby_source }}"
-      EC_PROJECT_PREFIX: 'sl_ruby'
-      CLOUD_CREDENTIALS_PATH: 'secret/ci/elastic-elasticsearch-serverless-ruby/cloud-access'
-    matrix:
-      setup:
-        ruby:
-          - "3.3"
-        ruby_source:
-          - 'ruby'
-      adjustments:
-        - with:
-            ruby_source: 'jruby'
-            ruby: '9.4'
-    command: './.buildkite/run-tests.sh'
