@@ -19,31 +19,14 @@ docker build \
 
 echo "--- :ruby: Running $TEST_SUITE tests"
 
-if [[ "$TEST_SUITE" == "api" ]]; then
-  docker run \
-         -e "TEST_SUITE=${TEST_SUITE}" \
-         -e "ELASTIC_USER=elastic" \
-         -e "BUILDKITE=true" \
-         -e "TRANSPORT_VERSION=${TRANSPORT_VERSION}" \
-         -e "ELASTICSEARCH_URL=${ELASTICSEARCH_URL}" \
-         -e "API_KEY=${ES_API_SECRET_KEY}" \
-         --volume $repo:/usr/src/app \
-         --name elasticsearch-ruby \
-         --rm \
-         elastic/elasticsearch-ruby \
-         bundle exec rake info spec:api spec:stack spec:download_tests spec:yaml
-elif [[ "$TEST_SUITE" == "otel" ]]; then
-  docker run \
-         -e "TEST_SUITE=${TEST_SUITE}" \
-         -e "ELASTIC_USER=elastic" \
-         -e "BUILDKITE=true" \
-         -e "TRANSPORT_VERSION=${TRANSPORT_VERSION}" \
-         -e "ELASTICSEARCH_URL=${ELASTICSEARCH_URL}" \
-         -e "API_KEY=${ES_API_SECRET_KEY}" \
-         -e "TEST_WITH_OTEL=true" \
-         --volume $repo:/usr/src/app \
-         --name elasticsearch-ruby \
-         --rm \
-         elastic/elasticsearch-ruby \
-         bundle exec rake spec:otel
-fi
+docker run \
+       -e "ELASTIC_USER=elastic" \
+       -e "BUILDKITE=true" \
+       -e "TRANSPORT_VERSION=${TRANSPORT_VERSION}" \
+       -e "ELASTICSEARCH_URL=${ELASTICSEARCH_URL}" \
+       -e "API_KEY=${ES_API_SECRET_KEY}" \
+       --volume $repo:/usr/src/app \
+       --name elasticsearch-ruby \
+       --rm \
+       elastic/elasticsearch-ruby \
+       bundle exec rake info spec:otel spec:api spec:stack spec:download_tests spec:yaml
