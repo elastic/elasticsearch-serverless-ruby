@@ -127,3 +127,6 @@ task :info do
   info = client.info
   puts "Connected to Elasticsearch cluster #{info['cluster_name']}"
 end
+
+require 'yard'
+YARD::Rake::YardocTask.new(:doc)
