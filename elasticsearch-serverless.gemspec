@@ -28,10 +28,4 @@ Gem::Specification.new do |s|
   s.license     = 'Apache-2.0'
 
   s.add_dependency 'elastic-transport', '~> 8.3'
-
-  s.add_development_dependency 'debug', '>= 1.0.0' unless defined?(JRUBY_VERSION)
-  s.add_development_dependency 'elasticsearch-test-runner'
-  s.add_development_dependency 'rake'
-  s.add_development_dependency 'rspec'
-  s.add_development_dependency 'faraday-net_http_persistent'
 end

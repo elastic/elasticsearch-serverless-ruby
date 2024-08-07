@@ -19,4 +19,10 @@ source 'https://rubygems.org'
 
 gemspec
 
+gem 'debug', '>= 1.0.0' unless defined?(JRUBY_VERSION)
+gem 'elasticsearch-test-runner'
+gem 'faraday-net_http_persistent'
 gem 'opentelemetry-sdk', require: false
+gem 'rake'
+gem 'rspec'
+gem 'yard'
