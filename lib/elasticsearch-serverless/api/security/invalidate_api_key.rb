@@ -22,6 +22,7 @@ module ElasticsearchServerless
   module API
     module Security
       module Actions
+        # Invalidate API keys.
         # Invalidates one or more API keys.
         # The +manage_api_key+ privilege allows deleting any API keys.
         # The +manage_own_api_key+ only allows deleting API keys that are owned by the user.

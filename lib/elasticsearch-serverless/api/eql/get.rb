@@ -25,8 +25,10 @@ module ElasticsearchServerless
         # Returns the current status and available results for an async EQL search or a stored synchronous EQL search.
         #
         # @option arguments [String] :id Identifier for the search. (*Required*)
-        # @option arguments [Time] :keep_alive Period for which the search and its results are stored on the cluster. Defaults to the keep_alive value set by the search’s EQL search API request.
-        # @option arguments [Time] :wait_for_completion_timeout Timeout duration to wait for the request to finish. Defaults to no timeout, meaning the request waits for complete search results.
+        # @option arguments [Time] :keep_alive Period for which the search and its results are stored on the cluster.
+        #  Defaults to the keep_alive value set by the search’s EQL search API request.
+        # @option arguments [Time] :wait_for_completion_timeout Timeout duration to wait for the request to finish.
+        #  Defaults to no timeout, meaning the request waits for complete search results.
         # @option arguments [Hash] :headers Custom HTTP headers
         #
         # @see https://www.elastic.co/guide/en/elasticsearch/reference/current/get-async-eql-search-api.html

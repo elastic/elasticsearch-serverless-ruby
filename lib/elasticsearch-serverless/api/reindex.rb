@@ -21,16 +21,18 @@
 module ElasticsearchServerless
   module API
     module Actions
-      # Allows to copy documents from one index to another, optionally filtering the source
-      # documents by a query, changing the destination index settings, or fetching the
-      # documents from a remote cluster.
+      # Reindex documents.
+      # Copies documents from a source to a destination. The source can be any existing index, alias, or data stream. The destination must differ from the source. For example, you cannot reindex a data stream into itself.
       #
       # @option arguments [Boolean] :refresh If +true+, the request refreshes affected shards to make this operation visible to search.
-      # @option arguments [Float] :requests_per_second The throttle for this request in sub-requests per second. Defaults to no throttle. Server default: -1.
+      # @option arguments [Float] :requests_per_second The throttle for this request in sub-requests per second.
+      #  Defaults to no throttle. Server default: -1.
       # @option arguments [Time] :scroll Specifies how long a consistent view of the index should be maintained for scrolled search.
-      # @option arguments [Integer, String] :slices The number of slices this task should be divided into. Defaults to 1 slice, meaning the task isn’t sliced into subtasks. Server default: 1.
+      # @option arguments [Integer, String] :slices The number of slices this task should be divided into.
+      #  Defaults to 1 slice, meaning the task isn’t sliced into subtasks. Server default: 1.
       # @option arguments [Time] :timeout Period each indexing waits for automatic index creation, dynamic mapping updates, and waiting for active shards. Server default: 1m.
-      # @option arguments [Integer, String] :wait_for_active_shards The number of shard copies that must be active before proceeding with the operation. Set to +all+ or any positive integer up to the total number of shards in the index (+number_of_replicas+1+). Server default: 1.
+      # @option arguments [Integer, String] :wait_for_active_shards The number of shard copies that must be active before proceeding with the operation.
+      #  Set to +all+ or any positive integer up to the total number of shards in the index (+number_of_replicas+1+). Server default: 1.
       # @option arguments [Boolean] :wait_for_completion If +true+, the request blocks until the operation is complete. Server default: true.
       # @option arguments [Boolean] :require_alias If +true+, the destination must be an index alias.
       # @option arguments [Hash] :headers Custom HTTP headers

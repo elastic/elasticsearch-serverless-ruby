@@ -22,7 +22,8 @@ module ElasticsearchServerless
   module API
     module Indices
       module Actions
-        # Retrieves information about the index's current data stream lifecycle, such as any potential encountered error, time since creation etc.
+        # Get the status for a data stream lifecycle.
+        # Retrieves information about an index or data stream’s current data stream lifecycle status, such as time since index creation, time since rollover, the lifecycle configuration managing the index, or any errors encountered during lifecycle execution.
         #
         # @option arguments [String, Array] :index The name of the index to explain (*Required*)
         # @option arguments [Boolean] :include_defaults indicates if the API should return the default values the system uses for the index's lifecycle

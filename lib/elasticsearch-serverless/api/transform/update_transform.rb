@@ -22,8 +22,8 @@ module ElasticsearchServerless
   module API
     module Transform
       module Actions
+        # Update a transform.
         # Updates certain properties of a transform.
-        #
         # All updated properties except +description+ do not take effect until after the transform starts the next checkpoint,
         # thus there is data consistency in each checkpoint. To use this API, you must have +read+ and +view_index_metadata+
         # privileges for the source indices. You must also have +index+ and +read+ privileges for the destination index. When
@@ -31,8 +31,11 @@ module ElasticsearchServerless
         # time of update and runs with those privileges.
         #
         # @option arguments [String] :transform_id Identifier for the transform. (*Required*)
-        # @option arguments [Boolean] :defer_validation When true, deferrable validations are not run. This behavior may be desired if the source index does not exist until after the transform is created.
-        # @option arguments [Time] :timeout Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error. Server default: 30s.
+        # @option arguments [Boolean] :defer_validation When true, deferrable validations are not run. This behavior may be
+        #  desired if the source index does not exist until after the transform is
+        #  created.
+        # @option arguments [Time] :timeout Period to wait for a response. If no response is received before the
+        #  timeout expires, the request fails and returns an error. Server default: 30s.
         # @option arguments [Hash] :headers Custom HTTP headers
         # @option arguments [Hash] :body request body
         #

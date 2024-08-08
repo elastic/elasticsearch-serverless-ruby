@@ -24,9 +24,12 @@ module ElasticsearchServerless
       module Actions
         # Deletes one or more existing ingest pipeline.
         #
-        # @option arguments [String] :id Pipeline ID or wildcard expression of pipeline IDs used to limit the request. To delete all ingest pipelines in a cluster, use a value of +*+. (*Required*)
-        # @option arguments [Time] :master_timeout Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error. Server default: 30s.
-        # @option arguments [Time] :timeout Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error. Server default: 30s.
+        # @option arguments [String] :id Pipeline ID or wildcard expression of pipeline IDs used to limit the request.
+        #  To delete all ingest pipelines in a cluster, use a value of +*+. (*Required*)
+        # @option arguments [Time] :master_timeout Period to wait for a connection to the master node.
+        #  If no response is received before the timeout expires, the request fails and returns an error. Server default: 30s.
+        # @option arguments [Time] :timeout Period to wait for a response.
+        #  If no response is received before the timeout expires, the request fails and returns an error. Server default: 30s.
         # @option arguments [Hash] :headers Custom HTTP headers
         #
         # @see https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-pipeline-api.html

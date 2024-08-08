@@ -22,7 +22,8 @@ module ElasticsearchServerless
   module API
     module Cluster
       module Actions
-        # Returns different information about the cluster.
+        # Get cluster info.
+        # Returns basic information about the cluster.
         #
         # @option arguments [String, Array<String>] :target Limits the information returned to the specific target. Supports a comma-separated list, such as http,ingest. (*Required*)
         # @option arguments [Hash] :headers Custom HTTP headers

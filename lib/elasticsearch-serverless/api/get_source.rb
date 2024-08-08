@@ -21,6 +21,7 @@
 module ElasticsearchServerless
   module API
     module Actions
+      # Get a document's source.
       # Returns the source of a document.
       #
       # @option arguments [String] :id Unique identifier of the document. (*Required*)

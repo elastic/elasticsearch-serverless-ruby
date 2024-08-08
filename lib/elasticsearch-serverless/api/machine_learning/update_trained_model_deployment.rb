@@ -23,13 +23,14 @@ module ElasticsearchServerless
     module MachineLearning
       module Actions
         # Starts a trained model deployment, which allocates the model to every machine learning node.
-        # This functionality is in Beta and is subject to change. The design and
-        # code is less mature than official GA features and is being provided
-        # as-is with no warranties. Beta features are not subject to the support
-        # SLA of official GA features.
         #
         # @option arguments [String] :model_id The unique identifier of the trained model. Currently, only PyTorch models are supported. (*Required*)
-        # @option arguments [Integer] :number_of_allocations The number of model allocations on each node where the model is deployed. All allocations on a node share the same copy of the model in memory but use a separate set of threads to evaluate the model. Increasing this value generally increases the throughput. If this setting is greater than the number of hardware threads it will automatically be changed to a value less than the number of hardware threads. Server default: 1.
+        # @option arguments [Integer] :number_of_allocations The number of model allocations on each node where the model is deployed.
+        #  All allocations on a node share the same copy of the model in memory but use
+        #  a separate set of threads to evaluate the model.
+        #  Increasing this value generally increases the throughput.
+        #  If this setting is greater than the number of hardware threads
+        #  it will automatically be changed to a value less than the number of hardware threads. Server default: 1.
         # @option arguments [Hash] :headers Custom HTTP headers
         # @option arguments [Hash] :body request body
         #

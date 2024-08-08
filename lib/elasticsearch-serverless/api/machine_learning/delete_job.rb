@@ -31,9 +31,13 @@ module ElasticsearchServerless
         # delete job request.
         #
         # @option arguments [String] :job_id Identifier for the anomaly detection job. (*Required*)
-        # @option arguments [Boolean] :force Use to forcefully delete an opened job; this method is quicker than closing and deleting the job.
-        # @option arguments [Boolean] :delete_user_annotations Specifies whether annotations that have been added by the user should be deleted along with any auto-generated annotations when the job is reset.
-        # @option arguments [Boolean] :wait_for_completion Specifies whether the request should return immediately or wait until the job deletion completes. Server default: true.
+        # @option arguments [Boolean] :force Use to forcefully delete an opened job; this method is quicker than
+        #  closing and deleting the job.
+        # @option arguments [Boolean] :delete_user_annotations Specifies whether annotations that have been added by the
+        #  user should be deleted along with any auto-generated annotations when the job is
+        #  reset.
+        # @option arguments [Boolean] :wait_for_completion Specifies whether the request should return immediately or wait until the
+        #  job deletion completes. Server default: true.
         # @option arguments [Hash] :headers Custom HTTP headers
         #
         # @see https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-job.html

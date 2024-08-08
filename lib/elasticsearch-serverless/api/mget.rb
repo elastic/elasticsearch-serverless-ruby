@@ -24,14 +24,19 @@ module ElasticsearchServerless
       # Allows to get multiple documents in one request.
       #
       # @option arguments [String] :index Name of the index to retrieve documents from when +ids+ are specified, or when a document in the +docs+ array does not specify an index.
-      # @option arguments [Boolean] :force_synthetic_source Should this request force synthetic _source? Use this to test if the mapping supports synthetic _source and to get a sense of the worst case performance. Fetches with this enabled will be slower the enabling synthetic source natively in the index.
+      # @option arguments [Boolean] :force_synthetic_source Should this request force synthetic _source?
+      #  Use this to test if the mapping supports synthetic _source and to get a sense of the worst case performance.
+      #  Fetches with this enabled will be slower the enabling synthetic source natively in the index.
       # @option arguments [String] :preference Specifies the node or shard the operation should be performed on. Random by default.
       # @option arguments [Boolean] :realtime If +true+, the request is real-time as opposed to near-real-time. Server default: true.
       # @option arguments [Boolean] :refresh If +true+, the request refreshes relevant shards before retrieving documents.
       # @option arguments [String] :routing Custom value used to route operations to a specific shard.
       # @option arguments [Boolean, String, Array<String>] :_source True or false to return the +_source+ field or not, or a list of fields to return.
-      # @option arguments [String, Array<String>] :_source_excludes A comma-separated list of source fields to exclude from the response. You can also use this parameter to exclude fields from the subset specified in +_source_includes+ query parameter.
-      # @option arguments [String, Array<String>] :_source_includes A comma-separated list of source fields to include in the response. If this parameter is specified, only these source fields are returned. You can exclude fields from this subset using the +_source_excludes+ query parameter. If the +_source+ parameter is +false+, this parameter is ignored.
+      # @option arguments [String, Array<String>] :_source_excludes A comma-separated list of source fields to exclude from the response.
+      #  You can also use this parameter to exclude fields from the subset specified in +_source_includes+ query parameter.
+      # @option arguments [String, Array<String>] :_source_includes A comma-separated list of source fields to include in the response.
+      #  If this parameter is specified, only these source fields are returned. You can exclude fields from this subset using the +_source_excludes+ query parameter.
+      #  If the +_source+ parameter is +false+, this parameter is ignored.
       # @option arguments [String, Array<String>] :stored_fields If +true+, retrieves the document fields stored in the index rather than the document +_source+. Server default: false.
       # @option arguments [Hash] :headers Custom HTTP headers
       # @option arguments [Hash] :body request body

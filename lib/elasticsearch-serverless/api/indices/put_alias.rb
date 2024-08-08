@@ -22,12 +22,19 @@ module ElasticsearchServerless
   module API
     module Indices
       module Actions
+        # Create or update an alias.
         # Adds a data stream or index to an alias.
         #
-        # @option arguments [String, Array] :index Comma-separated list of data streams or indices to add. Supports wildcards (+*+). Wildcard patterns that match both data streams and indices return an error. (*Required*)
-        # @option arguments [String] :name Alias to update. If the alias doesn’t exist, the request creates it. Index alias names support date math. (*Required*)
-        # @option arguments [Time] :master_timeout Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error. Server default: 30s.
-        # @option arguments [Time] :timeout Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error. Server default: 30s.
+        # @option arguments [String, Array] :index Comma-separated list of data streams or indices to add.
+        #  Supports wildcards (+*+).
+        #  Wildcard patterns that match both data streams and indices return an error. (*Required*)
+        # @option arguments [String] :name Alias to update.
+        #  If the alias doesn’t exist, the request creates it.
+        #  Index alias names support date math. (*Required*)
+        # @option arguments [Time] :master_timeout Period to wait for a connection to the master node.
+        #  If no response is received before the timeout expires, the request fails and returns an error. Server default: 30s.
+        # @option arguments [Time] :timeout Period to wait for a response.
+        #  If no response is received before the timeout expires, the request fails and returns an error. Server default: 30s.
         # @option arguments [Hash] :headers Custom HTTP headers
         # @option arguments [Hash] :body request body
         #

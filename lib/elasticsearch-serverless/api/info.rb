@@ -21,6 +21,7 @@
 module ElasticsearchServerless
   module API
     module Actions
+      # Get cluster info.
       # Returns basic information about the cluster.
       #
       # @option arguments [Hash] :headers Custom HTTP headers

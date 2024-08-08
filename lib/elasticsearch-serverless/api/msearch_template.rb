@@ -23,11 +23,15 @@ module ElasticsearchServerless
     module Actions
       # Runs multiple templated searches with a single request.
       #
-      # @option arguments [String, Array] :index Comma-separated list of data streams, indices, and aliases to search. Supports wildcards (+*+). To search all data streams and indices, omit this parameter or use +*+.
+      # @option arguments [String, Array] :index Comma-separated list of data streams, indices, and aliases to search.
+      #  Supports wildcards (+*+).
+      #  To search all data streams and indices, omit this parameter or use +*+.
       # @option arguments [Boolean] :ccs_minimize_roundtrips If +true+, network round-trips are minimized for cross-cluster search requests. Server default: true.
       # @option arguments [Integer] :max_concurrent_searches Maximum number of concurrent searches the API can run.
-      # @option arguments [String] :search_type The type of the search operation. Available options: +query_then_fetch+, +dfs_query_then_fetch+.
-      # @option arguments [Boolean] :rest_total_hits_as_int If +true+, the response returns +hits.total+ as an integer. If +false+, it returns +hits.total+ as an object.
+      # @option arguments [String] :search_type The type of the search operation.
+      #  Available options: +query_then_fetch+, +dfs_query_then_fetch+.
+      # @option arguments [Boolean] :rest_total_hits_as_int If +true+, the response returns +hits.total+ as an integer.
+      #  If +false+, it returns +hits.total+ as an object.
       # @option arguments [Boolean] :typed_keys If +true+, the response prefixes aggregation and suggester names with their respective types.
       # @option arguments [Hash] :headers Custom HTTP headers
       # @option arguments [Hash] :body search_templates

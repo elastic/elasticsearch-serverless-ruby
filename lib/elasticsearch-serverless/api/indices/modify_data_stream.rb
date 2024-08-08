@@ -22,6 +22,7 @@ module ElasticsearchServerless
   module API
     module Indices
       module Actions
+        # Update data streams.
         # Performs one or more data stream modification actions in a single atomic operation.
         #
         # @option arguments [Hash] :headers Custom HTTP headers

@@ -22,16 +22,23 @@ module ElasticsearchServerless
   module API
     module Indices
       module Actions
+        # Update field mappings.
         # Adds new fields to an existing data stream or index.
         # You can also use this API to change the search settings of existing fields.
         # For data streams, these changes are applied to all backing indices by default.
         #
         # @option arguments [String, Array] :index A comma-separated list of index names the mapping should be added to (supports wildcards); use +_all+ or omit to add the mapping on all indices. (*Required*)
-        # @option arguments [Boolean] :allow_no_indices If +false+, the request returns an error if any wildcard expression, index alias, or +_all+ value targets only missing or closed indices. This behavior applies even if the request targets other open indices. Server default: true.
-        # @option arguments [String, Array<String>] :expand_wildcards Type of index that wildcard patterns can match. If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams. Supports comma-separated values, such as +open,hidden+. Valid values are: +all+, +open+, +closed+, +hidden+, +none+. Server default: open.
+        # @option arguments [Boolean] :allow_no_indices If +false+, the request returns an error if any wildcard expression, index alias, or +_all+ value targets only missing or closed indices.
+        #  This behavior applies even if the request targets other open indices. Server default: true.
+        # @option arguments [String, Array<String>] :expand_wildcards Type of index that wildcard patterns can match.
+        #  If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
+        #  Supports comma-separated values, such as +open,hidden+.
+        #  Valid values are: +all+, +open+, +closed+, +hidden+, +none+. Server default: open.
         # @option arguments [Boolean] :ignore_unavailable If +false+, the request returns an error if it targets a missing or closed index.
-        # @option arguments [Time] :master_timeout Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error. Server default: 30s.
-        # @option arguments [Time] :timeout Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error. Server default: 30s.
+        # @option arguments [Time] :master_timeout Period to wait for a connection to the master node.
+        #  If no response is received before the timeout expires, the request fails and returns an error. Server default: 30s.
+        # @option arguments [Time] :timeout Period to wait for a response.
+        #  If no response is received before the timeout expires, the request fails and returns an error. Server default: 30s.
         # @option arguments [Boolean] :write_index_only If +true+, the mappings are applied only to the current write index for the target.
         # @option arguments [Hash] :headers Custom HTTP headers
         # @option arguments [Hash] :body request body

@@ -41,7 +41,9 @@ module ElasticsearchServerless
         #
         # @option arguments [String] :model_alias The alias to create or update. This value cannot end in numbers. (*Required*)
         # @option arguments [String] :model_id The identifier for the trained model that the alias refers to. (*Required*)
-        # @option arguments [Boolean] :reassign Specifies whether the alias gets reassigned to the specified trained model if it is already assigned to a different model. If the alias is already assigned and this parameter is false, the API returns an error.
+        # @option arguments [Boolean] :reassign Specifies whether the alias gets reassigned to the specified trained
+        #  model if it is already assigned to a different model. If the alias is
+        #  already assigned and this parameter is false, the API returns an error.
         # @option arguments [Hash] :headers Custom HTTP headers
         #
         # @see https://www.elastic.co/guide/en/elasticsearch/reference/current/put-trained-models-aliases.html

@@ -29,8 +29,11 @@ module ElasticsearchServerless
         # comma separated list.
         #
         # @option arguments [String] :job_id The ID of the job to reset. (*Required*)
-        # @option arguments [Boolean] :wait_for_completion Should this request wait until the operation has completed before returning. Server default: true.
-        # @option arguments [Boolean] :delete_user_annotations Specifies whether annotations that have been added by the user should be deleted along with any auto-generated annotations when the job is reset.
+        # @option arguments [Boolean] :wait_for_completion Should this request wait until the operation has completed before
+        #  returning. Server default: true.
+        # @option arguments [Boolean] :delete_user_annotations Specifies whether annotations that have been added by the
+        #  user should be deleted along with any auto-generated annotations when the job is
+        #  reset.
         # @option arguments [Hash] :headers Custom HTTP headers
         #
         # @see https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-reset-job.html

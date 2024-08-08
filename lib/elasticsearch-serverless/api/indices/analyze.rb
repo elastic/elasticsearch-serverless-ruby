@@ -24,7 +24,9 @@ module ElasticsearchServerless
       module Actions
         # Performs analysis on a text string and returns the resulting tokens.
         #
-        # @option arguments [String] :index Index used to derive the analyzer. If specified, the +analyzer+ or field parameter overrides this value. If no index is specified or the index does not have a default analyzer, the analyze API uses the standard analyzer.
+        # @option arguments [String] :index Index used to derive the analyzer.
+        #  If specified, the +analyzer+ or field parameter overrides this value.
+        #  If no index is specified or the index does not have a default analyzer, the analyze API uses the standard analyzer.
         # @option arguments [Hash] :headers Custom HTTP headers
         # @option arguments [Hash] :body request body
         #

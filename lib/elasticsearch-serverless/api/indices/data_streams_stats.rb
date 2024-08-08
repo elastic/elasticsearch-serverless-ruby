@@ -22,10 +22,14 @@ module ElasticsearchServerless
   module API
     module Indices
       module Actions
+        # Get data stream stats.
         # Retrieves statistics for one or more data streams.
         #
-        # @option arguments [String] :name Comma-separated list of data streams used to limit the request. Wildcard expressions (+*+) are supported. To target all data streams in a cluster, omit this parameter or use +*+.
-        # @option arguments [String, Array<String>] :expand_wildcards Type of data stream that wildcard patterns can match. Supports comma-separated values, such as +open,hidden+. Server default: open.
+        # @option arguments [String] :name Comma-separated list of data streams used to limit the request.
+        #  Wildcard expressions (+*+) are supported.
+        #  To target all data streams in a cluster, omit this parameter or use +*+.
+        # @option arguments [String, Array<String>] :expand_wildcards Type of data stream that wildcard patterns can match.
+        #  Supports comma-separated values, such as +open,hidden+. Server default: open.
         # @option arguments [Hash] :headers Custom HTTP headers
         #
         # @see https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html

@@ -22,6 +22,7 @@ module ElasticsearchServerless
   module API
     module Enrich
       module Actions
+        # Create an enrich policy.
         # Creates an enrich policy.
         #
         # @option arguments [String] :name Name of the enrich policy to create or update. (*Required*)

@@ -22,9 +22,11 @@ module ElasticsearchServerless
   module API
     module Enrich
       module Actions
+        # Get an enrich policy.
         # Returns information about an enrich policy.
         #
-        # @option arguments [String, Array<String>] :name Comma-separated list of enrich policy names used to limit the request. To return information for all enrich policies, omit this parameter.
+        # @option arguments [String, Array<String>] :name Comma-separated list of enrich policy names used to limit the request.
+        #  To return information for all enrich policies, omit this parameter.
         # @option arguments [Hash] :headers Custom HTTP headers
         #
         # @see https://www.elastic.co/guide/en/elasticsearch/reference/current/get-enrich-policy-api.html

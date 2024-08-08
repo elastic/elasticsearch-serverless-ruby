@@ -22,7 +22,8 @@ module ElasticsearchServerless
   module API
     module Indices
       module Actions
-        # Adds a block to an index.
+        # Add an index block.
+        # Limits the operations allowed on an index by blocking specific operation types.
         #
         # @option arguments [String] :index A comma separated list of indices to add a block to (*Required*)
         # @option arguments [String] :block The block to add (one of read, write, read_only or metadata) (*Required*)

@@ -21,16 +21,19 @@
 module ElasticsearchServerless
   module API
     module Actions
+      # Get term vector information.
       # Returns information and statistics about terms in the fields of a particular document.
       #
       # @option arguments [String] :index Name of the index that contains the document. (*Required*)
       # @option arguments [String] :id Unique identifier of the document.
-      # @option arguments [String, Array<String>] :fields Comma-separated list or wildcard expressions of fields to include in the statistics. Used as the default list unless a specific field list is provided in the +completion_fields+ or +fielddata_fields+ parameters.
+      # @option arguments [String, Array<String>] :fields Comma-separated list or wildcard expressions of fields to include in the statistics.
+      #  Used as the default list unless a specific field list is provided in the +completion_fields+ or +fielddata_fields+ parameters.
       # @option arguments [Boolean] :field_statistics If +true+, the response includes the document count, sum of document frequencies, and sum of total term frequencies. Server default: true.
       # @option arguments [Boolean] :offsets If +true+, the response includes term offsets. Server default: true.
       # @option arguments [Boolean] :payloads If +true+, the response includes term payloads. Server default: true.
       # @option arguments [Boolean] :positions If +true+, the response includes term positions. Server default: true.
-      # @option arguments [String] :preference Specifies the node or shard the operation should be performed on. Random by default.
+      # @option arguments [String] :preference Specifies the node or shard the operation should be performed on.
+      #  Random by default.
       # @option arguments [Boolean] :realtime If true, the request is real-time as opposed to near-real-time. Server default: true.
       # @option arguments [String] :routing Custom value used to route operations to a specific shard.
       # @option arguments [Boolean] :term_statistics If +true+, the response includes term frequency and document frequency.

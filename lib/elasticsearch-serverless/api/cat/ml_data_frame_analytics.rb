@@ -22,9 +22,9 @@ module ElasticsearchServerless
   module API
     module Cat
       module Actions
+        # Get data frame analytics jobs.
         # Returns configuration and usage information about data frame analytics jobs.
-        #
-        # IMPORTANT: cat APIs are only intended for human consumption using the Kibana
+        # CAT APIs are only intended for human consumption using the Kibana
         # console or command line. They are not intended for use by applications. For
         # application consumption, use the get data frame analytics jobs statistics API.
         #
@@ -32,14 +32,22 @@ module ElasticsearchServerless
         # @option arguments [Boolean] :allow_no_match Whether to ignore if a wildcard expression matches no configs. (This includes +_all+ string or when no configs have been specified)
         # @option arguments [String] :bytes The unit in which to display byte values
         # @option arguments [String, Array<String>] :h Comma-separated list of column names to display. Server default: create_time,id,state,type.
-        # @option arguments [String, Array<String>] :s Comma-separated list of column names or column aliases used to sort the response.
+        # @option arguments [String, Array<String>] :s Comma-separated list of column names or column aliases used to sort the
+        #  response.
         # @option arguments [Time] :time Unit used to display time values.
-        # @option arguments [String] :format Specifies the format to return the columnar data in, can be set to +text+, +json+, +cbor+, +yaml+, or +smile+. Server default: text.
+        # @option arguments [String] :format Specifies the format to return the columnar data in, can be set to
+        #  +text+, +json+, +cbor+, +yaml+, or +smile+. Server default: text.
         # @option arguments [String, Array<String>] :h List of columns to appear in the response. Supports simple wildcards.
-        # @option arguments [Boolean] :help When set to +true+ will output available columns. This option can't be combined with any other query string option.
-        # @option arguments [Boolean] :local If +true+, the request computes the list of selected nodes from the local cluster state. If +false+ the list of selected nodes are computed from the cluster state of the master node. In both cases the coordinating node will send requests for further information to each selected node.
+        # @option arguments [Boolean] :help When set to +true+ will output available columns. This option
+        #  can't be combined with any other query string option.
+        # @option arguments [Boolean] :local If +true+, the request computes the list of selected nodes from the
+        #  local cluster state. If +false+ the list of selected nodes are computed
+        #  from the cluster state of the master node. In both cases the coordinating
+        #  node will send requests for further information to each selected node.
         # @option arguments [Time] :master_timeout Period to wait for a connection to the master node. Server default: 30s.
-        # @option arguments [String, Array<String>] :s List of columns that determine how the table should be sorted. Sorting defaults to ascending and can be changed by setting +:asc+ or +:desc+ as a suffix to the column name.
+        # @option arguments [String, Array<String>] :s List of columns that determine how the table should be sorted.
+        #  Sorting defaults to ascending and can be changed by setting +:asc+
+        #  or +:desc+ as a suffix to the column name.
         # @option arguments [Boolean] :v When set to +true+ will enable verbose output.
         # @option arguments [Hash] :headers Custom HTTP headers
         #

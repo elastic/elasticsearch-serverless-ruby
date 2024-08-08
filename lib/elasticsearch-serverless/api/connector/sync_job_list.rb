@@ -32,7 +32,7 @@ module ElasticsearchServerless
         # @option arguments [Integer] :size Specifies a max number of results to get
         # @option arguments [String] :status A sync job status to fetch connector sync jobs for
         # @option arguments [String] :connector_id A connector id to fetch connector sync jobs for
-        # @option arguments [Array<String>] :job_type A comma-separated list of job types to fetch the sync jobs for
+        # @option arguments [Syncjobtype] :job_type A comma-separated list of job types to fetch the sync jobs for
         # @option arguments [Hash] :headers Custom HTTP headers
         #
         # @see https://www.elastic.co/guide/en/elasticsearch/reference/current/list-connector-sync-jobs-api.html

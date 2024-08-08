@@ -32,7 +32,10 @@ module ElasticsearchServerless
         # datafeed. To get a preview that accurately reflects the behavior of the datafeed, use the appropriate credentials.
         # You can also use secondary authorization headers to supply the credentials.
         #
-        # @option arguments [String] :datafeed_id A numerical character string that uniquely identifies the datafeed. This identifier can contain lowercase alphanumeric characters (a-z and 0-9), hyphens, and underscores. It must start and end with alphanumeric characters. NOTE: If you use this path parameter, you cannot provide datafeed or anomaly detection job configuration details in the request body.
+        # @option arguments [String] :datafeed_id A numerical character string that uniquely identifies the datafeed. This identifier can contain lowercase
+        #  alphanumeric characters (a-z and 0-9), hyphens, and underscores. It must start and end with alphanumeric
+        #  characters. NOTE: If you use this path parameter, you cannot provide datafeed or anomaly detection job
+        #  configuration details in the request body.
         # @option arguments [String, Time] :start The start time from where the datafeed preview should begin
         # @option arguments [String, Time] :end The end time when the datafeed preview should stop
         # @option arguments [Hash] :headers Custom HTTP headers

@@ -22,7 +22,7 @@ module ElasticsearchServerless
   module API
     module MachineLearning
       module Actions
-        # Evaluates the data frame analytics for an annotated index.
+        # Evaluate data frame analytics.
         # The API packages together commonly used evaluation metrics for various types
         # of machine learning features. This has been designed for use on indexes
         # created by data frame analytics. Evaluation requires both a ground truth

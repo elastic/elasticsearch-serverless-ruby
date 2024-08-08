@@ -21,6 +21,7 @@
 module ElasticsearchServerless
   module API
     module Actions
+      # Ping the cluster.
       # Returns whether the cluster is running.
       #
       # @option arguments [Hash] :headers Custom HTTP headers

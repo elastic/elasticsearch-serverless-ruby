@@ -22,13 +22,24 @@ module ElasticsearchServerless
   module API
     module Transform
       module Actions
+        # Get transforms.
         # Retrieves configuration information for transforms.
         #
-        # @option arguments [String, Array<String>] :transform_id Identifier for the transform. It can be a transform identifier or a wildcard expression. You can get information for all transforms by using +_all+, by specifying +*+ as the +<transform_id>+, or by omitting the +<transform_id>+.
-        # @option arguments [Boolean] :allow_no_match Specifies what to do when the request:  1. Contains wildcard expressions and there are no transforms that match. 2. Contains the _all string or no identifiers and there are no matches. 3. Contains wildcard expressions and there are only partial matches.  If this parameter is false, the request returns a 404 status code when there are no matches or only partial matches. Server default: true.
+        # @option arguments [String, Array<String>] :transform_id Identifier for the transform. It can be a transform identifier or a
+        #  wildcard expression. You can get information for all transforms by using
+        #  +_all+, by specifying +*+ as the +<transform_id>+, or by omitting the
+        #  +<transform_id>+.
+        # @option arguments [Boolean] :allow_no_match Specifies what to do when the request:
+        #  - Contains wildcard expressions and there are no transforms that match.
+        #  - Contains the _all string or no identifiers and there are no matches.
+        #  - Contains wildcard expressions and there are only partial matches.
+        #  If this parameter is false, the request returns a 404 status code when
+        #  there are no matches or only partial matches. Server default: true.
         # @option arguments [Integer] :from Skips the specified number of transforms. Server default: 0.
         # @option arguments [Integer] :size Specifies the maximum number of transforms to obtain. Server default: 100.
-        # @option arguments [Boolean] :exclude_generated Excludes fields that were automatically added when creating the transform. This allows the configuration to be in an acceptable format to be retrieved and then added to another cluster.
+        # @option arguments [Boolean] :exclude_generated Excludes fields that were automatically added when creating the
+        #  transform. This allows the configuration to be in an acceptable format to
+        #  be retrieved and then added to another cluster.
         # @option arguments [Hash] :headers Custom HTTP headers
         #
         # @see https://www.elastic.co/guide/en/elasticsearch/reference/current/get-transform.html

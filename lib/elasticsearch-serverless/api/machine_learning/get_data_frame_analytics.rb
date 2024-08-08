@@ -27,11 +27,23 @@ module ElasticsearchServerless
         # API request by using a comma-separated list of data frame analytics jobs or a
         # wildcard expression.
         #
-        # @option arguments [String] :id Identifier for the data frame analytics job. If you do not specify this option, the API returns information for the first hundred data frame analytics jobs.
-        # @option arguments [Boolean] :allow_no_match Specifies what to do when the request:  1. Contains wildcard expressions and there are no data frame analytics jobs that match. 2. Contains the +_all+ string or no identifiers and there are no matches. 3. Contains wildcard expressions and there are only partial matches.  The default value returns an empty data_frame_analytics array when there are no matches and the subset of results when there are partial matches. If this parameter is +false+, the request returns a 404 status code when there are no matches or only partial matches. Server default: true.
+        # @option arguments [String] :id Identifier for the data frame analytics job. If you do not specify this
+        #  option, the API returns information for the first hundred data frame
+        #  analytics jobs.
+        # @option arguments [Boolean] :allow_no_match Specifies what to do when the request:
+        #  - Contains wildcard expressions and there are no data frame analytics
+        #  jobs that match.
+        #  - Contains the +_all+ string or no identifiers and there are no matches.
+        #  - Contains wildcard expressions and there are only partial matches.
+        #  The default value returns an empty data_frame_analytics array when there
+        #  are no matches and the subset of results when there are partial matches.
+        #  If this parameter is +false+, the request returns a 404 status code when
+        #  there are no matches or only partial matches. Server default: true.
         # @option arguments [Integer] :from Skips the specified number of data frame analytics jobs. Server default: 0.
         # @option arguments [Integer] :size Specifies the maximum number of data frame analytics jobs to obtain. Server default: 100.
-        # @option arguments [Boolean] :exclude_generated Indicates if certain fields should be removed from the configuration on retrieval. This allows the configuration to be in an acceptable format to be retrieved and then added to another cluster.
+        # @option arguments [Boolean] :exclude_generated Indicates if certain fields should be removed from the configuration on
+        #  retrieval. This allows the configuration to be in an acceptable format to
+        #  be retrieved and then added to another cluster.
         # @option arguments [Hash] :headers Custom HTTP headers
         #
         # @see https://www.elastic.co/guide/en/elasticsearch/reference/current/get-dfanalytics.html

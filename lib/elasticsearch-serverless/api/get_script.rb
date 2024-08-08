@@ -21,6 +21,7 @@
 module ElasticsearchServerless
   module API
     module Actions
+      # Get a script or search template.
       # Retrieves a stored script or search template.
       #
       # @option arguments [String] :id Identifier for the stored script or search template. (*Required*)

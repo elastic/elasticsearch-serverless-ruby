@@ -22,10 +22,16 @@ module ElasticsearchServerless
   module API
     module Indices
       module Actions
+        # Create a data stream.
         # Creates a data stream.
         # You must have a matching index template with data stream enabled.
         #
-        # @option arguments [String] :name Name of the data stream, which must meet the following criteria: Lowercase only; Cannot include +\+, +/+, +*+, +?+, +"+, +<+, +>+, +|+, +,+, +#+, +:+, or a space character; Cannot start with +-+, +_+, +++, or +.ds-+; Cannot be +.+ or +..+; Cannot be longer than 255 bytes. Multi-byte characters count towards this limit faster. (*Required*)
+        # @option arguments [String] :name Name of the data stream, which must meet the following criteria:
+        #  Lowercase only;
+        #  Cannot include +\+, +/+, +*+, +?+, +"+, +<+, +>+, +|+, +,+, +#+, +:+, or a space character;
+        #  Cannot start with +-+, +_+, +++, or +.ds-+;
+        #  Cannot be +.+ or +..+;
+        #  Cannot be longer than 255 bytes. Multi-byte characters count towards this limit faster. (*Required*)
         # @option arguments [Hash] :headers Custom HTTP headers
         #
         # @see https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html

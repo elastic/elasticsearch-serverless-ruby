@@ -22,6 +22,7 @@ module ElasticsearchServerless
   module API
     module MachineLearning
       module Actions
+        # Estimate job model memory usage.
         # Makes an estimation of the memory usage for an anomaly detection job model.
         # It is based on analysis configuration details for the job and cardinality
         # estimates for the fields it references.
