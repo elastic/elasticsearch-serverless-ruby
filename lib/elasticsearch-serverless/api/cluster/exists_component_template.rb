@@ -22,11 +22,16 @@ module ElasticsearchServerless
   module API
     module Cluster
       module Actions
-        # Returns information about whether a particular component template exist
+        # Check component templates.
+        # Returns information about whether a particular component template exists.
         #
-        # @option arguments [String, Array<String>] :name Comma-separated list of component template names used to limit the request. Wildcard (*) expressions are supported. (*Required*)
-        # @option arguments [Time] :master_timeout Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error. Server default: 30s.
-        # @option arguments [Boolean] :local If true, the request retrieves information from the local node only. Defaults to false, which means information is retrieved from the master node.
+        # @option arguments [String, Array<String>] :name Comma-separated list of component template names used to limit the request.
+        #  Wildcard (*) expressions are supported. (*Required*)
+        # @option arguments [Time] :master_timeout Period to wait for a connection to the master node. If no response is
+        #  received before the timeout expires, the request fails and returns an
+        #  error. Server default: 30s.
+        # @option arguments [Boolean] :local If true, the request retrieves information from the local node only.
+        #  Defaults to false, which means information is retrieved from the master node.
         # @option arguments [Hash] :headers Custom HTTP headers
         #
         # @see https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-component-template.html

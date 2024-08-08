@@ -22,7 +22,7 @@ module ElasticsearchServerless
   module API
     module MachineLearning
       module Actions
-        # Deletes a trained model alias.
+        # Delete a trained model alias.
         # This API deletes an existing model alias that refers to a trained model. If
         # the model alias is missing or refers to a model other than the one identified
         # by the +model_id+, this API returns an error.

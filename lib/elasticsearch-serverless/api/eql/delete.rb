@@ -25,7 +25,9 @@ module ElasticsearchServerless
         # Deletes an async EQL search or a stored synchronous EQL search.
         # The API also deletes results for the search.
         #
-        # @option arguments [String] :id Identifier for the search to delete. A search ID is provided in the EQL search API's response for an async search. A search ID is also provided if the request’s +keep_on_completion+ parameter is +true+. (*Required*)
+        # @option arguments [String] :id Identifier for the search to delete.
+        #  A search ID is provided in the EQL search API's response for an async search.
+        #  A search ID is also provided if the request’s +keep_on_completion+ parameter is +true+. (*Required*)
         # @option arguments [Hash] :headers Custom HTTP headers
         #
         # @see https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html

@@ -22,10 +22,14 @@ module ElasticsearchServerless
   module API
     module MachineLearning
       module Actions
-        # Deletes an existing datafeed.
+        # Delete a datafeed.
         #
-        # @option arguments [String] :datafeed_id A numerical character string that uniquely identifies the datafeed. This identifier can contain lowercase alphanumeric characters (a-z and 0-9), hyphens, and underscores. It must start and end with alphanumeric characters. (*Required*)
-        # @option arguments [Boolean] :force Use to forcefully delete a started datafeed; this method is quicker than stopping and deleting the datafeed.
+        # @option arguments [String] :datafeed_id A numerical character string that uniquely identifies the datafeed. This
+        #  identifier can contain lowercase alphanumeric characters (a-z and 0-9),
+        #  hyphens, and underscores. It must start and end with alphanumeric
+        #  characters. (*Required*)
+        # @option arguments [Boolean] :force Use to forcefully delete a started datafeed; this method is quicker than
+        #  stopping and deleting the datafeed.
         # @option arguments [Hash] :headers Custom HTTP headers
         #
         # @see https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-datafeed.html

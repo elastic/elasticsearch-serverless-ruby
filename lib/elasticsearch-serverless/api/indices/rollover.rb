@@ -22,14 +22,20 @@ module ElasticsearchServerless
   module API
     module Indices
       module Actions
+        # Roll over to a new index.
         # Creates a new index for a data stream or index alias.
         #
         # @option arguments [String] :alias Name of the data stream or index alias to roll over. (*Required*)
-        # @option arguments [String] :new_index Name of the index to create. Supports date math. Data streams do not support this parameter.
+        # @option arguments [String] :new_index Name of the index to create.
+        #  Supports date math.
+        #  Data streams do not support this parameter.
         # @option arguments [Boolean] :dry_run If +true+, checks whether the current index satisfies the specified conditions but does not perform a rollover.
-        # @option arguments [Time] :master_timeout Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error. Server default: 30s.
-        # @option arguments [Time] :timeout Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error. Server default: 30s.
-        # @option arguments [Integer, String] :wait_for_active_shards The number of shard copies that must be active before proceeding with the operation. Set to all or any positive integer up to the total number of shards in the index (+number_of_replicas+1+). Server default: 1.
+        # @option arguments [Time] :master_timeout Period to wait for a connection to the master node.
+        #  If no response is received before the timeout expires, the request fails and returns an error. Server default: 30s.
+        # @option arguments [Time] :timeout Period to wait for a response.
+        #  If no response is received before the timeout expires, the request fails and returns an error. Server default: 30s.
+        # @option arguments [Integer, String] :wait_for_active_shards The number of shard copies that must be active before proceeding with the operation.
+        #  Set to all or any positive integer up to the total number of shards in the index (+number_of_replicas+1+). Server default: 1.
         # @option arguments [Hash] :headers Custom HTTP headers
         # @option arguments [Hash] :body request body
         #

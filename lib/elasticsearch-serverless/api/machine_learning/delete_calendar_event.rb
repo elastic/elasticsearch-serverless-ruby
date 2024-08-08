@@ -22,10 +22,11 @@ module ElasticsearchServerless
   module API
     module MachineLearning
       module Actions
-        # Deletes scheduled events from a calendar.
+        # Delete events from a calendar.
         #
         # @option arguments [String] :calendar_id A string that uniquely identifies a calendar. (*Required*)
-        # @option arguments [String] :event_id Identifier for the scheduled event. You can obtain this identifier by using the get calendar events API. (*Required*)
+        # @option arguments [String] :event_id Identifier for the scheduled event.
+        #  You can obtain this identifier by using the get calendar events API. (*Required*)
         # @option arguments [Hash] :headers Custom HTTP headers
         #
         # @see https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-calendar-event.html

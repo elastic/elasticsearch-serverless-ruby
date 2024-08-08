@@ -22,6 +22,7 @@ module ElasticsearchServerless
   module API
     module Enrich
       module Actions
+        # Delete an enrich policy.
         # Deletes an existing enrich policy and its enrich index.
         #
         # @option arguments [String] :name Enrich policy to delete. (*Required*)

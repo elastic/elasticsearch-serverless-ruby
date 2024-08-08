@@ -21,18 +21,22 @@
 module ElasticsearchServerless
   module API
     module Actions
+      # Delete a document.
       # Removes a JSON document from the specified index.
       #
       # @option arguments [String] :id Unique identifier for the document. (*Required*)
       # @option arguments [String] :index Name of the target index. (*Required*)
       # @option arguments [Integer] :if_primary_term Only perform the operation if the document has this primary term.
       # @option arguments [Integer] :if_seq_no Only perform the operation if the document has this sequence number.
-      # @option arguments [String] :refresh If +true+, Elasticsearch refreshes the affected shards to make this operation visible to search, if +wait_for+ then wait for a refresh to make this operation visible to search, if +false+ do nothing with refreshes. Valid values: +true+, +false+, +wait_for+. Server default: false.
+      # @option arguments [String] :refresh If +true+, Elasticsearch refreshes the affected shards to make this operation visible to search, if +wait_for+ then wait for a refresh to make this operation visible to search, if +false+ do nothing with refreshes.
+      #  Valid values: +true+, +false+, +wait_for+. Server default: false.
       # @option arguments [String] :routing Custom value used to route operations to a specific shard.
       # @option arguments [Time] :timeout Period to wait for active shards. Server default: 1m.
-      # @option arguments [Integer] :version Explicit version number for concurrency control. The specified version must match the current version of the document for the request to succeed.
+      # @option arguments [Integer] :version Explicit version number for concurrency control.
+      #  The specified version must match the current version of the document for the request to succeed.
       # @option arguments [String] :version_type Specific version type: +external+, +external_gte+.
-      # @option arguments [Integer, String] :wait_for_active_shards The number of shard copies that must be active before proceeding with the operation. Set to +all+ or any positive integer up to the total number of shards in the index (+number_of_replicas+1+). Server default: 1.
+      # @option arguments [Integer, String] :wait_for_active_shards The number of shard copies that must be active before proceeding with the operation.
+      #  Set to +all+ or any positive integer up to the total number of shards in the index (+number_of_replicas+1+). Server default: 1.
       # @option arguments [Hash] :headers Custom HTTP headers
       #
       # @see https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-delete.html

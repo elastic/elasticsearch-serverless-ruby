@@ -21,20 +21,32 @@
 module ElasticsearchServerless
   module API
     module Actions
-      # Searches a vector tile for geospatial values. Returns results as a binary Mapbox vector tile.
+      # Search a vector tile.
+      # Searches a vector tile for geospatial values.
       #
       # @option arguments [String, Array] :index Comma-separated list of data streams, indices, or aliases to search (*Required*)
       # @option arguments [String] :field Field containing geospatial data to return (*Required*)
       # @option arguments [Integer] :zoom Zoom level for the vector tile to search (*Required*)
       # @option arguments [Integer] :x X coordinate for the vector tile to search (*Required*)
       # @option arguments [Integer] :y Y coordinate for the vector tile to search (*Required*)
-      # @option arguments [Boolean] :exact_bounds If false, the meta layer’s feature is the bounding box of the tile. If true, the meta layer’s feature is a bounding box resulting from a geo_bounds aggregation. The aggregation runs on <field> values that intersect the <zoom>/<x>/<y> tile with wrap_longitude set to false. The resulting bounding box may be larger than the vector tile.
+      # @option arguments [Boolean] :exact_bounds If false, the meta layer’s feature is the bounding box of the tile.
+      #  If true, the meta layer’s feature is a bounding box resulting from a
+      #  geo_bounds aggregation. The aggregation runs on <field> values that intersect
+      #  the <zoom>/<x>/<y> tile with wrap_longitude set to false. The resulting
+      #  bounding box may be larger than the vector tile.
       # @option arguments [Integer] :extent Size, in pixels, of a side of the tile. Vector tiles are square with equal sides. Server default: 4096.
       # @option arguments [String] :grid_agg Aggregation used to create a grid for +field+.
-      # @option arguments [Integer] :grid_precision Additional zoom levels available through the aggs layer. For example, if <zoom> is 7 and grid_precision is 8, you can zoom in up to level 15. Accepts 0-8. If 0, results don’t include the aggs layer. Server default: 8.
-      # @option arguments [String] :grid_type Determines the geometry type for features in the aggs layer. In the aggs layer, each feature represents a geotile_grid cell. If 'grid' each feature is a Polygon of the cells bounding box. If 'point' each feature is a Point that is the centroid of the cell. Server default: grid.
-      # @option arguments [Integer] :size Maximum number of features to return in the hits layer. Accepts 0-10000. If 0, results don’t include the hits layer. Server default: 10000.
-      # @option arguments [Boolean] :with_labels If +true+, the hits and aggs layers will contain additional point features representing suggested label positions for the original features.
+      # @option arguments [Integer] :grid_precision Additional zoom levels available through the aggs layer. For example, if <zoom> is 7
+      #  and grid_precision is 8, you can zoom in up to level 15. Accepts 0-8. If 0, results
+      #  don’t include the aggs layer. Server default: 8.
+      # @option arguments [String] :grid_type Determines the geometry type for features in the aggs layer. In the aggs layer,
+      #  each feature represents a geotile_grid cell. If 'grid' each feature is a Polygon
+      #  of the cells bounding box. If 'point' each feature is a Point that is the centroid
+      #  of the cell. Server default: grid.
+      # @option arguments [Integer] :size Maximum number of features to return in the hits layer. Accepts 0-10000.
+      #  If 0, results don’t include the hits layer. Server default: 10000.
+      # @option arguments [Boolean] :with_labels If +true+, the hits and aggs layers will contain additional point features representing
+      #  suggested label positions for the original features.
       # @option arguments [Hash] :headers Custom HTTP headers
       # @option arguments [Hash] :body request body
       #

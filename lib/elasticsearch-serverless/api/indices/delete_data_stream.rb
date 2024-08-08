@@ -22,6 +22,7 @@ module ElasticsearchServerless
   module API
     module Indices
       module Actions
+        # Delete data streams.
         # Deletes one or more data streams and their backing indices.
         #
         # @option arguments [String, Array<String>] :name Comma-separated list of data streams to delete. Wildcard (+*+) expressions are supported. (*Required*)

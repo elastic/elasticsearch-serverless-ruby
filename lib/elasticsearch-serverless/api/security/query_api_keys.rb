@@ -22,9 +22,11 @@ module ElasticsearchServerless
   module API
     module Security
       module Actions
-        # Retrieves information for API keys in a paginated manner. You can optionally filter the results with a query.
+        # Query API keys.
+        # Retrieves a paginated list of API keys and their information. You can optionally filter the results with a query.
         #
-        # @option arguments [Boolean] :with_limited_by Return the snapshot of the owner user's role descriptors associated with the API key. An API key's actual permission is the intersection of its assigned role descriptors and the owner user's role descriptors.
+        # @option arguments [Boolean] :with_limited_by Return the snapshot of the owner user's role descriptors associated with the API key.
+        #  An API key's actual permission is the intersection of its assigned role descriptors and the owner user's role descriptors.
         # @option arguments [Boolean] :with_profile_uid Determines whether to also retrieve the profile uid, for the API key owner principal, if it exists.
         # @option arguments [Boolean] :typed_keys Determines whether aggregation names are prefixed by their respective types in the response.
         # @option arguments [Hash] :headers Custom HTTP headers

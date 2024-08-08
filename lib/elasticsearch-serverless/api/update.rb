@@ -21,20 +21,28 @@
 module ElasticsearchServerless
   module API
     module Actions
-      # Updates a document with a script or partial document.
+      # Update a document.
+      # Updates a document by running a script or passing a partial document.
       #
       # @option arguments [String] :id Document ID (*Required*)
       # @option arguments [String] :index The name of the index (*Required*)
       # @option arguments [Integer] :if_primary_term Only perform the operation if the document has this primary term.
       # @option arguments [Integer] :if_seq_no Only perform the operation if the document has this sequence number.
       # @option arguments [String] :lang The script language. Server default: painless.
-      # @option arguments [String] :refresh If 'true', Elasticsearch refreshes the affected shards to make this operation visible to search, if 'wait_for' then wait for a refresh to make this operation visible to search, if 'false' do nothing with refreshes. Server default: false.
+      # @option arguments [String] :refresh If 'true', Elasticsearch refreshes the affected shards to make this operation
+      #  visible to search, if 'wait_for' then wait for a refresh to make this operation
+      #  visible to search, if 'false' do nothing with refreshes. Server default: false.
       # @option arguments [Boolean] :require_alias If true, the destination must be an index alias.
       # @option arguments [Integer] :retry_on_conflict Specify how many times should the operation be retried when a conflict occurs. Server default: 0.
       # @option arguments [String] :routing Custom value used to route operations to a specific shard.
-      # @option arguments [Time] :timeout Period to wait for dynamic mapping updates and active shards. This guarantees Elasticsearch waits for at least the timeout before failing. The actual wait time could be longer, particularly when multiple waits occur. Server default: 1m.
-      # @option arguments [Integer, String] :wait_for_active_shards The number of shard copies that must be active before proceeding with the operations. Set to 'all' or any positive integer up to the total number of shards in the index (number_of_replicas+1). Defaults to 1 meaning the primary shard. Server default: 1.
-      # @option arguments [Boolean, String, Array<String>] :_source Set to false to disable source retrieval. You can also specify a comma-separated list of the fields you want to retrieve. Server default: true.
+      # @option arguments [Time] :timeout Period to wait for dynamic mapping updates and active shards.
+      #  This guarantees Elasticsearch waits for at least the timeout before failing.
+      #  The actual wait time could be longer, particularly when multiple waits occur. Server default: 1m.
+      # @option arguments [Integer, String] :wait_for_active_shards The number of shard copies that must be active before proceeding with the operations.
+      #  Set to 'all' or any positive integer up to the total number of shards in the index
+      #  (number_of_replicas+1). Defaults to 1 meaning the primary shard. Server default: 1.
+      # @option arguments [Boolean, String, Array<String>] :_source Set to false to disable source retrieval. You can also specify a comma-separated
+      #  list of the fields you want to retrieve. Server default: true.
       # @option arguments [String, Array<String>] :_source_excludes Specify the source fields you want to exclude.
       # @option arguments [String, Array<String>] :_source_includes Specify the source fields you want to retrieve.
       # @option arguments [Hash] :headers Custom HTTP headers

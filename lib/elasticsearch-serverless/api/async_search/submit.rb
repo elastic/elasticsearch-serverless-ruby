@@ -29,14 +29,17 @@ module ElasticsearchServerless
         # The maximum allowed size for a stored async search response can be set by changing the +search.max_async_search_response_size+ cluster level setting.
         #
         # @option arguments [String, Array] :index A comma-separated list of index names to search; use +_all+ or empty string to perform the operation on all indices
-        # @option arguments [Time] :wait_for_completion_timeout Blocks and waits until the search is completed up to a certain timeout. When the async search completes within the timeout, the response won’t include the ID as the results are not stored in the cluster. Server default: 1s.
+        # @option arguments [Time] :wait_for_completion_timeout Blocks and waits until the search is completed up to a certain timeout.
+        #  When the async search completes within the timeout, the response won’t include the ID as the results are not stored in the cluster. Server default: 1s.
         # @option arguments [Boolean] :keep_on_completion If +true+, results are stored for later retrieval when the search completes within the +wait_for_completion_timeout+.
-        # @option arguments [Time] :keep_alive Specifies how long the async search needs to be available. Ongoing async searches and any saved search results are deleted after this period. Server default: 5d.
+        # @option arguments [Time] :keep_alive Specifies how long the async search needs to be available.
+        #  Ongoing async searches and any saved search results are deleted after this period. Server default: 5d.
         # @option arguments [Boolean] :allow_no_indices Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes +_all+ string or when no indices have been specified)
         # @option arguments [Boolean] :allow_partial_search_results Indicate if an error should be returned if there is a partial search failure or timeout
         # @option arguments [String] :analyzer The analyzer to use for the query string
         # @option arguments [Boolean] :analyze_wildcard Specify whether wildcard and prefix queries should be analyzed (default: false)
-        # @option arguments [Integer] :batched_reduce_size Affects how often partial results become available, which happens whenever shard results are reduced. A partial reduction is performed every time the coordinating node has received a certain number of new shard responses (5 by default). Server default: 5.
+        # @option arguments [Integer] :batched_reduce_size Affects how often partial results become available, which happens whenever shard results are reduced.
+        #  A partial reduction is performed every time the coordinating node has received a certain number of new shard responses (5 by default). Server default: 5.
         # @option arguments [Boolean] :ccs_minimize_roundtrips The default value is the only supported value.
         # @option arguments [String] :default_operator The default operator for query string query (AND or OR)
         # @option arguments [String] :df The field to use as default where no field prefix is given in the query string

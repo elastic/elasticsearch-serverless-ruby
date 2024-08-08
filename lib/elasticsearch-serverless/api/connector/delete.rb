@@ -29,7 +29,7 @@ module ElasticsearchServerless
         # SLA of official GA features.
         #
         # @option arguments [String] :connector_id The unique identifier of the connector to be deleted (*Required*)
-        # @option arguments [Boolean] :delete_sync_jobs Determines whether associated sync jobs are also deleted. (*Required*)
+        # @option arguments [Boolean] :delete_sync_jobs A flag indicating if associated sync jobs should be also removed. Defaults to false.
         # @option arguments [Hash] :headers Custom HTTP headers
         #
         # @see https://www.elastic.co/guide/en/elasticsearch/reference/current/delete-connector-api.html

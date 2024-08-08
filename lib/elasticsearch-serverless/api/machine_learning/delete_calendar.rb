@@ -22,6 +22,7 @@ module ElasticsearchServerless
   module API
     module MachineLearning
       module Actions
+        # Delete a calendar.
         # Removes all scheduled events from a calendar, then deletes it.
         #
         # @option arguments [String] :calendar_id A string that uniquely identifies a calendar. (*Required*)

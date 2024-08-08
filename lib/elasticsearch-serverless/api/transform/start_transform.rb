@@ -22,8 +22,8 @@ module ElasticsearchServerless
   module API
     module Transform
       module Actions
+        # Start a transform.
         # Starts a transform.
-        #
         # When you start a transform, it creates the destination index if it does not already exist. The +number_of_shards+ is
         # set to +1+ and the +auto_expand_replicas+ is set to +0-1+. If it is a pivot transform, it deduces the mapping
         # definitions for the destination index from the source indices and the transform aggregations. If fields in the
@@ -32,7 +32,6 @@ module ElasticsearchServerless
         # mapping definitions; it uses dynamic mappings. To use explicit mappings, create the destination index before you
         # start the transform. Alternatively, you can create an index template, though it does not affect the deduced mappings
         # in a pivot transform.
-        #
         # When the transform starts, a series of validations occur to ensure its success. If you deferred validation when you
         # created the transform, they occur when you start the transform—​with the exception of privilege checks. When
         # Elasticsearch security features are enabled, the transform remembers which roles the user that created it had at the

@@ -22,25 +22,35 @@ module ElasticsearchServerless
   module API
     module Cat
       module Actions
+        # Get transforms.
         # Returns configuration and usage information about transforms.
-        #
-        # IMPORTANT: cat APIs are only intended for human consumption using the Kibana
+        # CAT APIs are only intended for human consumption using the Kibana
         # console or command line. They are not intended for use by applications. For
         # application consumption, use the get transform statistics API.
         #
-        # @option arguments [String] :transform_id A transform identifier or a wildcard expression. If you do not specify one of these options, the API returns information for all transforms.
-        # @option arguments [Boolean] :allow_no_match Specifies what to do when the request: contains wildcard expressions and there are no transforms that match; contains the +_all+ string or no identifiers and there are no matches; contains wildcard expressions and there are only partial matches. If +true+, it returns an empty transforms array when there are no matches and the subset of results when there are partial matches. If +false+, the request returns a 404 status code when there are no matches or only partial matches. Server default: true.
+        # @option arguments [String] :transform_id A transform identifier or a wildcard expression.
+        #  If you do not specify one of these options, the API returns information for all transforms.
+        # @option arguments [Boolean] :allow_no_match Specifies what to do when the request: contains wildcard expressions and there are no transforms that match; contains the +_all+ string or no identifiers and there are no matches; contains wildcard expressions and there are only partial matches.
+        #  If +true+, it returns an empty transforms array when there are no matches and the subset of results when there are partial matches.
+        #  If +false+, the request returns a 404 status code when there are no matches or only partial matches. Server default: true.
         # @option arguments [Integer] :from Skips the specified number of transforms. Server default: 0.
         # @option arguments [String, Array<String>] :h Comma-separated list of column names to display. Server default: changes_last_detection_time,checkpoint,checkpoint_progress,documents_processed,id,last_search_time,state.
         # @option arguments [String, Array<String>] :s Comma-separated list of column names or column aliases used to sort the response.
         # @option arguments [String] :time The unit used to display time values.
         # @option arguments [Integer] :size The maximum number of transforms to obtain. Server default: 100.
-        # @option arguments [String] :format Specifies the format to return the columnar data in, can be set to +text+, +json+, +cbor+, +yaml+, or +smile+. Server default: text.
+        # @option arguments [String] :format Specifies the format to return the columnar data in, can be set to
+        #  +text+, +json+, +cbor+, +yaml+, or +smile+. Server default: text.
         # @option arguments [String, Array<String>] :h List of columns to appear in the response. Supports simple wildcards.
-        # @option arguments [Boolean] :help When set to +true+ will output available columns. This option can't be combined with any other query string option.
-        # @option arguments [Boolean] :local If +true+, the request computes the list of selected nodes from the local cluster state. If +false+ the list of selected nodes are computed from the cluster state of the master node. In both cases the coordinating node will send requests for further information to each selected node.
+        # @option arguments [Boolean] :help When set to +true+ will output available columns. This option
+        #  can't be combined with any other query string option.
+        # @option arguments [Boolean] :local If +true+, the request computes the list of selected nodes from the
+        #  local cluster state. If +false+ the list of selected nodes are computed
+        #  from the cluster state of the master node. In both cases the coordinating
+        #  node will send requests for further information to each selected node.
         # @option arguments [Time] :master_timeout Period to wait for a connection to the master node. Server default: 30s.
-        # @option arguments [String, Array<String>] :s List of columns that determine how the table should be sorted. Sorting defaults to ascending and can be changed by setting +:asc+ or +:desc+ as a suffix to the column name.
+        # @option arguments [String, Array<String>] :s List of columns that determine how the table should be sorted.
+        #  Sorting defaults to ascending and can be changed by setting +:asc+
+        #  or +:desc+ as a suffix to the column name.
         # @option arguments [Boolean] :v When set to +true+ will enable verbose output.
         # @option arguments [Hash] :headers Custom HTTP headers
         #

@@ -35,8 +35,11 @@ module ElasticsearchServerless
         # If the destination index exists, it is used as is. You can therefore set up
         # the destination index in advance with custom settings and mappings.
         #
-        # @option arguments [String] :id Identifier for the data frame analytics job. This identifier can contain lowercase alphanumeric characters (a-z and 0-9), hyphens, and underscores. It must start and end with alphanumeric characters. (*Required*)
-        # @option arguments [Time] :timeout Controls the amount of time to wait until the data frame analytics job starts. Server default: 20s.
+        # @option arguments [String] :id Identifier for the data frame analytics job. This identifier can contain
+        #  lowercase alphanumeric characters (a-z and 0-9), hyphens, and
+        #  underscores. It must start and end with alphanumeric characters. (*Required*)
+        # @option arguments [Time] :timeout Controls the amount of time to wait until the data frame analytics job
+        #  starts. Server default: 20s.
         # @option arguments [Hash] :headers Custom HTTP headers
         #
         # @see https://www.elastic.co/guide/en/elasticsearch/reference/current/start-dfanalytics.html

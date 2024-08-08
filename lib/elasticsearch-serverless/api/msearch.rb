@@ -29,6 +29,12 @@ module ElasticsearchServerless
       # @option arguments [String, Array<String>] :expand_wildcards Type of index that wildcard expressions can match. If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
       # @option arguments [Boolean] :ignore_throttled If true, concrete, expanded or aliased indices are ignored when frozen.
       # @option arguments [Boolean] :ignore_unavailable If true, missing or closed indices are not included in the response.
+      # @option arguments [Boolean] :include_named_queries_score Indicates whether hit.matched_queries should be rendered as a map that includes
+      #  the name of the matched query associated with its score (true)
+      #  or as an array containing the name of the matched queries (false)
+      #  This functionality reruns each named query on every hit in a search response.
+      #  Typically, this adds a small overhead to a request.
+      #  However, using computationally expensive named queries on a large number of hits may add significant overhead.
       # @option arguments [Integer] :max_concurrent_searches Maximum number of concurrent searches the multi search API can execute.
       # @option arguments [Integer] :max_concurrent_shard_requests Maximum number of concurrent shard requests that each sub-search request executes per node. Server default: 5.
       # @option arguments [Integer] :pre_filter_shard_size Defines a threshold that enforces a pre-filter roundtrip to prefilter search shards based on query rewriting if the number of shards the search request expands to exceeds the threshold. This filter roundtrip can limit the number of shards significantly if for instance a shard can not match any documents based on its rewrite method i.e., if date filters are mandatory to match but the shard bounds and the query are disjoint.

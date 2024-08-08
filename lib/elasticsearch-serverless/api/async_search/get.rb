@@ -26,9 +26,15 @@ module ElasticsearchServerless
         # If the Elasticsearch security features are enabled, access to the results of a specific async search is restricted to the user or API key that submitted it.
         #
         # @option arguments [String] :id A unique identifier for the async search. (*Required*)
-        # @option arguments [Time] :keep_alive Specifies how long the async search should be available in the cluster. When not specified, the +keep_alive+ set with the corresponding submit async request will be used. Otherwise, it is possible to override the value and extend the validity of the request. When this period expires, the search, if still running, is cancelled. If the search is completed, its saved results are deleted.
+        # @option arguments [Time] :keep_alive Specifies how long the async search should be available in the cluster.
+        #  When not specified, the +keep_alive+ set with the corresponding submit async request will be used.
+        #  Otherwise, it is possible to override the value and extend the validity of the request.
+        #  When this period expires, the search, if still running, is cancelled.
+        #  If the search is completed, its saved results are deleted.
         # @option arguments [Boolean] :typed_keys Specify whether aggregation and suggester names should be prefixed by their respective types in the response
-        # @option arguments [Time] :wait_for_completion_timeout Specifies to wait for the search to be completed up until the provided timeout. Final results will be returned if available before the timeout expires, otherwise the currently available results will be returned once the timeout expires. By default no timeout is set meaning that the currently available results will be returned without any additional wait.
+        # @option arguments [Time] :wait_for_completion_timeout Specifies to wait for the search to be completed up until the provided timeout.
+        #  Final results will be returned if available before the timeout expires, otherwise the currently available results will be returned once the timeout expires.
+        #  By default no timeout is set meaning that the currently available results will be returned without any additional wait.
         # @option arguments [Hash] :headers Custom HTTP headers
         #
         # @see https://www.elastic.co/guide/en/elasticsearch/reference/current/async-search.html

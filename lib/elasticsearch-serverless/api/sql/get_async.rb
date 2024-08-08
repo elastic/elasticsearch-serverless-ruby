@@ -26,9 +26,12 @@ module ElasticsearchServerless
         #
         # @option arguments [String] :id Identifier for the search. (*Required*)
         # @option arguments [String] :delimiter Separator for CSV results. The API only supports this parameter for CSV responses. Server default: ,.
-        # @option arguments [String] :format Format for the response. You must specify a format using this parameter or the Accept HTTP header. If you specify both, the API uses this parameter.
-        # @option arguments [Time] :keep_alive Retention period for the search and its results. Defaults to the +keep_alive+ period for the original SQL search.
-        # @option arguments [Time] :wait_for_completion_timeout Period to wait for complete results. Defaults to no timeout, meaning the request waits for complete search results.
+        # @option arguments [String] :format Format for the response. You must specify a format using this parameter or the
+        #  Accept HTTP header. If you specify both, the API uses this parameter.
+        # @option arguments [Time] :keep_alive Retention period for the search and its results. Defaults
+        #  to the +keep_alive+ period for the original SQL search.
+        # @option arguments [Time] :wait_for_completion_timeout Period to wait for complete results. Defaults to no timeout,
+        #  meaning the request waits for complete search results.
         # @option arguments [Hash] :headers Custom HTTP headers
         #
         # @see https://www.elastic.co/guide/en/elasticsearch/reference/master/get-async-sql-search-api.html

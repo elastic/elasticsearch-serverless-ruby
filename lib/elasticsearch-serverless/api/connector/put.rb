@@ -28,7 +28,7 @@ module ElasticsearchServerless
         # as-is with no warranties. Beta features are not subject to the support
         # SLA of official GA features.
         #
-        # @option arguments [String] :connector_id The unique identifier of the connector to be created or updated (*Required*)
+        # @option arguments [String] :connector_id The unique identifier of the connector to be created or updated. ID is auto-generated if not provided.
         # @option arguments [Hash] :headers Custom HTTP headers
         # @option arguments [Hash] :body request body
         #

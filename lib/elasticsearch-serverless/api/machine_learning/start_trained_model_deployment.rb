@@ -25,12 +25,24 @@ module ElasticsearchServerless
         # Starts a trained model deployment, which allocates the model to every machine learning node.
         #
         # @option arguments [String] :model_id The unique identifier of the trained model. Currently, only PyTorch models are supported. (*Required*)
-        # @option arguments [Integer, String] :cache_size The inference cache size (in memory outside the JVM heap) per node for the model. The default value is the same size as the +model_size_bytes+. To disable the cache, +0b+ can be provided.
+        # @option arguments [Integer, String] :cache_size The inference cache size (in memory outside the JVM heap) per node for the model.
+        #  The default value is the same size as the +model_size_bytes+. To disable the cache,
+        #  +0b+ can be provided.
         # @option arguments [String] :deployment_id A unique identifier for the deployment of the model.
-        # @option arguments [Integer] :number_of_allocations The number of model allocations on each node where the model is deployed. All allocations on a node share the same copy of the model in memory but use a separate set of threads to evaluate the model. Increasing this value generally increases the throughput. If this setting is greater than the number of hardware threads it will automatically be changed to a value less than the number of hardware threads. Server default: 1.
+        # @option arguments [Integer] :number_of_allocations The number of model allocations on each node where the model is deployed.
+        #  All allocations on a node share the same copy of the model in memory but use
+        #  a separate set of threads to evaluate the model.
+        #  Increasing this value generally increases the throughput.
+        #  If this setting is greater than the number of hardware threads
+        #  it will automatically be changed to a value less than the number of hardware threads. Server default: 1.
         # @option arguments [String] :priority The deployment priority.
-        # @option arguments [Integer] :queue_capacity Specifies the number of inference requests that are allowed in the queue. After the number of requests exceeds this value, new requests are rejected with a 429 error. Server default: 1024.
-        # @option arguments [Integer] :threads_per_allocation Sets the number of threads used by each model allocation during inference. This generally increases the inference speed. The inference process is a compute-bound process; any number greater than the number of available hardware threads on the machine does not increase the inference speed. If this setting is greater than the number of hardware threads it will automatically be changed to a value less than the number of hardware threads. Server default: 1.
+        # @option arguments [Integer] :queue_capacity Specifies the number of inference requests that are allowed in the queue. After the number of requests exceeds
+        #  this value, new requests are rejected with a 429 error. Server default: 1024.
+        # @option arguments [Integer] :threads_per_allocation Sets the number of threads used by each model allocation during inference. This generally increases
+        #  the inference speed. The inference process is a compute-bound process; any number
+        #  greater than the number of available hardware threads on the machine does not increase the
+        #  inference speed. If this setting is greater than the number of hardware threads
+        #  it will automatically be changed to a value less than the number of hardware threads. Server default: 1.
         # @option arguments [Time] :timeout Specifies the amount of time to wait for the model to deploy. Server default: 20s.
         # @option arguments [String] :wait_for Specifies the allocation status to wait for before returning. Server default: started.
         # @option arguments [Hash] :headers Custom HTTP headers

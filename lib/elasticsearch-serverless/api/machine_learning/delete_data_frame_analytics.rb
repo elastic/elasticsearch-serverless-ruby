@@ -22,7 +22,7 @@ module ElasticsearchServerless
   module API
     module MachineLearning
       module Actions
-        # Deletes a data frame analytics job.
+        # Delete a data frame analytics job.
         #
         # @option arguments [String] :id Identifier for the data frame analytics job. (*Required*)
         # @option arguments [Boolean] :force If +true+, it deletes a job that is not stopped; this method is quicker than stopping and deleting the job.

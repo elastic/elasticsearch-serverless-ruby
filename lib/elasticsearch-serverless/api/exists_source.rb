@@ -21,18 +21,22 @@
 module ElasticsearchServerless
   module API
     module Actions
+      # Check for a document source.
       # Checks if a document's +_source+ is stored.
       #
       # @option arguments [String] :id Identifier of the document. (*Required*)
-      # @option arguments [String] :index Comma-separated list of data streams, indices, and aliases. Supports wildcards (+*+). (*Required*)
-      # @option arguments [String] :preference Specifies the node or shard the operation should be performed on. Random by default.
+      # @option arguments [String] :index Comma-separated list of data streams, indices, and aliases.
+      #  Supports wildcards (+*+). (*Required*)
+      # @option arguments [String] :preference Specifies the node or shard the operation should be performed on.
+      #  Random by default.
       # @option arguments [Boolean] :realtime If true, the request is real-time as opposed to near-real-time. Server default: true.
       # @option arguments [Boolean] :refresh If +true+, Elasticsearch refreshes all shards involved in the delete by query after the request completes.
       # @option arguments [String] :routing Target the specified primary shard.
       # @option arguments [Boolean, String, Array<String>] :_source +true+ or +false+ to return the +_source+ field or not, or a list of fields to return.
       # @option arguments [String, Array<String>] :_source_excludes A comma-separated list of source fields to exclude in the response.
       # @option arguments [String, Array<String>] :_source_includes A comma-separated list of source fields to include in the response.
-      # @option arguments [Integer] :version Explicit version number for concurrency control. The specified version must match the current version of the document for the request to succeed.
+      # @option arguments [Integer] :version Explicit version number for concurrency control.
+      #  The specified version must match the current version of the document for the request to succeed.
       # @option arguments [String] :version_type Specific version type: +external+, +external_gte+.
       # @option arguments [Hash] :headers Custom HTTP headers
       #

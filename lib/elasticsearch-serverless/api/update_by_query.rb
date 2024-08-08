@@ -21,23 +21,35 @@
 module ElasticsearchServerless
   module API
     module Actions
+      # Update documents.
       # Updates documents that match the specified query.
       # If no query is specified, performs an update on every document in the data stream or index without modifying the source, which is useful for picking up mapping changes.
       #
-      # @option arguments [String, Array] :index Comma-separated list of data streams, indices, and aliases to search. Supports wildcards (+*+). To search all data streams or indices, omit this parameter or use +*+ or +_all+. (*Required*)
-      # @option arguments [Boolean] :allow_no_indices If +false+, the request returns an error if any wildcard expression, index alias, or +_all+ value targets only missing or closed indices. This behavior applies even if the request targets other open indices. For example, a request targeting +foo*,bar*+ returns an error if an index starts with +foo+ but no index starts with +bar+. Server default: true.
+      # @option arguments [String, Array] :index Comma-separated list of data streams, indices, and aliases to search.
+      #  Supports wildcards (+*+).
+      #  To search all data streams or indices, omit this parameter or use +*+ or +_all+. (*Required*)
+      # @option arguments [Boolean] :allow_no_indices If +false+, the request returns an error if any wildcard expression, index alias, or +_all+ value targets only missing or closed indices.
+      #  This behavior applies even if the request targets other open indices.
+      #  For example, a request targeting +foo*,bar*+ returns an error if an index starts with +foo+ but no index starts with +bar+. Server default: true.
       # @option arguments [String] :analyzer Analyzer to use for the query string.
       # @option arguments [Boolean] :analyze_wildcard If +true+, wildcard and prefix queries are analyzed.
       # @option arguments [String] :conflicts What to do if update by query hits version conflicts: +abort+ or +proceed+. Server default: abort.
       # @option arguments [String] :default_operator The default operator for query string query: +AND+ or +OR+. Server default: OR.
       # @option arguments [String] :df Field to use as default where no field prefix is given in the query string.
-      # @option arguments [String, Array<String>] :expand_wildcards Type of index that wildcard patterns can match. If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams. Supports comma-separated values, such as +open,hidden+. Valid values are: +all+, +open+, +closed+, +hidden+, +none+.
+      # @option arguments [String, Array<String>] :expand_wildcards Type of index that wildcard patterns can match.
+      #  If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
+      #  Supports comma-separated values, such as +open,hidden+.
+      #  Valid values are: +all+, +open+, +closed+, +hidden+, +none+.
       # @option arguments [Integer] :from Starting offset (default: 0)
       # @option arguments [Boolean] :ignore_unavailable If +false+, the request returns an error if it targets a missing or closed index.
       # @option arguments [Boolean] :lenient If +true+, format-based query failures (such as providing text to a numeric field) in the query string will be ignored.
-      # @option arguments [Integer] :max_docs Maximum number of documents to process. Defaults to all documents.
-      # @option arguments [String] :pipeline ID of the pipeline to use to preprocess incoming documents. If the index has a default ingest pipeline specified, then setting the value to +_none+ disables the default ingest pipeline for this request. If a final pipeline is configured it will always run, regardless of the value of this parameter.
-      # @option arguments [String] :preference Specifies the node or shard the operation should be performed on. Random by default.
+      # @option arguments [Integer] :max_docs Maximum number of documents to process.
+      #  Defaults to all documents.
+      # @option arguments [String] :pipeline ID of the pipeline to use to preprocess incoming documents.
+      #  If the index has a default ingest pipeline specified, then setting the value to +_none+ disables the default ingest pipeline for this request.
+      #  If a final pipeline is configured it will always run, regardless of the value of this parameter.
+      # @option arguments [String] :preference Specifies the node or shard the operation should be performed on.
+      #  Random by default.
       # @option arguments [Boolean] :refresh If +true+, Elasticsearch refreshes affected shards to make the operation visible to search.
       # @option arguments [Boolean] :request_cache If +true+, the request cache is used for this request.
       # @option arguments [Float] :requests_per_second The throttle for this request in sub-requests per second. Server default: -1.
@@ -49,11 +61,18 @@ module ElasticsearchServerless
       # @option arguments [Integer, String] :slices The number of slices this task should be divided into. Server default: 1.
       # @option arguments [Array<String>] :sort A comma-separated list of <field>:<direction> pairs.
       # @option arguments [Array<String>] :stats Specific +tag+ of the request for logging and statistical purposes.
-      # @option arguments [Integer] :terminate_after Maximum number of documents to collect for each shard. If a query reaches this limit, Elasticsearch terminates the query early. Elasticsearch collects documents before sorting. Use with caution. Elasticsearch applies this parameter to each shard handling the request. When possible, let Elasticsearch perform early termination automatically. Avoid specifying this parameter for requests that target data streams with backing indices across multiple data tiers.
+      # @option arguments [Integer] :terminate_after Maximum number of documents to collect for each shard.
+      #  If a query reaches this limit, Elasticsearch terminates the query early.
+      #  Elasticsearch collects documents before sorting.
+      #  Use with caution.
+      #  Elasticsearch applies this parameter to each shard handling the request.
+      #  When possible, let Elasticsearch perform early termination automatically.
+      #  Avoid specifying this parameter for requests that target data streams with backing indices across multiple data tiers.
       # @option arguments [Time] :timeout Period each update request waits for the following operations: dynamic mapping updates, waiting for active shards. Server default: 1m.
       # @option arguments [Boolean] :version If +true+, returns the document version as part of a hit.
       # @option arguments [Boolean] :version_type Should the document increment the version number (internal) on hit or not (reindex)
-      # @option arguments [Integer, String] :wait_for_active_shards The number of shard copies that must be active before proceeding with the operation. Set to +all+ or any positive integer up to the total number of shards in the index (+number_of_replicas+1+). Server default: 1.
+      # @option arguments [Integer, String] :wait_for_active_shards The number of shard copies that must be active before proceeding with the operation.
+      #  Set to +all+ or any positive integer up to the total number of shards in the index (+number_of_replicas+1+). Server default: 1.
       # @option arguments [Boolean] :wait_for_completion If +true+, the request blocks until the operation is complete. Server default: true.
       # @option arguments [Hash] :headers Custom HTTP headers
       # @option arguments [Hash] :body request body

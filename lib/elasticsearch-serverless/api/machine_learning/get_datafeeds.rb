@@ -29,9 +29,20 @@ module ElasticsearchServerless
         # +<feed_id>+, or by omitting the +<feed_id>+.
         # This API returns a maximum of 10,000 datafeeds.
         #
-        # @option arguments [String, Array] :datafeed_id Identifier for the datafeed. It can be a datafeed identifier or a wildcard expression. If you do not specify one of these options, the API returns information about all datafeeds.
-        # @option arguments [Boolean] :allow_no_match Specifies what to do when the request:  1. Contains wildcard expressions and there are no datafeeds that match. 2. Contains the +_all+ string or no identifiers and there are no matches. 3. Contains wildcard expressions and there are only partial matches.  The default value is +true+, which returns an empty +datafeeds+ array when there are no matches and the subset of results when there are partial matches. If this parameter is +false+, the request returns a +404+ status code when there are no matches or only partial matches.
-        # @option arguments [Boolean] :exclude_generated Indicates if certain fields should be removed from the configuration on retrieval. This allows the configuration to be in an acceptable format to be retrieved and then added to another cluster.
+        # @option arguments [String, Array] :datafeed_id Identifier for the datafeed. It can be a datafeed identifier or a
+        #  wildcard expression. If you do not specify one of these options, the API
+        #  returns information about all datafeeds.
+        # @option arguments [Boolean] :allow_no_match Specifies what to do when the request:
+        #  - Contains wildcard expressions and there are no datafeeds that match.
+        #  - Contains the +_all+ string or no identifiers and there are no matches.
+        #  - Contains wildcard expressions and there are only partial matches.
+        #  The default value is +true+, which returns an empty +datafeeds+ array
+        #  when there are no matches and the subset of results when there are
+        #  partial matches. If this parameter is +false+, the request returns a
+        #  +404+ status code when there are no matches or only partial matches.
+        # @option arguments [Boolean] :exclude_generated Indicates if certain fields should be removed from the configuration on
+        #  retrieval. This allows the configuration to be in an acceptable format to
+        #  be retrieved and then added to another cluster.
         # @option arguments [Hash] :headers Custom HTTP headers
         #
         # @see https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-datafeed.html

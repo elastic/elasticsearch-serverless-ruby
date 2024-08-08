@@ -22,26 +22,40 @@ module ElasticsearchServerless
   module API
     module Cat
       module Actions
+        # Get index information.
         # Returns high-level information about indices in a cluster, including backing indices for data streams.
-        # IMPORTANT: cat APIs are only intended for human consumption using the command line or Kibana console.
-        # They are not intended for use by applications. For application consumption, use the get index API.
-        # Use the cat indices API to get the following information for each index in a cluster: shard count; document count; deleted document count; primary store size; total store size of all shards, including shard replicas.
+        # Use this request to get the following information for each index in a cluster:
+        # - shard count
+        # - document count
+        # - deleted document count
+        # - primary store size
+        # - total store size of all shards, including shard replicas
         # These metrics are retrieved directly from Lucene, which Elasticsearch uses internally to power indexing and search. As a result, all document counts include hidden nested documents.
         # To get an accurate count of Elasticsearch documents, use the cat count or count APIs.
+        # CAT APIs are only intended for human consumption using the command line or Kibana console.
+        # They are not intended for use by applications. For application consumption, use an index endpoint.
         #
-        # @option arguments [String, Array] :index Comma-separated list of data streams, indices, and aliases used to limit the request. Supports wildcards (+*+). To target all data streams and indices, omit this parameter or use +*+ or +_all+.
+        # @option arguments [String, Array] :index Comma-separated list of data streams, indices, and aliases used to limit the request.
+        #  Supports wildcards (+*+). To target all data streams and indices, omit this parameter or use +*+ or +_all+.
         # @option arguments [String] :bytes The unit used to display byte values.
         # @option arguments [String, Array<String>] :expand_wildcards The type of index that wildcard patterns can match.
         # @option arguments [String] :health The health status used to limit returned indices. By default, the response includes indices of any health status.
         # @option arguments [Boolean] :include_unloaded_segments If true, the response includes information from segments that are not loaded into memory.
         # @option arguments [Boolean] :pri If true, the response only includes information from primary shards.
         # @option arguments [String] :time The unit used to display time values.
-        # @option arguments [String] :format Specifies the format to return the columnar data in, can be set to +text+, +json+, +cbor+, +yaml+, or +smile+. Server default: text.
+        # @option arguments [String] :format Specifies the format to return the columnar data in, can be set to
+        #  +text+, +json+, +cbor+, +yaml+, or +smile+. Server default: text.
         # @option arguments [String, Array<String>] :h List of columns to appear in the response. Supports simple wildcards.
-        # @option arguments [Boolean] :help When set to +true+ will output available columns. This option can't be combined with any other query string option.
-        # @option arguments [Boolean] :local If +true+, the request computes the list of selected nodes from the local cluster state. If +false+ the list of selected nodes are computed from the cluster state of the master node. In both cases the coordinating node will send requests for further information to each selected node.
+        # @option arguments [Boolean] :help When set to +true+ will output available columns. This option
+        #  can't be combined with any other query string option.
+        # @option arguments [Boolean] :local If +true+, the request computes the list of selected nodes from the
+        #  local cluster state. If +false+ the list of selected nodes are computed
+        #  from the cluster state of the master node. In both cases the coordinating
+        #  node will send requests for further information to each selected node.
         # @option arguments [Time] :master_timeout Period to wait for a connection to the master node. Server default: 30s.
-        # @option arguments [String, Array<String>] :s List of columns that determine how the table should be sorted. Sorting defaults to ascending and can be changed by setting +:asc+ or +:desc+ as a suffix to the column name.
+        # @option arguments [String, Array<String>] :s List of columns that determine how the table should be sorted.
+        #  Sorting defaults to ascending and can be changed by setting +:asc+
+        #  or +:desc+ as a suffix to the column name.
         # @option arguments [Boolean] :v When set to +true+ will enable verbose output.
         # @option arguments [Hash] :headers Custom HTTP headers
         #

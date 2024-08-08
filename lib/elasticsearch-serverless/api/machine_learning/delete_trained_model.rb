@@ -22,8 +22,8 @@ module ElasticsearchServerless
   module API
     module MachineLearning
       module Actions
-        # Deletes an existing trained inference model that is currently not referenced
-        # by an ingest pipeline.
+        # Delete an unreferenced trained model.
+        # The request deletes a trained inference model that is not referenced by an ingest pipeline.
         #
         # @option arguments [String] :model_id The unique identifier of the trained model. (*Required*)
         # @option arguments [Boolean] :force Forcefully deletes a trained model that is referenced by ingest pipelines or has a started deployment.

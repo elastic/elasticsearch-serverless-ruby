@@ -21,11 +21,14 @@
 module ElasticsearchServerless
   module API
     module Actions
+      # Delete a script or search template.
       # Deletes a stored script or search template.
       #
       # @option arguments [String] :id Identifier for the stored script or search template. (*Required*)
-      # @option arguments [Time] :master_timeout Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error. Server default: 30s.
-      # @option arguments [Time] :timeout Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error. Server default: 30s.
+      # @option arguments [Time] :master_timeout Period to wait for a connection to the master node.
+      #  If no response is received before the timeout expires, the request fails and returns an error. Server default: 30s.
+      # @option arguments [Time] :timeout Period to wait for a response.
+      #  If no response is received before the timeout expires, the request fails and returns an error. Server default: 30s.
       # @option arguments [Hash] :headers Custom HTTP headers
       #
       # @see https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html

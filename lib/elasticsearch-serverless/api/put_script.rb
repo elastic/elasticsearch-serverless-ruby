@@ -21,12 +21,17 @@
 module ElasticsearchServerless
   module API
     module Actions
+      # Create or update a script or search template.
       # Creates or updates a stored script or search template.
       #
-      # @option arguments [String] :id Identifier for the stored script or search template. Must be unique within the cluster. (*Required*)
-      # @option arguments [String] :context Context in which the script or search template should run. To prevent errors, the API immediately compiles the script or template in this context.
-      # @option arguments [Time] :master_timeout Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error. Server default: 30s.
-      # @option arguments [Time] :timeout Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error. Server default: 30s.
+      # @option arguments [String] :id Identifier for the stored script or search template.
+      #  Must be unique within the cluster. (*Required*)
+      # @option arguments [String] :context Context in which the script or search template should run.
+      #  To prevent errors, the API immediately compiles the script or template in this context.
+      # @option arguments [Time] :master_timeout Period to wait for a connection to the master node.
+      #  If no response is received before the timeout expires, the request fails and returns an error. Server default: 30s.
+      # @option arguments [Time] :timeout Period to wait for a response.
+      #  If no response is received before the timeout expires, the request fails and returns an error. Server default: 30s.
       # @option arguments [Hash] :headers Custom HTTP headers
       # @option arguments [Hash] :body request body
       #

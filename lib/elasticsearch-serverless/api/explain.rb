@@ -21,16 +21,20 @@
 module ElasticsearchServerless
   module API
     module Actions
-      # Returns information about why a specific document matches (or doesn’t match) a query.
+      # Explain a document match result.
+      # Returns information about why a specific document matches, or doesn’t match, a query.
       #
       # @option arguments [String] :id Defines the document ID. (*Required*)
-      # @option arguments [String] :index Index names used to limit the request. Only a single index name can be provided to this parameter. (*Required*)
-      # @option arguments [String] :analyzer Analyzer to use for the query string. This parameter can only be used when the +q+ query string parameter is specified.
+      # @option arguments [String] :index Index names used to limit the request.
+      #  Only a single index name can be provided to this parameter. (*Required*)
+      # @option arguments [String] :analyzer Analyzer to use for the query string.
+      #  This parameter can only be used when the +q+ query string parameter is specified.
       # @option arguments [Boolean] :analyze_wildcard If +true+, wildcard and prefix queries are analyzed.
       # @option arguments [String] :default_operator The default operator for query string query: +AND+ or +OR+. Server default: OR.
       # @option arguments [String] :df Field to use as default where no field prefix is given in the query string.
       # @option arguments [Boolean] :lenient If +true+, format-based query failures (such as providing text to a numeric field) in the query string will be ignored.
-      # @option arguments [String] :preference Specifies the node or shard the operation should be performed on. Random by default.
+      # @option arguments [String] :preference Specifies the node or shard the operation should be performed on.
+      #  Random by default.
       # @option arguments [String] :routing Custom value used to route operations to a specific shard.
       # @option arguments [Boolean, String, Array<String>] :_source True or false to return the +_source+ field or not, or a list of fields to return.
       # @option arguments [String, Array<String>] :_source_excludes A comma-separated list of source fields to exclude from the response.
