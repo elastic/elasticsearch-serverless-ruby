@@ -22,6 +22,7 @@ echo "--- :ruby: Running $TEST_SUITE tests"
 docker run \
        -e "ELASTIC_USER=elastic" \
        -e "BUILDKITE=true" \
+       -e "QUIET=${QUIET}" \
        -e "TRANSPORT_VERSION=${TRANSPORT_VERSION}" \
        -e "ELASTICSEARCH_URL=${ELASTICSEARCH_URL}" \
        -e "API_KEY=${ES_API_SECRET_KEY}" \
