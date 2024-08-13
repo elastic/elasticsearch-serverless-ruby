@@ -93,6 +93,13 @@ describe ElasticsearchServerless::Client do
       end.to raise_error(ArgumentError)
     end
 
+    it 'accepst opentelemetry_tracer_provider in arguments' do
+      require 'opentelemetry'
+      arguments = { opentelemetry_tracer_provider: OpenTelemetry.tracer_provider }
+      client = ElasticsearchServerless::Client.new(api_key: 'test', url: 'test', arguments: arguments)
+      expect(client.transport.options[:opentelemetry_tracer_provider])
+    end
+
     context 'adapters' do
       let(:arguments) { { adapter: :net_http_persistent } }
 

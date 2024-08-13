@@ -24,7 +24,8 @@ module ElasticsearchServerless
     include ElasticsearchServerless::API
 
     VALID_PARAMETERS = [:adapter, :log, :logger, :serializer_class, :trace, :tracer, :headers,
-                        :request_timeout, :retry_on_status, :retry_on_failure, :delay_on_retry]
+                        :request_timeout, :retry_on_status, :retry_on_failure, :delay_on_retry,
+                        :opentelemetry_tracer_provider]
 
     # Initializes an Elasticsearch Serverless Client
     #
