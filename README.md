@@ -128,8 +128,8 @@ You can call the `update` API to update a document:
 
 ```ruby
 response = client.update(
-  index: 'books', 
-  id: 'document_id', 
+  index: 'books',
+  id: 'document_id',
   body: { doc: { page_count: 312 } }
 )
 ```
@@ -146,6 +146,18 @@ Now that some data is available, you can search your documents using the **Searc
 > response = client.search(index: 'books', q: 'snow')
 > response['hits']['hits']
  => [{"_index"=>"books", "_id"=>"Pdink4cBmDx329iqhzM2", "_score"=>1.5904956, "_source"=>{"name"=>"Snow Crash", "author"=>"Neal Stephenson", "release_date"=>"1992-06-01", "page_count"=>470}}]
+```
+
+### Using OpenTelemetry
+
+The Client comes with built-in OpenTelemetry instrumentation that emits distributed tracing spans by default. You can find out how to use it [in the official documentation](https://www.elastic.co/guide/en/elasticsearch/client/ruby-api/current/opentelemetry.html). The only difference from the Elasticsearch Stack Client is how to pass in a tracer provider when instantiating the client. In Elasticsearch Serverless, you need to use the following code:
+
+```ruby
+client = ElasticsearchServerless::Client.new(
+  api_key: 'your_api_key',
+  url: 'https://my-deployment-url',
+  arguments: { opentelemetry_tracer_provider: tracer_provider }
+)
 ```
 
 ## Development
