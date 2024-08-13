@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.3.0
+
+### Client
+
+* Updates elastic-transport version dependency to `~> 8.3`.
+* Adds native support for OpenTelemetry. See [Using OpenTelemetry](https://www.elastic.co/guide/en/elasticsearch/client/ruby-api/current/opentelemetry.html).
+
+### Changes in APIs:
+
+* Adds connector APIs: `check_in`, `delete`, `get`, `list`, `post`, `put`, `sync_job_cancel`, `sync_job_delete`, `sync_job_get`, `sync_job_list`, `sync_job_post`, `update_active_filtering`, `update_api_key_id`, `update_configuration`, `update_error`, `update_filtering`, `update_filtering_validation`, `update_index_name`, `update_name`, `update_native`, `update_pipeline`, `update_scheduling`, `update_service_type`, `update_status`.
+* Updates termvectors APIs, adds deprecation notice for `termvector`, please use the plural version `termvectors` instead.
+* Updates source code documentation for all APIs.  Check [rubydoc](https://rubydoc.info/gems/elasticsearch-serverless/) for the API reference, or run `yardoc` in the root of the project if you've checked out the code. The API reference documentation will be generated in the `doc` folder.
+
 ## 0.2.0
 
 ### Client
