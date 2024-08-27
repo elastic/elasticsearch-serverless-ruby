@@ -22,6 +22,7 @@ module ElasticsearchServerless
   module API
     module MachineLearning
       module Actions
+        # Update an anomaly detection job.
         # Updates certain properties of an anomaly detection job.
         #
         # @option arguments [String] :job_id Identifier for the job. (*Required*)

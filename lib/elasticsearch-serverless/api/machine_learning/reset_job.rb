@@ -22,7 +22,7 @@ module ElasticsearchServerless
   module API
     module MachineLearning
       module Actions
-        # Resets an anomaly detection job.
+        # Reset an anomaly detection job.
         # All model state and results are deleted. The job is ready to start over as if
         # it had just been created.
         # It is not currently possible to reset multiple jobs using wildcards or a

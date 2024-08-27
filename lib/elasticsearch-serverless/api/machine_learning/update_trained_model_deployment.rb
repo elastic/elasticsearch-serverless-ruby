@@ -22,7 +22,7 @@ module ElasticsearchServerless
   module API
     module MachineLearning
       module Actions
-        # Starts a trained model deployment, which allocates the model to every machine learning node.
+        # Update a trained model deployment.
         #
         # @option arguments [String] :model_id The unique identifier of the trained model. Currently, only PyTorch models are supported. (*Required*)
         # @option arguments [Integer] :number_of_allocations The number of model allocations on each node where the model is deployed.

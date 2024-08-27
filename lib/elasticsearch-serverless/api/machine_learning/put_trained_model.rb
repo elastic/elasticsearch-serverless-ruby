@@ -22,7 +22,8 @@ module ElasticsearchServerless
   module API
     module MachineLearning
       module Actions
-        # Enables you to supply a trained model that is not created by data frame analytics.
+        # Create a trained model.
+        # Enable you to supply a trained model that is not created by data frame analytics.
         #
         # @option arguments [String] :model_id The unique identifier of the trained model. (*Required*)
         # @option arguments [Boolean] :defer_definition_decompression If set to +true+ and a +compressed_definition+ is provided,

@@ -22,6 +22,7 @@ module ElasticsearchServerless
   module API
     module MachineLearning
       module Actions
+        # Update a filter.
         # Updates the description of a filter, adds items, or removes items from the list.
         #
         # @option arguments [String] :filter_id A string that uniquely identifies a filter. (*Required*)

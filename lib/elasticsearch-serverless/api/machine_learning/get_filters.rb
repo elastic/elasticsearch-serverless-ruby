@@ -22,7 +22,7 @@ module ElasticsearchServerless
   module API
     module MachineLearning
       module Actions
-        # Retrieves filters.
+        # Get filters.
         # You can get a single filter or all filters.
         #
         # @option arguments [String, Array] :filter_id A string that uniquely identifies a filter.

@@ -22,6 +22,7 @@ module ElasticsearchServerless
   module API
     module MachineLearning
       module Actions
+        # Preview features used by data frame analytics.
         # Previews the extracted features used by a data frame analytics config.
         #
         # @option arguments [String] :id Identifier for the data frame analytics job.
