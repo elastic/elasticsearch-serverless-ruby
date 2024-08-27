@@ -32,6 +32,8 @@ module ElasticsearchServerless
         #  Cannot start with +-+, +_+, +++, or +.ds-+;
         #  Cannot be +.+ or +..+;
         #  Cannot be longer than 255 bytes. Multi-byte characters count towards this limit faster. (*Required*)
+        # @option arguments [Time] :master_timeout Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error. Server default: 30s.
+        # @option arguments [Time] :timeout Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error. Server default: 30s.
         # @option arguments [Hash] :headers Custom HTTP headers
         #
         # @see https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html
@@ -56,7 +58,7 @@ module ElasticsearchServerless
 
           method = ElasticsearchServerless::API::HTTP_PUT
           path   = "_data_stream/#{Utils.listify(_name)}"
-          params = {}
+          params = Utils.process_params(arguments)
 
           ElasticsearchServerless::API::Response.new(
             perform_request(method, path, params, body, headers, request_opts)
