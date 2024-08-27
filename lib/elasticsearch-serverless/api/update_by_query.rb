@@ -50,6 +50,7 @@ module ElasticsearchServerless
       #  If a final pipeline is configured it will always run, regardless of the value of this parameter.
       # @option arguments [String] :preference Specifies the node or shard the operation should be performed on.
       #  Random by default.
+      # @option arguments [String] :q Query in the Lucene query string syntax.
       # @option arguments [Boolean] :refresh If +true+, Elasticsearch refreshes affected shards to make the operation visible to search.
       # @option arguments [Boolean] :request_cache If +true+, the request cache is used for this request.
       # @option arguments [Float] :requests_per_second The throttle for this request in sub-requests per second. Server default: -1.
