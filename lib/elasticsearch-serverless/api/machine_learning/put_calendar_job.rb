@@ -22,7 +22,7 @@ module ElasticsearchServerless
   module API
     module MachineLearning
       module Actions
-        # Adds an anomaly detection job to a calendar.
+        # Add anomaly detection job to calendar.
         #
         # @option arguments [String] :calendar_id A string that uniquely identifies a calendar. (*Required*)
         # @option arguments [String, Array] :job_id An identifier for the anomaly detection jobs. It can be a job identifier, a group name, or a comma-separated list of jobs or groups. (*Required*)

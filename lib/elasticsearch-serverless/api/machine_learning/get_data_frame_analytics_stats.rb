@@ -22,7 +22,7 @@ module ElasticsearchServerless
   module API
     module MachineLearning
       module Actions
-        # Retrieves usage information for data frame analytics jobs.
+        # Get data frame analytics jobs usage info.
         #
         # @option arguments [String] :id Identifier for the data frame analytics job. If you do not specify this
         #  option, the API returns information for the first hundred data frame

@@ -22,7 +22,7 @@ module ElasticsearchServerless
   module API
     module MachineLearning
       module Actions
-        # Retrieves configuration information for datafeeds.
+        # Get datafeeds configuration info.
         # You can get information for multiple datafeeds in a single API request by
         # using a comma-separated list of datafeeds or a wildcard expression. You can
         # get information for all datafeeds by using +_all+, by specifying +*+ as the

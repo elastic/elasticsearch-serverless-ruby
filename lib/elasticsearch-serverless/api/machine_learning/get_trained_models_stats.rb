@@ -22,7 +22,8 @@ module ElasticsearchServerless
   module API
     module MachineLearning
       module Actions
-        # Retrieves usage information for trained models. You can get usage information for multiple trained
+        # Get trained models usage info.
+        # You can get usage information for multiple trained
         # models in a single API request by using a comma-separated list of model IDs or a wildcard expression.
         #
         # @option arguments [String, Array] :model_id The unique identifier of the trained model or a model alias. It can be a

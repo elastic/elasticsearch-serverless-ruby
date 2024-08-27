@@ -22,7 +22,7 @@ module ElasticsearchServerless
   module API
     module MachineLearning
       module Actions
-        # Stops one or more datafeeds.
+        # Stop datafeeds.
         # A datafeed that is stopped ceases to retrieve data from Elasticsearch. A datafeed can be started and stopped
         # multiple times throughout its lifecycle.
         #

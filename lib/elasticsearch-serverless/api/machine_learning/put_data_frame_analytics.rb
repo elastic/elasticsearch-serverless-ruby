@@ -22,7 +22,7 @@ module ElasticsearchServerless
   module API
     module MachineLearning
       module Actions
-        # Instantiates a data frame analytics job.
+        # Create a data frame analytics job.
         # This API creates a data frame analytics job that performs an analysis on the
         # source indices and stores the outcome in a destination index.
         #

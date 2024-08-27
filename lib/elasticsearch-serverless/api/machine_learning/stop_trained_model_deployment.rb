@@ -22,7 +22,7 @@ module ElasticsearchServerless
   module API
     module MachineLearning
       module Actions
-        # Stops a trained model deployment.
+        # Stop a trained model deployment.
         #
         # @option arguments [String] :model_id The unique identifier of the trained model. (*Required*)
         # @option arguments [Boolean] :allow_no_match Specifies what to do when the request: contains wildcard expressions and there are no deployments that match;

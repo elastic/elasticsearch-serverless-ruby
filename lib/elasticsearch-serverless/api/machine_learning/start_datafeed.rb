@@ -22,7 +22,7 @@ module ElasticsearchServerless
   module API
     module MachineLearning
       module Actions
-        # Starts one or more datafeeds.
+        # Start datafeeds.
         # A datafeed must be started in order to retrieve data from Elasticsearch. A datafeed can be started and stopped
         # multiple times throughout its lifecycle.
         # Before you can start a datafeed, the anomaly detection job must be open. Otherwise, an error occurs.

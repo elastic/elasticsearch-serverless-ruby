@@ -22,7 +22,7 @@ module ElasticsearchServerless
   module API
     module MachineLearning
       module Actions
-        # Retrieves configuration information for a trained model.
+        # Get trained model configuration info.
         #
         # @option arguments [String, Array] :model_id The unique identifier of the trained model or a model alias.You can get information for multiple trained models in a single API
         #  request by using a comma-separated list of model IDs or a wildcard

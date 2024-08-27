@@ -22,7 +22,7 @@ module ElasticsearchServerless
   module API
     module MachineLearning
       module Actions
-        # Retrieves information about the scheduled events in calendars.
+        # Get info about events in calendars.
         #
         # @option arguments [String] :calendar_id A string that uniquely identifies a calendar. You can get information for multiple calendars by using a comma-separated list of ids or a wildcard expression. You can get information for all calendars by using +_all+ or +*+ or by omitting the calendar identifier. (*Required*)
         # @option arguments [String, Time] :end Specifies to get events with timestamps earlier than this time.
