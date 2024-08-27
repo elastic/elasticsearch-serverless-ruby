@@ -30,6 +30,7 @@ module ElasticsearchServerless
         # @option arguments [String, Array<String>] :expand_wildcards Type of data stream that wildcard patterns can match.
         #  Supports comma-separated values, such as +open,hidden+. Server default: open.
         # @option arguments [Boolean] :include_defaults If true, returns all relevant default configurations for the index template.
+        # @option arguments [Time] :master_timeout Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error. Server default: 30s.
         # @option arguments [Hash] :headers Custom HTTP headers
         #
         # @see https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html

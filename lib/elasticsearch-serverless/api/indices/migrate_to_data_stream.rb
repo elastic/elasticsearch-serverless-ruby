@@ -35,6 +35,8 @@ module ElasticsearchServerless
         # The write index for the alias becomes the write index for the stream.
         #
         # @option arguments [String] :name Name of the index alias to convert to a data stream. (*Required*)
+        # @option arguments [Time] :master_timeout Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error. Server default: 30s.
+        # @option arguments [Time] :timeout Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error. Server default: 30s.
         # @option arguments [Hash] :headers Custom HTTP headers
         #
         # @see https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html
@@ -59,7 +61,7 @@ module ElasticsearchServerless
 
           method = ElasticsearchServerless::API::HTTP_POST
           path   = "_data_stream/_migrate/#{Utils.listify(_name)}"
-          params = {}
+          params = Utils.process_params(arguments)
 
           ElasticsearchServerless::API::Response.new(
             perform_request(method, path, params, body, headers, request_opts)
