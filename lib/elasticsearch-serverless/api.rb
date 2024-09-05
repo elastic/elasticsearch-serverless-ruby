@@ -62,7 +62,6 @@ module ElasticsearchServerless
       :connector,
       :enrich,
       :eql,
-      :esql,
       :graph,
       :indices,
       :inference,
