@@ -75,16 +75,14 @@ module ElasticsearchServerless
 
         case
         when body.is_a?(Array) && body.any? { |d| d.has_key? :search }
-          payload = body
-                    .inject([]) do |sum, item|
-                      meta = item
-                      data = meta.delete(:search)
+          payload = body.inject([]) do |sum, item|
+            meta = item
+            data = meta.delete(:search)
 
-                      sum << meta
-                      sum << data
-                      sum
-                    end
-                    .map { |item| ElasticsearchServerless::API.serializer.dump(item) }
+            sum << meta
+            sum << data
+            sum
+          end.map { |item| ElasticsearchServerless::API.serializer.dump(item) }
           payload << "" unless payload.empty?
           payload = payload.join("\n")
         when body.is_a?(Array)
