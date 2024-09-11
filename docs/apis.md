@@ -197,8 +197,6 @@ These are the available APIs in the Elasticsearch Serverless Ruby client.
  https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-put-mapping.html
 * `indices.put_settings` - Update index settings.
  https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-update-settings.html
-* `indices.put_template` - Create or update an index template.
- https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates-v1.html
 * `indices.refresh` - Refresh an index.
  https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-refresh.html
 * `indices.resolve_index` - Resolves the specified name(s) and/or index patterns for indices, aliases, and data streams.
@@ -265,85 +263,83 @@ These are the available APIs in the Elasticsearch Serverless Ruby client.
  https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-apis.html
 * `machine_learning.evaluate_data_frame` - Evaluate data frame analytics.
  https://www.elastic.co/guide/en/elasticsearch/reference/current/evaluate-dfanalytics.html
-* `machine_learning.flush_job` - Forces any buffered data to be processed by the job.
+* `machine_learning.flush_job` - Force buffered data to be processed.
  https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-flush-job.html
-* `machine_learning.get_calendar_events` - Retrieves information about the scheduled events in calendars.
+* `machine_learning.get_calendar_events` - Get info about events in calendars.
  https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-calendar-event.html
-* `machine_learning.get_calendars` - Retrieves configuration information for calendars.
+* `machine_learning.get_calendars` - Get calendar configuration info.
  https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-calendar.html
-* `machine_learning.get_data_frame_analytics` - Retrieves configuration information for data frame analytics jobs.
+* `machine_learning.get_data_frame_analytics` - Get data frame analytics job configuration info.
  https://www.elastic.co/guide/en/elasticsearch/reference/current/get-dfanalytics.html
-* `machine_learning.get_data_frame_analytics_stats` - Retrieves usage information for data frame analytics jobs.
+* `machine_learning.get_data_frame_analytics_stats` - Get data frame analytics jobs usage info.
  https://www.elastic.co/guide/en/elasticsearch/reference/current/get-dfanalytics-stats.html
-* `machine_learning.get_datafeed_stats` - Retrieves usage information for datafeeds.
+* `machine_learning.get_datafeed_stats` - Get datafeeds usage info.
  https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-datafeed-stats.html
-* `machine_learning.get_datafeeds` - Retrieves configuration information for datafeeds.
+* `machine_learning.get_datafeeds` - Get datafeeds configuration info.
  https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-datafeed.html
-* `machine_learning.get_filters` - Retrieves filters.
+* `machine_learning.get_filters` - Get filters.
  https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-filter.html
-* `machine_learning.get_job_stats` - Retrieves usage information for anomaly detection jobs.
+* `machine_learning.get_job_stats` - Get anomaly detection jobs usage info.
  https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job-stats.html
-* `machine_learning.get_jobs` - Retrieves configuration information for anomaly detection jobs.
+* `machine_learning.get_jobs` - Get anomaly detection jobs configuration info.
  https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-job.html
-* `machine_learning.get_overall_buckets` - Retrieves overall bucket results that summarize the bucket results of
+* `machine_learning.get_overall_buckets` - Get overall bucket results.
  https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-overall-buckets.html
-* `machine_learning.get_trained_models` - Retrieves configuration information for a trained model.
+* `machine_learning.get_trained_models` - Get trained model configuration info.
  https://www.elastic.co/guide/en/elasticsearch/reference/current/get-trained-models.html
-* `machine_learning.get_trained_models_stats` - Retrieves usage information for trained models. You can get usage information for multiple trained
+* `machine_learning.get_trained_models_stats` - Get trained models usage info.
  https://www.elastic.co/guide/en/elasticsearch/reference/current/get-trained-models-stats.html
-* `machine_learning.infer_trained_model` - Evaluates a trained model.
- https://www.elastic.co/guide/en/elasticsearch/reference/master/infer-trained-model.html
 * `machine_learning.open_job` - Open anomaly detection jobs.
  https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-open-job.html
-* `machine_learning.post_calendar_events` - Adds scheduled events to a calendar.
+* `machine_learning.post_calendar_events` - Add scheduled events to the calendar.
  https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-post-calendar-event.html
-* `machine_learning.preview_data_frame_analytics` - Previews the extracted features used by a data frame analytics config.
+* `machine_learning.preview_data_frame_analytics` - Preview features used by data frame analytics.
  http://www.elastic.co/guide/en/elasticsearch/reference/current/preview-dfanalytics.html
-* `machine_learning.preview_datafeed` - Previews a datafeed.
+* `machine_learning.preview_datafeed` - Preview a datafeed.
  https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-preview-datafeed.html
-* `machine_learning.put_calendar` - Creates a calendar.
+* `machine_learning.put_calendar` - Create a calendar.
  https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-calendar.html
-* `machine_learning.put_calendar_job` - Adds an anomaly detection job to a calendar.
+* `machine_learning.put_calendar_job` - Add anomaly detection job to calendar.
  https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-calendar-job.html
-* `machine_learning.put_data_frame_analytics` - Instantiates a data frame analytics job.
+* `machine_learning.put_data_frame_analytics` - Create a data frame analytics job.
  https://www.elastic.co/guide/en/elasticsearch/reference/current/put-dfanalytics.html
-* `machine_learning.put_datafeed` - Instantiates a datafeed.
+* `machine_learning.put_datafeed` - Create a datafeed.
  https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-datafeed.html
-* `machine_learning.put_filter` - Instantiates a filter.
+* `machine_learning.put_filter` - Create a filter.
  https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-filter.html
 * `machine_learning.put_job` - Create an anomaly detection job.
  https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-job.html
-* `machine_learning.put_trained_model` - Enables you to supply a trained model that is not created by data frame analytics.
+* `machine_learning.put_trained_model` - Create a trained model.
  https://www.elastic.co/guide/en/elasticsearch/reference/current/put-trained-models.html
-* `machine_learning.put_trained_model_alias` - Creates or updates a trained model alias. A trained model alias is a logical
+* `machine_learning.put_trained_model_alias` - Create or update a trained model alias.
  https://www.elastic.co/guide/en/elasticsearch/reference/current/put-trained-models-aliases.html
-* `machine_learning.put_trained_model_definition_part` - Creates part of a trained model definition.
+* `machine_learning.put_trained_model_definition_part` - Create part of a trained model definition.
  https://www.elastic.co/guide/en/elasticsearch/reference/current/put-trained-model-definition-part.html
-* `machine_learning.put_trained_model_vocabulary` - Creates a trained model vocabulary.
+* `machine_learning.put_trained_model_vocabulary` - Create a trained model vocabulary.
  https://www.elastic.co/guide/en/elasticsearch/reference/current/put-trained-model-vocabulary.html
-* `machine_learning.reset_job` - Resets an anomaly detection job.
+* `machine_learning.reset_job` - Reset an anomaly detection job.
  https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-reset-job.html
-* `machine_learning.start_data_frame_analytics` - Starts a data frame analytics job.
+* `machine_learning.start_data_frame_analytics` - Start a data frame analytics job.
  https://www.elastic.co/guide/en/elasticsearch/reference/current/start-dfanalytics.html
-* `machine_learning.start_datafeed` - Starts one or more datafeeds.
+* `machine_learning.start_datafeed` - Start datafeeds.
  https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-start-datafeed.html
-* `machine_learning.start_trained_model_deployment` - Starts a trained model deployment, which allocates the model to every machine learning node.
+* `machine_learning.start_trained_model_deployment` - Start a trained model deployment.
  https://www.elastic.co/guide/en/elasticsearch/reference/master/start-trained-model-deployment.html
-* `machine_learning.stop_data_frame_analytics` - Stops one or more data frame analytics jobs.
+* `machine_learning.stop_data_frame_analytics` - Stop data frame analytics jobs.
  https://www.elastic.co/guide/en/elasticsearch/reference/current/stop-dfanalytics.html
-* `machine_learning.stop_datafeed` - Stops one or more datafeeds.
+* `machine_learning.stop_datafeed` - Stop datafeeds.
  https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-stop-datafeed.html
-* `machine_learning.stop_trained_model_deployment` - Stops a trained model deployment.
+* `machine_learning.stop_trained_model_deployment` - Stop a trained model deployment.
  https://www.elastic.co/guide/en/elasticsearch/reference/master/stop-trained-model-deployment.html
-* `machine_learning.update_data_frame_analytics` - Updates an existing data frame analytics job.
+* `machine_learning.update_data_frame_analytics` - Update a data frame analytics job.
  https://www.elastic.co/guide/en/elasticsearch/reference/current/update-dfanalytics.html
-* `machine_learning.update_datafeed` - Updates the properties of a datafeed.
+* `machine_learning.update_datafeed` - Update a datafeed.
  https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-datafeed.html
-* `machine_learning.update_filter` - Updates the description of a filter, adds items, or removes items from the list.
+* `machine_learning.update_filter` - Update a filter.
  https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-filter.html
-* `machine_learning.update_job` - Updates certain properties of an anomaly detection job.
+* `machine_learning.update_job` - Update an anomaly detection job.
  https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-update-job.html
-* `machine_learning.update_trained_model_deployment` - Starts a trained model deployment, which allocates the model to every machine learning node.
+* `machine_learning.update_trained_model_deployment` - Update a trained model deployment.
  https://www.elastic.co/guide/en/elasticsearch/reference/current/update-trained-model-deployment.html
 * `mget` - Allows to get multiple documents in one request.
  https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-get.html
@@ -417,8 +413,6 @@ These are the available APIs in the Elasticsearch Serverless Ruby client.
  https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-invalidate-api-key.html
 * `security.query_api_keys` - Query API keys.
  https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-query-api-key.html
-* `security.update_api_key` - Update an API key.
- https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-update-api-key.html
 * `sql.clear_cursor` - Clears the SQL cursor
  https://www.elastic.co/guide/en/elasticsearch/reference/current/clear-sql-cursor-api.html
 * `sql.delete_async` - Deletes an async SQL search or a stored synchronous SQL search. If the search is still running, the API cancels it.
@@ -445,8 +439,6 @@ These are the available APIs in the Elasticsearch Serverless Ruby client.
  https://www.elastic.co/guide/en/elasticsearch/reference/master/put-synonyms-set.html
 * `synonyms.put_synonym_rule` - Creates or updates a synonym rule in a synonym set
  https://www.elastic.co/guide/en/elasticsearch/reference/master/put-synonym-rule.html
-* `tasks.get` - Get task information.
- https://www.elastic.co/guide/en/elasticsearch/reference/current/tasks.html
 * `terms_enum` - The terms enum API  can be used to discover terms in the index that begin with the provided string. It is designed for low-latency look-ups used in auto-complete scenarios.
  https://www.elastic.co/guide/en/elasticsearch/reference/current/search-terms-enum.html
 * `termvectors` - Get term vector information.
