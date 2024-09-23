@@ -17,6 +17,7 @@
 
 require 'spec_helper'
 require 'elastic-transport'
+require 'ostruct'
 
 describe 'Perform request args' do
   specs = [
