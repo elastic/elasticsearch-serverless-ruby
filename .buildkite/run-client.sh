@@ -8,7 +8,7 @@ export RUBY_VERSION=${RUBY_VERSION:-3.2}
 export TRANSPORT_VERSION=${TRANSPORT_VERSION:-8}
 export RUBY_SOURCE=${RUBY_SOURCE:-ruby}
 
-echo "--- :ruby: Building Docker image"
+echo "--- :docker: :ruby: Building Docker image"
 docker build \
        --file $script_path/Dockerfile \
        --tag elastic/elasticsearch-ruby \
@@ -17,7 +17,7 @@ docker build \
        --build-arg RUBY_SOURCE=$RUBY_SOURCE \
        .
 
-echo "--- :ruby: Running $TEST_SUITE tests"
+echo "--- :ruby: Running tests"
 
 docker run \
        -e "ELASTIC_USER=elastic" \
