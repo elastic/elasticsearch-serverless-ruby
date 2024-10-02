@@ -38,6 +38,7 @@ module ElasticsearchServerless
       #  If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
       #  Supports comma-separated values, such as +open,hidden+. Valid values are: +all+, +open+, +closed+, +hidden+, +none+. Server default: open.
       # @option arguments [Hash] :headers Custom HTTP headers
+      # @option arguments [Hash] :body request body
       #
       # @see https://www.elastic.co/guide/en/elasticsearch/reference/current/point-in-time-api.html
       #
@@ -55,7 +56,7 @@ module ElasticsearchServerless
         arguments = arguments.clone
         headers = arguments.delete(:headers) || {}
 
-        body = nil
+        body = arguments.delete(:body)
 
         _index = arguments.delete(:index)
 
