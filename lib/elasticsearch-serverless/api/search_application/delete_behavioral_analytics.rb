@@ -23,6 +23,7 @@ module ElasticsearchServerless
     module SearchApplication
       module Actions
         # Delete a behavioral analytics collection.
+        # The associated data stream is also deleted.
         # This functionality is Experimental and may be changed or removed
         # completely in a future release. Elastic will take a best effort approach
         # to fix any issues, but experimental features are not subject to the

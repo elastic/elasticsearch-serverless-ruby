@@ -22,7 +22,9 @@ module ElasticsearchServerless
   module API
     module SearchApplication
       module Actions
-        # Perform a search against a search application.
+        # Run a search application search.
+        # Generate and run an Elasticsearch query that uses the specified query parameteter and the search template associated with the search application or default template.
+        # Unspecified template parameters are assigned their default values if applicable.
         # This functionality is in Beta and is subject to change. The design and
         # code is less mature than official GA features and is being provided
         # as-is with no warranties. Beta features are not subject to the support
