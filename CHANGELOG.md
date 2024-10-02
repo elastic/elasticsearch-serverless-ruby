@@ -1,5 +1,32 @@
 # Changelog
 
+## 0.4.0
+
+### Changes in APIs:
+
+The following APIs API have been removed as they are not supported at the moment:
+* `esql.query`
+* `indices.data_streams_stats`
+
+Updates APIs:
+* `indices.get_data_stream` - `verbose` Boolean parameter added: Whether the maximum timestamp for each data stream should be calculated and returned.
+* `indices.resolve_index` adds two parameters:
+** `ignore_unavailable` [Boolean] If `false`, the request returns an error if it targets a missing or closed index.
+** `allow_no_indices` [Boolean] If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indices.
+* `open_point_in_time` - `body` Hash parameter added.
+* `update_by_query` - `q` String parameter added: Query in the Lucene query string syntax.
+
+The following **timeout parameters** were added in several indices APIs:
+* `timeout`:  Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error. Server default: 30s.
+* `master_timeout`: Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error. Server default: 30s.
+
+Added in the following APIs:
+* `indices.create_data_stream` - timeout, master_timeout
+* `indices.delete_data_stream` - master_timeout
+* `indices.get_data_lifecycle` - master_timeout
+* `indices.get_data_stream` - master_timeout
+* `indices.migrate_to_data_stream` - timeout, master_timeout
+
 ## 0.3.0
 
 ### Client
