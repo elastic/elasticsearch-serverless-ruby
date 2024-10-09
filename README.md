@@ -5,7 +5,7 @@
 
 This is the official Elastic client for [**Elasticsearch Cloud Serverless**](https://www.elastic.co/elasticsearch/serverless).
 
-If you're looking to develop your Ruby application with the Elasticsearch Stack, you should look at the [Elasticsearch Client](https://github.com/elastic/elasticsearch-ruby) instead. If you're looking to develop your Ruby application with Elastic Enterprise Search, you should look at the [Enterprise Search Client](https://github.com/elastic/enterprise-search-ruby/).
+If you're looking to develop your Ruby application with the Elasticsearch Stack, you should look at the [Elasticsearch Client](https://github.com/elastic/elasticsearch-ruby) instead.
 
 ## Guide
 
