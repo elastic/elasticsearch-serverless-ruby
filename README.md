@@ -9,22 +9,12 @@ If you're looking to develop your Ruby application with the Elasticsearch Stack,
 
 ## Guide
 
-You need to have Ruby version 3.0 or higher installed to use this gem.
+You need to have Ruby version 3.0 or higher installed to use this gem. We follow Ruby’s own maintenance policy and officially support all currently maintained versions per [Ruby Maintenance Branches](https://www.ruby-lang.org/en/downloads/branches/).
 
 You can install the Elasticsearch Serverless Ruby Client from RubyGems:
 
 ```bash
-$ gem install elasticsearch-serverless --pre
-```
-
-Check [releases](https://github.com/elastic/elasticsearch-serverless-ruby/releases) for the latests available versions.
-
-You can also install the gem from its source code with the following commands:
-
-```bash
-# From the project's root directory:
-$ gem build elasticsearch-serverless.gemspec
-$ gem install elasticsearch-serverless-x.x.x.gem
+$ gem install elasticsearch-serverless
 ```
 
 Or include it in your Ruby project's Gemfile:
