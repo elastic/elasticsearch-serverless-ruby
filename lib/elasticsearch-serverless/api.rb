@@ -74,6 +74,7 @@ module ElasticsearchServerless
       :security,
       :sql,
       :synonyms,
+      :tasks,
       :transform
     ].freeze
     UPPERCASE_APIS = ['sql'].freeze
