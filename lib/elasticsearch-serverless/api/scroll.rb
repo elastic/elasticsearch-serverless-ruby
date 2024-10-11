@@ -39,12 +39,6 @@ module ElasticsearchServerless
       def scroll(arguments = {})
         request_opts = { endpoint: arguments[:endpoint] || "scroll" }
 
-        defined_params = [:scroll_id].inject({}) do |set_variables, variable|
-          set_variables[variable] = arguments[variable] if arguments.key?(variable)
-          set_variables
-        end
-        request_opts[:defined_params] = defined_params unless defined_params.empty?
-
         arguments = arguments.clone
         headers = arguments.delete(:headers) || {}
 
@@ -58,11 +52,7 @@ module ElasticsearchServerless
                    ElasticsearchServerless::API::HTTP_GET
                  end
 
-        path   = if _scroll_id
-                   "_search/scroll/#{Utils.listify(_scroll_id)}"
-                 else
-                   "_search/scroll"
-                 end
+        path   = "_search/scroll"
         params = Utils.process_params(arguments)
 
         ElasticsearchServerless::API::Response.new(

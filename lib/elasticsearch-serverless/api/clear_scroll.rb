@@ -38,12 +38,6 @@ module ElasticsearchServerless
       def clear_scroll(arguments = {})
         request_opts = { endpoint: arguments[:endpoint] || "clear_scroll" }
 
-        defined_params = [:scroll_id].inject({}) do |set_variables, variable|
-          set_variables[variable] = arguments[variable] if arguments.key?(variable)
-          set_variables
-        end
-        request_opts[:defined_params] = defined_params unless defined_params.empty?
-
         arguments = arguments.clone
         headers = arguments.delete(:headers) || {}
 
@@ -52,11 +46,7 @@ module ElasticsearchServerless
         _scroll_id = arguments.delete(:scroll_id)
 
         method = ElasticsearchServerless::API::HTTP_DELETE
-        path   = if _scroll_id
-                   "_search/scroll/#{Utils.listify(_scroll_id)}"
-                 else
-                   "_search/scroll"
-                 end
+        path   = "_search/scroll"
         params = Utils.process_params(arguments)
 
         if Array(arguments[:ignore]).include?(404)
