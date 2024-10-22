@@ -22,8 +22,8 @@ module ElasticsearchServerless
   module API
     module Security
       module Actions
-        # The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
-        # The get roles API cannot retrieve roles that are defined in roles files.
+        # Get roles API.
+        # Retrieves roles in the native realm.
         #
         # @option arguments [String, Array<String>] :name The name of the role. You can specify multiple roles as a comma-separated list. If you do not specify this parameter, the API returns information about all roles.
         # @option arguments [Hash] :headers Custom HTTP headers

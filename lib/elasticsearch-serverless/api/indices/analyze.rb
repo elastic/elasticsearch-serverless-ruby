@@ -22,7 +22,8 @@ module ElasticsearchServerless
   module API
     module Indices
       module Actions
-        # Performs analysis on a text string and returns the resulting tokens.
+        # Get tokens from text analysis.
+        # The analyze API performs {https://www.elastic.co/guide/en/elasticsearch/reference/current/analysis.html analysis} on a text string and returns the resulting tokens.
         #
         # @option arguments [String] :index Index used to derive the analyzer.
         #  If specified, the +analyzer+ or field parameter overrides this value.

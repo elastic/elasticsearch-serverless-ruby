@@ -22,6 +22,7 @@ module ElasticsearchServerless
   module API
     module Security
       module Actions
+        # Delete roles API.
         # Removes roles in the native realm.
         #
         # @option arguments [String] :name Role name (*Required*)
