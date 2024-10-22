@@ -22,7 +22,8 @@ module ElasticsearchServerless
   module API
     module AsyncSearch
       module Actions
-        # Retrieves the results of a previously submitted async search request given its identifier.
+        # Get async search results.
+        # Retrieve the results of a previously submitted asynchronous search request.
         # If the Elasticsearch security features are enabled, access to the results of a specific async search is restricted to the user or API key that submitted it.
         #
         # @option arguments [String] :id A unique identifier for the async search. (*Required*)
