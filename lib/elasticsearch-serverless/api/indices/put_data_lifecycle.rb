@@ -37,7 +37,7 @@ module ElasticsearchServerless
         # @option arguments [Time] :timeout Period to wait for a response.
         #  If no response is received before the timeout expires, the request fails and returns an error. Server default: 30s.
         # @option arguments [Hash] :headers Custom HTTP headers
-        # @option arguments [Hash] :body request body
+        # @option arguments [Hash] :body lifecycle
         #
         # @see https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams-put-lifecycle.html
         #
@@ -50,6 +50,7 @@ module ElasticsearchServerless
           end
           request_opts[:defined_params] = defined_params unless defined_params.empty?
 
+          raise ArgumentError, "Required argument 'body' missing" unless arguments[:body]
           raise ArgumentError, "Required argument 'name' missing" unless arguments[:name]
 
           arguments = arguments.clone
