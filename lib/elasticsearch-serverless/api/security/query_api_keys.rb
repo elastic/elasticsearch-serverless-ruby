@@ -22,8 +22,8 @@ module ElasticsearchServerless
   module API
     module Security
       module Actions
-        # Query API keys.
-        # Retrieves a paginated list of API keys and their information. You can optionally filter the results with a query.
+        # Find API keys with a query.
+        # Get a paginated list of API keys and their information. You can optionally filter the results with a query.
         #
         # @option arguments [Boolean] :with_limited_by Return the snapshot of the owner user's role descriptors associated with the API key.
         #  An API key's actual permission is the intersection of its assigned role descriptors and the owner user's role descriptors.

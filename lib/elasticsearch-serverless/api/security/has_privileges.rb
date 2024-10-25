@@ -23,7 +23,7 @@ module ElasticsearchServerless
     module Security
       module Actions
         # Check user privileges.
-        # Determines whether the specified user has a specified list of privileges.
+        # Determine whether the specified user has a specified list of privileges.
         #
         # @option arguments [String] :user Username
         # @option arguments [Hash] :headers Custom HTTP headers

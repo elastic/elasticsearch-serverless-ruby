@@ -22,7 +22,8 @@ module ElasticsearchServerless
   module API
     module Connector
       module Actions
-        # Creates a connector sync job.
+        # Create a connector sync job.
+        # Create a connector sync job document in the internal index and initialize its counters and timestamps with default values.
         # This functionality is in Beta and is subject to change. The design and
         # code is less mature than official GA features and is being provided
         # as-is with no warranties. Beta features are not subject to the support

@@ -26,12 +26,12 @@ module ElasticsearchServerless
         # Datafeeds retrieve data from Elasticsearch for analysis by an anomaly detection job.
         # You can associate only one datafeed with each anomaly detection job.
         # The datafeed contains a query that runs at a defined interval (+frequency+).
-        # If you are concerned about delayed data, you can add a delay (+query_delay') at each interval.
+        # If you are concerned about delayed data, you can add a delay (+query_delay+) at each interval.
         # When Elasticsearch security features are enabled, your datafeed remembers which roles the user who created it had
         # at the time of creation and runs the query using those same roles. If you provide secondary authorization headers,
         # those credentials are used instead.
         # You must use Kibana, this API, or the create anomaly detection jobs API to create a datafeed. Do not add a datafeed
-        # directly to the+.ml-config+index. Do not give users+write+privileges on the+.ml-config` index.
+        # directly to the +.ml-config+ index. Do not give users +write+ privileges on the +.ml-config+ index.
         #
         # @option arguments [String] :datafeed_id A numerical character string that uniquely identifies the datafeed.
         #  This identifier can contain lowercase alphanumeric characters (a-z and 0-9), hyphens, and underscores.

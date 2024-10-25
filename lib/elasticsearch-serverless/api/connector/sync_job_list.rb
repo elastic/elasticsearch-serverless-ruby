@@ -22,7 +22,8 @@ module ElasticsearchServerless
   module API
     module Connector
       module Actions
-        # Lists connector sync jobs.
+        # Get all connector sync jobs.
+        # Get information about all stored connector sync jobs listed by their creation date in ascending order.
         # This functionality is in Beta and is subject to change. The design and
         # code is less mature than official GA features and is being provided
         # as-is with no warranties. Beta features are not subject to the support

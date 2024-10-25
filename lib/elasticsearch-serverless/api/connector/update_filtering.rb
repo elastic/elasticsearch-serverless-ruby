@@ -22,7 +22,10 @@ module ElasticsearchServerless
   module API
     module Connector
       module Actions
-        # Updates the filtering field in the connector document
+        # Update the connector filtering.
+        # Update the draft filtering configuration of a connector and marks the draft validation state as edited.
+        # The filtering draft is activated once validated by the running Elastic connector service.
+        # The filtering property is used to configure sync rules (both basic and advanced) for a connector.
         # This functionality is in Beta and is subject to change. The design and
         # code is less mature than official GA features and is being provided
         # as-is with no warranties. Beta features are not subject to the support

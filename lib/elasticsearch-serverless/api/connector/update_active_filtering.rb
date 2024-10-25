@@ -22,6 +22,7 @@ module ElasticsearchServerless
   module API
     module Connector
       module Actions
+        # Activate the connector draft filter.
         # Activates the valid draft filtering for a connector.
         # This functionality is Experimental and may be changed or removed
         # completely in a future release. Elastic will take a best effort approach

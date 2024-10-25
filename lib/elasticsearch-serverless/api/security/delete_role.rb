@@ -22,8 +22,8 @@ module ElasticsearchServerless
   module API
     module Security
       module Actions
-        # Delete roles API.
-        # Removes roles in the native realm.
+        # Delete roles.
+        # Delete roles in the native realm.
         #
         # @option arguments [String] :name Role name (*Required*)
         # @option arguments [String] :refresh If +true+ (the default) then refresh the affected shards to make this operation visible to search, if +wait_for+ then wait for a refresh to make this operation visible to search, if +false+ then do nothing with refreshes.
