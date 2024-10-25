@@ -22,7 +22,7 @@ module ElasticsearchServerless
   module API
     module Connector
       module Actions
-        # Updates the scheduling field in the connector document
+        # Update the connector scheduling.
         # This functionality is in Beta and is subject to change. The design and
         # code is less mature than official GA features and is being provided
         # as-is with no warranties. Beta features are not subject to the support

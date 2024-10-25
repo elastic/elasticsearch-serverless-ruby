@@ -21,7 +21,11 @@
 module ElasticsearchServerless
   module API
     module Actions
-      # Returns multiple termvectors in one request.
+      # Get multiple term vectors.
+      # You can specify existing documents by index and ID or provide artificial documents in the body of the request.
+      # You can specify the index in the request body or request URI.
+      # The response contains a +docs+ array with all the fetched termvectors.
+      # Each element has the structure provided by the termvectors API.
       #
       # @option arguments [String] :index Name of the index that contains the documents.
       # @option arguments [Array<String>] :ids A comma-separated list of documents ids. You must define ids as parameter or set "ids" or "docs" in the request body

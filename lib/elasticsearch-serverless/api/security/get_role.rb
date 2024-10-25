@@ -22,8 +22,8 @@ module ElasticsearchServerless
   module API
     module Security
       module Actions
-        # Get roles API.
-        # Retrieves roles in the native realm.
+        # Get roles.
+        # Get roles in the native realm.
         #
         # @option arguments [String, Array<String>] :name The name of the role. You can specify multiple roles as a comma-separated list. If you do not specify this parameter, the API returns information about all roles.
         # @option arguments [Hash] :headers Custom HTTP headers

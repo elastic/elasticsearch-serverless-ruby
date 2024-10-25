@@ -22,7 +22,11 @@ module ElasticsearchServerless
   module API
     module Connector
       module Actions
-        # Deletes a connector.
+        # Delete a connector.
+        # Removes a connector and associated sync jobs.
+        # This is a destructive action that is not recoverable.
+        # NOTE: This action doesn’t delete any API keys, ingest pipelines, or data indices associated with the connector.
+        # These need to be removed manually.
         # This functionality is in Beta and is subject to change. The design and
         # code is less mature than official GA features and is being provided
         # as-is with no warranties. Beta features are not subject to the support

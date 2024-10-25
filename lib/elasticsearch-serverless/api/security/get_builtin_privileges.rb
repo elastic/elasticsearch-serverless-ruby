@@ -22,8 +22,8 @@ module ElasticsearchServerless
   module API
     module Security
       module Actions
-        # Get builtin privileges API.
-        # Retrieves the list of cluster privileges and index privileges that are available in this version of Elasticsearch.
+        # Get builtin privileges.
+        # Get the list of cluster privileges and index privileges that are available in this version of Elasticsearch.
         #
         # @option arguments [Hash] :headers Custom HTTP headers
         #

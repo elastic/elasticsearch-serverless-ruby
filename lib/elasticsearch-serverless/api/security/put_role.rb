@@ -22,8 +22,10 @@ module ElasticsearchServerless
   module API
     module Security
       module Actions
-        # Create or update roles API.
-        # Create or update roles in the native realm.
+        # Create or update roles.
+        # The role management APIs are generally the preferred way to manage roles in the native realm, rather than using file-based role management.
+        # The create or update roles API cannot update roles that are defined in roles files.
+        # File-based role management is not available in Elastic Serverless.
         #
         # @option arguments [String] :name The name of the role that is being created or updated. On Elasticsearch Serverless, the role name must begin with a letter or digit and can only contain letters, digits and the characters '_', '-', and '.'. Each role must have a unique name, as this will serve as the identifier for that role. (*Required*)
         # @option arguments [String] :refresh If +true+ (the default) then refresh the affected shards to make this operation visible to search, if +wait_for+ then wait for a refresh to make this operation visible to search, if +false+ then do nothing with refreshes.

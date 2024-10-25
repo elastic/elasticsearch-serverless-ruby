@@ -22,7 +22,10 @@ module ElasticsearchServerless
   module API
     module Connector
       module Actions
-        # Updates the filtering field in the connector document
+        # Update the connector error field.
+        # Set the error field for the connector.
+        # If the error provided in the request body is non-null, the connector’s status is updated to error.
+        # Otherwise, if the error is reset to null, the connector status is updated to connected.
         # This functionality is Experimental and may be changed or removed
         # completely in a future release. Elastic will take a best effort approach
         # to fix any issues, but experimental features are not subject to the

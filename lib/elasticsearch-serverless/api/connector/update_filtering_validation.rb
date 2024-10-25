@@ -22,7 +22,8 @@ module ElasticsearchServerless
   module API
     module Connector
       module Actions
-        # Updates the draft filtering validation info for a connector.
+        # Update the connector draft filtering validation.
+        # Update the draft filtering validation info for a connector.
         # This functionality is Experimental and may be changed or removed
         # completely in a future release. Elastic will take a best effort approach
         # to fix any issues, but experimental features are not subject to the

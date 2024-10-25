@@ -21,7 +21,17 @@
 module ElasticsearchServerless
   module API
     module Actions
-      # Allows to execute several search operations in one request.
+      # Run multiple searches.
+      # The format of the request is similar to the bulk API format and makes use of the newline delimited JSON (NDJSON) format.
+      # The structure is as follows:
+      #   header
+      #   body
+      #   header
+      #   body
+      # This structure is specifically optimized to reduce parsing if a specific search ends up redirected to another node.
+      # IMPORTANT: The final line of data must end with a newline character +\n+.
+      # Each newline character may be preceded by a carriage return +\r+.
+      # When sending requests to this endpoint the +Content-Type+ header should be set to +application/x-ndjson+.
       #
       # @option arguments [String, Array] :index Comma-separated list of data streams, indices, and index aliases to search.
       # @option arguments [Boolean] :allow_no_indices If false, the request returns an error if any wildcard expression, index alias, or _all value targets only missing or closed indices. This behavior applies even if the request targets other open indices. For example, a request targeting foo*,bar* returns an error if an index starts with foo but no index starts with bar.

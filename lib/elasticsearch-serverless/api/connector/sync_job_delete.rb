@@ -22,7 +22,9 @@ module ElasticsearchServerless
   module API
     module Connector
       module Actions
-        # Deletes a connector sync job.
+        # Delete a connector sync job.
+        # Remove a connector sync job and its associated data.
+        # This is a destructive action that is not recoverable.
         # This functionality is in Beta and is subject to change. The design and
         # code is less mature than official GA features and is being provided
         # as-is with no warranties. Beta features are not subject to the support
