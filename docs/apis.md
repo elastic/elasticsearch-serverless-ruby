@@ -3,13 +3,13 @@
 These are the available APIs in the Elasticsearch Serverless Ruby client.
 
 
-* `async_search.delete` - Deletes an async search by identifier.
+* `async_search.delete` - Delete an async search.
  https://www.elastic.co/guide/en/elasticsearch/reference/current/async-search.html
-* `async_search.get` - Retrieves the results of a previously submitted async search request given its identifier.
+* `async_search.get` - Get async search results.
  https://www.elastic.co/guide/en/elasticsearch/reference/current/async-search.html
-* `async_search.status` - Get async search status
+* `async_search.status` - Get async search status.
  https://www.elastic.co/guide/en/elasticsearch/reference/current/async-search.html
-* `async_search.submit` - Runs a search request asynchronously.
+* `async_search.submit` - Run an async search.
  https://www.elastic.co/guide/en/elasticsearch/reference/current/async-search.html
 * `bulk` - Bulk index or delete documents.
  https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html
@@ -113,8 +113,6 @@ These are the available APIs in the Elasticsearch Serverless Ruby client.
  https://www.elastic.co/guide/en/elasticsearch/reference/current/get-enrich-policy-api.html
 * `enrich.put_policy` - Create an enrich policy.
  https://www.elastic.co/guide/en/elasticsearch/reference/current/put-enrich-policy-api.html
-* `enrich.stats` - Get enrich stats.
- https://www.elastic.co/guide/en/elasticsearch/reference/current/enrich-stats-api.html
 * `eql.delete` - Deletes an async EQL search or a stored synchronous EQL search.
  https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html
 * `eql.get` - Returns the current status and available results for an async EQL search or a stored synchronous EQL search.
@@ -143,20 +141,16 @@ These are the available APIs in the Elasticsearch Serverless Ruby client.
  https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html
 * `indices.add_block` - Add an index block.
  https://www.elastic.co/guide/en/elasticsearch/reference/master/index-modules-blocks.html
-* `indices.analyze` - Performs analysis on a text string and returns the resulting tokens.
+* `indices.analyze` - Get tokens from text analysis.
  https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-analyze.html
 * `indices.create` - Create an index.
  https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-create-index.html
 * `indices.create_data_stream` - Create a data stream.
  https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html
-* `indices.data_streams_stats` - Get data stream stats.
- https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html
 * `indices.delete` - Delete indices.
  https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-delete-index.html
 * `indices.delete_alias` - Delete an alias.
  https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html
-* `indices.delete_data_lifecycle` - Delete data stream lifecycles.
- https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams-delete-lifecycle.html
 * `indices.delete_data_stream` - Delete data streams.
  https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html
 * `indices.delete_index_template` - Delete an index template.
@@ -289,6 +283,8 @@ These are the available APIs in the Elasticsearch Serverless Ruby client.
  https://www.elastic.co/guide/en/elasticsearch/reference/current/get-trained-models.html
 * `machine_learning.get_trained_models_stats` - Get trained models usage info.
  https://www.elastic.co/guide/en/elasticsearch/reference/current/get-trained-models-stats.html
+* `machine_learning.infer_trained_model` - Evaluate a trained model.
+ https://www.elastic.co/guide/en/elasticsearch/reference/master/infer-trained-model.html
 * `machine_learning.open_job` - Open anomaly detection jobs.
  https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-open-job.html
 * `machine_learning.post_calendar_events` - Add scheduled events to the calendar.
@@ -369,6 +365,8 @@ These are the available APIs in the Elasticsearch Serverless Ruby client.
  https://www.elastic.co/guide/en/elasticsearch/reference/master/put-query-rule.html
 * `query_rules.put_ruleset` - Creates or updates a query ruleset.
  https://www.elastic.co/guide/en/elasticsearch/reference/master/put-query-ruleset.html
+* `query_rules.test` - Creates or updates a query ruleset.
+ https://www.elastic.co/guide/en/elasticsearch/reference/master/test-query-ruleset.html
 * `rank_eval` - Enables you to evaluate the quality of ranked search results over a set of typical search queries.
  https://www.elastic.co/guide/en/elasticsearch/reference/master/search-rank-eval.html
 * `reindex` - Reindex documents.
@@ -381,21 +379,21 @@ These are the available APIs in the Elasticsearch Serverless Ruby client.
  https://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-body.html#request-body-search-scroll
 * `search` - Returns search hits that match the query defined in the request.
  https://www.elastic.co/guide/en/elasticsearch/reference/master/search-search.html
-* `search_application.delete` - Deletes a search application.
+* `search_application.delete` - Delete a search application.
  https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-search-application.html
 * `search_application.delete_behavioral_analytics` - Delete a behavioral analytics collection.
  https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-analytics-collection.html
-* `search_application.get` - Returns the details about a search application
+* `search_application.get` - Get search application details.
  https://www.elastic.co/guide/en/elasticsearch/reference/master/get-search-application.html
-* `search_application.get_behavioral_analytics` - Returns the existing behavioral analytics collections.
+* `search_application.get_behavioral_analytics` - Get behavioral analytics collections.
  https://www.elastic.co/guide/en/elasticsearch/reference/master/list-analytics-collection.html
 * `search_application.list` - Returns the existing search applications.
  https://www.elastic.co/guide/en/elasticsearch/reference/master/list-search-applications.html
-* `search_application.put` - Creates or updates a search application.
+* `search_application.put` - Create or update a search application.
  https://www.elastic.co/guide/en/elasticsearch/reference/master/put-search-application.html
-* `search_application.put_behavioral_analytics` - Creates a behavioral analytics collection.
+* `search_application.put_behavioral_analytics` - Create a behavioral analytics collection.
  https://www.elastic.co/guide/en/elasticsearch/reference/master/put-analytics-collection.html
-* `search_application.search` - Perform a search against a search application.
+* `search_application.search` - Run a search application search.
  https://www.elastic.co/guide/en/elasticsearch/reference/master/search-application-search.html
 * `search_mvt` - Search a vector tile.
  https://www.elastic.co/guide/en/elasticsearch/reference/master/search-vector-tile-api.html
@@ -405,14 +403,24 @@ These are the available APIs in the Elasticsearch Serverless Ruby client.
  https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-authenticate.html
 * `security.create_api_key` - Create an API key.
  https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-create-api-key.html
+* `security.delete_role` - Delete roles API.
+ https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-role.html
 * `security.get_api_key` - Get API key information.
  https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-api-key.html
+* `security.get_builtin_privileges` - Get builtin privileges API.
+ https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-builtin-privileges.html
+* `security.get_role` - Get roles API.
+ https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-role.html
 * `security.has_privileges` - Check user privileges.
  https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-has-privileges.html
 * `security.invalidate_api_key` - Invalidate API keys.
  https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-invalidate-api-key.html
+* `security.put_role` - Create or update roles API.
+ https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-role.html
 * `security.query_api_keys` - Query API keys.
  https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-query-api-key.html
+* `security.update_api_key` - Update an API key.
+ https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-update-api-key.html
 * `sql.clear_cursor` - Clears the SQL cursor
  https://www.elastic.co/guide/en/elasticsearch/reference/current/clear-sql-cursor-api.html
 * `sql.delete_async` - Deletes an async SQL search or a stored synchronous SQL search. If the search is still running, the API cancels it.
@@ -439,6 +447,8 @@ These are the available APIs in the Elasticsearch Serverless Ruby client.
  https://www.elastic.co/guide/en/elasticsearch/reference/master/put-synonyms-set.html
 * `synonyms.put_synonym_rule` - Creates or updates a synonym rule in a synonym set
  https://www.elastic.co/guide/en/elasticsearch/reference/master/put-synonym-rule.html
+* `tasks.get` - Get task information.
+ https://www.elastic.co/guide/en/elasticsearch/reference/current/tasks.html
 * `terms_enum` - The terms enum API  can be used to discover terms in the index that begin with the provided string. It is designed for low-latency look-ups used in auto-complete scenarios.
  https://www.elastic.co/guide/en/elasticsearch/reference/current/search-terms-enum.html
 * `termvectors` - Get term vector information.
