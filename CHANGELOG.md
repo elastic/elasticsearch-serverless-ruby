@@ -1,10 +1,37 @@
 # Changelog
 
+## 0.5.0
+
+### Client
+
+- Removed Ruby 3.0 from testing matrix, it's been end of life for over 6 months.
+
+### Changes in APIs:
+
+The following APIs have been removed as they're not available on Serverless:
+* `enrich.stats`
+* `indices.delete_data_lifecycle`
+
+Changes in `scroll` APIs, the parameter `scroll_id` has been removed as it's been deprecated, it should be sent via the body:
+* `clear_scroll`
+* `scroll`
+
+Update `indices.put_data_lifecycle` - body (lifecycle) is a required argument.
+
+Added the following APIs:
+* `machine_learning.infer_trained_model`
+* `query_rules.test`
+* `security.delete_role.rb`
+* `security.get_builtin_privileges.rb`
+* `security.get_role.rb`
+* `security.put_role.rb`
+* `tasks.get`
+
 ## 0.4.0
 
 ### Changes in APIs:
 
-The following APIs API have been removed as they are not supported at the moment:
+The following APIs have been removed as they are not supported at the moment:
 * `esql.query`
 * `indices.data_streams_stats`
 
