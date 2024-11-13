@@ -53,34 +53,6 @@ namespace :spec do
     t.pattern = Dir.glob('spec/**/*_spec.rb')
   end
 
-  desc 'Download test suite to ./spec/tmp'
-  task :download_tests do
-    require 'open-uri'
-    path = 'spec/tmp'
-    filename = 'tests.zip'
-    url = 'https://api.github.com/repos/elastic/elasticsearch-clients-tests/zipball/main'
-
-    File.open(filename, 'w') do |downloaded_file|
-      URI.open(
-        url,
-        'Accept' => 'application/vnd.github+json'
-      ) do |artifact_file|
-        downloaded_file.write(artifact_file.read)
-      end
-    end
-    if File.exist?(filename)
-      puts "Successfully downloaded #{filename}"
-    else
-      warn "[!] Couldn't download #{filename}"
-      exit 1
-    end
-
-    puts "Unzipping files"
-    `unzip #{filename} -d spec/tmp/`
-    puts "Removing zip file"
-    File.delete(filename)
-  end
-
   desc 'Clean tests folder'
   task :clean_tests do
     FileUtils.rm_rf(Dir.glob('./spec/tmp/**/*'), secure: true)
