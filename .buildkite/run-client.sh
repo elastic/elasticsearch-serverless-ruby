@@ -30,4 +30,4 @@ docker run \
        --name elasticsearch-ruby \
        --rm \
        elastic/elasticsearch-ruby \
-       bundle exec rake info spec:otel spec:api spec:stack spec:download_tests spec:yaml
+       bundle exec rake info spec:otel spec:api spec:stack spec:yaml
