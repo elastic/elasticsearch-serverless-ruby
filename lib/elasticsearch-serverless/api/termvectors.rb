@@ -22,7 +22,7 @@ module ElasticsearchServerless
   module API
     module Actions
       # Get term vector information.
-      # Returns information and statistics about terms in the fields of a particular document.
+      # Get information and statistics about terms in the fields of a particular document.
       #
       # @option arguments [String] :index Name of the index that contains the document. (*Required*)
       # @option arguments [String] :id Unique identifier of the document.

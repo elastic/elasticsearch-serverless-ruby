@@ -50,12 +50,10 @@ module ElasticsearchServerless
         # @option arguments [Boolean] :ignore_unavailable Whether specified concrete indices should be ignored when unavailable (missing or closed)
         # @option arguments [Boolean] :lenient Specify whether format-based query failures (such as providing text to a numeric field) should be ignored
         # @option arguments [Integer] :max_concurrent_shard_requests The number of concurrent shard requests per node this search executes concurrently. This value should be used to limit the impact of the search on the cluster in order to limit the number of concurrent shard requests
-        # @option arguments [String] :min_compatible_shard_node [TODO]
         # @option arguments [String] :preference Specify the node or shard the operation should be performed on (default: random)
         # @option arguments [Integer] :pre_filter_shard_size The default value cannot be changed, which enforces the execution of a pre-filter roundtrip to retrieve statistics from each shard so that the ones that surely don’t hold any document matching the query get skipped. Server default: 1.
         # @option arguments [Boolean] :request_cache Specify if request cache should be used for this request or not, defaults to true Server default: true.
         # @option arguments [String] :routing A comma-separated list of specific routing values
-        # @option arguments [Time] :scroll [TODO]
         # @option arguments [String] :search_type Search operation type
         # @option arguments [Array<String>] :stats Specific 'tag' of the request for logging and statistical purposes
         # @option arguments [String, Array<String>] :stored_fields A comma-separated list of stored fields to return as part of a hit
@@ -68,7 +66,7 @@ module ElasticsearchServerless
         # @option arguments [Boolean, Integer] :track_total_hits Indicate if the number of documents that match the query should be tracked. A number can also be specified, to accurately track the total hit count up to the number.
         # @option arguments [Boolean] :track_scores Whether to calculate and return scores even if they are not used for sorting
         # @option arguments [Boolean] :typed_keys Specify whether aggregation and suggester names should be prefixed by their respective types in the response
-        # @option arguments [Boolean] :rest_total_hits_as_int [TODO]
+        # @option arguments [Boolean] :rest_total_hits_as_int Indicates whether hits.total should be rendered as an integer or an object in the rest search response
         # @option arguments [Boolean] :version Specify whether to return document version as part of a hit
         # @option arguments [Boolean, String, Array<String>] :_source True or false to return the _source field or not, or a list of fields to return
         # @option arguments [String, Array<String>] :_source_excludes A list of fields to exclude from the returned _source field

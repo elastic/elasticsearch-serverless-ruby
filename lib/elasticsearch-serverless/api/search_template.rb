@@ -21,7 +21,7 @@
 module ElasticsearchServerless
   module API
     module Actions
-      # Runs a search with a search template.
+      # Run a search with a search template.
       #
       # @option arguments [String, Array] :index Comma-separated list of data streams, indices,
       #  and aliases to search. Supports wildcards (*).

@@ -48,10 +48,6 @@ module ElasticsearchServerless
         # @option arguments [String, Array<String>] :h List of columns to appear in the response. Supports simple wildcards.
         # @option arguments [Boolean] :help When set to +true+ will output available columns. This option
         #  can't be combined with any other query string option.
-        # @option arguments [Boolean] :local If +true+, the request computes the list of selected nodes from the
-        #  local cluster state. If +false+ the list of selected nodes are computed
-        #  from the cluster state of the master node. In both cases the coordinating
-        #  node will send requests for further information to each selected node.
         # @option arguments [Time] :master_timeout Period to wait for a connection to the master node. Server default: 30s.
         # @option arguments [String, Array<String>] :s List of columns that determine how the table should be sorted.
         #  Sorting defaults to ascending and can be changed by setting +:asc+

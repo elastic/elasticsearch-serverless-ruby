@@ -38,7 +38,6 @@ module ElasticsearchServerless
         #  Supports comma-separated values, such as +open,hidden+.
         #  Valid values are: +all+, +open+, +closed+, +hidden+, +none+. Server default: open.
         # @option arguments [Boolean] :ignore_unavailable If +false+, the request returns an error if it targets a missing or closed index.
-        # @option arguments [Boolean] :local If +true+, the request retrieves information from the local node only.
         # @option arguments [Hash] :headers Custom HTTP headers
         #
         # @see https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html

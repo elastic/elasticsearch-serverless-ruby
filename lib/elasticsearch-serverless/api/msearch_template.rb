@@ -21,7 +21,7 @@
 module ElasticsearchServerless
   module API
     module Actions
-      # Runs multiple templated searches with a single request.
+      # Run multiple templated searches.
       #
       # @option arguments [String, Array] :index Comma-separated list of data streams, indices, and aliases to search.
       #  Supports wildcards (+*+).

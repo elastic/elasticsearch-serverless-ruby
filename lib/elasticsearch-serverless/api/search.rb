@@ -21,7 +21,8 @@
 module ElasticsearchServerless
   module API
     module Actions
-      # Returns search hits that match the query defined in the request.
+      # Run a search.
+      # Get search hits that match the query defined in the request.
       # You can provide search queries using the +q+ query string parameter or the request body.
       # If both are specified, only the query parameter is used.
       #
@@ -60,8 +61,6 @@ module ElasticsearchServerless
       #  This parameter can only be used when the +q+ query string parameter is specified.
       # @option arguments [Integer] :max_concurrent_shard_requests Defines the number of concurrent shard requests per node this search executes concurrently.
       #  This value should be used to limit the impact of the search on the cluster in order to limit the number of concurrent shard requests. Server default: 5.
-      # @option arguments [String] :min_compatible_shard_node The minimum version of the node that can handle the request
-      #  Any handling node with a lower version will fail the request.
       # @option arguments [String] :preference Nodes and shards used for the search.
       #  By default, Elasticsearch selects from eligible nodes and shards using adaptive replica selection, accounting for allocation awareness. Valid values are:
       #  +_only_local+ to run the search only on shards on the local node;
