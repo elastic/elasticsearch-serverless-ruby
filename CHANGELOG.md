@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.6.0
+
+### Changes in APIs:
+
+- Updated source code documentation, updated [rubydocs](https://rubydoc.info/gems/elasticsearch-serverless).
+- `async_search.status` - Adds `keep_alive` Time parameter. Specifies how long the async search needs to be available. Ongoing async searches and any saved search results are deleted after this period. Server default: 5d.
+- `async_search.submit` - Removes `min_compatible_shared_node` and `scroll` parameters.
+- `cat.aliases`, `cat.count`, `cat.help`, `cat.indices`, `cat.ml_data_frame_analytics`, `cat.ml_datafeeds`, `cat.ml_jobs`, `cat.ml_trained_models`, `cat.transforms`, `indices.exists_alias`, `indices.get_alias` - Removes `local` parameter (not applicable).
+- Inference APIs promoted from Experimental to stable: `inference.delete`, `inference.get`, `inference.inference`, `inference.put`.
+- `open_point_in_time` adds `allow_partial_search_results` boolean parameter. If `false`, creating a point in time request when a shard is missing or unavailable will throw an exception. If `true`, the point in time will contain all the shards that are available at the time of the request.
+- `search` - Removes `min_compatible_shard_node` parameter (not applicable).
+
 ## 0.5.0
 
 ### Client
