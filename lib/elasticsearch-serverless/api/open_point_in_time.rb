@@ -21,12 +21,15 @@
 module ElasticsearchServerless
   module API
     module Actions
-      # A search request by default executes against the most recent visible data of the target indices,
+      # Open a point in time.
+      # A search request by default runs against the most recent visible data of the target indices,
       # which is called point in time. Elasticsearch pit (point in time) is a lightweight view into the
       # state of the data as it existed when initiated. In some cases, it’s preferred to perform multiple
       # search requests using the same point in time. For example, if refreshes happen between
       # +search_after+ requests, then the results of those requests might not be consistent as changes happening
       # between searches are only visible to the more recent point in time.
+      # A point in time must be opened explicitly before being used in search requests.
+      # The +keep_alive+ parameter tells Elasticsearch how long it should persist.
       #
       # @option arguments [String, Array] :index A comma-separated list of index names to open point in time; use +_all+ or empty string to perform the operation on all indices (*Required*)
       # @option arguments [Time] :keep_alive Extends the time to live of the corresponding point in time. (*Required*)
@@ -37,6 +40,8 @@ module ElasticsearchServerless
       # @option arguments [String, Array<String>] :expand_wildcards Type of index that wildcard patterns can match.
       #  If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
       #  Supports comma-separated values, such as +open,hidden+. Valid values are: +all+, +open+, +closed+, +hidden+, +none+. Server default: open.
+      # @option arguments [Boolean] :allow_partial_search_results If +false+, creating a point in time request when a shard is missing or unavailable will throw an exception.
+      #  If +true+, the point in time will contain all the shards that are available at the time of the request.
       # @option arguments [Hash] :headers Custom HTTP headers
       # @option arguments [Hash] :body request body
       #

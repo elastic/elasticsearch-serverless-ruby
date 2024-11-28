@@ -22,7 +22,7 @@ module ElasticsearchServerless
   module API
     module Actions
       # Search a vector tile.
-      # Searches a vector tile for geospatial values.
+      # Search a vector tile for geospatial values.
       #
       # @option arguments [String, Array] :index Comma-separated list of data streams, indices, or aliases to search (*Required*)
       # @option arguments [String] :field Field containing geospatial data to return (*Required*)

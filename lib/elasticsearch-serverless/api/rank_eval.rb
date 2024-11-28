@@ -21,7 +21,8 @@
 module ElasticsearchServerless
   module API
     module Actions
-      # Enables you to evaluate the quality of ranked search results over a set of typical search queries.
+      # Evaluate ranked search results.
+      # Evaluate the quality of ranked search results over a set of typical search queries.
       #
       # @option arguments [String, Array] :index Comma-separated list of data streams, indices, and index aliases used to limit the request. Wildcard (+*+) expressions are supported.
       #  To target all data streams and indices in a cluster, omit this parameter or use +_all+ or +*+.

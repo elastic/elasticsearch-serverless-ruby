@@ -22,11 +22,13 @@ module ElasticsearchServerless
   module API
     module AsyncSearch
       module Actions
-        # Get async search status.
-        # Retrieve the status of a previously submitted async search request given its identifier, without retrieving search results.
+        # Get the async search status.
+        # Get the status of a previously submitted async search request given its identifier, without retrieving search results.
         # If the Elasticsearch security features are enabled, use of this API is restricted to the +monitoring_user+ role.
         #
         # @option arguments [String] :id A unique identifier for the async search. (*Required*)
+        # @option arguments [Time] :keep_alive Specifies how long the async search needs to be available.
+        #  Ongoing async searches and any saved search results are deleted after this period. Server default: 5d.
         # @option arguments [Hash] :headers Custom HTTP headers
         #
         # @see https://www.elastic.co/guide/en/elasticsearch/reference/current/async-search.html
@@ -51,7 +53,7 @@ module ElasticsearchServerless
 
           method = ElasticsearchServerless::API::HTTP_GET
           path   = "_async_search/status/#{Utils.listify(_id)}"
-          params = {}
+          params = Utils.process_params(arguments)
 
           ElasticsearchServerless::API::Response.new(
             perform_request(method, path, params, body, headers, request_opts)
