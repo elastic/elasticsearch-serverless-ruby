@@ -32,8 +32,6 @@ module ElasticsearchServerless
         # @option arguments [Time] :wait_for_completion_timeout Blocks and waits until the search is completed up to a certain timeout.
         #  When the async search completes within the timeout, the response won’t include the ID as the results are not stored in the cluster. Server default: 1s.
         # @option arguments [Boolean] :keep_on_completion If +true+, results are stored for later retrieval when the search completes within the +wait_for_completion_timeout+.
-        # @option arguments [Time] :keep_alive Specifies how long the async search needs to be available.
-        #  Ongoing async searches and any saved search results are deleted after this period. Server default: 5d.
         # @option arguments [Boolean] :allow_no_indices Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes +_all+ string or when no indices have been specified)
         # @option arguments [Boolean] :allow_partial_search_results Indicate if an error should be returned if there is a partial search failure or timeout
         # @option arguments [String] :analyzer The analyzer to use for the query string
@@ -51,7 +49,6 @@ module ElasticsearchServerless
         # @option arguments [Boolean] :lenient Specify whether format-based query failures (such as providing text to a numeric field) should be ignored
         # @option arguments [Integer] :max_concurrent_shard_requests The number of concurrent shard requests per node this search executes concurrently. This value should be used to limit the impact of the search on the cluster in order to limit the number of concurrent shard requests
         # @option arguments [String] :preference Specify the node or shard the operation should be performed on (default: random)
-        # @option arguments [Integer] :pre_filter_shard_size The default value cannot be changed, which enforces the execution of a pre-filter roundtrip to retrieve statistics from each shard so that the ones that surely don’t hold any document matching the query get skipped. Server default: 1.
         # @option arguments [Boolean] :request_cache Specify if request cache should be used for this request or not, defaults to true Server default: true.
         # @option arguments [String] :routing A comma-separated list of specific routing values
         # @option arguments [String] :search_type Search operation type
