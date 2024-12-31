@@ -22,7 +22,8 @@ module ElasticsearchServerless
   module API
     module Enrich
       module Actions
-        # Creates the enrich index for an existing enrich policy.
+        # Run an enrich policy.
+        # Create the enrich index for an existing enrich policy.
         #
         # @option arguments [String] :name Enrich policy to execute. (*Required*)
         # @option arguments [Boolean] :wait_for_completion If +true+, the request blocks other enrich policy execution requests until complete. Server default: true.

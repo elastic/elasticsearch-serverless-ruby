@@ -22,7 +22,7 @@ module ElasticsearchServerless
   module API
     module Ingest
       module Actions
-        # Creates or updates an ingest pipeline.
+        # Create or update a pipeline.
         # Changes made using this API take effect immediately.
         #
         # @option arguments [String] :id ID of the ingest pipeline to create or update. (*Required*)

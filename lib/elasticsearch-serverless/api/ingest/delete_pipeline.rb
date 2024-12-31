@@ -22,7 +22,8 @@ module ElasticsearchServerless
   module API
     module Ingest
       module Actions
-        # Deletes one or more existing ingest pipeline.
+        # Delete pipelines.
+        # Delete one or more ingest pipelines.
         #
         # @option arguments [String] :id Pipeline ID or wildcard expression of pipeline IDs used to limit the request.
         #  To delete all ingest pipelines in a cluster, use a value of +*+. (*Required*)

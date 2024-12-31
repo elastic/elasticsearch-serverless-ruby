@@ -22,9 +22,11 @@ module ElasticsearchServerless
   module API
     module Logstash
       module Actions
-        # Creates or updates a pipeline used for Logstash Central Management.
+        # Create or update a Logstash pipeline.
+        # Create a pipeline that is used for Logstash Central Management.
+        # If the specified pipeline exists, it is replaced.
         #
-        # @option arguments [String] :id Identifier for the pipeline. (*Required*)
+        # @option arguments [String] :id An identifier for the pipeline. (*Required*)
         # @option arguments [Hash] :headers Custom HTTP headers
         # @option arguments [Hash] :body pipeline
         #

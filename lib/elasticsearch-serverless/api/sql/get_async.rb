@@ -22,7 +22,8 @@ module ElasticsearchServerless
   module API
     module SQL
       module Actions
-        # Returns the current status and available results for an async SQL search or stored synchronous SQL search
+        # Get async SQL search results.
+        # Get the current status and available results for an async SQL search or stored synchronous SQL search.
         #
         # @option arguments [String] :id Identifier for the search. (*Required*)
         # @option arguments [String] :delimiter Separator for CSV results. The API only supports this parameter for CSV responses. Server default: ,.

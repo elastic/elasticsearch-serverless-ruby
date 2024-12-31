@@ -22,7 +22,8 @@ module ElasticsearchServerless
   module API
     module QueryRules
       module Actions
-        # Returns the details about a query rule within a query ruleset
+        # Get a query rule.
+        # Get details about a query rule within a query ruleset.
         #
         # @option arguments [String] :ruleset_id The unique identifier of the query ruleset containing the rule to retrieve (*Required*)
         # @option arguments [String] :rule_id The unique identifier of the query rule within the specified ruleset to retrieve (*Required*)

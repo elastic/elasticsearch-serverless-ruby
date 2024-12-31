@@ -29,12 +29,12 @@ module ElasticsearchServerless
         #
         # @option arguments [String, Array<String>] :name A comma-separated list of aliases to retrieve. Supports wildcards (+*+).  To retrieve all aliases, omit this parameter or use +*+ or +_all+.
         # @option arguments [String, Array<String>] :expand_wildcards Whether to expand wildcard expression to concrete indices that are open, closed or both.
+        # @option arguments [Time] :master_timeout Period to wait for a connection to the master node. Server default: 30s.
         # @option arguments [String] :format Specifies the format to return the columnar data in, can be set to
         #  +text+, +json+, +cbor+, +yaml+, or +smile+. Server default: text.
         # @option arguments [String, Array<String>] :h List of columns to appear in the response. Supports simple wildcards.
         # @option arguments [Boolean] :help When set to +true+ will output available columns. This option
         #  can't be combined with any other query string option.
-        # @option arguments [Time] :master_timeout Period to wait for a connection to the master node. Server default: 30s.
         # @option arguments [String, Array<String>] :s List of columns that determine how the table should be sorted.
         #  Sorting defaults to ascending and can be changed by setting +:asc+
         #  or +:desc+ as a suffix to the column name.

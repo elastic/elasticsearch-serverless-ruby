@@ -23,8 +23,9 @@ module ElasticsearchServerless
     module License
       module Actions
         # Get license information.
-        # Returns information about your Elastic license, including its type, its status, when it was issued, and when it expires.
-        # For more information about the different types of licenses, refer to {https://www.elastic.co/subscriptions Elastic Stack subscriptions}.
+        # Get information about your Elastic license including its type, its status, when it was issued, and when it expires.
+        # NOTE: If the master node is generating a new cluster state, the get license API may return a +404 Not Found+ response.
+        # If you receive an unexpected 404 response after cluster startup, wait a short period and retry the request.
         #
         # @option arguments [Boolean] :accept_enterprise If +true+, this parameter returns enterprise for Enterprise license types. If +false+, this parameter returns platinum for both platinum and enterprise license types. This behavior is maintained for backwards compatibility.
         #  This parameter is deprecated and will always be set to true in 8.x. Server default: true.

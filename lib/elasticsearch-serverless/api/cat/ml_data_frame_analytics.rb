@@ -34,13 +34,12 @@ module ElasticsearchServerless
         # @option arguments [String, Array<String>] :h Comma-separated list of column names to display. Server default: create_time,id,state,type.
         # @option arguments [String, Array<String>] :s Comma-separated list of column names or column aliases used to sort the
         #  response.
-        # @option arguments [Time] :time Unit used to display time values.
+        # @option arguments [String] :time Unit used to display time values.
         # @option arguments [String] :format Specifies the format to return the columnar data in, can be set to
         #  +text+, +json+, +cbor+, +yaml+, or +smile+. Server default: text.
         # @option arguments [String, Array<String>] :h List of columns to appear in the response. Supports simple wildcards.
         # @option arguments [Boolean] :help When set to +true+ will output available columns. This option
         #  can't be combined with any other query string option.
-        # @option arguments [Time] :master_timeout Period to wait for a connection to the master node. Server default: 30s.
         # @option arguments [String, Array<String>] :s List of columns that determine how the table should be sorted.
         #  Sorting defaults to ascending and can be changed by setting +:asc+
         #  or +:desc+ as a suffix to the column name.

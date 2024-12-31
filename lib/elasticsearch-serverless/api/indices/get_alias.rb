@@ -38,6 +38,8 @@ module ElasticsearchServerless
         #  Supports comma-separated values, such as +open,hidden+.
         #  Valid values are: +all+, +open+, +closed+, +hidden+, +none+. Server default: open.
         # @option arguments [Boolean] :ignore_unavailable If +false+, the request returns an error if it targets a missing or closed index.
+        # @option arguments [Time] :master_timeout Period to wait for a connection to the master node.
+        #  If no response is received before the timeout expires, the request fails and returns an error. Server default: 30s.
         # @option arguments [Hash] :headers Custom HTTP headers
         #
         # @see https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html

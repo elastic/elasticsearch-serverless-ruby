@@ -22,7 +22,8 @@ module ElasticsearchServerless
   module API
     module QueryRules
       module Actions
-        # Returns summarized information about existing query rulesets.
+        # Get all query rulesets.
+        # Get summarized information about the query rulesets.
         #
         # @option arguments [Integer] :from Starting offset (default: 0)
         # @option arguments [Integer] :size specifies a max number of results to get

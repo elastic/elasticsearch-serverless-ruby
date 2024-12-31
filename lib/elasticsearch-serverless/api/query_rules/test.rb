@@ -22,7 +22,8 @@ module ElasticsearchServerless
   module API
     module QueryRules
       module Actions
-        # Creates or updates a query ruleset.
+        # Test a query ruleset.
+        # Evaluate match criteria against a query ruleset to identify the rules that would match that criteria.
         #
         # @option arguments [String] :ruleset_id The unique identifier of the query ruleset to be created or updated (*Required*)
         # @option arguments [Hash] :headers Custom HTTP headers

@@ -22,7 +22,8 @@ module ElasticsearchServerless
   module API
     module SQL
       module Actions
-        # Translates SQL into Elasticsearch queries
+        # Translate SQL into Elasticsearch queries.
+        # Translate an SQL search into a search API request containing Query DSL.
         #
         # @option arguments [Hash] :headers Custom HTTP headers
         # @option arguments [Hash] :body request body

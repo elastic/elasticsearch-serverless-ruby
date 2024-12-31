@@ -23,7 +23,7 @@ module ElasticsearchServerless
     module Tasks
       module Actions
         # Get task information.
-        # Returns information about the tasks currently executing in the cluster.
+        # Get information about a task currently running in the cluster.
         # This functionality is Experimental and may be changed or removed
         # completely in a future release. Elastic will take a best effort approach
         # to fix any issues, but experimental features are not subject to the

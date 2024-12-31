@@ -22,10 +22,15 @@ module ElasticsearchServerless
   module API
     module Eql
       module Actions
-        # Returns results matching a query expressed in Event Query Language (EQL)
+        # Get EQL search results.
+        # Returns search results for an Event Query Language (EQL) query.
+        # EQL assumes each document in a data stream or index corresponds to an event.
         #
         # @option arguments [String, Array] :index The name of the index to scope the operation (*Required*)
         # @option arguments [Boolean] :allow_no_indices [TODO] Server default: true.
+        # @option arguments [Boolean] :allow_partial_search_results If true, returns partial results if there are shard failures. If false, returns an error with no partial results.
+        # @option arguments [Boolean] :allow_partial_sequence_results If true, sequence queries will return partial results in case of shard failures. If false, they will return no results at all.
+        #  This flag has effect only if allow_partial_search_results is true.
         # @option arguments [String, Array<String>] :expand_wildcards [TODO] Server default: open.
         # @option arguments [Boolean] :ignore_unavailable If true, missing or closed indices are not included in the response. Server default: true.
         # @option arguments [Time] :keep_alive Period for which the search and its results are stored on the cluster. Server default: 5d.

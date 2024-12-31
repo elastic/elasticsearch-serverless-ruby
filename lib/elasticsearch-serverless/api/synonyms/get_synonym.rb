@@ -22,7 +22,7 @@ module ElasticsearchServerless
   module API
     module Synonyms
       module Actions
-        # Retrieves a synonym set
+        # Get a synonym set.
         #
         # @option arguments [String] :id "The id of the synonyms set to be retrieved (*Required*)
         # @option arguments [Integer] :from Starting offset for query rules to be retrieved Server default: 0.

@@ -22,7 +22,8 @@ module ElasticsearchServerless
   module API
     module Synonyms
       module Actions
-        # Creates or updates a synonym rule in a synonym set
+        # Create or update a synonym rule.
+        # Create or update a synonym rule in a synonym set.
         #
         # @option arguments [String] :set_id The id of the synonym set to be updated with the synonym rule (*Required*)
         # @option arguments [String] :rule_id The id of the synonym rule to be updated or created (*Required*)

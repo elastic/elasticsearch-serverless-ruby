@@ -22,7 +22,8 @@ module ElasticsearchServerless
   module API
     module Eql
       module Actions
-        # Returns the current status for an async EQL search or a stored synchronous EQL search without returning results.
+        # Get the async EQL status.
+        # Get the current status for an async EQL search or a stored synchronous EQL search without returning results.
         #
         # @option arguments [String] :id Identifier for the search. (*Required*)
         # @option arguments [Hash] :headers Custom HTTP headers
