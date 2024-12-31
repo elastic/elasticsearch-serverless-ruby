@@ -22,7 +22,8 @@ module ElasticsearchServerless
   module API
     module Ingest
       module Actions
-        # Returns information about one or more ingest pipelines.
+        # Get pipelines.
+        # Get information about one or more ingest pipelines.
         # This API returns a local reference of the pipeline.
         #
         # @option arguments [String] :id Comma-separated list of pipeline IDs to retrieve.

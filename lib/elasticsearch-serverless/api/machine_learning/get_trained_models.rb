@@ -41,6 +41,7 @@ module ElasticsearchServerless
         # @option arguments [Integer] :from Skips the specified number of models. Server default: 0.
         # @option arguments [String] :include A comma delimited string of optional fields to include in the response
         #  body.
+        # @option arguments [Boolean] :include_model_definition parameter is deprecated! Use [include=definition] instead
         # @option arguments [Integer] :size Specifies the maximum number of models to obtain. Server default: 100.
         # @option arguments [String] :tags A comma delimited string of tags. A trained model can have many tags, or
         #  none. When supplied, only trained models that contain all the supplied

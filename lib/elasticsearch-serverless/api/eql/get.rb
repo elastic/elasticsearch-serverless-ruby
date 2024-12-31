@@ -22,7 +22,8 @@ module ElasticsearchServerless
   module API
     module Eql
       module Actions
-        # Returns the current status and available results for an async EQL search or a stored synchronous EQL search.
+        # Get async EQL search results.
+        # Get the current status and available results for an async EQL search or a stored synchronous EQL search.
         #
         # @option arguments [String] :id Identifier for the search. (*Required*)
         # @option arguments [Time] :keep_alive Period for which the search and its results are stored on the cluster.

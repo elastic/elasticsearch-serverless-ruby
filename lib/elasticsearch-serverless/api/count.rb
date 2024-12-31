@@ -21,7 +21,8 @@
 module ElasticsearchServerless
   module API
     module Actions
-      # Returns number of documents matching a query.
+      # Count search results.
+      # Get the number of documents matching a query.
       #
       # @option arguments [String, Array] :index Comma-separated list of data streams, indices, and aliases to search.
       #  Supports wildcards (+*+).

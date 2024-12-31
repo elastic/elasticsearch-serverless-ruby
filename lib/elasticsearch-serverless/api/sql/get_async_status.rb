@@ -22,7 +22,8 @@ module ElasticsearchServerless
   module API
     module SQL
       module Actions
-        # Returns the current status of an async SQL search or a stored synchronous SQL search
+        # Get the async SQL search status.
+        # Get the current status of an async SQL search or a stored synchronous SQL search.
         #
         # @option arguments [String] :id Identifier for the search. (*Required*)
         # @option arguments [Hash] :headers Custom HTTP headers

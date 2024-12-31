@@ -22,7 +22,8 @@ module ElasticsearchServerless
   module API
     module QueryRules
       module Actions
-        # Deletes a query rule within a query ruleset.
+        # Delete a query rule.
+        # Delete a query rule within a query ruleset.
         #
         # @option arguments [String] :ruleset_id The unique identifier of the query ruleset containing the rule to delete (*Required*)
         # @option arguments [String] :rule_id The unique identifier of the query rule within the specified ruleset to delete (*Required*)

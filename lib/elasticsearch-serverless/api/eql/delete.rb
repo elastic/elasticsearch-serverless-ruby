@@ -22,7 +22,8 @@ module ElasticsearchServerless
   module API
     module Eql
       module Actions
-        # Deletes an async EQL search or a stored synchronous EQL search.
+        # Delete an async EQL search.
+        # Delete an async EQL search or a stored synchronous EQL search.
         # The API also deletes results for the search.
         #
         # @option arguments [String] :id Identifier for the search to delete.

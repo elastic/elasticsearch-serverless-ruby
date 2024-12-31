@@ -22,7 +22,9 @@ module ElasticsearchServerless
   module API
     module Synonyms
       module Actions
-        # Creates or updates a synonym set.
+        # Create or update a synonym set.
+        # Synonyms sets are limited to a maximum of 10,000 synonym rules per set.
+        # If you need to manage more synonym rules, you can create multiple synonym sets.
         #
         # @option arguments [String] :id The id of the synonyms set to be created or updated (*Required*)
         # @option arguments [Hash] :headers Custom HTTP headers

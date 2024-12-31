@@ -22,7 +22,7 @@ module ElasticsearchServerless
   module API
     module SQL
       module Actions
-        # Clears the SQL cursor
+        # Clear an SQL search cursor.
         #
         # @option arguments [Hash] :headers Custom HTTP headers
         # @option arguments [Hash] :body request body

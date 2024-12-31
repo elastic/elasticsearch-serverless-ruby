@@ -22,7 +22,8 @@ module ElasticsearchServerless
   module API
     module SQL
       module Actions
-        # Executes a SQL request
+        # Get SQL search results.
+        # Run an SQL request.
         #
         # @option arguments [String] :format Format for the response.
         # @option arguments [Hash] :headers Custom HTTP headers

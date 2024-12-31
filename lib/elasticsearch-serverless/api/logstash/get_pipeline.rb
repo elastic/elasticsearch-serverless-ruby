@@ -22,9 +22,10 @@ module ElasticsearchServerless
   module API
     module Logstash
       module Actions
-        # Retrieves pipelines used for Logstash Central Management.
+        # Get Logstash pipelines.
+        # Get pipelines that are used for Logstash Central Management.
         #
-        # @option arguments [String, Array] :id Comma-separated list of pipeline identifiers.
+        # @option arguments [String, Array] :id A comma-separated list of pipeline identifiers.
         # @option arguments [Hash] :headers Custom HTTP headers
         #
         # @see https://www.elastic.co/guide/en/elasticsearch/reference/current/logstash-api-get-pipeline.html

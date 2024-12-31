@@ -22,7 +22,8 @@ module ElasticsearchServerless
   module API
     module Synonyms
       module Actions
-        # Retrieves a summary of all defined synonym sets
+        # Get all synonym sets.
+        # Get a summary of all defined synonym sets.
         #
         # @option arguments [Integer] :from Starting offset Server default: 0.
         # @option arguments [Integer] :size specifies a max number of results to get Server default: 10.

@@ -26,6 +26,7 @@ module ElasticsearchServerless
       # This reduces overhead and can greatly increase indexing speed.
       #
       # @option arguments [String] :index Name of the data stream, index, or index alias to perform bulk actions on.
+      # @option arguments [Boolean] :list_executed_pipelines If +true+, the response will include the ingest pipelines that were executed for each index or create.
       # @option arguments [String] :pipeline ID of the pipeline to use to preprocess incoming documents.
       #  If the index has a default ingest pipeline specified, then setting the value to +_none+ disables the default ingest pipeline for this request.
       #  If a final pipeline is configured it will always run, regardless of the value of this parameter.
@@ -39,6 +40,7 @@ module ElasticsearchServerless
       # @option arguments [Integer, String] :wait_for_active_shards The number of shard copies that must be active before proceeding with the operation.
       #  Set to all or any positive integer up to the total number of shards in the index (+number_of_replicas+1+). Server default: 1.
       # @option arguments [Boolean] :require_alias If +true+, the request’s actions must target an index alias.
+      # @option arguments [Boolean] :require_data_stream If +true+, the request's actions must target a data stream (existing or to-be-created).
       # @option arguments [Hash] :headers Custom HTTP headers
       # @option arguments [String|Array] :body operations. Array of Strings, Header/Data pairs, or the conveniency "combined" format can be passed, refer to ElasticsearchServerless::API::Utils.bulkify documentation.
       #

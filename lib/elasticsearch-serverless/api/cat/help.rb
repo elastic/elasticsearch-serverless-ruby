@@ -25,16 +25,6 @@ module ElasticsearchServerless
         # Get CAT help.
         # Returns help for the CAT APIs.
         #
-        # @option arguments [String] :format Specifies the format to return the columnar data in, can be set to
-        #  +text+, +json+, +cbor+, +yaml+, or +smile+. Server default: text.
-        # @option arguments [String, Array<String>] :h List of columns to appear in the response. Supports simple wildcards.
-        # @option arguments [Boolean] :help When set to +true+ will output available columns. This option
-        #  can't be combined with any other query string option.
-        # @option arguments [Time] :master_timeout Period to wait for a connection to the master node. Server default: 30s.
-        # @option arguments [String, Array<String>] :s List of columns that determine how the table should be sorted.
-        #  Sorting defaults to ascending and can be changed by setting +:asc+
-        #  or +:desc+ as a suffix to the column name.
-        # @option arguments [Boolean] :v When set to +true+ will enable verbose output.
         # @option arguments [Hash] :headers Custom HTTP headers
         #
         # @see https://www.elastic.co/guide/en/elasticsearch/reference/current/cat.html
@@ -49,7 +39,7 @@ module ElasticsearchServerless
 
           method = ElasticsearchServerless::API::HTTP_GET
           path   = "_cat"
-          params = Utils.process_params(arguments)
+          params = {}
 
           ElasticsearchServerless::API::Response.new(
             perform_request(method, path, params, body, headers, request_opts)

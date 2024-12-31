@@ -22,7 +22,8 @@ module ElasticsearchServerless
   module API
     module Indices
       module Actions
-        # Resolves the specified name(s) and/or index patterns for indices, aliases, and data streams.
+        # Resolve indices.
+        # Resolve the names and/or index patterns for indices, aliases, and data streams.
         # Multiple patterns and remote clusters are supported.
         #
         # @option arguments [String, Array<String>] :name Comma-separated name(s) or index pattern(s) of the indices, aliases, and data streams to resolve.

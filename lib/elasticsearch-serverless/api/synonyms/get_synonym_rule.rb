@@ -22,7 +22,8 @@ module ElasticsearchServerless
   module API
     module Synonyms
       module Actions
-        # Retrieves a synonym rule from a synonym set
+        # Get a synonym rule.
+        # Get a synonym rule from a synonym set.
         #
         # @option arguments [String] :set_id The id of the synonym set to retrieve the synonym rule from (*Required*)
         # @option arguments [String] :rule_id The id of the synonym rule to retrieve (*Required*)

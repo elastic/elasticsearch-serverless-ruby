@@ -22,8 +22,8 @@ module ElasticsearchServerless
   module API
     module Cat
       module Actions
-        # Get transforms.
-        # Returns configuration and usage information about transforms.
+        # Get transform information.
+        # Get configuration and usage information about transforms.
         # CAT APIs are only intended for human consumption using the Kibana
         # console or command line. They are not intended for use by applications. For
         # application consumption, use the get transform statistics API.
@@ -43,7 +43,6 @@ module ElasticsearchServerless
         # @option arguments [String, Array<String>] :h List of columns to appear in the response. Supports simple wildcards.
         # @option arguments [Boolean] :help When set to +true+ will output available columns. This option
         #  can't be combined with any other query string option.
-        # @option arguments [Time] :master_timeout Period to wait for a connection to the master node. Server default: 30s.
         # @option arguments [String, Array<String>] :s List of columns that determine how the table should be sorted.
         #  Sorting defaults to ascending and can be changed by setting +:asc+
         #  or +:desc+ as a suffix to the column name.

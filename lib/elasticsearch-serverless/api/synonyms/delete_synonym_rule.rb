@@ -22,7 +22,8 @@ module ElasticsearchServerless
   module API
     module Synonyms
       module Actions
-        # Deletes a synonym rule in a synonym set
+        # Delete a synonym rule.
+        # Delete a synonym rule from a synonym set.
         #
         # @option arguments [String] :set_id The id of the synonym set to be updated (*Required*)
         # @option arguments [String] :rule_id The id of the synonym rule to be deleted (*Required*)
