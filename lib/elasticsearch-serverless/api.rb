@@ -53,32 +53,29 @@ module ElasticsearchServerless
       end
     end
 
-    # Add new namespaces to this constant
-    #
-    API_NAMESPACES = [
-      :async_search,
-      :cat,
-      :cluster,
-      :connector,
-      :enrich,
-      :eql,
-      :graph,
-      :indices,
-      :inference,
-      :ingest,
-      :license,
-      :logstash,
-      :machine_learning,
-      :query_rules,
-      :search_application,
-      :security,
-      :sql,
-      :synonyms,
-      :tasks,
-      :transform
-    ].freeze
-    UPPERCASE_APIS = ['sql'].freeze
+    # New namespaces are added dynamically with the Generator
+    API_NAMESPACES = [:async_search,
+                      :cat,
+                      :cluster,
+                      :connector,
+                      :enrich,
+                      :eql,
+                      :graph,
+                      :indices,
+                      :inference,
+                      :ingest,
+                      :license,
+                      :logstash,
+                      :machine_learning,
+                      :query_rules,
+                      :search_application,
+                      :security,
+                      :sql,
+                      :synonyms,
+                      :tasks,
+                      :transform].freeze
 
+    UPPERCASE_APIS = ['sql'].freeze
     API_NAMESPACES.each do |namespace|
       name = namespace.to_s
       module_name = if UPPERCASE_APIS.include?(name)
