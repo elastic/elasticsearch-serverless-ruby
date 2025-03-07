@@ -28,4 +28,11 @@ Gem::Specification.new do |s|
   s.license     = 'Apache-2.0'
 
   s.add_dependency 'elastic-transport', '~> 8.3'
+  s.post_install_message = <<~EOM
+
+  WARNING: Starting with the release of the Elastic Stack 9.0.0, this client elasticsearch-serverless will be discontinued.
+  Instead, you can use the latest version of the Elasticsearch Client to build your Elasticsearch Serverless Ruby applications:
+  https://github.com/elastic/elasticsearch-ruby
+
+  EOM
 end

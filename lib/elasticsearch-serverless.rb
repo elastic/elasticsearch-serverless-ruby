@@ -26,6 +26,12 @@ module ElasticsearchServerless
     VALID_PARAMETERS = [:adapter, :log, :logger, :serializer_class, :trace, :tracer, :headers,
                         :request_timeout, :retry_on_status, :retry_on_failure, :delay_on_retry,
                         :opentelemetry_tracer_provider]
+    DEPRECATION_MESSAGE =
+      'WARNING: Starting with the release of the Elastic Stack 9.0.0, this client ' \
+      'will be discontinued.' \
+      'Instead, you can use the latest version of the Elasticsearch Client to build your ' \
+      'Elasticsearch Serverless Ruby applications: ' \
+      "https://github.com/elastic/elasticsearch-ruby\n".freeze
 
     # Initializes an Elasticsearch Serverless Client
     #
@@ -52,6 +58,7 @@ module ElasticsearchServerless
       validate_arguments(arguments)
       arguments.merge!(essential_parameters(url, api_key))
       @transport = Elastic::Transport::Client.new(arguments)
+      warn(DEPRECATION_MESSAGE)
     end
 
     def essential_parameters(url, api_key)
