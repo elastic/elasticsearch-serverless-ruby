@@ -1,5 +1,28 @@
 # Changelog
 
+## 0.7.0
+
+> [!WARNING]
+> Starting with the release of the Elastic Stack 9.0.0, this client will be discontinued. Instead, you can use the latest version of the [Elasticsearch Client](https://github.com/elastic/elasticsearch-ruby) to build your Elasticsearch Serverless Ruby applications.
+
+### Client
+
+- Adds testing for Ruby 3.4.
+
+### Changes in APIs:
+
+* `async_search.submit` - Removes `keep_alive` and `pre_filter_shard_size` parameters.
+* New API: `security.query_role`: Find roles with a query.
+* Source code documentation is updated.
+* `bulk`:
+  * Adds `list_executed_pipelines` - If `true`, the response will include the ingest pipelines that were executed for each index or create.
+  * Adds `require_data_stream` If `true`, the request's actions must target a data stream (existing or to-be-created).
+* `cat` APIs have been streamlined, `master_timeout` and `verbose` parameters removed in some endpoints.
+* `eql.search` - Adds `allow_partial_search_results` and `allow_partial_sequence_results` parameters.
+* `indices.exists_alias`, `indices.get_alias` - add `master_timeout` parameter.
+* `machine_learning.get_trained_models` - `include_model_definition` parameter is deprecated. Use `[include=definition]` instead.
+* `machine_learning.put_job` - adds `allow_no_indices`, `expand_wildcards`, `ignore_throttled` and `ignore_unavailable` parameters.
+
 ## 0.6.0
 
 ### Changes in APIs:
