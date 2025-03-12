@@ -34,16 +34,16 @@ module ElasticsearchServerless
         #
         # @option arguments [String] :connector_id The unique identifier of the connector to be deleted (*Required*)
         # @option arguments [Boolean] :delete_sync_jobs A flag indicating if associated sync jobs should be also removed. Defaults to false.
+        # @option arguments [Boolean] :hard A flag indicating if the connector should be hard deleted.
         # @option arguments [Hash] :headers Custom HTTP headers
         #
-        # @see https://www.elastic.co/guide/en/elasticsearch/reference/current/delete-connector-api.html
+        # @see https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-connector-delete
         #
         def delete(arguments = {})
-          request_opts = { endpoint: arguments[:endpoint] || "connector.delete" }
+          request_opts = { endpoint: arguments[:endpoint] || 'connector.delete' }
 
-          defined_params = [:connector_id].inject({}) do |set_variables, variable|
+          defined_params = [:connector_id].each_with_object({}) do |variable, set_variables|
             set_variables[variable] = arguments[variable] if arguments.key?(variable)
-            set_variables
           end
           request_opts[:defined_params] = defined_params unless defined_params.empty?
 

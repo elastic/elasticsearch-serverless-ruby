@@ -34,13 +34,14 @@ module ElasticsearchServerless
         # @option arguments [String, Array] :index_name A comma-separated list of connector index names to fetch connector documents for
         # @option arguments [String, Array<String>] :connector_name A comma-separated list of connector names to fetch connector documents for
         # @option arguments [String, Array<String>] :service_type A comma-separated list of connector service types to fetch connector documents for
+        # @option arguments [Boolean] :include_deleted A flag to indicate if the desired connector should be fetched, even if it was soft-deleted.
         # @option arguments [String] :query A wildcard query string that filters connectors with matching name, description or index name
         # @option arguments [Hash] :headers Custom HTTP headers
         #
-        # @see https://www.elastic.co/guide/en/elasticsearch/reference/current/list-connector-api.html
+        # @see https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-connector-list
         #
         def list(arguments = {})
-          request_opts = { endpoint: arguments[:endpoint] || "connector.list" }
+          request_opts = { endpoint: arguments[:endpoint] || 'connector.list' }
 
           arguments = arguments.clone
           headers = arguments.delete(:headers) || {}
@@ -48,7 +49,7 @@ module ElasticsearchServerless
           body = nil
 
           method = ElasticsearchServerless::API::HTTP_GET
-          path   = "_connector"
+          path   = '_connector'
           params = Utils.process_params(arguments)
 
           ElasticsearchServerless::API::Response.new(

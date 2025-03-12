@@ -32,10 +32,10 @@ module ElasticsearchServerless
         # @option arguments [Hash] :headers Custom HTTP headers
         # @option arguments [Hash] :body request body
         #
-        # @see https://www.elastic.co/guide/en/elasticsearch/reference/current/create-connector-sync-job-api.html
+        # @see https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-connector-sync-job-post
         #
         def sync_job_post(arguments = {})
-          request_opts = { endpoint: arguments[:endpoint] || "connector.sync_job_post" }
+          request_opts = { endpoint: arguments[:endpoint] || 'connector.sync_job_post' }
 
           raise ArgumentError, "Required argument 'body' missing" unless arguments[:body]
 
@@ -45,7 +45,7 @@ module ElasticsearchServerless
           body = arguments.delete(:body)
 
           method = ElasticsearchServerless::API::HTTP_POST
-          path   = "_connector/_sync_job"
+          path   = '_connector/_sync_job'
           params = {}
 
           ElasticsearchServerless::API::Response.new(

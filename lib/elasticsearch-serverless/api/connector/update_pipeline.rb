@@ -33,14 +33,13 @@ module ElasticsearchServerless
         # @option arguments [Hash] :headers Custom HTTP headers
         # @option arguments [Hash] :body request body
         #
-        # @see https://www.elastic.co/guide/en/elasticsearch/reference/current/update-connector-pipeline-api.html
+        # @see https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-connector-update-pipeline
         #
         def update_pipeline(arguments = {})
-          request_opts = { endpoint: arguments[:endpoint] || "connector.update_pipeline" }
+          request_opts = { endpoint: arguments[:endpoint] || 'connector.update_pipeline' }
 
-          defined_params = [:connector_id].inject({}) do |set_variables, variable|
+          defined_params = [:connector_id].each_with_object({}) do |variable, set_variables|
             set_variables[variable] = arguments[variable] if arguments.key?(variable)
-            set_variables
           end
           request_opts[:defined_params] = defined_params unless defined_params.empty?
 
