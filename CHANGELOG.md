@@ -11,6 +11,7 @@
 
 ### Changes in APIs:
 
+* Updated code generation, Rubocop configuration to target 3.0.
 * `async_search.submit` - Removes `keep_alive` and `pre_filter_shard_size` parameters.
 * New API: `security.query_role`: Find roles with a query.
 * Source code documentation is updated.
@@ -18,6 +19,8 @@
   * Adds `list_executed_pipelines` - If `true`, the response will include the ingest pipelines that were executed for each index or create.
   * Adds `require_data_stream` If `true`, the request's actions must target a data stream (existing or to-be-created).
 * `cat` APIs have been streamlined, `master_timeout` and `verbose` parameters removed in some endpoints.
+* `connector.delete`: Adds `:hard` (Boolean) parameter - A flag indicating if the connector should be hard deleted
+* `connector.get`, `connector.list` - Add `:include_deleted` (Boolean) parameter - A flag to indicate if the desired connector should be fetched, even if it was soft-deleted.
 * `eql.search` - Adds `allow_partial_search_results` and `allow_partial_sequence_results` parameters.
 * `indices.exists_alias`, `indices.get_alias` - add `master_timeout` parameter.
 * `machine_learning.get_trained_models` - `include_model_definition` parameter is deprecated. Use `[include=definition]` instead.
