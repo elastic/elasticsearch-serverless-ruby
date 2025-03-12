@@ -24,21 +24,22 @@ module ElasticsearchServerless
       module Actions
         # Get the async search status.
         # Get the status of a previously submitted async search request given its identifier, without retrieving search results.
-        # If the Elasticsearch security features are enabled, use of this API is restricted to the +monitoring_user+ role.
+        # If the Elasticsearch security features are enabled, the access to the status of a specific async search is restricted to:
+        # * The user or API key that submitted the original async search request.
+        # * Users that have the +monitor+ cluster privilege or greater privileges.
         #
         # @option arguments [String] :id A unique identifier for the async search. (*Required*)
-        # @option arguments [Time] :keep_alive Specifies how long the async search needs to be available.
+        # @option arguments [Time] :keep_alive The length of time that the async search needs to be available.
         #  Ongoing async searches and any saved search results are deleted after this period. Server default: 5d.
         # @option arguments [Hash] :headers Custom HTTP headers
         #
-        # @see https://www.elastic.co/guide/en/elasticsearch/reference/current/async-search.html
+        # @see https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-async-search-submit
         #
         def status(arguments = {})
-          request_opts = { endpoint: arguments[:endpoint] || "async_search.status" }
+          request_opts = { endpoint: arguments[:endpoint] || 'async_search.status' }
 
-          defined_params = [:id].inject({}) do |set_variables, variable|
+          defined_params = [:id].each_with_object({}) do |variable, set_variables|
             set_variables[variable] = arguments[variable] if arguments.key?(variable)
-            set_variables
           end
           request_opts[:defined_params] = defined_params unless defined_params.empty?
 

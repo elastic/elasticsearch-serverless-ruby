@@ -23,7 +23,7 @@ module ElasticsearchServerless
     module Indices
       module Actions
         # Check indices.
-        # Checks if one or more indices, index aliases, or data streams exist.
+        # Check if one or more indices, index aliases, or data streams exist.
         #
         # @option arguments [String, Array] :index Comma-separated list of data streams, indices, and aliases. Supports wildcards (+*+). (*Required*)
         # @option arguments [Boolean] :allow_no_indices If +false+, the request returns an error if any wildcard expression, index alias, or +_all+ value targets only missing or closed indices.
@@ -38,14 +38,13 @@ module ElasticsearchServerless
         # @option arguments [Boolean] :local If +true+, the request retrieves information from the local node only.
         # @option arguments [Hash] :headers Custom HTTP headers
         #
-        # @see https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-exists.html
+        # @see https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-indices-exists
         #
         def exists(arguments = {})
-          request_opts = { endpoint: arguments[:endpoint] || "indices.exists" }
+          request_opts = { endpoint: arguments[:endpoint] || 'indices.exists' }
 
-          defined_params = [:index].inject({}) do |set_variables, variable|
+          defined_params = [:index].each_with_object({}) do |variable, set_variables|
             set_variables[variable] = arguments[variable] if arguments.key?(variable)
-            set_variables
           end
           request_opts[:defined_params] = defined_params unless defined_params.empty?
 
@@ -59,15 +58,15 @@ module ElasticsearchServerless
           _index = arguments.delete(:index)
 
           method = ElasticsearchServerless::API::HTTP_HEAD
-          path   = "#{Utils.listify(_index)}"
+          path   = Utils.listify(_index).to_s
           params = Utils.process_params(arguments)
 
           Utils.rescue_from_not_found do
-            perform_request(method, path, params, body, headers, request_opts).status == 200 ? true : false
+            perform_request(method, path, params, body, headers, request_opts).status == 200
           end
         end
 
-        alias_method :exists?, :exists
+        alias exists? exists
       end
     end
   end

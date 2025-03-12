@@ -23,7 +23,11 @@ module ElasticsearchServerless
     module Indices
       module Actions
         # Delete indices.
-        # Deletes one or more indices.
+        # Deleting an index deletes its documents, shards, and metadata.
+        # It does not delete related Kibana components, such as data views, visualizations, or dashboards.
+        # You cannot delete the current write index of a data stream.
+        # To delete the index, you must roll over the data stream so a new write index is created.
+        # You can then use the delete index API to delete the previous write index.
         #
         # @option arguments [String, Array] :index Comma-separated list of indices to delete.
         #  You cannot specify index aliases.
@@ -42,14 +46,13 @@ module ElasticsearchServerless
         #  If no response is received before the timeout expires, the request fails and returns an error. Server default: 30s.
         # @option arguments [Hash] :headers Custom HTTP headers
         #
-        # @see https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-delete-index.html
+        # @see https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-indices-delete
         #
         def delete(arguments = {})
-          request_opts = { endpoint: arguments[:endpoint] || "indices.delete" }
+          request_opts = { endpoint: arguments[:endpoint] || 'indices.delete' }
 
-          defined_params = [:index].inject({}) do |set_variables, variable|
+          defined_params = [:index].each_with_object({}) do |variable, set_variables|
             set_variables[variable] = arguments[variable] if arguments.key?(variable)
-            set_variables
           end
           request_opts[:defined_params] = defined_params unless defined_params.empty?
 
@@ -63,15 +66,15 @@ module ElasticsearchServerless
           _index = arguments.delete(:index)
 
           method = ElasticsearchServerless::API::HTTP_DELETE
-          path   = "#{Utils.listify(_index)}"
+          path   = Utils.listify(_index).to_s
           params = Utils.process_params(arguments)
 
           if Array(arguments[:ignore]).include?(404)
-            Utils.rescue_from_not_found {
+            Utils.rescue_from_not_found do
               ElasticsearchServerless::API::Response.new(
                 perform_request(method, path, params, body, headers, request_opts)
               )
-            }
+            end
           else
             ElasticsearchServerless::API::Response.new(
               perform_request(method, path, params, body, headers, request_opts)

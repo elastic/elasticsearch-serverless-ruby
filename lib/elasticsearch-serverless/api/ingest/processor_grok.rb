@@ -32,7 +32,7 @@ module ElasticsearchServerless
         # @see https://www.elastic.co/guide/en/elasticsearch/reference/current/grok-processor.html
         #
         def processor_grok(arguments = {})
-          request_opts = { endpoint: arguments[:endpoint] || "ingest.processor_grok" }
+          request_opts = { endpoint: arguments[:endpoint] || 'ingest.processor_grok' }
 
           arguments = arguments.clone
           headers = arguments.delete(:headers) || {}
@@ -40,7 +40,7 @@ module ElasticsearchServerless
           body = nil
 
           method = ElasticsearchServerless::API::HTTP_GET
-          path   = "_ingest/processor/grok"
+          path   = '_ingest/processor/grok'
           params = {}
 
           ElasticsearchServerless::API::Response.new(

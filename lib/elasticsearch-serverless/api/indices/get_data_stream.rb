@@ -23,7 +23,7 @@ module ElasticsearchServerless
     module Indices
       module Actions
         # Get data streams.
-        # Retrieves information about one or more data streams.
+        # Get information about one or more data streams.
         #
         # @option arguments [String, Array<String>] :name Comma-separated list of data stream names used to limit the request.
         #  Wildcard (+*+) expressions are supported. If omitted, all data streams are returned.
@@ -34,14 +34,13 @@ module ElasticsearchServerless
         # @option arguments [Boolean] :verbose Whether the maximum timestamp for each data stream should be calculated and returned.
         # @option arguments [Hash] :headers Custom HTTP headers
         #
-        # @see https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html
+        # @see https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-indices-get-data-stream
         #
         def get_data_stream(arguments = {})
-          request_opts = { endpoint: arguments[:endpoint] || "indices.get_data_stream" }
+          request_opts = { endpoint: arguments[:endpoint] || 'indices.get_data_stream' }
 
-          defined_params = [:name].inject({}) do |set_variables, variable|
+          defined_params = [:name].each_with_object({}) do |variable, set_variables|
             set_variables[variable] = arguments[variable] if arguments.key?(variable)
-            set_variables
           end
           request_opts[:defined_params] = defined_params unless defined_params.empty?
 
@@ -56,7 +55,7 @@ module ElasticsearchServerless
           path   = if _name
                      "_data_stream/#{Utils.listify(_name)}"
                    else
-                     "_data_stream"
+                     '_data_stream'
                    end
           params = Utils.process_params(arguments)
 

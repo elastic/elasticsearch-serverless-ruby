@@ -31,14 +31,13 @@ module ElasticsearchServerless
         #  A search ID is also provided if the request’s +keep_on_completion+ parameter is +true+. (*Required*)
         # @option arguments [Hash] :headers Custom HTTP headers
         #
-        # @see https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html
+        # @see https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-eql-delete
         #
         def delete(arguments = {})
-          request_opts = { endpoint: arguments[:endpoint] || "eql.delete" }
+          request_opts = { endpoint: arguments[:endpoint] || 'eql.delete' }
 
-          defined_params = [:id].inject({}) do |set_variables, variable|
+          defined_params = [:id].each_with_object({}) do |variable, set_variables|
             set_variables[variable] = arguments[variable] if arguments.key?(variable)
-            set_variables
           end
           request_opts[:defined_params] = defined_params unless defined_params.empty?
 

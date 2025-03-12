@@ -23,14 +23,14 @@ module ElasticsearchServerless
     module Cat
       module Actions
         # Get CAT help.
-        # Returns help for the CAT APIs.
+        # Get help for the CAT APIs.
         #
         # @option arguments [Hash] :headers Custom HTTP headers
         #
-        # @see https://www.elastic.co/guide/en/elasticsearch/reference/current/cat.html
+        # @see https://www.elastic.co/docs/api/doc/elasticsearch/group/endpoint-cat
         #
         def help(arguments = {})
-          request_opts = { endpoint: arguments[:endpoint] || "cat.help" }
+          request_opts = { endpoint: arguments[:endpoint] || 'cat.help' }
 
           arguments = arguments.clone
           headers = arguments.delete(:headers) || {}
@@ -38,7 +38,7 @@ module ElasticsearchServerless
           body = nil
 
           method = ElasticsearchServerless::API::HTTP_GET
-          path   = "_cat"
+          path   = '_cat'
           params = {}
 
           ElasticsearchServerless::API::Response.new(

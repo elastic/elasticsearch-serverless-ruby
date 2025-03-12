@@ -23,7 +23,7 @@ module ElasticsearchServerless
     module Indices
       module Actions
         # Get index information.
-        # Returns information about one or more indices. For data streams, the API returns information about the
+        # Get information about one or more indices. For data streams, the API returns information about the
         # stream’s backing indices.
         #
         # @option arguments [String, Array] :index Comma-separated list of data streams, indices, and index aliases used to limit the request.
@@ -42,14 +42,13 @@ module ElasticsearchServerless
         # @option arguments [String, Array<String>] :features Return only information on specified index features Server default: ['aliases', 'mappings', 'settings'].
         # @option arguments [Hash] :headers Custom HTTP headers
         #
-        # @see https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-index.html
+        # @see https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-indices-get
         #
         def get(arguments = {})
-          request_opts = { endpoint: arguments[:endpoint] || "indices.get" }
+          request_opts = { endpoint: arguments[:endpoint] || 'indices.get' }
 
-          defined_params = [:index].inject({}) do |set_variables, variable|
+          defined_params = [:index].each_with_object({}) do |variable, set_variables|
             set_variables[variable] = arguments[variable] if arguments.key?(variable)
-            set_variables
           end
           request_opts[:defined_params] = defined_params unless defined_params.empty?
 
@@ -63,7 +62,7 @@ module ElasticsearchServerless
           _index = arguments.delete(:index)
 
           method = ElasticsearchServerless::API::HTTP_GET
-          path   = "#{Utils.listify(_index)}"
+          path   = Utils.listify(_index).to_s
           params = Utils.process_params(arguments)
 
           ElasticsearchServerless::API::Response.new(

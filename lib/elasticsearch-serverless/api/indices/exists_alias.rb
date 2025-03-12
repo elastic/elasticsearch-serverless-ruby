@@ -23,7 +23,7 @@ module ElasticsearchServerless
     module Indices
       module Actions
         # Check aliases.
-        # Checks if one or more data stream or index aliases exist.
+        # Check if one or more data stream or index aliases exist.
         #
         # @option arguments [String, Array<String>] :name Comma-separated list of aliases to check. Supports wildcards (+*+). (*Required*)
         # @option arguments [String, Array] :index Comma-separated list of data streams or indices used to limit the request. Supports wildcards (+*+).
@@ -39,14 +39,13 @@ module ElasticsearchServerless
         #  If no response is received before the timeout expires, the request fails and returns an error. Server default: 30s.
         # @option arguments [Hash] :headers Custom HTTP headers
         #
-        # @see https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html
+        # @see https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-indices-exists-alias
         #
         def exists_alias(arguments = {})
-          request_opts = { endpoint: arguments[:endpoint] || "indices.exists_alias" }
+          request_opts = { endpoint: arguments[:endpoint] || 'indices.exists_alias' }
 
-          defined_params = [:name, :index].inject({}) do |set_variables, variable|
+          defined_params = [:name, :index].each_with_object({}) do |variable, set_variables|
             set_variables[variable] = arguments[variable] if arguments.key?(variable)
-            set_variables
           end
           request_opts[:defined_params] = defined_params unless defined_params.empty?
 
@@ -70,11 +69,11 @@ module ElasticsearchServerless
           params = Utils.process_params(arguments)
 
           Utils.rescue_from_not_found do
-            perform_request(method, path, params, body, headers, request_opts).status == 200 ? true : false
+            perform_request(method, path, params, body, headers, request_opts).status == 200
           end
         end
 
-        alias_method :exists_alias?, :exists_alias
+        alias exists_alias? exists_alias
       end
     end
   end

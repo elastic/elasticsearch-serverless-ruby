@@ -25,18 +25,20 @@ module ElasticsearchServerless
         # Delete an async SQL search.
         # Delete an async SQL search or a stored synchronous SQL search.
         # If the search is still running, the API cancels it.
+        # If the Elasticsearch security features are enabled, only the following users can use this API to delete a search:
+        # * Users with the +cancel_task+ cluster privilege.
+        # * The user who first submitted the search.
         #
-        # @option arguments [String] :id Identifier for the search. (*Required*)
+        # @option arguments [String] :id The identifier for the search. (*Required*)
         # @option arguments [Hash] :headers Custom HTTP headers
         #
-        # @see https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-async-sql-search-api.html
+        # @see https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-sql-delete-async
         #
         def delete_async(arguments = {})
-          request_opts = { endpoint: arguments[:endpoint] || "sql.delete_async" }
+          request_opts = { endpoint: arguments[:endpoint] || 'sql.delete_async' }
 
-          defined_params = [:id].inject({}) do |set_variables, variable|
+          defined_params = [:id].each_with_object({}) do |variable, set_variables|
             set_variables[variable] = arguments[variable] if arguments.key?(variable)
-            set_variables
           end
           request_opts[:defined_params] = defined_params unless defined_params.empty?
 

@@ -25,19 +25,18 @@ module ElasticsearchServerless
         # Delete an inference endpoint
         #
         # @option arguments [String] :task_type The task type
-        # @option arguments [String] :inference_id The inference Id (*Required*)
-        # @option arguments [Boolean] :dry_run When true, the endpoint is not deleted, and a list of ingest processors which reference this endpoint is returned
-        # @option arguments [Boolean] :force When true, the inference endpoint is forcefully deleted even if it is still being used by ingest processors or semantic text fields
+        # @option arguments [String] :inference_id The inference identifier. (*Required*)
+        # @option arguments [Boolean] :dry_run When true, the endpoint is not deleted and a list of ingest processors which reference this endpoint is returned.
+        # @option arguments [Boolean] :force When true, the inference endpoint is forcefully deleted even if it is still being used by ingest processors or semantic text fields.
         # @option arguments [Hash] :headers Custom HTTP headers
         #
-        # @see https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-inference-api.html
+        # @see https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-inference-delete
         #
         def delete(arguments = {})
-          request_opts = { endpoint: arguments[:endpoint] || "inference.delete" }
+          request_opts = { endpoint: arguments[:endpoint] || 'inference.delete' }
 
-          defined_params = [:inference_id, :task_type].inject({}) do |set_variables, variable|
+          defined_params = [:inference_id, :task_type].each_with_object({}) do |variable, set_variables|
             set_variables[variable] = arguments[variable] if arguments.key?(variable)
-            set_variables
           end
           request_opts[:defined_params] = defined_params unless defined_params.empty?
 

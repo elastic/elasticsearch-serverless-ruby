@@ -25,14 +25,14 @@ module ElasticsearchServerless
         # Get all synonym sets.
         # Get a summary of all defined synonym sets.
         #
-        # @option arguments [Integer] :from Starting offset Server default: 0.
-        # @option arguments [Integer] :size specifies a max number of results to get Server default: 10.
+        # @option arguments [Integer] :from The starting offset for synonyms sets to retrieve. Server default: 0.
+        # @option arguments [Integer] :size The maximum number of synonyms sets to retrieve. Server default: 10.
         # @option arguments [Hash] :headers Custom HTTP headers
         #
-        # @see https://www.elastic.co/guide/en/elasticsearch/reference/master/list-synonyms-sets.html
+        # @see https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-synonyms-get-synonym
         #
         def get_synonyms_sets(arguments = {})
-          request_opts = { endpoint: arguments[:endpoint] || "synonyms.get_synonyms_sets" }
+          request_opts = { endpoint: arguments[:endpoint] || 'synonyms.get_synonyms_sets' }
 
           arguments = arguments.clone
           headers = arguments.delete(:headers) || {}
@@ -40,7 +40,7 @@ module ElasticsearchServerless
           body = nil
 
           method = ElasticsearchServerless::API::HTTP_GET
-          path   = "_synonyms"
+          path   = '_synonyms'
           params = Utils.process_params(arguments)
 
           ElasticsearchServerless::API::Response.new(

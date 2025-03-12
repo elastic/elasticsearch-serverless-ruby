@@ -24,14 +24,15 @@ module ElasticsearchServerless
       module Actions
         # Translate SQL into Elasticsearch queries.
         # Translate an SQL search into a search API request containing Query DSL.
+        # It accepts the same request body parameters as the SQL search API, excluding +cursor+.
         #
         # @option arguments [Hash] :headers Custom HTTP headers
         # @option arguments [Hash] :body request body
         #
-        # @see https://www.elastic.co/guide/en/elasticsearch/reference/current/sql-translate-api.html
+        # @see https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-sql-translate
         #
         def translate(arguments = {})
-          request_opts = { endpoint: arguments[:endpoint] || "sql.translate" }
+          request_opts = { endpoint: arguments[:endpoint] || 'sql.translate' }
 
           raise ArgumentError, "Required argument 'body' missing" unless arguments[:body]
 
@@ -41,7 +42,7 @@ module ElasticsearchServerless
           body = arguments.delete(:body)
 
           method = ElasticsearchServerless::API::HTTP_POST
-          path   = "_sql/translate"
+          path   = '_sql/translate'
           params = {}
 
           ElasticsearchServerless::API::Response.new(

@@ -23,18 +23,19 @@ module ElasticsearchServerless
     module QueryRules
       module Actions
         # Delete a query ruleset.
+        # Remove a query ruleset and its associated data.
+        # This is a destructive action that is not recoverable.
         #
         # @option arguments [String] :ruleset_id The unique identifier of the query ruleset to delete (*Required*)
         # @option arguments [Hash] :headers Custom HTTP headers
         #
-        # @see https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-query-ruleset.html
+        # @see https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-query-rules-delete-ruleset
         #
         def delete_ruleset(arguments = {})
-          request_opts = { endpoint: arguments[:endpoint] || "query_rules.delete_ruleset" }
+          request_opts = { endpoint: arguments[:endpoint] || 'query_rules.delete_ruleset' }
 
-          defined_params = [:ruleset_id].inject({}) do |set_variables, variable|
+          defined_params = [:ruleset_id].each_with_object({}) do |variable, set_variables|
             set_variables[variable] = arguments[variable] if arguments.key?(variable)
-            set_variables
           end
           request_opts[:defined_params] = defined_params unless defined_params.empty?
 

@@ -27,16 +27,16 @@ module ElasticsearchServerless
         #
         # @option arguments [String, Array<String>] :name Comma-separated list of enrich policy names used to limit the request.
         #  To return information for all enrich policies, omit this parameter.
+        # @option arguments [Time] :master_timeout Period to wait for a connection to the master node. Server default: 30s.
         # @option arguments [Hash] :headers Custom HTTP headers
         #
-        # @see https://www.elastic.co/guide/en/elasticsearch/reference/current/get-enrich-policy-api.html
+        # @see https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-enrich-get-policy
         #
         def get_policy(arguments = {})
-          request_opts = { endpoint: arguments[:endpoint] || "enrich.get_policy" }
+          request_opts = { endpoint: arguments[:endpoint] || 'enrich.get_policy' }
 
-          defined_params = [:name].inject({}) do |set_variables, variable|
+          defined_params = [:name].each_with_object({}) do |variable, set_variables|
             set_variables[variable] = arguments[variable] if arguments.key?(variable)
-            set_variables
           end
           request_opts[:defined_params] = defined_params unless defined_params.empty?
 
@@ -51,9 +51,9 @@ module ElasticsearchServerless
           path   = if _name
                      "_enrich/policy/#{Utils.listify(_name)}"
                    else
-                     "_enrich/policy"
+                     '_enrich/policy'
                    end
-          params = {}
+          params = Utils.process_params(arguments)
 
           ElasticsearchServerless::API::Response.new(
             perform_request(method, path, params, body, headers, request_opts)

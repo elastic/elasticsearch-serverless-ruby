@@ -23,7 +23,6 @@ module ElasticsearchServerless
     module Transform
       module Actions
         # Reset a transform.
-        # Resets a transform.
         # Before you can reset it, you must stop it; alternatively, use the +force+ query parameter.
         # If the destination index was created by the transform, it is deleted.
         #
@@ -31,16 +30,16 @@ module ElasticsearchServerless
         #  hyphens, and underscores. It has a 64 character limit and must start and end with alphanumeric characters. (*Required*)
         # @option arguments [Boolean] :force If this value is +true+, the transform is reset regardless of its current state. If it's +false+, the transform
         #  must be stopped before it can be reset.
+        # @option arguments [Time] :timeout Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error. Server default: 30s.
         # @option arguments [Hash] :headers Custom HTTP headers
         #
-        # @see https://www.elastic.co/guide/en/elasticsearch/reference/current/reset-transform.html
+        # @see https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-transform-reset-transform
         #
         def reset_transform(arguments = {})
-          request_opts = { endpoint: arguments[:endpoint] || "transform.reset_transform" }
+          request_opts = { endpoint: arguments[:endpoint] || 'transform.reset_transform' }
 
-          defined_params = [:transform_id].inject({}) do |set_variables, variable|
+          defined_params = [:transform_id].each_with_object({}) do |variable, set_variables|
             set_variables[variable] = arguments[variable] if arguments.key?(variable)
-            set_variables
           end
           request_opts[:defined_params] = defined_params unless defined_params.empty?
 

@@ -23,7 +23,7 @@ module ElasticsearchServerless
     module Indices
       module Actions
         # Get data stream lifecycles.
-        # Retrieves the data stream lifecycle configuration of one or more data streams.
+        # Get the data stream lifecycle configuration of one or more data streams.
         #
         # @option arguments [String, Array<String>] :name Comma-separated list of data streams to limit the request.
         #  Supports wildcards (+*+).
@@ -35,14 +35,13 @@ module ElasticsearchServerless
         # @option arguments [Time] :master_timeout Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error. Server default: 30s.
         # @option arguments [Hash] :headers Custom HTTP headers
         #
-        # @see https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams-get-lifecycle.html
+        # @see https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-indices-get-data-lifecycle
         #
         def get_data_lifecycle(arguments = {})
-          request_opts = { endpoint: arguments[:endpoint] || "indices.get_data_lifecycle" }
+          request_opts = { endpoint: arguments[:endpoint] || 'indices.get_data_lifecycle' }
 
-          defined_params = [:name].inject({}) do |set_variables, variable|
+          defined_params = [:name].each_with_object({}) do |variable, set_variables|
             set_variables[variable] = arguments[variable] if arguments.key?(variable)
-            set_variables
           end
           request_opts[:defined_params] = defined_params unless defined_params.empty?
 

@@ -33,7 +33,7 @@ module ElasticsearchServerless
       # IMPORTANT: Results from a scrolling search reflect the state of the index at the time of the initial search request. Subsequent indexing or document changes only affect later search and scroll requests.
       #
       # @option arguments [String] :scroll_id The scroll ID
-      # @option arguments [Time] :scroll Period to retain the search context for scrolling. Server default: 1d.
+      # @option arguments [Time] :scroll The period to retain the search context for scrolling. Server default: 1d.
       # @option arguments [Boolean] :rest_total_hits_as_int If true, the API response’s hit.total property is returned as an integer. If false, the API response’s hit.total property is returned as an object.
       # @option arguments [Hash] :headers Custom HTTP headers
       # @option arguments [Hash] :body request body
@@ -43,10 +43,10 @@ module ElasticsearchServerless
       # Deprecated since version 7.0.0
       #
       #
-      # @see https://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-body.html#request-body-search-scroll
+      # @see https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-scroll
       #
       def scroll(arguments = {})
-        request_opts = { endpoint: arguments[:endpoint] || "scroll" }
+        request_opts = { endpoint: arguments[:endpoint] || 'scroll' }
 
         arguments = arguments.clone
         headers = arguments.delete(:headers) || {}
@@ -61,7 +61,7 @@ module ElasticsearchServerless
                    ElasticsearchServerless::API::HTTP_GET
                  end
 
-        path   = "_search/scroll"
+        path   = '_search/scroll'
         params = Utils.process_params(arguments)
 
         ElasticsearchServerless::API::Response.new(

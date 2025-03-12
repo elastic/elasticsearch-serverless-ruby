@@ -23,11 +23,11 @@ module ElasticsearchServerless
     module Cat
       module Actions
         # Get anomaly detection jobs.
-        # Returns configuration and usage information for anomaly detection jobs.
+        # Get configuration and usage information for anomaly detection jobs.
         # This API returns a maximum of 10,000 jobs.
         # If the Elasticsearch security features are enabled, you must have +monitor_ml+,
         # +monitor+, +manage_ml+, or +manage+ cluster privileges to use this API.
-        # CAT APIs are only intended for human consumption using the Kibana
+        # IMPORTANT: CAT APIs are only intended for human consumption using the Kibana
         # console or command line. They are not intended for use by applications. For
         # application consumption, use the get anomaly detection job statistics API.
         #
@@ -45,23 +45,18 @@ module ElasticsearchServerless
         # @option arguments [String] :time The unit used to display time values.
         # @option arguments [String] :format Specifies the format to return the columnar data in, can be set to
         #  +text+, +json+, +cbor+, +yaml+, or +smile+. Server default: text.
-        # @option arguments [String, Array<String>] :h List of columns to appear in the response. Supports simple wildcards.
         # @option arguments [Boolean] :help When set to +true+ will output available columns. This option
         #  can't be combined with any other query string option.
-        # @option arguments [String, Array<String>] :s List of columns that determine how the table should be sorted.
-        #  Sorting defaults to ascending and can be changed by setting +:asc+
-        #  or +:desc+ as a suffix to the column name.
         # @option arguments [Boolean] :v When set to +true+ will enable verbose output.
         # @option arguments [Hash] :headers Custom HTTP headers
         #
-        # @see https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-anomaly-detectors.html
+        # @see https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-cat-ml-jobs
         #
         def ml_jobs(arguments = {})
-          request_opts = { endpoint: arguments[:endpoint] || "cat.ml_jobs" }
+          request_opts = { endpoint: arguments[:endpoint] || 'cat.ml_jobs' }
 
-          defined_params = [:job_id].inject({}) do |set_variables, variable|
+          defined_params = [:job_id].each_with_object({}) do |variable, set_variables|
             set_variables[variable] = arguments[variable] if arguments.key?(variable)
-            set_variables
           end
           request_opts[:defined_params] = defined_params unless defined_params.empty?
 
@@ -76,7 +71,7 @@ module ElasticsearchServerless
           path   = if _job_id
                      "_cat/ml/anomaly_detectors/#{Utils.listify(_job_id)}"
                    else
-                     "_cat/ml/anomaly_detectors"
+                     '_cat/ml/anomaly_detectors'
                    end
           params = Utils.process_params(arguments)
 

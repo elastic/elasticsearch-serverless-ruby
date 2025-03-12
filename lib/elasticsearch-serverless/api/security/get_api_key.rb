@@ -46,10 +46,10 @@ module ElasticsearchServerless
         # @option arguments [Boolean] :with_profile_uid Determines whether to also retrieve the profile uid, for the API key owner principal, if it exists.
         # @option arguments [Hash] :headers Custom HTTP headers
         #
-        # @see https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-api-key.html
+        # @see https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-security-get-api-key
         #
         def get_api_key(arguments = {})
-          request_opts = { endpoint: arguments[:endpoint] || "security.get_api_key" }
+          request_opts = { endpoint: arguments[:endpoint] || 'security.get_api_key' }
 
           arguments = arguments.clone
           headers = arguments.delete(:headers) || {}
@@ -57,7 +57,7 @@ module ElasticsearchServerless
           body = nil
 
           method = ElasticsearchServerless::API::HTTP_GET
-          path   = "_security/api_key"
+          path   = '_security/api_key'
           params = Utils.process_params(arguments)
 
           ElasticsearchServerless::API::Response.new(

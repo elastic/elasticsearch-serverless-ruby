@@ -23,24 +23,23 @@ module ElasticsearchServerless
     module Transform
       module Actions
         # Schedule a transform to start now.
-        # Instantly runs a transform to process data.
-        # If you _schedule_now a transform, it will process the new data instantly,
-        # without waiting for the configured frequency interval. After _schedule_now API is called,
-        # the transform will be processed again at now + frequency unless _schedule_now API
+        # Instantly run a transform to process data.
+        # If you run this API, the transform will process the new data instantly,
+        # without waiting for the configured frequency interval. After the API is called,
+        # the transform will be processed again at +now + frequency+ unless the API
         # is called again in the meantime.
         #
         # @option arguments [String] :transform_id Identifier for the transform. (*Required*)
         # @option arguments [Time] :timeout Controls the time to wait for the scheduling to take place Server default: 30s.
         # @option arguments [Hash] :headers Custom HTTP headers
         #
-        # @see https://www.elastic.co/guide/en/elasticsearch/reference/current/schedule-now-transform.html
+        # @see https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-transform-schedule-now-transform
         #
         def schedule_now_transform(arguments = {})
-          request_opts = { endpoint: arguments[:endpoint] || "transform.schedule_now_transform" }
+          request_opts = { endpoint: arguments[:endpoint] || 'transform.schedule_now_transform' }
 
-          defined_params = [:transform_id].inject({}) do |set_variables, variable|
+          defined_params = [:transform_id].each_with_object({}) do |variable, set_variables|
             set_variables[variable] = arguments[variable] if arguments.key?(variable)
-            set_variables
           end
           request_opts[:defined_params] = defined_params unless defined_params.empty?
 

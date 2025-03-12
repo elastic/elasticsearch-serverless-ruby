@@ -23,7 +23,7 @@ module ElasticsearchServerless
     module Indices
       module Actions
         # Get index templates.
-        # Returns information about one or more index templates.
+        # Get information about one or more index templates.
         #
         # @option arguments [String] :name Comma-separated list of index template names used to limit the request. Wildcard (*) expressions are supported.
         # @option arguments [Boolean] :local If true, the request retrieves information from the local node only. Defaults to false, which means information is retrieved from the master node.
@@ -32,14 +32,13 @@ module ElasticsearchServerless
         # @option arguments [Boolean] :include_defaults If true, returns all relevant default configurations for the index template.
         # @option arguments [Hash] :headers Custom HTTP headers
         #
-        # @see https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-template.html
+        # @see https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-indices-get-index-template
         #
         def get_index_template(arguments = {})
-          request_opts = { endpoint: arguments[:endpoint] || "indices.get_index_template" }
+          request_opts = { endpoint: arguments[:endpoint] || 'indices.get_index_template' }
 
-          defined_params = [:name].inject({}) do |set_variables, variable|
+          defined_params = [:name].each_with_object({}) do |variable, set_variables|
             set_variables[variable] = arguments[variable] if arguments.key?(variable)
-            set_variables
           end
           request_opts[:defined_params] = defined_params unless defined_params.empty?
 
@@ -54,7 +53,7 @@ module ElasticsearchServerless
           path   = if _name
                      "_index_template/#{Utils.listify(_name)}"
                    else
-                     "_index_template"
+                     '_index_template'
                    end
           params = Utils.process_params(arguments)
 

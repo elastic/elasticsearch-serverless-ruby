@@ -23,7 +23,11 @@ module ElasticsearchServerless
     module Indices
       module Actions
         # Get tokens from text analysis.
-        # The analyze API performs {https://www.elastic.co/guide/en/elasticsearch/reference/current/analysis.html analysis} on a text string and returns the resulting tokens.
+        # The analyze API performs analysis on a text string and returns the resulting tokens.
+        # Generating excessive amount of tokens may cause a node to run out of memory.
+        # The +index.analyze.max_token_count+ setting enables you to limit the number of tokens that can be produced.
+        # If more than this limit of tokens gets generated, an error occurs.
+        # The +_analyze+ endpoint without a specified index will always use +10000+ as its limit.
         #
         # @option arguments [String] :index Index used to derive the analyzer.
         #  If specified, the +analyzer+ or field parameter overrides this value.
@@ -31,14 +35,13 @@ module ElasticsearchServerless
         # @option arguments [Hash] :headers Custom HTTP headers
         # @option arguments [Hash] :body request body
         #
-        # @see https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-analyze.html
+        # @see https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-indices-analyze
         #
         def analyze(arguments = {})
-          request_opts = { endpoint: arguments[:endpoint] || "indices.analyze" }
+          request_opts = { endpoint: arguments[:endpoint] || 'indices.analyze' }
 
-          defined_params = [:index].inject({}) do |set_variables, variable|
+          defined_params = [:index].each_with_object({}) do |variable, set_variables|
             set_variables[variable] = arguments[variable] if arguments.key?(variable)
-            set_variables
           end
           request_opts[:defined_params] = defined_params unless defined_params.empty?
 
@@ -58,7 +61,7 @@ module ElasticsearchServerless
           path   = if _index
                      "#{Utils.listify(_index)}/_analyze"
                    else
-                     "_analyze"
+                     '_analyze'
                    end
           params = {}
 

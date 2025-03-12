@@ -24,18 +24,22 @@ module ElasticsearchServerless
       module Actions
         # Create an API key.
         # Create an API key for access without requiring basic authentication.
+        # IMPORTANT: If the credential that is used to authenticate this request is an API key, the derived API key cannot have any privileges.
+        # If you specify privileges, the API returns an error.
         # A successful request returns a JSON structure that contains the API key, its unique id, and its name.
         # If applicable, it also returns expiration information for the API key in milliseconds.
         # NOTE: By default, API keys never expire. You can specify expiration information when you create the API keys.
+        # The API keys are created by the Elasticsearch API key service, which is automatically enabled.
+        # To configure or turn off the API key service, refer to API key service setting documentation.
         #
         # @option arguments [String] :refresh If +true+ (the default) then refresh the affected shards to make this operation visible to search, if +wait_for+ then wait for a refresh to make this operation visible to search, if +false+ then do nothing with refreshes.
         # @option arguments [Hash] :headers Custom HTTP headers
         # @option arguments [Hash] :body request body
         #
-        # @see https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-create-api-key.html
+        # @see https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-security-create-api-key
         #
         def create_api_key(arguments = {})
-          request_opts = { endpoint: arguments[:endpoint] || "security.create_api_key" }
+          request_opts = { endpoint: arguments[:endpoint] || 'security.create_api_key' }
 
           raise ArgumentError, "Required argument 'body' missing" unless arguments[:body]
 
@@ -45,7 +49,7 @@ module ElasticsearchServerless
           body = arguments.delete(:body)
 
           method = ElasticsearchServerless::API::HTTP_PUT
-          path   = "_security/api_key"
+          path   = '_security/api_key'
           params = Utils.process_params(arguments)
 
           ElasticsearchServerless::API::Response.new(

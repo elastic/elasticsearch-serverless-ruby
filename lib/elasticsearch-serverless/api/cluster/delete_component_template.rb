@@ -23,7 +23,6 @@ module ElasticsearchServerless
     module Cluster
       module Actions
         # Delete component templates.
-        # Deletes component templates.
         # Component templates are building blocks for constructing index templates that specify index mappings, settings, and aliases.
         #
         # @option arguments [String, Array<String>] :name Comma-separated list or wildcard expression of component template names used to limit the request. (*Required*)
@@ -33,14 +32,13 @@ module ElasticsearchServerless
         #  If no response is received before the timeout expires, the request fails and returns an error. Server default: 30s.
         # @option arguments [Hash] :headers Custom HTTP headers
         #
-        # @see https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-component-template.html
+        # @see https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-cluster-put-component-template
         #
         def delete_component_template(arguments = {})
-          request_opts = { endpoint: arguments[:endpoint] || "cluster.delete_component_template" }
+          request_opts = { endpoint: arguments[:endpoint] || 'cluster.delete_component_template' }
 
-          defined_params = [:name].inject({}) do |set_variables, variable|
+          defined_params = [:name].each_with_object({}) do |variable, set_variables|
             set_variables[variable] = arguments[variable] if arguments.key?(variable)
-            set_variables
           end
           request_opts[:defined_params] = defined_params unless defined_params.empty?
 

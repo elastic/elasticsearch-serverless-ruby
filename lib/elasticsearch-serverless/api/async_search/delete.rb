@@ -30,14 +30,13 @@ module ElasticsearchServerless
         # @option arguments [String] :id A unique identifier for the async search. (*Required*)
         # @option arguments [Hash] :headers Custom HTTP headers
         #
-        # @see https://www.elastic.co/guide/en/elasticsearch/reference/current/async-search.html
+        # @see https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-async-search-submit
         #
         def delete(arguments = {})
-          request_opts = { endpoint: arguments[:endpoint] || "async_search.delete" }
+          request_opts = { endpoint: arguments[:endpoint] || 'async_search.delete' }
 
-          defined_params = [:id].inject({}) do |set_variables, variable|
+          defined_params = [:id].each_with_object({}) do |variable, set_variables|
             set_variables[variable] = arguments[variable] if arguments.key?(variable)
-            set_variables
           end
           request_opts[:defined_params] = defined_params unless defined_params.empty?
 

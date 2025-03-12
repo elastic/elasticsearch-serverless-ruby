@@ -23,6 +23,10 @@ module ElasticsearchServerless
     module Actions
       # Run a script.
       # Runs a script and returns a result.
+      # Use this API to build and test scripts, such as when defining a script for a runtime field.
+      # This API requires very few dependencies and is especially useful if you don't have permissions to write documents on a cluster.
+      # The API uses several _contexts_, which control how scripts are run, what variables are available at runtime, and what the return type is.
+      # Each context requires a script, but additional parameters depend on the context you're using for that script.
       # This functionality is Experimental and may be changed or removed
       # completely in a future release. Elastic will take a best effort approach
       # to fix any issues, but experimental features are not subject to the
@@ -31,10 +35,10 @@ module ElasticsearchServerless
       # @option arguments [Hash] :headers Custom HTTP headers
       # @option arguments [Hash] :body request body
       #
-      # @see https://www.elastic.co/guide/en/elasticsearch/painless/master/painless-execute-api.html
+      # @see https://www.elastic.co/guide/en/elasticsearch/painless/current/painless-execute-api.html
       #
       def scripts_painless_execute(arguments = {})
-        request_opts = { endpoint: arguments[:endpoint] || "scripts_painless_execute" }
+        request_opts = { endpoint: arguments[:endpoint] || 'scripts_painless_execute' }
 
         arguments = arguments.clone
         headers = arguments.delete(:headers) || {}
@@ -47,7 +51,7 @@ module ElasticsearchServerless
                    ElasticsearchServerless::API::HTTP_GET
                  end
 
-        path   = "_scripts/painless/_execute"
+        path   = '_scripts/painless/_execute'
         params = {}
 
         ElasticsearchServerless::API::Response.new(

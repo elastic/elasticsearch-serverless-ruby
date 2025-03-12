@@ -35,7 +35,8 @@ module ElasticsearchServerless
         #  a separate set of threads to evaluate the model.
         #  Increasing this value generally increases the throughput.
         #  If this setting is greater than the number of hardware threads
-        #  it will automatically be changed to a value less than the number of hardware threads. Server default: 1.
+        #  it will automatically be changed to a value less than the number of hardware threads.
+        #  If adaptive_allocations is enabled, do not set this value, because it’s automatically set. Server default: 1.
         # @option arguments [String] :priority The deployment priority.
         # @option arguments [Integer] :queue_capacity Specifies the number of inference requests that are allowed in the queue. After the number of requests exceeds
         #  this value, new requests are rejected with a 429 error. Server default: 1024.
@@ -47,15 +48,15 @@ module ElasticsearchServerless
         # @option arguments [Time] :timeout Specifies the amount of time to wait for the model to deploy. Server default: 20s.
         # @option arguments [String] :wait_for Specifies the allocation status to wait for before returning. Server default: started.
         # @option arguments [Hash] :headers Custom HTTP headers
+        # @option arguments [Hash] :body request body
         #
-        # @see https://www.elastic.co/guide/en/elasticsearch/reference/master/start-trained-model-deployment.html
+        # @see https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-ml-start-trained-model-deployment
         #
         def start_trained_model_deployment(arguments = {})
-          request_opts = { endpoint: arguments[:endpoint] || "ml.start_trained_model_deployment" }
+          request_opts = { endpoint: arguments[:endpoint] || 'ml.start_trained_model_deployment' }
 
-          defined_params = [:model_id].inject({}) do |set_variables, variable|
+          defined_params = [:model_id].each_with_object({}) do |variable, set_variables|
             set_variables[variable] = arguments[variable] if arguments.key?(variable)
-            set_variables
           end
           request_opts[:defined_params] = defined_params unless defined_params.empty?
 
@@ -64,7 +65,7 @@ module ElasticsearchServerless
           arguments = arguments.clone
           headers = arguments.delete(:headers) || {}
 
-          body = nil
+          body = arguments.delete(:body)
 
           _model_id = arguments.delete(:model_id)
 

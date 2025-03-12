@@ -28,7 +28,7 @@ module ElasticsearchServerless
         #
         # @option arguments [String, Array] :index The name of the index to scope the operation (*Required*)
         # @option arguments [Boolean] :allow_no_indices [TODO] Server default: true.
-        # @option arguments [Boolean] :allow_partial_search_results If true, returns partial results if there are shard failures. If false, returns an error with no partial results.
+        # @option arguments [Boolean] :allow_partial_search_results If true, returns partial results if there are shard failures. If false, returns an error with no partial results. Server default: true.
         # @option arguments [Boolean] :allow_partial_sequence_results If true, sequence queries will return partial results in case of shard failures. If false, they will return no results at all.
         #  This flag has effect only if allow_partial_search_results is true.
         # @option arguments [String, Array<String>] :expand_wildcards [TODO] Server default: open.
@@ -39,14 +39,13 @@ module ElasticsearchServerless
         # @option arguments [Hash] :headers Custom HTTP headers
         # @option arguments [Hash] :body request body
         #
-        # @see https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html
+        # @see https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-eql-search
         #
         def search(arguments = {})
-          request_opts = { endpoint: arguments[:endpoint] || "eql.search" }
+          request_opts = { endpoint: arguments[:endpoint] || 'eql.search' }
 
-          defined_params = [:index].inject({}) do |set_variables, variable|
+          defined_params = [:index].each_with_object({}) do |variable, set_variables|
             set_variables[variable] = arguments[variable] if arguments.key?(variable)
-            set_variables
           end
           request_opts[:defined_params] = defined_params unless defined_params.empty?
 

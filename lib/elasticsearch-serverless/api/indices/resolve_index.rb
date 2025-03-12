@@ -38,14 +38,13 @@ module ElasticsearchServerless
         #  For example, a request targeting +foo*,bar*+ returns an error if an index starts with +foo+ but no index starts with +bar+. Server default: true.
         # @option arguments [Hash] :headers Custom HTTP headers
         #
-        # @see https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-resolve-index-api.html
+        # @see https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-indices-resolve-index
         #
         def resolve_index(arguments = {})
-          request_opts = { endpoint: arguments[:endpoint] || "indices.resolve_index" }
+          request_opts = { endpoint: arguments[:endpoint] || 'indices.resolve_index' }
 
-          defined_params = [:name].inject({}) do |set_variables, variable|
+          defined_params = [:name].each_with_object({}) do |variable, set_variables|
             set_variables[variable] = arguments[variable] if arguments.key?(variable)
-            set_variables
           end
           request_opts[:defined_params] = defined_params unless defined_params.empty?
 

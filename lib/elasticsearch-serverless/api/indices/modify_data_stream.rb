@@ -28,10 +28,10 @@ module ElasticsearchServerless
         # @option arguments [Hash] :headers Custom HTTP headers
         # @option arguments [Hash] :body request body
         #
-        # @see https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html
+        # @see https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-indices-modify-data-stream
         #
         def modify_data_stream(arguments = {})
-          request_opts = { endpoint: arguments[:endpoint] || "indices.modify_data_stream" }
+          request_opts = { endpoint: arguments[:endpoint] || 'indices.modify_data_stream' }
 
           raise ArgumentError, "Required argument 'body' missing" unless arguments[:body]
 
@@ -41,7 +41,7 @@ module ElasticsearchServerless
           body = arguments.delete(:body)
 
           method = ElasticsearchServerless::API::HTTP_POST
-          path   = "_data_stream/_modify"
+          path   = '_data_stream/_modify'
           params = {}
 
           ElasticsearchServerless::API::Response.new(

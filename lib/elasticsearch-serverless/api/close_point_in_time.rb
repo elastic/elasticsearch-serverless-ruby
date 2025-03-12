@@ -30,10 +30,10 @@ module ElasticsearchServerless
       # @option arguments [Hash] :headers Custom HTTP headers
       # @option arguments [Hash] :body request body
       #
-      # @see https://www.elastic.co/guide/en/elasticsearch/reference/current/point-in-time-api.html
+      # @see https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-open-point-in-time
       #
       def close_point_in_time(arguments = {})
-        request_opts = { endpoint: arguments[:endpoint] || "close_point_in_time" }
+        request_opts = { endpoint: arguments[:endpoint] || 'close_point_in_time' }
 
         arguments = arguments.clone
         headers = arguments.delete(:headers) || {}
@@ -41,7 +41,7 @@ module ElasticsearchServerless
         body = arguments.delete(:body)
 
         method = ElasticsearchServerless::API::HTTP_DELETE
-        path   = "_pit"
+        path   = '_pit'
         params = {}
 
         ElasticsearchServerless::API::Response.new(

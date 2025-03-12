@@ -23,7 +23,6 @@ module ElasticsearchServerless
     module Transform
       module Actions
         # Start a transform.
-        # Starts a transform.
         # When you start a transform, it creates the destination index if it does not already exist. The +number_of_shards+ is
         # set to +1+ and the +auto_expand_replicas+ is set to +0-1+. If it is a pivot transform, it deduces the mapping
         # definitions for the destination index from the source indices and the transform aggregations. If fields in the
@@ -43,14 +42,13 @@ module ElasticsearchServerless
         # @option arguments [String] :from Restricts the set of transformed entities to those changed after this time. Relative times like now-30d are supported. Only applicable for continuous transforms.
         # @option arguments [Hash] :headers Custom HTTP headers
         #
-        # @see https://www.elastic.co/guide/en/elasticsearch/reference/current/start-transform.html
+        # @see https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-transform-start-transform
         #
         def start_transform(arguments = {})
-          request_opts = { endpoint: arguments[:endpoint] || "transform.start_transform" }
+          request_opts = { endpoint: arguments[:endpoint] || 'transform.start_transform' }
 
-          defined_params = [:transform_id].inject({}) do |set_variables, variable|
+          defined_params = [:transform_id].each_with_object({}) do |variable, set_variables|
             set_variables[variable] = arguments[variable] if arguments.key?(variable)
-            set_variables
           end
           request_opts[:defined_params] = defined_params unless defined_params.empty?
 

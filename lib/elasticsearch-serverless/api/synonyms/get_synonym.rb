@@ -24,19 +24,18 @@ module ElasticsearchServerless
       module Actions
         # Get a synonym set.
         #
-        # @option arguments [String] :id "The id of the synonyms set to be retrieved (*Required*)
-        # @option arguments [Integer] :from Starting offset for query rules to be retrieved Server default: 0.
-        # @option arguments [Integer] :size specifies a max number of query rules to retrieve Server default: 10.
+        # @option arguments [String] :id The synonyms set identifier to retrieve. (*Required*)
+        # @option arguments [Integer] :from The starting offset for query rules to retrieve. Server default: 0.
+        # @option arguments [Integer] :size The max number of query rules to retrieve. Server default: 10.
         # @option arguments [Hash] :headers Custom HTTP headers
         #
-        # @see https://www.elastic.co/guide/en/elasticsearch/reference/master/get-synonyms-set.html
+        # @see https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-synonyms-get-synonym
         #
         def get_synonym(arguments = {})
-          request_opts = { endpoint: arguments[:endpoint] || "synonyms.get_synonym" }
+          request_opts = { endpoint: arguments[:endpoint] || 'synonyms.get_synonym' }
 
-          defined_params = [:id].inject({}) do |set_variables, variable|
+          defined_params = [:id].each_with_object({}) do |variable, set_variables|
             set_variables[variable] = arguments[variable] if arguments.key?(variable)
-            set_variables
           end
           request_opts[:defined_params] = defined_params unless defined_params.empty?
 

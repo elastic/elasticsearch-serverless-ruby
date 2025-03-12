@@ -23,7 +23,7 @@ module ElasticsearchServerless
     module Indices
       module Actions
         # Simulate an index template.
-        # Returns the index configuration that would be applied by a particular index template.
+        # Get the index configuration that would be applied by a particular index template.
         #
         # @option arguments [String] :name Name of the index template to simulate. To test a template configuration before you add it to the cluster, omit
         #  this parameter and specify the template configuration in the request body.
@@ -33,14 +33,13 @@ module ElasticsearchServerless
         # @option arguments [Hash] :headers Custom HTTP headers
         # @option arguments [Hash] :body request body
         #
-        # @see https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-simulate-template.html
+        # @see https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-indices-simulate-template
         #
         def simulate_template(arguments = {})
-          request_opts = { endpoint: arguments[:endpoint] || "indices.simulate_template" }
+          request_opts = { endpoint: arguments[:endpoint] || 'indices.simulate_template' }
 
-          defined_params = [:name].inject({}) do |set_variables, variable|
+          defined_params = [:name].each_with_object({}) do |variable, set_variables|
             set_variables[variable] = arguments[variable] if arguments.key?(variable)
-            set_variables
           end
           request_opts[:defined_params] = defined_params unless defined_params.empty?
 
@@ -55,7 +54,7 @@ module ElasticsearchServerless
           path   = if _name
                      "_index_template/_simulate/#{Utils.listify(_name)}"
                    else
-                     "_index_template/_simulate"
+                     '_index_template/_simulate'
                    end
           params = Utils.process_params(arguments)
 

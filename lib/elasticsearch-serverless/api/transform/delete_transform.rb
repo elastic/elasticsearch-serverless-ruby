@@ -23,7 +23,6 @@ module ElasticsearchServerless
     module Transform
       module Actions
         # Delete a transform.
-        # Deletes a transform.
         #
         # @option arguments [String] :transform_id Identifier for the transform. (*Required*)
         # @option arguments [Boolean] :force If this value is false, the transform must be stopped before it can be deleted. If true, the transform is
@@ -33,14 +32,13 @@ module ElasticsearchServerless
         # @option arguments [Time] :timeout Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error. Server default: 30s.
         # @option arguments [Hash] :headers Custom HTTP headers
         #
-        # @see https://www.elastic.co/guide/en/elasticsearch/reference/current/delete-transform.html
+        # @see https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-transform-delete-transform
         #
         def delete_transform(arguments = {})
-          request_opts = { endpoint: arguments[:endpoint] || "transform.delete_transform" }
+          request_opts = { endpoint: arguments[:endpoint] || 'transform.delete_transform' }
 
-          defined_params = [:transform_id].inject({}) do |set_variables, variable|
+          defined_params = [:transform_id].each_with_object({}) do |variable, set_variables|
             set_variables[variable] = arguments[variable] if arguments.key?(variable)
-            set_variables
           end
           request_opts[:defined_params] = defined_params unless defined_params.empty?
 

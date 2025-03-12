@@ -24,19 +24,18 @@ module ElasticsearchServerless
       # Render a search template.
       # Render a search template as a search request body.
       #
-      # @option arguments [String] :id ID of the search template to render.
+      # @option arguments [String] :id The ID of the search template to render.
       #  If no +source+ is specified, this or the +id+ request body parameter is required.
       # @option arguments [Hash] :headers Custom HTTP headers
       # @option arguments [Hash] :body request body
       #
-      # @see https://www.elastic.co/guide/en/elasticsearch/reference/current/render-search-template-api.html
+      # @see https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-render-search-template
       #
       def render_search_template(arguments = {})
-        request_opts = { endpoint: arguments[:endpoint] || "render_search_template" }
+        request_opts = { endpoint: arguments[:endpoint] || 'render_search_template' }
 
-        defined_params = [:id].inject({}) do |set_variables, variable|
+        defined_params = [:id].each_with_object({}) do |variable, set_variables|
           set_variables[variable] = arguments[variable] if arguments.key?(variable)
-          set_variables
         end
         request_opts[:defined_params] = defined_params unless defined_params.empty?
 
@@ -56,7 +55,7 @@ module ElasticsearchServerless
         path   = if _id
                    "_render/template/#{Utils.listify(_id)}"
                  else
-                   "_render/template"
+                   '_render/template'
                  end
         params = {}
 

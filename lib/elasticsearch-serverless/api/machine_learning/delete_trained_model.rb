@@ -27,16 +27,16 @@ module ElasticsearchServerless
         #
         # @option arguments [String] :model_id The unique identifier of the trained model. (*Required*)
         # @option arguments [Boolean] :force Forcefully deletes a trained model that is referenced by ingest pipelines or has a started deployment.
+        # @option arguments [Time] :timeout Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error. Server default: 30s.
         # @option arguments [Hash] :headers Custom HTTP headers
         #
-        # @see https://www.elastic.co/guide/en/elasticsearch/reference/current/delete-trained-models.html
+        # @see https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-ml-delete-trained-model
         #
         def delete_trained_model(arguments = {})
-          request_opts = { endpoint: arguments[:endpoint] || "ml.delete_trained_model" }
+          request_opts = { endpoint: arguments[:endpoint] || 'ml.delete_trained_model' }
 
-          defined_params = [:model_id].inject({}) do |set_variables, variable|
+          defined_params = [:model_id].each_with_object({}) do |variable, set_variables|
             set_variables[variable] = arguments[variable] if arguments.key?(variable)
-            set_variables
           end
           request_opts[:defined_params] = defined_params unless defined_params.empty?
 

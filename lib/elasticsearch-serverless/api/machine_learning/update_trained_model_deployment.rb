@@ -34,14 +34,13 @@ module ElasticsearchServerless
         # @option arguments [Hash] :headers Custom HTTP headers
         # @option arguments [Hash] :body request body
         #
-        # @see https://www.elastic.co/guide/en/elasticsearch/reference/current/update-trained-model-deployment.html
+        # @see https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-ml-update-trained-model-deployment
         #
         def update_trained_model_deployment(arguments = {})
-          request_opts = { endpoint: arguments[:endpoint] || "ml.update_trained_model_deployment" }
+          request_opts = { endpoint: arguments[:endpoint] || 'ml.update_trained_model_deployment' }
 
-          defined_params = [:model_id].inject({}) do |set_variables, variable|
+          defined_params = [:model_id].each_with_object({}) do |variable, set_variables|
             set_variables[variable] = arguments[variable] if arguments.key?(variable)
-            set_variables
           end
           request_opts[:defined_params] = defined_params unless defined_params.empty?
 

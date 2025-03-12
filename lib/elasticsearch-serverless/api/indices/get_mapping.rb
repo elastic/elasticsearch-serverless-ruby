@@ -23,7 +23,6 @@ module ElasticsearchServerless
     module Indices
       module Actions
         # Get mapping definitions.
-        # Retrieves mapping definitions for one or more indices.
         # For data streams, the API retrieves mappings for the stream’s backing indices.
         #
         # @option arguments [String, Array] :index Comma-separated list of data streams, indices, and aliases used to limit the request.
@@ -41,14 +40,13 @@ module ElasticsearchServerless
         #  If no response is received before the timeout expires, the request fails and returns an error. Server default: 30s.
         # @option arguments [Hash] :headers Custom HTTP headers
         #
-        # @see https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-mapping.html
+        # @see https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-indices-get-mapping
         #
         def get_mapping(arguments = {})
-          request_opts = { endpoint: arguments[:endpoint] || "indices.get_mapping" }
+          request_opts = { endpoint: arguments[:endpoint] || 'indices.get_mapping' }
 
-          defined_params = [:index].inject({}) do |set_variables, variable|
+          defined_params = [:index].each_with_object({}) do |variable, set_variables|
             set_variables[variable] = arguments[variable] if arguments.key?(variable)
-            set_variables
           end
           request_opts[:defined_params] = defined_params unless defined_params.empty?
 
@@ -63,7 +61,7 @@ module ElasticsearchServerless
           path   = if _index
                      "#{Utils.listify(_index)}/_mapping"
                    else
-                     "_mapping"
+                     '_mapping'
                    end
           params = Utils.process_params(arguments)
 

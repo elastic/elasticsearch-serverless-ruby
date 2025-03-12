@@ -30,14 +30,13 @@ module ElasticsearchServerless
         # @option arguments [Hash] :headers Custom HTTP headers
         # @option arguments [Hash] :body request body
         #
-        # @see https://www.elastic.co/guide/en/elasticsearch/reference/current/put-trained-model-definition-part.html
+        # @see https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-ml-put-trained-model-definition-part
         #
         def put_trained_model_definition_part(arguments = {})
-          request_opts = { endpoint: arguments[:endpoint] || "ml.put_trained_model_definition_part" }
+          request_opts = { endpoint: arguments[:endpoint] || 'ml.put_trained_model_definition_part' }
 
-          defined_params = [:model_id, :part].inject({}) do |set_variables, variable|
+          defined_params = [:model_id, :part].each_with_object({}) do |variable, set_variables|
             set_variables[variable] = arguments[variable] if arguments.key?(variable)
-            set_variables
           end
           request_opts[:defined_params] = defined_params unless defined_params.empty?
 

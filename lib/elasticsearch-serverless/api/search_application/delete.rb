@@ -29,17 +29,16 @@ module ElasticsearchServerless
         # as-is with no warranties. Beta features are not subject to the support
         # SLA of official GA features.
         #
-        # @option arguments [String] :name The name of the search application to delete (*Required*)
+        # @option arguments [String] :name The name of the search application to delete. (*Required*)
         # @option arguments [Hash] :headers Custom HTTP headers
         #
-        # @see https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-search-application.html
+        # @see https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-search-application-delete
         #
         def delete(arguments = {})
-          request_opts = { endpoint: arguments[:endpoint] || "search_application.delete" }
+          request_opts = { endpoint: arguments[:endpoint] || 'search_application.delete' }
 
-          defined_params = [:name].inject({}) do |set_variables, variable|
+          defined_params = [:name].each_with_object({}) do |variable, set_variables|
             set_variables[variable] = arguments[variable] if arguments.key?(variable)
-            set_variables
           end
           request_opts[:defined_params] = defined_params unless defined_params.empty?
 

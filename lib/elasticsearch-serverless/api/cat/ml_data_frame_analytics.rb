@@ -23,8 +23,8 @@ module ElasticsearchServerless
     module Cat
       module Actions
         # Get data frame analytics jobs.
-        # Returns configuration and usage information about data frame analytics jobs.
-        # CAT APIs are only intended for human consumption using the Kibana
+        # Get configuration and usage information about data frame analytics jobs.
+        # IMPORTANT: CAT APIs are only intended for human consumption using the Kibana
         # console or command line. They are not intended for use by applications. For
         # application consumption, use the get data frame analytics jobs statistics API.
         #
@@ -37,23 +37,18 @@ module ElasticsearchServerless
         # @option arguments [String] :time Unit used to display time values.
         # @option arguments [String] :format Specifies the format to return the columnar data in, can be set to
         #  +text+, +json+, +cbor+, +yaml+, or +smile+. Server default: text.
-        # @option arguments [String, Array<String>] :h List of columns to appear in the response. Supports simple wildcards.
         # @option arguments [Boolean] :help When set to +true+ will output available columns. This option
         #  can't be combined with any other query string option.
-        # @option arguments [String, Array<String>] :s List of columns that determine how the table should be sorted.
-        #  Sorting defaults to ascending and can be changed by setting +:asc+
-        #  or +:desc+ as a suffix to the column name.
         # @option arguments [Boolean] :v When set to +true+ will enable verbose output.
         # @option arguments [Hash] :headers Custom HTTP headers
         #
-        # @see https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-dfanalytics.html
+        # @see https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-cat-ml-data-frame-analytics
         #
         def ml_data_frame_analytics(arguments = {})
-          request_opts = { endpoint: arguments[:endpoint] || "cat.ml_data_frame_analytics" }
+          request_opts = { endpoint: arguments[:endpoint] || 'cat.ml_data_frame_analytics' }
 
-          defined_params = [:id].inject({}) do |set_variables, variable|
+          defined_params = [:id].each_with_object({}) do |variable, set_variables|
             set_variables[variable] = arguments[variable] if arguments.key?(variable)
-            set_variables
           end
           request_opts[:defined_params] = defined_params unless defined_params.empty?
 
@@ -68,7 +63,7 @@ module ElasticsearchServerless
           path   = if _id
                      "_cat/ml/data_frame/analytics/#{Utils.listify(_id)}"
                    else
-                     "_cat/ml/data_frame/analytics"
+                     '_cat/ml/data_frame/analytics'
                    end
           params = Utils.process_params(arguments)
 

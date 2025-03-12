@@ -31,6 +31,8 @@ module ElasticsearchServerless
         # @option arguments [String, Array] :index A comma-separated list of index names to search; use +_all+ or empty string to perform the operation on all indices
         # @option arguments [Time] :wait_for_completion_timeout Blocks and waits until the search is completed up to a certain timeout.
         #  When the async search completes within the timeout, the response won’t include the ID as the results are not stored in the cluster. Server default: 1s.
+        # @option arguments [Time] :keep_alive Specifies how long the async search needs to be available.
+        #  Ongoing async searches and any saved search results are deleted after this period. Server default: 5d.
         # @option arguments [Boolean] :keep_on_completion If +true+, results are stored for later retrieval when the search completes within the +wait_for_completion_timeout+.
         # @option arguments [Boolean] :allow_no_indices Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes +_all+ string or when no indices have been specified)
         # @option arguments [Boolean] :allow_partial_search_results Indicate if an error should be returned if there is a partial search failure or timeout
@@ -76,14 +78,13 @@ module ElasticsearchServerless
         # @option arguments [Hash] :headers Custom HTTP headers
         # @option arguments [Hash] :body request body
         #
-        # @see https://www.elastic.co/guide/en/elasticsearch/reference/current/async-search.html
+        # @see https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-async-search-submit
         #
         def submit(arguments = {})
-          request_opts = { endpoint: arguments[:endpoint] || "async_search.submit" }
+          request_opts = { endpoint: arguments[:endpoint] || 'async_search.submit' }
 
-          defined_params = [:index].inject({}) do |set_variables, variable|
+          defined_params = [:index].each_with_object({}) do |variable, set_variables|
             set_variables[variable] = arguments[variable] if arguments.key?(variable)
-            set_variables
           end
           request_opts[:defined_params] = defined_params unless defined_params.empty?
 
@@ -98,7 +99,7 @@ module ElasticsearchServerless
           path   = if _index
                      "#{Utils.listify(_index)}/_async_search"
                    else
-                     "_async_search"
+                     '_async_search'
                    end
           params = Utils.process_params(arguments)
 

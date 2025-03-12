@@ -48,7 +48,7 @@ module ElasticsearchServerless
                      ElasticsearchServerless::API::HTTP_GET
                    end
 
-          path   = "_security/_query/role"
+          path   = '_security/_query/role'
           params = {}
 
           ElasticsearchServerless::API::Response.new(

@@ -25,14 +25,16 @@ module ElasticsearchServerless
         # Get SQL search results.
         # Run an SQL request.
         #
-        # @option arguments [String] :format Format for the response.
+        # @option arguments [String] :format The format for the response.
+        #  You can also specify a format using the +Accept+ HTTP header.
+        #  If you specify both this parameter and the +Accept+ HTTP header, this parameter takes precedence.
         # @option arguments [Hash] :headers Custom HTTP headers
         # @option arguments [Hash] :body request body
         #
-        # @see https://www.elastic.co/guide/en/elasticsearch/reference/current/sql-search-api.html
+        # @see https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-sql-query
         #
         def query(arguments = {})
-          request_opts = { endpoint: arguments[:endpoint] || "sql.query" }
+          request_opts = { endpoint: arguments[:endpoint] || 'sql.query' }
 
           raise ArgumentError, "Required argument 'body' missing" unless arguments[:body]
 
@@ -42,7 +44,7 @@ module ElasticsearchServerless
           body = arguments.delete(:body)
 
           method = ElasticsearchServerless::API::HTTP_POST
-          path   = "_sql"
+          path   = '_sql'
           params = Utils.process_params(arguments)
 
           ElasticsearchServerless::API::Response.new(

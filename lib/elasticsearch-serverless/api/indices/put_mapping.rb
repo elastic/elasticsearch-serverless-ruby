@@ -23,9 +23,25 @@ module ElasticsearchServerless
     module Indices
       module Actions
         # Update field mappings.
-        # Adds new fields to an existing data stream or index.
-        # You can also use this API to change the search settings of existing fields.
+        # Add new fields to an existing data stream or index.
+        # You can also use this API to change the search settings of existing fields and add new properties to existing object fields.
         # For data streams, these changes are applied to all backing indices by default.
+        # **Add multi-fields to an existing field**
+        # Multi-fields let you index the same field in different ways.
+        # You can use this API to update the fields mapping parameter and enable multi-fields for an existing field.
+        # WARNING: If an index (or data stream) contains documents when you add a multi-field, those documents will not have values for the new multi-field.
+        # You can populate the new multi-field with the update by query API.
+        # **Change supported mapping parameters for an existing field**
+        # The documentation for each mapping parameter indicates whether you can update it for an existing field using this API.
+        # For example, you can use the update mapping API to update the +ignore_above+ parameter.
+        # **Change the mapping of an existing field**
+        # Except for supported mapping parameters, you can't change the mapping or field type of an existing field.
+        # Changing an existing field could invalidate data that's already indexed.
+        # If you need to change the mapping of a field in a data stream's backing indices, refer to documentation about modifying data streams.
+        # If you need to change the mapping of a field in other indices, create a new index with the correct mapping and reindex your data into that index.
+        # **Rename a field**
+        # Renaming a field would invalidate data already indexed under the old field name.
+        # Instead, add an alias field to create an alternate field name.
         #
         # @option arguments [String, Array] :index A comma-separated list of index names the mapping should be added to (supports wildcards); use +_all+ or omit to add the mapping on all indices. (*Required*)
         # @option arguments [Boolean] :allow_no_indices If +false+, the request returns an error if any wildcard expression, index alias, or +_all+ value targets only missing or closed indices.
@@ -43,14 +59,13 @@ module ElasticsearchServerless
         # @option arguments [Hash] :headers Custom HTTP headers
         # @option arguments [Hash] :body request body
         #
-        # @see https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-put-mapping.html
+        # @see https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-indices-put-mapping
         #
         def put_mapping(arguments = {})
-          request_opts = { endpoint: arguments[:endpoint] || "indices.put_mapping" }
+          request_opts = { endpoint: arguments[:endpoint] || 'indices.put_mapping' }
 
-          defined_params = [:index].inject({}) do |set_variables, variable|
+          defined_params = [:index].each_with_object({}) do |variable, set_variables|
             set_variables[variable] = arguments[variable] if arguments.key?(variable)
-            set_variables
           end
           request_opts[:defined_params] = defined_params unless defined_params.empty?
 

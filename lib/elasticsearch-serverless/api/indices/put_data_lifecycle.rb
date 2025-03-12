@@ -37,20 +37,18 @@ module ElasticsearchServerless
         # @option arguments [Time] :timeout Period to wait for a response.
         #  If no response is received before the timeout expires, the request fails and returns an error. Server default: 30s.
         # @option arguments [Hash] :headers Custom HTTP headers
-        # @option arguments [Hash] :body lifecycle
+        # @option arguments [Hash] :body request body
         #
-        # @see https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams-put-lifecycle.html
+        # @see https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-indices-put-data-lifecycle
         #
         def put_data_lifecycle(arguments = {})
-          request_opts = { endpoint: arguments[:endpoint] || "indices.put_data_lifecycle" }
+          request_opts = { endpoint: arguments[:endpoint] || 'indices.put_data_lifecycle' }
 
-          defined_params = [:name].inject({}) do |set_variables, variable|
+          defined_params = [:name].each_with_object({}) do |variable, set_variables|
             set_variables[variable] = arguments[variable] if arguments.key?(variable)
-            set_variables
           end
           request_opts[:defined_params] = defined_params unless defined_params.empty?
 
-          raise ArgumentError, "Required argument 'body' missing" unless arguments[:body]
           raise ArgumentError, "Required argument 'name' missing" unless arguments[:name]
 
           arguments = arguments.clone

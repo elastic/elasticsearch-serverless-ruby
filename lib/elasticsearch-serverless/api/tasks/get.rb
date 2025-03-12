@@ -24,25 +24,27 @@ module ElasticsearchServerless
       module Actions
         # Get task information.
         # Get information about a task currently running in the cluster.
+        # WARNING: The task management API is new and should still be considered a beta feature.
+        # The API may change in ways that are not backwards compatible.
+        # If the task identifier is not found, a 404 response code indicates that there are no resources that match the request.
         # This functionality is Experimental and may be changed or removed
         # completely in a future release. Elastic will take a best effort approach
         # to fix any issues, but experimental features are not subject to the
         # support SLA of official GA features.
         #
-        # @option arguments [String] :task_id ID of the task. (*Required*)
-        # @option arguments [Time] :timeout Period to wait for a response.
+        # @option arguments [String] :task_id The task identifier. (*Required*)
+        # @option arguments [Time] :timeout The period to wait for a response.
         #  If no response is received before the timeout expires, the request fails and returns an error. Server default: 30s.
         # @option arguments [Boolean] :wait_for_completion If +true+, the request blocks until the task has completed.
         # @option arguments [Hash] :headers Custom HTTP headers
         #
-        # @see https://www.elastic.co/guide/en/elasticsearch/reference/current/tasks.html
+        # @see https://www.elastic.co/docs/api/doc/elasticsearch/group/endpoint-tasks
         #
         def get(arguments = {})
-          request_opts = { endpoint: arguments[:endpoint] || "tasks.get" }
+          request_opts = { endpoint: arguments[:endpoint] || 'tasks.get' }
 
-          defined_params = [:task_id].inject({}) do |set_variables, variable|
+          defined_params = [:task_id].each_with_object({}) do |variable, set_variables|
             set_variables[variable] = arguments[variable] if arguments.key?(variable)
-            set_variables
           end
           request_opts[:defined_params] = defined_params unless defined_params.empty?
 

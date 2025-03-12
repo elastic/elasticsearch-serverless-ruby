@@ -23,7 +23,6 @@ module ElasticsearchServerless
     module Cluster
       module Actions
         # Create or update a component template.
-        # Creates or updates a component template.
         # Component templates are building blocks for constructing index templates that specify index mappings, settings, and aliases.
         # An index template can be composed of multiple component templates.
         # To use a component template, specify it in an index template’s +composed_of+ list.
@@ -34,6 +33,9 @@ module ElasticsearchServerless
         # Changes to component templates do not affect existing indices, including a stream’s backing indices.
         # You can use C-style +/* *\/+ block comments in component templates.
         # You can include comments anywhere in the request body except before the opening curly bracket.
+        # **Applying component templates**
+        # You cannot directly apply a component template to a data stream or index.
+        # To be applied, a component template must be included in an index template's +composed_of+ list.
         #
         # @option arguments [String] :name Name of the component template to create.
         #  Elasticsearch includes the following built-in component templates: +logs-mappings+; +logs-settings+; +metrics-mappings+; +metrics-settings+;+synthetics-mapping+; +synthetics-settings+.
@@ -46,14 +48,13 @@ module ElasticsearchServerless
         # @option arguments [Hash] :headers Custom HTTP headers
         # @option arguments [Hash] :body request body
         #
-        # @see https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-component-template.html
+        # @see https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-cluster-put-component-template
         #
         def put_component_template(arguments = {})
-          request_opts = { endpoint: arguments[:endpoint] || "cluster.put_component_template" }
+          request_opts = { endpoint: arguments[:endpoint] || 'cluster.put_component_template' }
 
-          defined_params = [:name].inject({}) do |set_variables, variable|
+          defined_params = [:name].each_with_object({}) do |variable, set_variables|
             set_variables[variable] = arguments[variable] if arguments.key?(variable)
-            set_variables
           end
           request_opts[:defined_params] = defined_params unless defined_params.empty?
 

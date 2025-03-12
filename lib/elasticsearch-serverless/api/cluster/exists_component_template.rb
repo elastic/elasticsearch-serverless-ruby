@@ -34,14 +34,13 @@ module ElasticsearchServerless
         #  Defaults to false, which means information is retrieved from the master node.
         # @option arguments [Hash] :headers Custom HTTP headers
         #
-        # @see https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-component-template.html
+        # @see https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-cluster-put-component-template
         #
         def exists_component_template(arguments = {})
-          request_opts = { endpoint: arguments[:endpoint] || "cluster.exists_component_template" }
+          request_opts = { endpoint: arguments[:endpoint] || 'cluster.exists_component_template' }
 
-          defined_params = [:name].inject({}) do |set_variables, variable|
+          defined_params = [:name].each_with_object({}) do |variable, set_variables|
             set_variables[variable] = arguments[variable] if arguments.key?(variable)
-            set_variables
           end
           request_opts[:defined_params] = defined_params unless defined_params.empty?
 
@@ -63,7 +62,7 @@ module ElasticsearchServerless
           )
         end
 
-        alias_method :exists_component_template?, :exists_component_template
+        alias exists_component_template? exists_component_template
       end
     end
   end

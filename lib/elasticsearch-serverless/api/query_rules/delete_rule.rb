@@ -24,19 +24,19 @@ module ElasticsearchServerless
       module Actions
         # Delete a query rule.
         # Delete a query rule within a query ruleset.
+        # This is a destructive action that is only recoverable by re-adding the same rule with the create or update query rule API.
         #
         # @option arguments [String] :ruleset_id The unique identifier of the query ruleset containing the rule to delete (*Required*)
         # @option arguments [String] :rule_id The unique identifier of the query rule within the specified ruleset to delete (*Required*)
         # @option arguments [Hash] :headers Custom HTTP headers
         #
-        # @see https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-query-rule.html
+        # @see https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-query-rules-delete-rule
         #
         def delete_rule(arguments = {})
-          request_opts = { endpoint: arguments[:endpoint] || "query_rules.delete_rule" }
+          request_opts = { endpoint: arguments[:endpoint] || 'query_rules.delete_rule' }
 
-          defined_params = [:ruleset_id, :rule_id].inject({}) do |set_variables, variable|
+          defined_params = [:ruleset_id, :rule_id].each_with_object({}) do |variable, set_variables|
             set_variables[variable] = arguments[variable] if arguments.key?(variable)
-            set_variables
           end
           request_opts[:defined_params] = defined_params unless defined_params.empty?
 

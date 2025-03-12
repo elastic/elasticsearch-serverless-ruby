@@ -24,8 +24,9 @@ module ElasticsearchServerless
       # Clear a scrolling search.
       # Clear the search context and results for a scrolling search.
       #
-      # @option arguments [String, Array] :scroll_id Comma-separated list of scroll IDs to clear.
+      # @option arguments [String, Array] :scroll_id A comma-separated list of scroll IDs to clear.
       #  To clear all scroll IDs, use +_all+.
+      #  IMPORTANT: Scroll IDs can be long. It is recommended to specify scroll IDs in the request body parameter.
       # @option arguments [Hash] :headers Custom HTTP headers
       # @option arguments [Hash] :body request body
       #
@@ -34,10 +35,10 @@ module ElasticsearchServerless
       # Deprecated since version 7.0.0
       #
       #
-      # @see https://www.elastic.co/guide/en/elasticsearch/reference/current/clear-scroll-api.html
+      # @see https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-clear-scroll
       #
       def clear_scroll(arguments = {})
-        request_opts = { endpoint: arguments[:endpoint] || "clear_scroll" }
+        request_opts = { endpoint: arguments[:endpoint] || 'clear_scroll' }
 
         arguments = arguments.clone
         headers = arguments.delete(:headers) || {}
@@ -47,15 +48,15 @@ module ElasticsearchServerless
         _scroll_id = arguments.delete(:scroll_id)
 
         method = ElasticsearchServerless::API::HTTP_DELETE
-        path   = "_search/scroll"
+        path   = '_search/scroll'
         params = Utils.process_params(arguments)
 
         if Array(arguments[:ignore]).include?(404)
-          Utils.rescue_from_not_found {
+          Utils.rescue_from_not_found do
             ElasticsearchServerless::API::Response.new(
               perform_request(method, path, params, body, headers, request_opts)
             )
-          }
+          end
         else
           ElasticsearchServerless::API::Response.new(
             perform_request(method, path, params, body, headers, request_opts)

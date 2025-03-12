@@ -22,28 +22,37 @@ module ElasticsearchServerless
   module API
     module Actions
       # Run multiple templated searches.
+      # Run multiple templated searches with a single request.
+      # If you are providing a text file or text input to +curl+, use the +--data-binary+ flag instead of +-d+ to preserve newlines.
+      # For example:
+      # +
+      # $ cat requests
+      # { "index": "my-index" }
+      # { "id": "my-search-template", "params": { "query_string": "hello world", "from": 0, "size": 10 }}
+      # { "index": "my-other-index" }
+      # { "id": "my-other-search-template", "params": { "query_type": "match_all" }}
+      # $ curl -H "Content-Type: application/x-ndjson" -XGET localhost:9200/_msearch/template --data-binary "@requests"; echo
+      # +
       #
-      # @option arguments [String, Array] :index Comma-separated list of data streams, indices, and aliases to search.
-      #  Supports wildcards (+*+).
+      # @option arguments [String, Array] :index A comma-separated list of data streams, indices, and aliases to search.
+      #  It supports wildcards (+*+).
       #  To search all data streams and indices, omit this parameter or use +*+.
       # @option arguments [Boolean] :ccs_minimize_roundtrips If +true+, network round-trips are minimized for cross-cluster search requests. Server default: true.
-      # @option arguments [Integer] :max_concurrent_searches Maximum number of concurrent searches the API can run.
+      # @option arguments [Integer] :max_concurrent_searches The maximum number of concurrent searches the API can run.
       # @option arguments [String] :search_type The type of the search operation.
-      #  Available options: +query_then_fetch+, +dfs_query_then_fetch+.
       # @option arguments [Boolean] :rest_total_hits_as_int If +true+, the response returns +hits.total+ as an integer.
       #  If +false+, it returns +hits.total+ as an object.
       # @option arguments [Boolean] :typed_keys If +true+, the response prefixes aggregation and suggester names with their respective types.
       # @option arguments [Hash] :headers Custom HTTP headers
       # @option arguments [Hash] :body search_templates
       #
-      # @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-multi-search.html
+      # @see https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-msearch-template
       #
       def msearch_template(arguments = {})
-        request_opts = { endpoint: arguments[:endpoint] || "msearch_template" }
+        request_opts = { endpoint: arguments[:endpoint] || 'msearch_template' }
 
-        defined_params = [:index].inject({}) do |set_variables, variable|
+        defined_params = [:index].each_with_object({}) do |variable, set_variables|
           set_variables[variable] = arguments[variable] if arguments.key?(variable)
-          set_variables
         end
         request_opts[:defined_params] = defined_params unless defined_params.empty?
 
@@ -60,21 +69,19 @@ module ElasticsearchServerless
         path   = if _index
                    "#{Utils.listify(_index)}/_msearch/template"
                  else
-                   "_msearch/template"
+                   '_msearch/template'
                  end
         params = Utils.process_params(arguments)
 
-        case
-        when body.is_a?(Array)
+        if body.is_a?(Array)
           payload = body.map { |d| d.is_a?(String) ? d : ElasticsearchServerless::API.serializer.dump(d) }
-          payload << "" unless payload.empty?
-          payload = payload.join("
-")
+          payload << '' unless payload.empty?
+          payload = payload.join("\n")
         else
           payload = body
         end
 
-        headers.merge!("Content-Type" => "application/x-ndjson")
+        headers.merge!('Content-Type' => 'application/x-ndjson')
         ElasticsearchServerless::API::Response.new(
           perform_request(method, path, params, payload, headers, request_opts)
         )

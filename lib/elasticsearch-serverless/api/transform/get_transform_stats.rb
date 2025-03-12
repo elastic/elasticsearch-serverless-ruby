@@ -23,7 +23,7 @@ module ElasticsearchServerless
     module Transform
       module Actions
         # Get transform stats.
-        # Retrieves usage information for transforms.
+        # Get usage information for transforms.
         #
         # @option arguments [String, Array<String>] :transform_id Identifier for the transform. It can be a transform identifier or a
         #  wildcard expression. You can get information for all transforms by using
@@ -40,14 +40,13 @@ module ElasticsearchServerless
         # @option arguments [Time] :timeout Controls the time to wait for the stats
         # @option arguments [Hash] :headers Custom HTTP headers
         #
-        # @see https://www.elastic.co/guide/en/elasticsearch/reference/current/get-transform-stats.html
+        # @see https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-transform-get-transform-stats
         #
         def get_transform_stats(arguments = {})
-          request_opts = { endpoint: arguments[:endpoint] || "transform.get_transform_stats" }
+          request_opts = { endpoint: arguments[:endpoint] || 'transform.get_transform_stats' }
 
-          defined_params = [:transform_id].inject({}) do |set_variables, variable|
+          defined_params = [:transform_id].each_with_object({}) do |variable, set_variables|
             set_variables[variable] = arguments[variable] if arguments.key?(variable)
-            set_variables
           end
           request_opts[:defined_params] = defined_params unless defined_params.empty?
 
