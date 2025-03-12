@@ -36,10 +36,10 @@ module ElasticsearchServerless
         # @option arguments [Syncjobtype] :job_type A comma-separated list of job types to fetch the sync jobs for
         # @option arguments [Hash] :headers Custom HTTP headers
         #
-        # @see https://www.elastic.co/guide/en/elasticsearch/reference/current/list-connector-sync-jobs-api.html
+        # @see https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-connector-sync-job-list
         #
         def sync_job_list(arguments = {})
-          request_opts = { endpoint: arguments[:endpoint] || "connector.sync_job_list" }
+          request_opts = { endpoint: arguments[:endpoint] || 'connector.sync_job_list' }
 
           arguments = arguments.clone
           headers = arguments.delete(:headers) || {}
@@ -47,7 +47,7 @@ module ElasticsearchServerless
           body = nil
 
           method = ElasticsearchServerless::API::HTTP_GET
-          path   = "_connector/_sync_job"
+          path   = '_connector/_sync_job'
           params = Utils.process_params(arguments)
 
           ElasticsearchServerless::API::Response.new(

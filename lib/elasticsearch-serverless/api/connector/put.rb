@@ -32,14 +32,13 @@ module ElasticsearchServerless
         # @option arguments [Hash] :headers Custom HTTP headers
         # @option arguments [Hash] :body request body
         #
-        # @see https://www.elastic.co/guide/en/elasticsearch/reference/current/create-connector-api.html
+        # @see https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-connector-put
         #
         def put(arguments = {})
-          request_opts = { endpoint: arguments[:endpoint] || "connector.put" }
+          request_opts = { endpoint: arguments[:endpoint] || 'connector.put' }
 
-          defined_params = [:connector_id].inject({}) do |set_variables, variable|
+          defined_params = [:connector_id].each_with_object({}) do |variable, set_variables|
             set_variables[variable] = arguments[variable] if arguments.key?(variable)
-            set_variables
           end
           request_opts[:defined_params] = defined_params unless defined_params.empty?
 
@@ -54,7 +53,7 @@ module ElasticsearchServerless
           path   = if _connector_id
                      "_connector/#{Utils.listify(_connector_id)}"
                    else
-                     "_connector"
+                     '_connector'
                    end
           params = {}
 

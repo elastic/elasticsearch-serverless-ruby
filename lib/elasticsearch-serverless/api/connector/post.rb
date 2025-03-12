@@ -34,10 +34,10 @@ module ElasticsearchServerless
         # @option arguments [Hash] :headers Custom HTTP headers
         # @option arguments [Hash] :body request body
         #
-        # @see https://www.elastic.co/guide/en/elasticsearch/reference/current/create-connector-api.html
+        # @see https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-connector-put
         #
         def post(arguments = {})
-          request_opts = { endpoint: arguments[:endpoint] || "connector.post" }
+          request_opts = { endpoint: arguments[:endpoint] || 'connector.post' }
 
           arguments = arguments.clone
           headers = arguments.delete(:headers) || {}
@@ -45,7 +45,7 @@ module ElasticsearchServerless
           body = arguments.delete(:body)
 
           method = ElasticsearchServerless::API::HTTP_POST
-          path   = "_connector"
+          path   = '_connector'
           params = {}
 
           ElasticsearchServerless::API::Response.new(
