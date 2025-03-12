@@ -25,19 +25,20 @@ module ElasticsearchServerless
         # Create or update a synonym set.
         # Synonyms sets are limited to a maximum of 10,000 synonym rules per set.
         # If you need to manage more synonym rules, you can create multiple synonym sets.
+        # When an existing synonyms set is updated, the search analyzers that use the synonyms set are reloaded automatically for all indices.
+        # This is equivalent to invoking the reload search analyzers API for all indices that use the synonyms set.
         #
-        # @option arguments [String] :id The id of the synonyms set to be created or updated (*Required*)
+        # @option arguments [String] :id The ID of the synonyms set to be created or updated. (*Required*)
         # @option arguments [Hash] :headers Custom HTTP headers
         # @option arguments [Hash] :body request body
         #
-        # @see https://www.elastic.co/guide/en/elasticsearch/reference/master/put-synonyms-set.html
+        # @see https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-synonyms-put-synonym
         #
         def put_synonym(arguments = {})
-          request_opts = { endpoint: arguments[:endpoint] || "synonyms.put_synonym" }
+          request_opts = { endpoint: arguments[:endpoint] || 'synonyms.put_synonym' }
 
-          defined_params = [:id].inject({}) do |set_variables, variable|
+          defined_params = [:id].each_with_object({}) do |variable, set_variables|
             set_variables[variable] = arguments[variable] if arguments.key?(variable)
-            set_variables
           end
           request_opts[:defined_params] = defined_params unless defined_params.empty?
 

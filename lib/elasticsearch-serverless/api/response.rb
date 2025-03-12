@@ -21,7 +21,7 @@ module ElasticsearchServerless
     # the initializer and behaves like a Hash, except when status or headers are called upon it, in
     # which case it returns the original object's status and headers.
     class Response
-      RESPONSE_METHODS = [:status, :body, :headers]
+      RESPONSE_METHODS = [:status, :body, :headers].freeze
 
       def initialize(response)
         @response = response

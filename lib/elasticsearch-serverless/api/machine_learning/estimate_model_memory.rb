@@ -23,17 +23,17 @@ module ElasticsearchServerless
     module MachineLearning
       module Actions
         # Estimate job model memory usage.
-        # Makes an estimation of the memory usage for an anomaly detection job model.
-        # It is based on analysis configuration details for the job and cardinality
+        # Make an estimation of the memory usage for an anomaly detection job model.
+        # The estimate is based on analysis configuration details for the job and cardinality
         # estimates for the fields it references.
         #
         # @option arguments [Hash] :headers Custom HTTP headers
         # @option arguments [Hash] :body request body
         #
-        # @see https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-apis.html
+        # @see https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-ml-estimate-model-memory
         #
         def estimate_model_memory(arguments = {})
-          request_opts = { endpoint: arguments[:endpoint] || "ml.estimate_model_memory" }
+          request_opts = { endpoint: arguments[:endpoint] || 'ml.estimate_model_memory' }
 
           raise ArgumentError, "Required argument 'body' missing" unless arguments[:body]
 
@@ -43,7 +43,7 @@ module ElasticsearchServerless
           body = arguments.delete(:body)
 
           method = ElasticsearchServerless::API::HTTP_POST
-          path   = "_ml/anomaly_detectors/_estimate_model_memory"
+          path   = '_ml/anomaly_detectors/_estimate_model_memory'
           params = {}
 
           ElasticsearchServerless::API::Response.new(

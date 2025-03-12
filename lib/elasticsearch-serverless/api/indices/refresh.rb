@@ -25,6 +25,13 @@ module ElasticsearchServerless
         # Refresh an index.
         # A refresh makes recent operations performed on one or more indices available for search.
         # For data streams, the API runs the refresh operation on the stream’s backing indices.
+        # By default, Elasticsearch periodically refreshes indices every second, but only on indices that have received one search request or more in the last 30 seconds.
+        # You can change this default interval with the +index.refresh_interval+ setting.
+        # Refresh requests are synchronous and do not return a response until the refresh operation completes.
+        # Refreshes are resource-intensive.
+        # To ensure good cluster performance, it's recommended to wait for Elasticsearch's periodic refresh rather than performing an explicit refresh when possible.
+        # If your application workflow indexes documents and then runs a search to retrieve the indexed document, it's recommended to use the index API's +refresh=wait_for+ query parameter option.
+        # This option ensures the indexing operation waits for a periodic refresh before running the search.
         #
         # @option arguments [String, Array] :index Comma-separated list of data streams, indices, and aliases used to limit the request.
         #  Supports wildcards (+*+).
@@ -38,14 +45,13 @@ module ElasticsearchServerless
         # @option arguments [Boolean] :ignore_unavailable If +false+, the request returns an error if it targets a missing or closed index.
         # @option arguments [Hash] :headers Custom HTTP headers
         #
-        # @see https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-refresh.html
+        # @see https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-indices-refresh
         #
         def refresh(arguments = {})
-          request_opts = { endpoint: arguments[:endpoint] || "indices.refresh" }
+          request_opts = { endpoint: arguments[:endpoint] || 'indices.refresh' }
 
-          defined_params = [:index].inject({}) do |set_variables, variable|
+          defined_params = [:index].each_with_object({}) do |variable, set_variables|
             set_variables[variable] = arguments[variable] if arguments.key?(variable)
-            set_variables
           end
           request_opts[:defined_params] = defined_params unless defined_params.empty?
 
@@ -60,7 +66,7 @@ module ElasticsearchServerless
           path   = if _index
                      "#{Utils.listify(_index)}/_refresh"
                    else
-                     "_refresh"
+                     '_refresh'
                    end
           params = Utils.process_params(arguments)
 

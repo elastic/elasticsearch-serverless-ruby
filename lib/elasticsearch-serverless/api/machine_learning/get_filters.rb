@@ -30,14 +30,13 @@ module ElasticsearchServerless
         # @option arguments [Integer] :size Specifies the maximum number of filters to obtain. Server default: 100.
         # @option arguments [Hash] :headers Custom HTTP headers
         #
-        # @see https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-filter.html
+        # @see https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-ml-get-filters
         #
         def get_filters(arguments = {})
-          request_opts = { endpoint: arguments[:endpoint] || "ml.get_filters" }
+          request_opts = { endpoint: arguments[:endpoint] || 'ml.get_filters' }
 
-          defined_params = [:filter_id].inject({}) do |set_variables, variable|
+          defined_params = [:filter_id].each_with_object({}) do |variable, set_variables|
             set_variables[variable] = arguments[variable] if arguments.key?(variable)
-            set_variables
           end
           request_opts[:defined_params] = defined_params unless defined_params.empty?
 
@@ -52,7 +51,7 @@ module ElasticsearchServerless
           path   = if _filter_id
                      "_ml/filters/#{Utils.listify(_filter_id)}"
                    else
-                     "_ml/filters"
+                     '_ml/filters'
                    end
           params = Utils.process_params(arguments)
 

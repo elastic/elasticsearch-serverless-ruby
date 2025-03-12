@@ -38,14 +38,13 @@ module ElasticsearchServerless
         # @option arguments [Hash] :headers Custom HTTP headers
         # @option arguments [Hash] :body request body
         #
-        # @see https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html
+        # @see https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-indices-put-alias
         #
         def put_alias(arguments = {})
-          request_opts = { endpoint: arguments[:endpoint] || "indices.put_alias" }
+          request_opts = { endpoint: arguments[:endpoint] || 'indices.put_alias' }
 
-          defined_params = [:index, :name].inject({}) do |set_variables, variable|
+          defined_params = [:index, :name].each_with_object({}) do |variable, set_variables|
             set_variables[variable] = arguments[variable] if arguments.key?(variable)
-            set_variables
           end
           request_opts[:defined_params] = defined_params unless defined_params.empty?
 
@@ -62,9 +61,7 @@ module ElasticsearchServerless
           _name = arguments.delete(:name)
 
           method = ElasticsearchServerless::API::HTTP_PUT
-          path   = if _index && _name
-                     "#{Utils.listify(_index)}/_aliases/#{Utils.listify(_name)}"
-                   end
+          path   = ("#{Utils.listify(_index)}/_aliases/#{Utils.listify(_name)}" if _index && _name)
           params = Utils.process_params(arguments)
 
           ElasticsearchServerless::API::Response.new(

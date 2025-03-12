@@ -24,20 +24,23 @@ module ElasticsearchServerless
       module Actions
         # Create or update a query rule.
         # Create or update a query rule within a query ruleset.
+        # IMPORTANT: Due to limitations within pinned queries, you can only pin documents using ids or docs, but cannot use both in single rule.
+        # It is advised to use one or the other in query rulesets, to avoid errors.
+        # Additionally, pinned queries have a maximum limit of 100 pinned hits.
+        # If multiple matching rules pin more than 100 documents, only the first 100 documents are pinned in the order they are specified in the ruleset.
         #
-        # @option arguments [String] :ruleset_id The unique identifier of the query ruleset containing the rule to be created or updated (*Required*)
-        # @option arguments [String] :rule_id The unique identifier of the query rule within the specified ruleset to be created or updated (*Required*)
+        # @option arguments [String] :ruleset_id The unique identifier of the query ruleset containing the rule to be created or updated. (*Required*)
+        # @option arguments [String] :rule_id The unique identifier of the query rule within the specified ruleset to be created or updated. (*Required*)
         # @option arguments [Hash] :headers Custom HTTP headers
         # @option arguments [Hash] :body request body
         #
-        # @see https://www.elastic.co/guide/en/elasticsearch/reference/master/put-query-rule.html
+        # @see https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-query-rules-put-rule
         #
         def put_rule(arguments = {})
-          request_opts = { endpoint: arguments[:endpoint] || "query_rules.put_rule" }
+          request_opts = { endpoint: arguments[:endpoint] || 'query_rules.put_rule' }
 
-          defined_params = [:ruleset_id, :rule_id].inject({}) do |set_variables, variable|
+          defined_params = [:ruleset_id, :rule_id].each_with_object({}) do |variable, set_variables|
             set_variables[variable] = arguments[variable] if arguments.key?(variable)
-            set_variables
           end
           request_opts[:defined_params] = defined_params unless defined_params.empty?
 

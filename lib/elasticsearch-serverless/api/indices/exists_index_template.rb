@@ -29,14 +29,13 @@ module ElasticsearchServerless
         # @option arguments [Time] :master_timeout Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error. Server default: 30s.
         # @option arguments [Hash] :headers Custom HTTP headers
         #
-        # @see https://www.elastic.co/guide/en/elasticsearch/reference/master/index-templates.html
+        # @see https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-indices-exists-index-template
         #
         def exists_index_template(arguments = {})
-          request_opts = { endpoint: arguments[:endpoint] || "indices.exists_index_template" }
+          request_opts = { endpoint: arguments[:endpoint] || 'indices.exists_index_template' }
 
-          defined_params = [:name].inject({}) do |set_variables, variable|
+          defined_params = [:name].each_with_object({}) do |variable, set_variables|
             set_variables[variable] = arguments[variable] if arguments.key?(variable)
-            set_variables
           end
           request_opts[:defined_params] = defined_params unless defined_params.empty?
 
@@ -58,7 +57,7 @@ module ElasticsearchServerless
           )
         end
 
-        alias_method :exists_index_template?, :exists_index_template
+        alias exists_index_template? exists_index_template
       end
     end
   end

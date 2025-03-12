@@ -31,14 +31,13 @@ module ElasticsearchServerless
         # @option arguments [String] :model_id The trained model ID to which the model alias refers. (*Required*)
         # @option arguments [Hash] :headers Custom HTTP headers
         #
-        # @see https://www.elastic.co/guide/en/elasticsearch/reference/current/delete-trained-models-aliases.html
+        # @see https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-ml-delete-trained-model-alias
         #
         def delete_trained_model_alias(arguments = {})
-          request_opts = { endpoint: arguments[:endpoint] || "ml.delete_trained_model_alias" }
+          request_opts = { endpoint: arguments[:endpoint] || 'ml.delete_trained_model_alias' }
 
-          defined_params = [:model_id, :model_alias].inject({}) do |set_variables, variable|
+          defined_params = [:model_id, :model_alias].each_with_object({}) do |variable, set_variables|
             set_variables[variable] = arguments[variable] if arguments.key?(variable)
-            set_variables
           end
           request_opts[:defined_params] = defined_params unless defined_params.empty?
 

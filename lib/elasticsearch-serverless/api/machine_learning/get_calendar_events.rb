@@ -32,14 +32,13 @@ module ElasticsearchServerless
         # @option arguments [String, Time] :start Specifies to get events with timestamps after this time.
         # @option arguments [Hash] :headers Custom HTTP headers
         #
-        # @see https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-calendar-event.html
+        # @see https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-ml-get-calendar-events
         #
         def get_calendar_events(arguments = {})
-          request_opts = { endpoint: arguments[:endpoint] || "ml.get_calendar_events" }
+          request_opts = { endpoint: arguments[:endpoint] || 'ml.get_calendar_events' }
 
-          defined_params = [:calendar_id].inject({}) do |set_variables, variable|
+          defined_params = [:calendar_id].each_with_object({}) do |variable, set_variables|
             set_variables[variable] = arguments[variable] if arguments.key?(variable)
-            set_variables
           end
           request_opts[:defined_params] = defined_params unless defined_params.empty?
 

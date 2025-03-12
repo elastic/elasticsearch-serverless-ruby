@@ -22,14 +22,14 @@ module ElasticsearchServerless
   module API
     module Actions
       # Get cluster info.
-      # Returns basic information about the cluster.
+      # Get basic build, version, and cluster information.
       #
       # @option arguments [Hash] :headers Custom HTTP headers
       #
-      # @see https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html
+      # @see https://www.elastic.co/docs/api/doc/elasticsearch/group/endpoint-info
       #
       def info(arguments = {})
-        request_opts = { endpoint: arguments[:endpoint] || "info" }
+        request_opts = { endpoint: arguments[:endpoint] || 'info' }
 
         arguments = arguments.clone
         headers = arguments.delete(:headers) || {}
@@ -37,7 +37,7 @@ module ElasticsearchServerless
         body = nil
 
         method = ElasticsearchServerless::API::HTTP_GET
-        path   = ""
+        path   = ''
         params = {}
 
         ElasticsearchServerless::API::Response.new(

@@ -30,14 +30,13 @@ module ElasticsearchServerless
         # @option arguments [Hash] :headers Custom HTTP headers
         # @option arguments [Hash] :body request body
         #
-        # @see https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-get-calendar.html
+        # @see https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-ml-get-calendars
         #
         def get_calendars(arguments = {})
-          request_opts = { endpoint: arguments[:endpoint] || "ml.get_calendars" }
+          request_opts = { endpoint: arguments[:endpoint] || 'ml.get_calendars' }
 
-          defined_params = [:calendar_id].inject({}) do |set_variables, variable|
+          defined_params = [:calendar_id].each_with_object({}) do |variable, set_variables|
             set_variables[variable] = arguments[variable] if arguments.key?(variable)
-            set_variables
           end
           request_opts[:defined_params] = defined_params unless defined_params.empty?
 
@@ -57,7 +56,7 @@ module ElasticsearchServerless
           path   = if _calendar_id
                      "_ml/calendars/#{Utils.listify(_calendar_id)}"
                    else
-                     "_ml/calendars"
+                     '_ml/calendars'
                    end
           params = Utils.process_params(arguments)
 

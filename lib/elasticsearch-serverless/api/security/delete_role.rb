@@ -24,19 +24,20 @@ module ElasticsearchServerless
       module Actions
         # Delete roles.
         # Delete roles in the native realm.
+        # The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
+        # The delete roles API cannot remove roles that are defined in roles files.
         #
-        # @option arguments [String] :name Role name (*Required*)
+        # @option arguments [String] :name The name of the role. (*Required*)
         # @option arguments [String] :refresh If +true+ (the default) then refresh the affected shards to make this operation visible to search, if +wait_for+ then wait for a refresh to make this operation visible to search, if +false+ then do nothing with refreshes.
         # @option arguments [Hash] :headers Custom HTTP headers
         #
-        # @see https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-role.html
+        # @see https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-security-delete-role
         #
         def delete_role(arguments = {})
-          request_opts = { endpoint: arguments[:endpoint] || "security.delete_role" }
+          request_opts = { endpoint: arguments[:endpoint] || 'security.delete_role' }
 
-          defined_params = [:name].inject({}) do |set_variables, variable|
+          defined_params = [:name].each_with_object({}) do |variable, set_variables|
             set_variables[variable] = arguments[variable] if arguments.key?(variable)
-            set_variables
           end
           request_opts[:defined_params] = defined_params unless defined_params.empty?
 

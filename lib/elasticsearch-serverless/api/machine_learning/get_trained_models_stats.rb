@@ -38,14 +38,13 @@ module ElasticsearchServerless
         # @option arguments [Integer] :size Specifies the maximum number of models to obtain. Server default: 100.
         # @option arguments [Hash] :headers Custom HTTP headers
         #
-        # @see https://www.elastic.co/guide/en/elasticsearch/reference/current/get-trained-models-stats.html
+        # @see https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-ml-get-trained-models-stats
         #
         def get_trained_models_stats(arguments = {})
-          request_opts = { endpoint: arguments[:endpoint] || "ml.get_trained_models_stats" }
+          request_opts = { endpoint: arguments[:endpoint] || 'ml.get_trained_models_stats' }
 
-          defined_params = [:model_id].inject({}) do |set_variables, variable|
+          defined_params = [:model_id].each_with_object({}) do |variable, set_variables|
             set_variables[variable] = arguments[variable] if arguments.key?(variable)
-            set_variables
           end
           request_opts[:defined_params] = defined_params unless defined_params.empty?
 
@@ -60,7 +59,7 @@ module ElasticsearchServerless
           path   = if _model_id
                      "_ml/trained_models/#{Utils.listify(_model_id)}/_stats"
                    else
-                     "_ml/trained_models/_stats"
+                     '_ml/trained_models/_stats'
                    end
           params = Utils.process_params(arguments)
 

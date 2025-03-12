@@ -29,19 +29,13 @@ module ElasticsearchServerless
         # @option arguments [Hash] :headers Custom HTTP headers
         # @option arguments [Hash] :body request body
         #
-        # *Deprecation notice*:
-        # /_ml/trained_models/{model_id}/deployment/_infer is deprecated. Use /_ml/trained_models/{model_id}/_infer instead
-        # Deprecated since version 8.3.0
-        #
-        #
-        # @see https://www.elastic.co/guide/en/elasticsearch/reference/master/infer-trained-model.html
+        # @see https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-ml-infer-trained-model
         #
         def infer_trained_model(arguments = {})
-          request_opts = { endpoint: arguments[:endpoint] || "ml.infer_trained_model" }
+          request_opts = { endpoint: arguments[:endpoint] || 'ml.infer_trained_model' }
 
-          defined_params = [:model_id].inject({}) do |set_variables, variable|
+          defined_params = [:model_id].each_with_object({}) do |variable, set_variables|
             set_variables[variable] = arguments[variable] if arguments.key?(variable)
-            set_variables
           end
           request_opts[:defined_params] = defined_params unless defined_params.empty?
 

@@ -22,37 +22,40 @@ module ElasticsearchServerless
   module API
     module Actions
       # Get multiple term vectors.
+      # Get multiple term vectors with a single request.
       # You can specify existing documents by index and ID or provide artificial documents in the body of the request.
       # You can specify the index in the request body or request URI.
       # The response contains a +docs+ array with all the fetched termvectors.
       # Each element has the structure provided by the termvectors API.
+      # **Artificial documents**
+      # You can also use +mtermvectors+ to generate term vectors for artificial documents provided in the body of the request.
+      # The mapping used is determined by the specified +_index+.
       #
-      # @option arguments [String] :index Name of the index that contains the documents.
+      # @option arguments [String] :index The name of the index that contains the documents.
       # @option arguments [Array<String>] :ids A comma-separated list of documents ids. You must define ids as parameter or set "ids" or "docs" in the request body
-      # @option arguments [String, Array<String>] :fields Comma-separated list or wildcard expressions of fields to include in the statistics.
-      #  Used as the default list unless a specific field list is provided in the +completion_fields+ or +fielddata_fields+ parameters.
+      # @option arguments [String, Array<String>] :fields A comma-separated list or wildcard expressions of fields to include in the statistics.
+      #  It is used as the default list unless a specific field list is provided in the +completion_fields+ or +fielddata_fields+ parameters.
       # @option arguments [Boolean] :field_statistics If +true+, the response includes the document count, sum of document frequencies, and sum of total term frequencies. Server default: true.
       # @option arguments [Boolean] :offsets If +true+, the response includes term offsets. Server default: true.
       # @option arguments [Boolean] :payloads If +true+, the response includes term payloads. Server default: true.
       # @option arguments [Boolean] :positions If +true+, the response includes term positions. Server default: true.
-      # @option arguments [String] :preference Specifies the node or shard the operation should be performed on.
-      #  Random by default.
+      # @option arguments [String] :preference The node or shard the operation should be performed on.
+      #  It is random by default.
       # @option arguments [Boolean] :realtime If true, the request is real-time as opposed to near-real-time. Server default: true.
-      # @option arguments [String] :routing Custom value used to route operations to a specific shard.
+      # @option arguments [String] :routing A custom value used to route operations to a specific shard.
       # @option arguments [Boolean] :term_statistics If true, the response includes term frequency and document frequency.
       # @option arguments [Integer] :version If +true+, returns the document version as part of a hit.
-      # @option arguments [String] :version_type Specific version type.
+      # @option arguments [String] :version_type The version type.
       # @option arguments [Hash] :headers Custom HTTP headers
       # @option arguments [Hash] :body request body
       #
-      # @see https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-termvectors.html
+      # @see https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-mtermvectors
       #
       def mtermvectors(arguments = {})
-        request_opts = { endpoint: arguments[:endpoint] || "mtermvectors" }
+        request_opts = { endpoint: arguments[:endpoint] || 'mtermvectors' }
 
-        defined_params = [:index].inject({}) do |set_variables, variable|
+        defined_params = [:index].each_with_object({}) do |variable, set_variables|
           set_variables[variable] = arguments[variable] if arguments.key?(variable)
-          set_variables
         end
         request_opts[:defined_params] = defined_params unless defined_params.empty?
 
@@ -72,7 +75,7 @@ module ElasticsearchServerless
         path   = if _index
                    "#{Utils.listify(_index)}/_mtermvectors"
                  else
-                   "_mtermvectors"
+                   '_mtermvectors'
                  end
         params = Utils.process_params(arguments)
 

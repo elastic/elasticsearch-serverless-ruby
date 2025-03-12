@@ -32,10 +32,10 @@ module ElasticsearchServerless
         # @option arguments [Hash] :headers Custom HTTP headers
         # @option arguments [Hash] :body request body
         #
-        # @see https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html
+        # @see https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-indices-update-aliases
         #
         def update_aliases(arguments = {})
-          request_opts = { endpoint: arguments[:endpoint] || "indices.update_aliases" }
+          request_opts = { endpoint: arguments[:endpoint] || 'indices.update_aliases' }
 
           raise ArgumentError, "Required argument 'body' missing" unless arguments[:body]
 
@@ -45,7 +45,7 @@ module ElasticsearchServerless
           body = arguments.delete(:body)
 
           method = ElasticsearchServerless::API::HTTP_POST
-          path   = "_aliases"
+          path   = '_aliases'
           params = Utils.process_params(arguments)
 
           ElasticsearchServerless::API::Response.new(

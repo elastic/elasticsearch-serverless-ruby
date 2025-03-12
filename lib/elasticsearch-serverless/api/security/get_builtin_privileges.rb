@@ -27,10 +27,10 @@ module ElasticsearchServerless
         #
         # @option arguments [Hash] :headers Custom HTTP headers
         #
-        # @see https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-builtin-privileges.html
+        # @see https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-security-get-builtin-privileges
         #
         def get_builtin_privileges(arguments = {})
-          request_opts = { endpoint: arguments[:endpoint] || "security.get_builtin_privileges" }
+          request_opts = { endpoint: arguments[:endpoint] || 'security.get_builtin_privileges' }
 
           arguments = arguments.clone
           headers = arguments.delete(:headers) || {}
@@ -38,7 +38,7 @@ module ElasticsearchServerless
           body = nil
 
           method = ElasticsearchServerless::API::HTTP_GET
-          path   = "_security/privilege/_builtin"
+          path   = '_security/privilege/_builtin'
           params = {}
 
           ElasticsearchServerless::API::Response.new(

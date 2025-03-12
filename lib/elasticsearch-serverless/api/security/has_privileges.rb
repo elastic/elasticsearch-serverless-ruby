@@ -24,19 +24,20 @@ module ElasticsearchServerless
       module Actions
         # Check user privileges.
         # Determine whether the specified user has a specified list of privileges.
+        # All users can use this API, but only to determine their own privileges.
+        # To check the privileges of other users, you must use the run as feature.
         #
         # @option arguments [String] :user Username
         # @option arguments [Hash] :headers Custom HTTP headers
         # @option arguments [Hash] :body request body
         #
-        # @see https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-has-privileges.html
+        # @see https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-security-has-privileges
         #
         def has_privileges(arguments = {})
-          request_opts = { endpoint: arguments[:endpoint] || "security.has_privileges" }
+          request_opts = { endpoint: arguments[:endpoint] || 'security.has_privileges' }
 
-          defined_params = [:user].inject({}) do |set_variables, variable|
+          defined_params = [:user].each_with_object({}) do |variable, set_variables|
             set_variables[variable] = arguments[variable] if arguments.key?(variable)
-            set_variables
           end
           request_opts[:defined_params] = defined_params unless defined_params.empty?
 
@@ -53,7 +54,7 @@ module ElasticsearchServerless
           path   = if _user
                      "_security/user/#{Utils.listify(_user)}/_has_privileges"
                    else
-                     "_security/user/_has_privileges"
+                     '_security/user/_has_privileges'
                    end
           params = {}
 

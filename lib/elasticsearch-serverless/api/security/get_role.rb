@@ -24,18 +24,21 @@ module ElasticsearchServerless
       module Actions
         # Get roles.
         # Get roles in the native realm.
+        # The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
+        # The get roles API cannot retrieve roles that are defined in roles files.
         #
-        # @option arguments [String, Array<String>] :name The name of the role. You can specify multiple roles as a comma-separated list. If you do not specify this parameter, the API returns information about all roles.
+        # @option arguments [String, Array<String>] :name The name of the role.
+        #  You can specify multiple roles as a comma-separated list.
+        #  If you do not specify this parameter, the API returns information about all roles.
         # @option arguments [Hash] :headers Custom HTTP headers
         #
-        # @see https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-role.html
+        # @see https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-security-get-role
         #
         def get_role(arguments = {})
-          request_opts = { endpoint: arguments[:endpoint] || "security.get_role" }
+          request_opts = { endpoint: arguments[:endpoint] || 'security.get_role' }
 
-          defined_params = [:name].inject({}) do |set_variables, variable|
+          defined_params = [:name].each_with_object({}) do |variable, set_variables|
             set_variables[variable] = arguments[variable] if arguments.key?(variable)
-            set_variables
           end
           request_opts[:defined_params] = defined_params unless defined_params.empty?
 
@@ -50,16 +53,16 @@ module ElasticsearchServerless
           path   = if _name
                      "_security/role/#{Utils.listify(_name)}"
                    else
-                     "_security/role"
+                     '_security/role'
                    end
           params = Utils.process_params(arguments)
 
           if Array(arguments[:ignore]).include?(404)
-            Utils.rescue_from_not_found {
+            Utils.rescue_from_not_found do
               ElasticsearchServerless::API::Response.new(
                 perform_request(method, path, params, body, headers, request_opts)
               )
-            }
+            end
           else
             ElasticsearchServerless::API::Response.new(
               perform_request(method, path, params, body, headers, request_opts)

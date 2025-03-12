@@ -24,10 +24,12 @@ module ElasticsearchServerless
       # Run multiple searches.
       # The format of the request is similar to the bulk API format and makes use of the newline delimited JSON (NDJSON) format.
       # The structure is as follows:
-      #   header
-      #   body
-      #   header
-      #   body
+      # +
+      # header\n
+      # body\n
+      # header\n
+      # body\n
+      # +
       # This structure is specifically optimized to reduce parsing if a specific search ends up redirected to another node.
       # IMPORTANT: The final line of data must end with a newline character +\n+.
       # Each newline character may be preceded by a carriage return +\r+.
@@ -55,14 +57,13 @@ module ElasticsearchServerless
       # @option arguments [Hash] :headers Custom HTTP headers
       # @option arguments [Hash] :body searches
       #
-      # @see https://www.elastic.co/guide/en/elasticsearch/reference/master/search-multi-search.html
+      # @see https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-msearch
       #
       def msearch(arguments = {})
-        request_opts = { endpoint: arguments[:endpoint] || "msearch" }
+        request_opts = { endpoint: arguments[:endpoint] || 'msearch' }
 
-        defined_params = [:index].inject({}) do |set_variables, variable|
+        defined_params = [:index].each_with_object({}) do |variable, set_variables|
           set_variables[variable] = arguments[variable] if arguments.key?(variable)
-          set_variables
         end
         request_opts[:defined_params] = defined_params unless defined_params.empty?
 
@@ -79,31 +80,29 @@ module ElasticsearchServerless
         path   = if _index
                    "#{Utils.listify(_index)}/_msearch"
                  else
-                   "_msearch"
+                   '_msearch'
                  end
         params = Utils.process_params(arguments)
 
-        case
-        when body.is_a?(Array) && body.any? { |d| d.has_key? :search }
-          payload = body.inject([]) do |sum, item|
+        if body.is_a?(Array) && body.any? { |d| d.key? :search }
+          payload = body.each_with_object([]) do |item, sum|
             meta = item
             data = meta.delete(:search)
 
             sum << meta
             sum << data
-            sum
           end.map { |item| ElasticsearchServerless::API.serializer.dump(item) }
-          payload << "" unless payload.empty?
+          payload << '' unless payload.empty?
           payload = payload.join("\n")
-        when body.is_a?(Array)
+        elsif body.is_a?(Array)
           payload = body.map { |d| d.is_a?(String) ? d : ElasticsearchServerless::API.serializer.dump(d) }
-          payload << "" unless payload.empty?
+          payload << '' unless payload.empty?
           payload = payload.join("\n")
         else
           payload = body
         end
 
-        headers.merge!("Content-Type" => "application/x-ndjson")
+        headers.merge!('Content-Type' => 'application/x-ndjson')
         ElasticsearchServerless::API::Response.new(
           perform_request(method, path, params, payload, headers, request_opts)
         )

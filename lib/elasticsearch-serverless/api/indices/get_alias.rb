@@ -42,14 +42,13 @@ module ElasticsearchServerless
         #  If no response is received before the timeout expires, the request fails and returns an error. Server default: 30s.
         # @option arguments [Hash] :headers Custom HTTP headers
         #
-        # @see https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html
+        # @see https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-indices-get-alias
         #
         def get_alias(arguments = {})
-          request_opts = { endpoint: arguments[:endpoint] || "indices.get_alias" }
+          request_opts = { endpoint: arguments[:endpoint] || 'indices.get_alias' }
 
-          defined_params = [:name, :index].inject({}) do |set_variables, variable|
+          defined_params = [:name, :index].each_with_object({}) do |variable, set_variables|
             set_variables[variable] = arguments[variable] if arguments.key?(variable)
-            set_variables
           end
           request_opts[:defined_params] = defined_params unless defined_params.empty?
 
@@ -70,7 +69,7 @@ module ElasticsearchServerless
                    elsif _name
                      "_alias/#{Utils.listify(_name)}"
                    else
-                     "_alias"
+                     '_alias'
                    end
           params = Utils.process_params(arguments)
 

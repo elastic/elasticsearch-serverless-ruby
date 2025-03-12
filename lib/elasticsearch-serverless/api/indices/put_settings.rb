@@ -23,8 +23,19 @@ module ElasticsearchServerless
     module Indices
       module Actions
         # Update index settings.
-        # Changes dynamic index settings in real time. For data streams, index setting
-        # changes are applied to all backing indices by default.
+        # Changes dynamic index settings in real time.
+        # For data streams, index setting changes are applied to all backing indices by default.
+        # To revert a setting to the default value, use a null value.
+        # The list of per-index settings that can be updated dynamically on live indices can be found in index module documentation.
+        # To preserve existing settings from being updated, set the +preserve_existing+ parameter to +true+.
+        # NOTE: You can only define new analyzers on closed indices.
+        # To add an analyzer, you must close the index, define the analyzer, and reopen the index.
+        # You cannot close the write index of a data stream.
+        # To update the analyzer for a data stream's write index and future backing indices, update the analyzer in the index template used by the stream.
+        # Then roll over the data stream to apply the new analyzer to the stream's write index and future backing indices.
+        # This affects searches and any new data added to the stream after the rollover.
+        # However, it does not affect the data stream's backing indices or their existing data.
+        # To change the analyzer for existing backing indices, you must create a new data stream and reindex your data into it.
         #
         # @option arguments [String, Array] :index Comma-separated list of data streams, indices, and aliases used to limit
         #  the request. Supports wildcards (+*+). To target all data streams and
@@ -49,14 +60,13 @@ module ElasticsearchServerless
         # @option arguments [Hash] :headers Custom HTTP headers
         # @option arguments [Hash] :body settings
         #
-        # @see https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-update-settings.html
+        # @see https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-indices-put-settings
         #
         def put_settings(arguments = {})
-          request_opts = { endpoint: arguments[:endpoint] || "indices.put_settings" }
+          request_opts = { endpoint: arguments[:endpoint] || 'indices.put_settings' }
 
-          defined_params = [:index].inject({}) do |set_variables, variable|
+          defined_params = [:index].each_with_object({}) do |variable, set_variables|
             set_variables[variable] = arguments[variable] if arguments.key?(variable)
-            set_variables
           end
           request_opts[:defined_params] = defined_params unless defined_params.empty?
 
@@ -73,7 +83,7 @@ module ElasticsearchServerless
           path   = if _index
                      "#{Utils.listify(_index)}/_settings"
                    else
-                     "_settings"
+                     '_settings'
                    end
           params = Utils.process_params(arguments)
 

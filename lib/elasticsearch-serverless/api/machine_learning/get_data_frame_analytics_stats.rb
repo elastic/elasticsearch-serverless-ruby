@@ -41,14 +41,13 @@ module ElasticsearchServerless
         # @option arguments [Boolean] :verbose Defines whether the stats response should be verbose.
         # @option arguments [Hash] :headers Custom HTTP headers
         #
-        # @see https://www.elastic.co/guide/en/elasticsearch/reference/current/get-dfanalytics-stats.html
+        # @see https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-ml-get-data-frame-analytics-stats
         #
         def get_data_frame_analytics_stats(arguments = {})
-          request_opts = { endpoint: arguments[:endpoint] || "ml.get_data_frame_analytics_stats" }
+          request_opts = { endpoint: arguments[:endpoint] || 'ml.get_data_frame_analytics_stats' }
 
-          defined_params = [:id].inject({}) do |set_variables, variable|
+          defined_params = [:id].each_with_object({}) do |variable, set_variables|
             set_variables[variable] = arguments[variable] if arguments.key?(variable)
-            set_variables
           end
           request_opts[:defined_params] = defined_params unless defined_params.empty?
 
@@ -63,7 +62,7 @@ module ElasticsearchServerless
           path   = if _id
                      "_ml/data_frame/analytics/#{Utils.listify(_id)}/_stats"
                    else
-                     "_ml/data_frame/analytics/_stats"
+                     '_ml/data_frame/analytics/_stats'
                    end
           params = Utils.process_params(arguments)
 

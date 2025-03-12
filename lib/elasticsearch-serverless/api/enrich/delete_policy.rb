@@ -26,16 +26,16 @@ module ElasticsearchServerless
         # Deletes an existing enrich policy and its enrich index.
         #
         # @option arguments [String] :name Enrich policy to delete. (*Required*)
+        # @option arguments [Time] :master_timeout Period to wait for a connection to the master node. Server default: 30s.
         # @option arguments [Hash] :headers Custom HTTP headers
         #
-        # @see https://www.elastic.co/guide/en/elasticsearch/reference/current/delete-enrich-policy-api.html
+        # @see https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-enrich-delete-policy
         #
         def delete_policy(arguments = {})
-          request_opts = { endpoint: arguments[:endpoint] || "enrich.delete_policy" }
+          request_opts = { endpoint: arguments[:endpoint] || 'enrich.delete_policy' }
 
-          defined_params = [:name].inject({}) do |set_variables, variable|
+          defined_params = [:name].each_with_object({}) do |variable, set_variables|
             set_variables[variable] = arguments[variable] if arguments.key?(variable)
-            set_variables
           end
           request_opts[:defined_params] = defined_params unless defined_params.empty?
 
@@ -50,7 +50,7 @@ module ElasticsearchServerless
 
           method = ElasticsearchServerless::API::HTTP_DELETE
           path   = "_enrich/policy/#{Utils.listify(_name)}"
-          params = {}
+          params = Utils.process_params(arguments)
 
           ElasticsearchServerless::API::Response.new(
             perform_request(method, path, params, body, headers, request_opts)

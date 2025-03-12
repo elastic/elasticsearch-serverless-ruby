@@ -23,36 +23,37 @@ module ElasticsearchServerless
     module Cat
       module Actions
         # Get component templates.
-        # Returns information about component templates in a cluster.
+        # Get information about component templates in a cluster.
         # Component templates are building blocks for constructing index templates that specify index mappings, settings, and aliases.
-        # CAT APIs are only intended for human consumption using the command line or Kibana console.
+        # IMPORTANT: CAT APIs are only intended for human consumption using the command line or Kibana console.
         # They are not intended for use by applications. For application consumption, use the get component template API.
         #
-        # @option arguments [String] :name The name of the component template. Accepts wildcard expressions. If omitted, all component templates are returned.
+        # @option arguments [String] :name The name of the component template.
+        #  It accepts wildcard expressions.
+        #  If it is omitted, all component templates are returned.
+        # @option arguments [String, Array<String>] :h List of columns to appear in the response. Supports simple wildcards.
+        # @option arguments [String, Array<String>] :s List of columns that determine how the table should be sorted.
+        #  Sorting defaults to ascending and can be changed by setting +:asc+
+        #  or +:desc+ as a suffix to the column name.
         # @option arguments [Boolean] :local If +true+, the request computes the list of selected nodes from the
         #  local cluster state. If +false+ the list of selected nodes are computed
         #  from the cluster state of the master node. In both cases the coordinating
         #  node will send requests for further information to each selected node.
-        # @option arguments [Time] :master_timeout Period to wait for a connection to the master node. Server default: 30s.
+        # @option arguments [Time] :master_timeout The period to wait for a connection to the master node. Server default: 30s.
         # @option arguments [String] :format Specifies the format to return the columnar data in, can be set to
         #  +text+, +json+, +cbor+, +yaml+, or +smile+. Server default: text.
-        # @option arguments [String, Array<String>] :h List of columns to appear in the response. Supports simple wildcards.
         # @option arguments [Boolean] :help When set to +true+ will output available columns. This option
         #  can't be combined with any other query string option.
-        # @option arguments [String, Array<String>] :s List of columns that determine how the table should be sorted.
-        #  Sorting defaults to ascending and can be changed by setting +:asc+
-        #  or +:desc+ as a suffix to the column name.
         # @option arguments [Boolean] :v When set to +true+ will enable verbose output.
         # @option arguments [Hash] :headers Custom HTTP headers
         #
-        # @see https://www.elastic.co/guide/en/elasticsearch/reference/master/cat-component-templates.html
+        # @see https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-cat-component-templates
         #
         def component_templates(arguments = {})
-          request_opts = { endpoint: arguments[:endpoint] || "cat.component_templates" }
+          request_opts = { endpoint: arguments[:endpoint] || 'cat.component_templates' }
 
-          defined_params = [:name].inject({}) do |set_variables, variable|
+          defined_params = [:name].each_with_object({}) do |variable, set_variables|
             set_variables[variable] = arguments[variable] if arguments.key?(variable)
-            set_variables
           end
           request_opts[:defined_params] = defined_params unless defined_params.empty?
 
@@ -67,7 +68,7 @@ module ElasticsearchServerless
           path   = if _name
                      "_cat/component_templates/#{Utils.listify(_name)}"
                    else
-                     "_cat/component_templates"
+                     '_cat/component_templates'
                    end
           params = Utils.process_params(arguments)
 

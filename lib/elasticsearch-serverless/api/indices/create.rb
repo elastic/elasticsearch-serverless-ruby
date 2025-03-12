@@ -23,7 +23,21 @@ module ElasticsearchServerless
     module Indices
       module Actions
         # Create an index.
-        # Creates a new index.
+        # You can use the create index API to add a new index to an Elasticsearch cluster.
+        # When creating an index, you can specify the following:
+        # * Settings for the index.
+        # * Mappings for fields in the index.
+        # * Index aliases
+        # **Wait for active shards**
+        # By default, index creation will only return a response to the client when the primary copies of each shard have been started, or the request times out.
+        # The index creation response will indicate what happened.
+        # For example, +acknowledged+ indicates whether the index was successfully created in the cluster, +while shards_acknowledged+ indicates whether the requisite number of shard copies were started for each shard in the index before timing out.
+        # Note that it is still possible for either +acknowledged+ or +shards_acknowledged+ to be +false+, but for the index creation to be successful.
+        # These values simply indicate whether the operation completed before the timeout.
+        # If +acknowledged+ is false, the request timed out before the cluster state was updated with the newly created index, but it probably will be created sometime soon.
+        # If +shards_acknowledged+ is false, then the request timed out before the requisite number of shards were started (by default just the primaries), even if the cluster state was successfully updated to reflect the newly created index (that is to say, +acknowledged+ is +true+).
+        # You can change the default of only waiting for the primary shards to start through the index setting +index.write.wait_for_active_shards+.
+        # Note that changing this setting will also affect the +wait_for_active_shards+ value on all subsequent write operations.
         #
         # @option arguments [String] :index Name of the index you wish to create. (*Required*)
         # @option arguments [Time] :master_timeout Period to wait for a connection to the master node.
@@ -35,14 +49,13 @@ module ElasticsearchServerless
         # @option arguments [Hash] :headers Custom HTTP headers
         # @option arguments [Hash] :body request body
         #
-        # @see https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-create-index.html
+        # @see https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-indices-create
         #
         def create(arguments = {})
-          request_opts = { endpoint: arguments[:endpoint] || "indices.create" }
+          request_opts = { endpoint: arguments[:endpoint] || 'indices.create' }
 
-          defined_params = [:index].inject({}) do |set_variables, variable|
+          defined_params = [:index].each_with_object({}) do |variable, set_variables|
             set_variables[variable] = arguments[variable] if arguments.key?(variable)
-            set_variables
           end
           request_opts[:defined_params] = defined_params unless defined_params.empty?
 
@@ -56,7 +69,7 @@ module ElasticsearchServerless
           _index = arguments.delete(:index)
 
           method = ElasticsearchServerless::API::HTTP_PUT
-          path   = "#{Utils.listify(_index)}"
+          path   = Utils.listify(_index).to_s
           params = Utils.process_params(arguments)
 
           ElasticsearchServerless::API::Response.new(

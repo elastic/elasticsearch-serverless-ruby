@@ -35,14 +35,13 @@ module ElasticsearchServerless
         # @option arguments [Hash] :headers Custom HTTP headers
         # @option arguments [Hash] :body request body
         #
-        # @see https://www.elastic.co/guide/en/elasticsearch/reference/master/search-application-search.html
+        # @see https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-search-application-search
         #
         def search(arguments = {})
-          request_opts = { endpoint: arguments[:endpoint] || "search_application.search" }
+          request_opts = { endpoint: arguments[:endpoint] || 'search_application.search' }
 
-          defined_params = [:name].inject({}) do |set_variables, variable|
+          defined_params = [:name].each_with_object({}) do |variable, set_variables|
             set_variables[variable] = arguments[variable] if arguments.key?(variable)
-            set_variables
           end
           request_opts[:defined_params] = defined_params unless defined_params.empty?
 

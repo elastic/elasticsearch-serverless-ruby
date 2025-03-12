@@ -30,10 +30,10 @@ module ElasticsearchServerless
         #
         # @option arguments [Hash] :headers Custom HTTP headers
         #
-        # @see https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-authenticate.html
+        # @see https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-security-authenticate
         #
         def authenticate(arguments = {})
-          request_opts = { endpoint: arguments[:endpoint] || "security.authenticate" }
+          request_opts = { endpoint: arguments[:endpoint] || 'security.authenticate' }
 
           arguments = arguments.clone
           headers = arguments.delete(:headers) || {}
@@ -41,7 +41,7 @@ module ElasticsearchServerless
           body = nil
 
           method = ElasticsearchServerless::API::HTTP_GET
-          path   = "_security/_authenticate"
+          path   = '_security/_authenticate'
           params = {}
 
           ElasticsearchServerless::API::Response.new(

@@ -28,14 +28,13 @@ module ElasticsearchServerless
         # @option arguments [String, Array<String>] :target Limits the information returned to the specific target. Supports a comma-separated list, such as http,ingest. (*Required*)
         # @option arguments [Hash] :headers Custom HTTP headers
         #
-        # @see https://www.elastic.co/guide/en/elasticsearch/reference/current/cluster-info.html
+        # @see https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-cluster-info
         #
         def info(arguments = {})
-          request_opts = { endpoint: arguments[:endpoint] || "cluster.info" }
+          request_opts = { endpoint: arguments[:endpoint] || 'cluster.info' }
 
-          defined_params = [:target].inject({}) do |set_variables, variable|
+          defined_params = [:target].each_with_object({}) do |variable, set_variables|
             set_variables[variable] = arguments[variable] if arguments.key?(variable)
-            set_variables
           end
           request_opts[:defined_params] = defined_params unless defined_params.empty?
 

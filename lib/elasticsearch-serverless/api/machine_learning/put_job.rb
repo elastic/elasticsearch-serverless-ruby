@@ -24,6 +24,7 @@ module ElasticsearchServerless
       module Actions
         # Create an anomaly detection job.
         # If you include a +datafeed_config+, you must have read index privileges on the source index.
+        # If you include a +datafeed_config+ but do not provide a query, the datafeed uses +{"match_all": {"boost": 1}}+.
         #
         # @option arguments [String] :job_id The identifier for the anomaly detection job. This identifier can contain lowercase alphanumeric characters (a-z and 0-9), hyphens, and underscores. It must start and end with alphanumeric characters. (*Required*)
         # @option arguments [Boolean] :allow_no_indices If +true+, wildcard indices expressions that resolve into no concrete indices are ignored. This includes the
@@ -40,14 +41,13 @@ module ElasticsearchServerless
         # @option arguments [Hash] :headers Custom HTTP headers
         # @option arguments [Hash] :body request body
         #
-        # @see https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-put-job.html
+        # @see https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-ml-put-job
         #
         def put_job(arguments = {})
-          request_opts = { endpoint: arguments[:endpoint] || "ml.put_job" }
+          request_opts = { endpoint: arguments[:endpoint] || 'ml.put_job' }
 
-          defined_params = [:job_id].inject({}) do |set_variables, variable|
+          defined_params = [:job_id].each_with_object({}) do |variable, set_variables|
             set_variables[variable] = arguments[variable] if arguments.key?(variable)
-            set_variables
           end
           request_opts[:defined_params] = defined_params unless defined_params.empty?
 

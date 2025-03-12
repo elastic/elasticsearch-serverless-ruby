@@ -24,18 +24,16 @@ module ElasticsearchServerless
       module Actions
         # Get license information.
         # Get information about your Elastic license including its type, its status, when it was issued, and when it expires.
-        # NOTE: If the master node is generating a new cluster state, the get license API may return a +404 Not Found+ response.
-        # If you receive an unexpected 404 response after cluster startup, wait a short period and retry the request.
         #
         # @option arguments [Boolean] :accept_enterprise If +true+, this parameter returns enterprise for Enterprise license types. If +false+, this parameter returns platinum for both platinum and enterprise license types. This behavior is maintained for backwards compatibility.
         #  This parameter is deprecated and will always be set to true in 8.x. Server default: true.
         # @option arguments [Boolean] :local Specifies whether to retrieve local information. The default value is +false+, which means the information is retrieved from the master node.
         # @option arguments [Hash] :headers Custom HTTP headers
         #
-        # @see https://www.elastic.co/guide/en/elasticsearch/reference/master/get-license.html
+        # @see https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-license-get
         #
         def get(arguments = {})
-          request_opts = { endpoint: arguments[:endpoint] || "license.get" }
+          request_opts = { endpoint: arguments[:endpoint] || 'license.get' }
 
           arguments = arguments.clone
           headers = arguments.delete(:headers) || {}
@@ -43,7 +41,7 @@ module ElasticsearchServerless
           body = nil
 
           method = ElasticsearchServerless::API::HTTP_GET
-          path   = "_license"
+          path   = '_license'
           params = Utils.process_params(arguments)
 
           ElasticsearchServerless::API::Response.new(

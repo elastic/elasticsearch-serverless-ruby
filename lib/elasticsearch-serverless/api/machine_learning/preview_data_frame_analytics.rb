@@ -23,20 +23,19 @@ module ElasticsearchServerless
     module MachineLearning
       module Actions
         # Preview features used by data frame analytics.
-        # Previews the extracted features used by a data frame analytics config.
+        # Preview the extracted features used by a data frame analytics config.
         #
         # @option arguments [String] :id Identifier for the data frame analytics job.
         # @option arguments [Hash] :headers Custom HTTP headers
         # @option arguments [Hash] :body request body
         #
-        # @see http://www.elastic.co/guide/en/elasticsearch/reference/current/preview-dfanalytics.html
+        # @see https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-ml-preview-data-frame-analytics
         #
         def preview_data_frame_analytics(arguments = {})
-          request_opts = { endpoint: arguments[:endpoint] || "ml.preview_data_frame_analytics" }
+          request_opts = { endpoint: arguments[:endpoint] || 'ml.preview_data_frame_analytics' }
 
-          defined_params = [:id].inject({}) do |set_variables, variable|
+          defined_params = [:id].each_with_object({}) do |variable, set_variables|
             set_variables[variable] = arguments[variable] if arguments.key?(variable)
-            set_variables
           end
           request_opts[:defined_params] = defined_params unless defined_params.empty?
 
@@ -56,7 +55,7 @@ module ElasticsearchServerless
           path   = if _id
                      "_ml/data_frame/analytics/#{Utils.listify(_id)}/_preview"
                    else
-                     "_ml/data_frame/analytics/_preview"
+                     '_ml/data_frame/analytics/_preview'
                    end
           params = {}
 

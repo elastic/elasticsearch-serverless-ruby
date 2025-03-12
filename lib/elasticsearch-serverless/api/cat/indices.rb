@@ -23,7 +23,7 @@ module ElasticsearchServerless
     module Cat
       module Actions
         # Get index information.
-        # Returns high-level information about indices in a cluster, including backing indices for data streams.
+        # Get high-level information about indices in a cluster, including backing indices for data streams.
         # Use this request to get the following information for each index in a cluster:
         # - shard count
         # - document count
@@ -44,25 +44,24 @@ module ElasticsearchServerless
         # @option arguments [Boolean] :pri If true, the response only includes information from primary shards.
         # @option arguments [String] :time The unit used to display time values.
         # @option arguments [Time] :master_timeout Period to wait for a connection to the master node. Server default: 30s.
-        # @option arguments [String] :format Specifies the format to return the columnar data in, can be set to
-        #  +text+, +json+, +cbor+, +yaml+, or +smile+. Server default: text.
         # @option arguments [String, Array<String>] :h List of columns to appear in the response. Supports simple wildcards.
-        # @option arguments [Boolean] :help When set to +true+ will output available columns. This option
-        #  can't be combined with any other query string option.
         # @option arguments [String, Array<String>] :s List of columns that determine how the table should be sorted.
         #  Sorting defaults to ascending and can be changed by setting +:asc+
         #  or +:desc+ as a suffix to the column name.
+        # @option arguments [String] :format Specifies the format to return the columnar data in, can be set to
+        #  +text+, +json+, +cbor+, +yaml+, or +smile+. Server default: text.
+        # @option arguments [Boolean] :help When set to +true+ will output available columns. This option
+        #  can't be combined with any other query string option.
         # @option arguments [Boolean] :v When set to +true+ will enable verbose output.
         # @option arguments [Hash] :headers Custom HTTP headers
         #
-        # @see https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-indices.html
+        # @see https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-cat-indices
         #
         def indices(arguments = {})
-          request_opts = { endpoint: arguments[:endpoint] || "cat.indices" }
+          request_opts = { endpoint: arguments[:endpoint] || 'cat.indices' }
 
-          defined_params = [:index].inject({}) do |set_variables, variable|
+          defined_params = [:index].each_with_object({}) do |variable, set_variables|
             set_variables[variable] = arguments[variable] if arguments.key?(variable)
-            set_variables
           end
           request_opts[:defined_params] = defined_params unless defined_params.empty?
 
@@ -77,7 +76,7 @@ module ElasticsearchServerless
           path   = if _index
                      "_cat/indices/#{Utils.listify(_index)}"
                    else
-                     "_cat/indices"
+                     '_cat/indices'
                    end
           params = Utils.process_params(arguments)
           params[:h] = Utils.listify(params[:h]) if params[:h]

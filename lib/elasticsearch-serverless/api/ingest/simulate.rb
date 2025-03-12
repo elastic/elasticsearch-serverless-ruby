@@ -26,20 +26,19 @@ module ElasticsearchServerless
         # Run an ingest pipeline against a set of provided documents.
         # You can either specify an existing pipeline to use with the provided documents or supply a pipeline definition in the body of the request.
         #
-        # @option arguments [String] :id Pipeline to test.
-        #  If you don’t specify a +pipeline+ in the request body, this parameter is required.
+        # @option arguments [String] :id The pipeline to test.
+        #  If you don't specify a +pipeline+ in the request body, this parameter is required.
         # @option arguments [Boolean] :verbose If +true+, the response includes output data for each processor in the executed pipeline.
         # @option arguments [Hash] :headers Custom HTTP headers
         # @option arguments [Hash] :body request body
         #
-        # @see https://www.elastic.co/guide/en/elasticsearch/reference/master/simulate-pipeline-api.html
+        # @see https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-ingest-simulate
         #
         def simulate(arguments = {})
-          request_opts = { endpoint: arguments[:endpoint] || "ingest.simulate" }
+          request_opts = { endpoint: arguments[:endpoint] || 'ingest.simulate' }
 
-          defined_params = [:id].inject({}) do |set_variables, variable|
+          defined_params = [:id].each_with_object({}) do |variable, set_variables|
             set_variables[variable] = arguments[variable] if arguments.key?(variable)
-            set_variables
           end
           request_opts[:defined_params] = defined_params unless defined_params.empty?
 
@@ -56,7 +55,7 @@ module ElasticsearchServerless
           path   = if _id
                      "_ingest/pipeline/#{Utils.listify(_id)}/_simulate"
                    else
-                     "_ingest/pipeline/_simulate"
+                     '_ingest/pipeline/_simulate'
                    end
           params = Utils.process_params(arguments)
 

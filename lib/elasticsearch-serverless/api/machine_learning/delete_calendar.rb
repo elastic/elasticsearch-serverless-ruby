@@ -23,19 +23,18 @@ module ElasticsearchServerless
     module MachineLearning
       module Actions
         # Delete a calendar.
-        # Removes all scheduled events from a calendar, then deletes it.
+        # Remove all scheduled events from a calendar, then delete it.
         #
         # @option arguments [String] :calendar_id A string that uniquely identifies a calendar. (*Required*)
         # @option arguments [Hash] :headers Custom HTTP headers
         #
-        # @see https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-calendar.html
+        # @see https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-ml-delete-calendar
         #
         def delete_calendar(arguments = {})
-          request_opts = { endpoint: arguments[:endpoint] || "ml.delete_calendar" }
+          request_opts = { endpoint: arguments[:endpoint] || 'ml.delete_calendar' }
 
-          defined_params = [:calendar_id].inject({}) do |set_variables, variable|
+          defined_params = [:calendar_id].each_with_object({}) do |variable, set_variables|
             set_variables[variable] = arguments[variable] if arguments.key?(variable)
-            set_variables
           end
           request_opts[:defined_params] = defined_params unless defined_params.empty?
 

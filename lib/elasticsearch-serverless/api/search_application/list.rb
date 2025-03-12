@@ -22,7 +22,8 @@ module ElasticsearchServerless
   module API
     module SearchApplication
       module Actions
-        # Returns the existing search applications.
+        # Get search applications.
+        # Get information about search applications.
         # This functionality is in Beta and is subject to change. The design and
         # code is less mature than official GA features and is being provided
         # as-is with no warranties. Beta features are not subject to the support
@@ -33,10 +34,10 @@ module ElasticsearchServerless
         # @option arguments [Integer] :size Specifies a max number of results to get.
         # @option arguments [Hash] :headers Custom HTTP headers
         #
-        # @see https://www.elastic.co/guide/en/elasticsearch/reference/master/list-search-applications.html
+        # @see https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-search-application-get-behavioral-analytics
         #
         def list(arguments = {})
-          request_opts = { endpoint: arguments[:endpoint] || "search_application.list" }
+          request_opts = { endpoint: arguments[:endpoint] || 'search_application.list' }
 
           arguments = arguments.clone
           headers = arguments.delete(:headers) || {}
@@ -44,7 +45,7 @@ module ElasticsearchServerless
           body = nil
 
           method = ElasticsearchServerless::API::HTTP_GET
-          path   = "_application/search_application"
+          path   = '_application/search_application'
           params = Utils.process_params(arguments)
 
           ElasticsearchServerless::API::Response.new(

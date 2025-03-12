@@ -26,17 +26,17 @@ module ElasticsearchServerless
         # Create the enrich index for an existing enrich policy.
         #
         # @option arguments [String] :name Enrich policy to execute. (*Required*)
+        # @option arguments [Time] :master_timeout Period to wait for a connection to the master node. Server default: 30s.
         # @option arguments [Boolean] :wait_for_completion If +true+, the request blocks other enrich policy execution requests until complete. Server default: true.
         # @option arguments [Hash] :headers Custom HTTP headers
         #
-        # @see https://www.elastic.co/guide/en/elasticsearch/reference/current/execute-enrich-policy-api.html
+        # @see https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-enrich-execute-policy
         #
         def execute_policy(arguments = {})
-          request_opts = { endpoint: arguments[:endpoint] || "enrich.execute_policy" }
+          request_opts = { endpoint: arguments[:endpoint] || 'enrich.execute_policy' }
 
-          defined_params = [:name].inject({}) do |set_variables, variable|
+          defined_params = [:name].each_with_object({}) do |variable, set_variables|
             set_variables[variable] = arguments[variable] if arguments.key?(variable)
-            set_variables
           end
           request_opts[:defined_params] = defined_params unless defined_params.empty?
 

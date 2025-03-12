@@ -27,28 +27,29 @@ module ElasticsearchServerless
       # It returns runtime fields like any other field.
       # For example, a runtime field with a type of keyword is returned the same as any other field that belongs to the +keyword+ family.
       #
-      # @option arguments [String, Array] :index Comma-separated list of data streams, indices, and aliases used to limit the request. Supports wildcards (*). To target all data streams and indices, omit this parameter or use * or _all.
+      # @option arguments [String, Array] :index A comma-separated list of data streams, indices, and aliases used to limit the request. Supports wildcards (*). To target all data streams and indices, omit this parameter or use * or _all.
       # @option arguments [Boolean] :allow_no_indices If false, the request returns an error if any wildcard expression, index alias,
       #  or +_all+ value targets only missing or closed indices. This behavior applies even if the request targets other open indices. For example, a request
       #  targeting +foo*,bar*+ returns an error if an index starts with foo but no index starts with bar. Server default: true.
-      # @option arguments [String, Array<String>] :expand_wildcards Type of index that wildcard patterns can match. If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams. Supports comma-separated values, such as +open,hidden+. Server default: open.
-      # @option arguments [String, Array<String>] :fields Comma-separated list of fields to retrieve capabilities for. Wildcard (+*+) expressions are supported.
+      # @option arguments [String, Array<String>] :expand_wildcards The type of index that wildcard patterns can match. If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams. Supports comma-separated values, such as +open,hidden+. Server default: open.
+      # @option arguments [String, Array<String>] :fields A comma-separated list of fields to retrieve capabilities for. Wildcard (+*+) expressions are supported.
       # @option arguments [Boolean] :ignore_unavailable If +true+, missing or closed indices are not included in the response.
       # @option arguments [Boolean] :include_unmapped If true, unmapped fields are included in the response.
-      # @option arguments [String] :filters An optional set of filters: can include +metadata,-metadata,-nested,-multifield,-parent
-      # @option arguments [Array<String>] :types Only return results for fields that have one of the types in the list
+      # @option arguments [String] :filters A comma-separated list of filters to apply to the response.
+      # @option arguments [Array<String>] :types A comma-separated list of field types to include.
+      #  Any fields that do not match one of these types will be excluded from the results.
+      #  It defaults to empty, meaning that all field types are returned.
       # @option arguments [Boolean] :include_empty_fields If false, empty fields are not included in the response. Server default: true.
       # @option arguments [Hash] :headers Custom HTTP headers
       # @option arguments [Hash] :body request body
       #
-      # @see https://www.elastic.co/guide/en/elasticsearch/reference/master/search-field-caps.html
+      # @see https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-field-caps
       #
       def field_caps(arguments = {})
-        request_opts = { endpoint: arguments[:endpoint] || "field_caps" }
+        request_opts = { endpoint: arguments[:endpoint] || 'field_caps' }
 
-        defined_params = [:index].inject({}) do |set_variables, variable|
+        defined_params = [:index].each_with_object({}) do |variable, set_variables|
           set_variables[variable] = arguments[variable] if arguments.key?(variable)
-          set_variables
         end
         request_opts[:defined_params] = defined_params unless defined_params.empty?
 
@@ -68,7 +69,7 @@ module ElasticsearchServerless
         path   = if _index
                    "#{Utils.listify(_index)}/_field_caps"
                  else
-                   "_field_caps"
+                   '_field_caps'
                  end
         params = Utils.process_params(arguments)
 

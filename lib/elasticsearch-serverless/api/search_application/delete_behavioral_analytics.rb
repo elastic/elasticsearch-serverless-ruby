@@ -32,14 +32,13 @@ module ElasticsearchServerless
         # @option arguments [String] :name The name of the analytics collection to be deleted (*Required*)
         # @option arguments [Hash] :headers Custom HTTP headers
         #
-        # @see https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-analytics-collection.html
+        # @see https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-search-application-delete-behavioral-analytics
         #
         def delete_behavioral_analytics(arguments = {})
-          request_opts = { endpoint: arguments[:endpoint] || "search_application.delete_behavioral_analytics" }
+          request_opts = { endpoint: arguments[:endpoint] || 'search_application.delete_behavioral_analytics' }
 
-          defined_params = [:name].inject({}) do |set_variables, variable|
+          defined_params = [:name].each_with_object({}) do |variable, set_variables|
             set_variables[variable] = arguments[variable] if arguments.key?(variable)
-            set_variables
           end
           request_opts[:defined_params] = defined_params unless defined_params.empty?
 

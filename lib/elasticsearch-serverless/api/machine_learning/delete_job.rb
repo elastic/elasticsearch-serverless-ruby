@@ -40,14 +40,13 @@ module ElasticsearchServerless
         #  job deletion completes. Server default: true.
         # @option arguments [Hash] :headers Custom HTTP headers
         #
-        # @see https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-job.html
+        # @see https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-ml-delete-job
         #
         def delete_job(arguments = {})
-          request_opts = { endpoint: arguments[:endpoint] || "ml.delete_job" }
+          request_opts = { endpoint: arguments[:endpoint] || 'ml.delete_job' }
 
-          defined_params = [:job_id].inject({}) do |set_variables, variable|
+          defined_params = [:job_id].each_with_object({}) do |variable, set_variables|
             set_variables[variable] = arguments[variable] if arguments.key?(variable)
-            set_variables
           end
           request_opts[:defined_params] = defined_params unless defined_params.empty?
 

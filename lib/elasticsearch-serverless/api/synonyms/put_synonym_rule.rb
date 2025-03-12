@@ -24,20 +24,21 @@ module ElasticsearchServerless
       module Actions
         # Create or update a synonym rule.
         # Create or update a synonym rule in a synonym set.
+        # If any of the synonym rules included is invalid, the API returns an error.
+        # When you update a synonym rule, all analyzers using the synonyms set will be reloaded automatically to reflect the new rule.
         #
-        # @option arguments [String] :set_id The id of the synonym set to be updated with the synonym rule (*Required*)
-        # @option arguments [String] :rule_id The id of the synonym rule to be updated or created (*Required*)
+        # @option arguments [String] :set_id The ID of the synonym set. (*Required*)
+        # @option arguments [String] :rule_id The ID of the synonym rule to be updated or created. (*Required*)
         # @option arguments [Hash] :headers Custom HTTP headers
         # @option arguments [Hash] :body request body
         #
-        # @see https://www.elastic.co/guide/en/elasticsearch/reference/master/put-synonym-rule.html
+        # @see https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-synonyms-put-synonym-rule
         #
         def put_synonym_rule(arguments = {})
-          request_opts = { endpoint: arguments[:endpoint] || "synonyms.put_synonym_rule" }
+          request_opts = { endpoint: arguments[:endpoint] || 'synonyms.put_synonym_rule' }
 
-          defined_params = [:set_id, :rule_id].inject({}) do |set_variables, variable|
+          defined_params = [:set_id, :rule_id].each_with_object({}) do |variable, set_variables|
             set_variables[variable] = arguments[variable] if arguments.key?(variable)
-            set_variables
           end
           request_opts[:defined_params] = defined_params unless defined_params.empty?
 

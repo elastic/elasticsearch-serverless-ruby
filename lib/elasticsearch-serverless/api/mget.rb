@@ -25,6 +25,14 @@ module ElasticsearchServerless
       # Get multiple JSON documents by ID from one or more indices.
       # If you specify an index in the request URI, you only need to specify the document IDs in the request body.
       # To ensure fast responses, this multi get (mget) API responds with partial results if one or more shards fail.
+      # **Filter source fields**
+      # By default, the +_source+ field is returned for every document (if stored).
+      # Use the +_source+ and +_source_include+ or +source_exclude+ attributes to filter what fields are returned for a particular document.
+      # You can include the +_source+, +_source_includes+, and +_source_excludes+ query parameters in the request URI to specify the defaults to use when there are no per-document instructions.
+      # **Get stored fields**
+      # Use the +stored_fields+ attribute to specify the set of stored fields you want to retrieve.
+      # Any requested fields that are not stored are ignored.
+      # You can include the +stored_fields+ query parameter in the request URI to specify the defaults to use when there are no per-document instructions.
       #
       # @option arguments [String] :index Name of the index to retrieve documents from when +ids+ are specified, or when a document in the +docs+ array does not specify an index.
       # @option arguments [Boolean] :force_synthetic_source Should this request force synthetic _source?
@@ -44,14 +52,13 @@ module ElasticsearchServerless
       # @option arguments [Hash] :headers Custom HTTP headers
       # @option arguments [Hash] :body request body
       #
-      # @see https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-get.html
+      # @see https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-mget
       #
       def mget(arguments = {})
-        request_opts = { endpoint: arguments[:endpoint] || "mget" }
+        request_opts = { endpoint: arguments[:endpoint] || 'mget' }
 
-        defined_params = [:index].inject({}) do |set_variables, variable|
+        defined_params = [:index].each_with_object({}) do |variable, set_variables|
           set_variables[variable] = arguments[variable] if arguments.key?(variable)
-          set_variables
         end
         request_opts[:defined_params] = defined_params unless defined_params.empty?
 
@@ -68,7 +75,7 @@ module ElasticsearchServerless
         path   = if _index
                    "#{Utils.listify(_index)}/_mget"
                  else
-                   "_mget"
+                   '_mget'
                  end
         params = Utils.process_params(arguments)
 

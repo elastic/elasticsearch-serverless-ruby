@@ -25,18 +25,17 @@ module ElasticsearchServerless
         # Get a synonym rule.
         # Get a synonym rule from a synonym set.
         #
-        # @option arguments [String] :set_id The id of the synonym set to retrieve the synonym rule from (*Required*)
-        # @option arguments [String] :rule_id The id of the synonym rule to retrieve (*Required*)
+        # @option arguments [String] :set_id The ID of the synonym set to retrieve the synonym rule from. (*Required*)
+        # @option arguments [String] :rule_id The ID of the synonym rule to retrieve. (*Required*)
         # @option arguments [Hash] :headers Custom HTTP headers
         #
-        # @see https://www.elastic.co/guide/en/elasticsearch/reference/master/get-synonym-rule.html
+        # @see https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-synonyms-get-synonym-rule
         #
         def get_synonym_rule(arguments = {})
-          request_opts = { endpoint: arguments[:endpoint] || "synonyms.get_synonym_rule" }
+          request_opts = { endpoint: arguments[:endpoint] || 'synonyms.get_synonym_rule' }
 
-          defined_params = [:set_id, :rule_id].inject({}) do |set_variables, variable|
+          defined_params = [:set_id, :rule_id].each_with_object({}) do |variable, set_variables|
             set_variables[variable] = arguments[variable] if arguments.key?(variable)
-            set_variables
           end
           request_opts[:defined_params] = defined_params unless defined_params.empty?
 

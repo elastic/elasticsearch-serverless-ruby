@@ -23,8 +23,8 @@ module ElasticsearchServerless
     module Indices
       module Actions
         # Get index settings.
-        # Returns setting information for one or more indices. For data streams,
-        # returns setting information for the stream’s backing indices.
+        # Get setting information for one or more indices.
+        # For data streams, it returns setting information for the stream's backing indices.
         #
         # @option arguments [String, Array] :index Comma-separated list of data streams, indices, and aliases used to limit
         #  the request. Supports wildcards (+*+). To target all data streams and
@@ -48,14 +48,13 @@ module ElasticsearchServerless
         #  error. Server default: 30s.
         # @option arguments [Hash] :headers Custom HTTP headers
         #
-        # @see https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-settings.html
+        # @see https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-indices-get-settings
         #
         def get_settings(arguments = {})
-          request_opts = { endpoint: arguments[:endpoint] || "indices.get_settings" }
+          request_opts = { endpoint: arguments[:endpoint] || 'indices.get_settings' }
 
-          defined_params = [:index, :name].inject({}) do |set_variables, variable|
+          defined_params = [:index, :name].each_with_object({}) do |variable, set_variables|
             set_variables[variable] = arguments[variable] if arguments.key?(variable)
-            set_variables
           end
           request_opts[:defined_params] = defined_params unless defined_params.empty?
 
@@ -76,7 +75,7 @@ module ElasticsearchServerless
                    elsif _name
                      "_settings/#{Utils.listify(_name)}"
                    else
-                     "_settings"
+                     '_settings'
                    end
           params = Utils.process_params(arguments)
 

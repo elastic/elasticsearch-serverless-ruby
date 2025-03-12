@@ -29,14 +29,13 @@ module ElasticsearchServerless
         # @option arguments [String] :filter_id A string that uniquely identifies a filter. (*Required*)
         # @option arguments [Hash] :headers Custom HTTP headers
         #
-        # @see https://www.elastic.co/guide/en/elasticsearch/reference/current/ml-delete-filter.html
+        # @see https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-ml-delete-filter
         #
         def delete_filter(arguments = {})
-          request_opts = { endpoint: arguments[:endpoint] || "ml.delete_filter" }
+          request_opts = { endpoint: arguments[:endpoint] || 'ml.delete_filter' }
 
-          defined_params = [:filter_id].inject({}) do |set_variables, variable|
+          defined_params = [:filter_id].each_with_object({}) do |variable, set_variables|
             set_variables[variable] = arguments[variable] if arguments.key?(variable)
-            set_variables
           end
           request_opts[:defined_params] = defined_params unless defined_params.empty?
 

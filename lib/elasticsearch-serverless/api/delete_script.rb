@@ -24,21 +24,22 @@ module ElasticsearchServerless
       # Delete a script or search template.
       # Deletes a stored script or search template.
       #
-      # @option arguments [String] :id Identifier for the stored script or search template. (*Required*)
-      # @option arguments [Time] :master_timeout Period to wait for a connection to the master node.
-      #  If no response is received before the timeout expires, the request fails and returns an error. Server default: 30s.
-      # @option arguments [Time] :timeout Period to wait for a response.
-      #  If no response is received before the timeout expires, the request fails and returns an error. Server default: 30s.
+      # @option arguments [String] :id The identifier for the stored script or search template. (*Required*)
+      # @option arguments [Time] :master_timeout The period to wait for a connection to the master node.
+      #  If no response is received before the timeout expires, the request fails and returns an error.
+      #  It can also be set to +-1+ to indicate that the request should never timeout. Server default: 30s.
+      # @option arguments [Time] :timeout The period to wait for a response.
+      #  If no response is received before the timeout expires, the request fails and returns an error.
+      #  It can also be set to +-1+ to indicate that the request should never timeout. Server default: 30s.
       # @option arguments [Hash] :headers Custom HTTP headers
       #
-      # @see https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html
+      # @see https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-delete-script
       #
       def delete_script(arguments = {})
-        request_opts = { endpoint: arguments[:endpoint] || "delete_script" }
+        request_opts = { endpoint: arguments[:endpoint] || 'delete_script' }
 
-        defined_params = [:id].inject({}) do |set_variables, variable|
+        defined_params = [:id].each_with_object({}) do |variable, set_variables|
           set_variables[variable] = arguments[variable] if arguments.key?(variable)
-          set_variables
         end
         request_opts[:defined_params] = defined_params unless defined_params.empty?
 

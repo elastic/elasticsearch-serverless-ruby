@@ -25,6 +25,9 @@ module ElasticsearchServerless
         # Create a data frame analytics job.
         # This API creates a data frame analytics job that performs an analysis on the
         # source indices and stores the outcome in a destination index.
+        # By default, the query used in the source configuration is +{"match_all": {}}+.
+        # If the destination index does not exist, it is created automatically when you start the job.
+        # If you supply only a subset of the regression or classification parameters, hyperparameter optimization occurs. It determines a value for each of the undefined parameters.
         #
         # @option arguments [String] :id Identifier for the data frame analytics job. This identifier can contain
         #  lowercase alphanumeric characters (a-z and 0-9), hyphens, and
@@ -32,14 +35,13 @@ module ElasticsearchServerless
         # @option arguments [Hash] :headers Custom HTTP headers
         # @option arguments [Hash] :body request body
         #
-        # @see https://www.elastic.co/guide/en/elasticsearch/reference/current/put-dfanalytics.html
+        # @see https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-ml-put-data-frame-analytics
         #
         def put_data_frame_analytics(arguments = {})
-          request_opts = { endpoint: arguments[:endpoint] || "ml.put_data_frame_analytics" }
+          request_opts = { endpoint: arguments[:endpoint] || 'ml.put_data_frame_analytics' }
 
-          defined_params = [:id].inject({}) do |set_variables, variable|
+          defined_params = [:id].each_with_object({}) do |variable, set_variables|
             set_variables[variable] = arguments[variable] if arguments.key?(variable)
-            set_variables
           end
           request_opts[:defined_params] = defined_params unless defined_params.empty?
 

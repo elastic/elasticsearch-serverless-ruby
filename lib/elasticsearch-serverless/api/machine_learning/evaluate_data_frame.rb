@@ -31,10 +31,10 @@ module ElasticsearchServerless
         # @option arguments [Hash] :headers Custom HTTP headers
         # @option arguments [Hash] :body request body
         #
-        # @see https://www.elastic.co/guide/en/elasticsearch/reference/current/evaluate-dfanalytics.html
+        # @see https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-ml-evaluate-data-frame
         #
         def evaluate_data_frame(arguments = {})
-          request_opts = { endpoint: arguments[:endpoint] || "ml.evaluate_data_frame" }
+          request_opts = { endpoint: arguments[:endpoint] || 'ml.evaluate_data_frame' }
 
           raise ArgumentError, "Required argument 'body' missing" unless arguments[:body]
 
@@ -44,7 +44,7 @@ module ElasticsearchServerless
           body = arguments.delete(:body)
 
           method = ElasticsearchServerless::API::HTTP_POST
-          path   = "_ml/data_frame/_evaluate"
+          path   = '_ml/data_frame/_evaluate'
           params = {}
 
           ElasticsearchServerless::API::Response.new(

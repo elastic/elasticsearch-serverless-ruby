@@ -25,14 +25,14 @@ module ElasticsearchServerless
         # Get all query rulesets.
         # Get summarized information about the query rulesets.
         #
-        # @option arguments [Integer] :from Starting offset (default: 0)
-        # @option arguments [Integer] :size specifies a max number of results to get
+        # @option arguments [Integer] :from The offset from the first result to fetch. Server default: 0.
+        # @option arguments [Integer] :size The maximum number of results to retrieve.
         # @option arguments [Hash] :headers Custom HTTP headers
         #
-        # @see https://www.elastic.co/guide/en/elasticsearch/reference/master/list-query-rulesets.html
+        # @see https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-query-rules-list-rulesets
         #
         def list_rulesets(arguments = {})
-          request_opts = { endpoint: arguments[:endpoint] || "query_rules.list_rulesets" }
+          request_opts = { endpoint: arguments[:endpoint] || 'query_rules.list_rulesets' }
 
           arguments = arguments.clone
           headers = arguments.delete(:headers) || {}
@@ -40,7 +40,7 @@ module ElasticsearchServerless
           body = nil
 
           method = ElasticsearchServerless::API::HTTP_GET
-          path   = "_query_rules"
+          path   = '_query_rules'
           params = Utils.process_params(arguments)
 
           ElasticsearchServerless::API::Response.new(

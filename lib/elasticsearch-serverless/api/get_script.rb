@@ -24,18 +24,19 @@ module ElasticsearchServerless
       # Get a script or search template.
       # Retrieves a stored script or search template.
       #
-      # @option arguments [String] :id Identifier for the stored script or search template. (*Required*)
-      # @option arguments [Time] :master_timeout Specify timeout for connection to master
+      # @option arguments [String] :id The identifier for the stored script or search template. (*Required*)
+      # @option arguments [Time] :master_timeout The period to wait for the master node.
+      #  If the master node is not available before the timeout expires, the request fails and returns an error.
+      #  It can also be set to +-1+ to indicate that the request should never timeout. Server default: .
       # @option arguments [Hash] :headers Custom HTTP headers
       #
-      # @see https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html
+      # @see https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-get-script
       #
       def get_script(arguments = {})
-        request_opts = { endpoint: arguments[:endpoint] || "get_script" }
+        request_opts = { endpoint: arguments[:endpoint] || 'get_script' }
 
-        defined_params = [:id].inject({}) do |set_variables, variable|
+        defined_params = [:id].each_with_object({}) do |variable, set_variables|
           set_variables[variable] = arguments[variable] if arguments.key?(variable)
-          set_variables
         end
         request_opts[:defined_params] = defined_params unless defined_params.empty?
 
